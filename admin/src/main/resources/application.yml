@@ -1,0 +1,56 @@
+  spring:
+    application:
+        name: api
+#    jmx:
+#      enabled: false
+    #打包打开下面的
+#    jmx:
+#      default-domain
+
+    profiles:
+      active: dev
+#      active: pro
+#      active: mj
+
+    # 静态资源 虚拟映射路径
+#    mvc:
+#      static-path-pattern: /upload/**
+#    http:
+#      multipart:
+#        location: /opt/upload/
+#    resources:
+#      static-locations: file:${spring.http.multipart.location}
+
+    # 返回客户端时间格式化
+    jackson:
+      date-format: yyyy-MM-dd HH:mm
+      time-zone: GMT+8
+    # 热部署配置
+#    devtools:
+#      restart:
+#        enabled: false
+#      livereload:
+#        enabled: false
+
+  server:
+      port: 8090
+
+  logging:
+      config: classpath:log/logback-spring.xml
+  mybatis:
+    type-aliases-package: com.mj.dao.entity
+    mapper-locations: classpath:com/mj/dao/mapper/*Mapper.xml
+    configuration:
+      map-underscore-to-camel-case: true
+      log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  #  ftp.host: 139.224.187.151
+#  ftp.port: 8068
+#  ftp.username: WebMaster
+#  ftp.password: cef45ede09e5e4
+#  ftp.filepath: @"ftp://139.224.187.151:2112/"
+
+
+
+
+
+

@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mj.dao.repository.CustomerRecordsMapper">
+  <resultMap id="BaseResultMap" type="com.mj.dao.entity.CustomerRecords">
+    <result column="ID" jdbcType="INTEGER" property="id" />
+    <result column="OddNumbers" jdbcType="VARCHAR" property="oddnumbers" />
+    <result column="TurnoverMoney" jdbcType="DOUBLE" property="turnovermoney" />
+    <result column="Trader" jdbcType="VARCHAR" property="trader" />
+    <result column="NameOfCommodity" jdbcType="VARCHAR" property="nameofcommodity" />
+    <result column="PersonnelID" jdbcType="INTEGER" property="personnelid" />
+    <result column="PersonnelIDfind" jdbcType="INTEGER" property="personnelidfind" />
+    <result column="IsTwo" jdbcType="INTEGER" property="istwo" />
+    <result column="AddTime" jdbcType="TIMESTAMP" property="addtime" />
+    <result column="Flag" jdbcType="VARCHAR" property="flag" />
+    <result column="ChangeTime" jdbcType="TIMESTAMP" property="changetime" />
+    <result column="IsCall" jdbcType="INTEGER" property="iscall" />
+    <result column="CustomerID" jdbcType="INTEGER" property="customerid" />
+    <result column="test" jdbcType="VARCHAR" property="test" />
+    <result column="PayType" jdbcType="INTEGER" property="paytype" />
+    <result column="RecordType" jdbcType="INTEGER" property="recordtype" />
+    <result column="PayAccount" jdbcType="VARCHAR" property="payaccount" />
+    <result column="PayName" jdbcType="VARCHAR" property="payname" />
+    <result column="CollectAccount" jdbcType="VARCHAR" property="collectaccount" />
+    <result column="PayTime" jdbcType="TIMESTAMP" property="paytime" />
+    <result column="RecumentId" jdbcType="INTEGER" property="recumentid" />
+    <result column="RecumentAssistantId" jdbcType="INTEGER" property="recumentassistantid" />
+    <result column="serverStartTime" jdbcType="VARCHAR" property="serverstarttime" />
+    <result column="serverEndTime" jdbcType="VARCHAR" property="serverendtime" />
+    <result column="invoicetitle" jdbcType="VARCHAR" property="invoicetitle" />
+    <result column="invoicenumber" jdbcType="VARCHAR" property="invoicenumber" />
+    <result column="RefundRcreenshots" jdbcType="VARCHAR" property="refundrcreenshots" />
+    <result column="Jiesuan" jdbcType="VARCHAR" property="jiesuan" />
+  </resultMap>
+  <insert id="insert" parameterType="com.mj.dao.entity.CustomerRecords">
+    insert into t_customer_records (ID, OddNumbers, TurnoverMoney, 
+      Trader, NameOfCommodity, PersonnelID, 
+      PersonnelIDfind, IsTwo, AddTime, 
+      Flag, ChangeTime, IsCall, 
+      CustomerID, test, PayType, 
+      RecordType, PayAccount, PayName, 
+      CollectAccount, PayTime, RecumentId, 
+      RecumentAssistantId, serverStartTime, serverEndTime, 
+      invoicetitle, invoicenumber, RefundRcreenshots, 
+      Jiesuan)
+    values (#{id,jdbcType=INTEGER}, #{oddnumbers,jdbcType=VARCHAR}, #{turnovermoney,jdbcType=DOUBLE}, 
+      #{trader,jdbcType=VARCHAR}, #{nameofcommodity,jdbcType=VARCHAR}, #{personnelid,jdbcType=INTEGER}, 
+      #{personnelidfind,jdbcType=INTEGER}, #{istwo,jdbcType=INTEGER}, #{addtime,jdbcType=TIMESTAMP}, 
+      #{flag,jdbcType=VARCHAR}, #{changetime,jdbcType=TIMESTAMP}, #{iscall,jdbcType=INTEGER}, 
+      #{customerid,jdbcType=INTEGER}, #{test,jdbcType=VARCHAR}, #{paytype,jdbcType=INTEGER}, 
+      #{recordtype,jdbcType=INTEGER}, #{payaccount,jdbcType=VARCHAR}, #{payname,jdbcType=VARCHAR}, 
+      #{collectaccount,jdbcType=VARCHAR}, #{paytime,jdbcType=TIMESTAMP}, #{recumentid,jdbcType=INTEGER}, 
+      #{recumentassistantid,jdbcType=INTEGER}, #{serverstarttime,jdbcType=VARCHAR}, #{serverendtime,jdbcType=VARCHAR}, 
+      #{invoicetitle,jdbcType=VARCHAR}, #{invoicenumber,jdbcType=VARCHAR}, #{refundrcreenshots,jdbcType=VARCHAR}, 
+      #{jiesuan,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mj.dao.entity.CustomerRecords">
+    insert into t_customer_records
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="oddnumbers != null">
+        OddNumbers,
+      </if>
+      <if test="turnovermoney != null">
+        TurnoverMoney,
+      </if>
+      <if test="trader != null">
+        Trader,
+      </if>
+      <if test="nameofcommodity != null">
+        NameOfCommodity,
+      </if>
+      <if test="personnelid != null">
+        PersonnelID,
+      </if>
+      <if test="personnelidfind != null">
+        PersonnelIDfind,
+      </if>
+      <if test="istwo != null">
+        IsTwo,
+      </if>
+      <if test="addtime != null">
+        AddTime,
+      </if>
+      <if test="flag != null">
+        Flag,
+      </if>
+      <if test="changetime != null">
+        ChangeTime,
+      </if>
+      <if test="iscall != null">
+        IsCall,
+      </if>
+      <if test="customerid != null">
+        CustomerID,
+      </if>
+      <if test="test != null">
+        test,
+      </if>
+      <if test="paytype != null">
+        PayType,
+      </if>
+      <if test="recordtype != null">
+        RecordType,
+      </if>
+      <if test="payaccount != null">
+        PayAccount,
+      </if>
+      <if test="payname != null">
+        PayName,
+      </if>
+      <if test="collectaccount != null">
+        CollectAccount,
+      </if>
+      <if test="paytime != null">
+        PayTime,
+      </if>
+      <if test="recumentid != null">
+        RecumentId,
+      </if>
+      <if test="recumentassistantid != null">
+        RecumentAssistantId,
+      </if>
+      <if test="serverstarttime != null">
+        serverStartTime,
+      </if>
+      <if test="serverendtime != null">
+        serverEndTime,
+      </if>
+      <if test="invoicetitle != null">
+        invoicetitle,
+      </if>
+      <if test="invoicenumber != null">
+        invoicenumber,
+      </if>
+      <if test="refundrcreenshots != null">
+        RefundRcreenshots,
+      </if>
+      <if test="jiesuan != null">
+        Jiesuan,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="oddnumbers != null">
+        #{oddnumbers,jdbcType=VARCHAR},
+      </if>
+      <if test="turnovermoney != null">
+        #{turnovermoney,jdbcType=DOUBLE},
+      </if>
+      <if test="trader != null">
+        #{trader,jdbcType=VARCHAR},
+      </if>
+      <if test="nameofcommodity != null">
+        #{nameofcommodity,jdbcType=VARCHAR},
+      </if>
+      <if test="personnelid != null">
+        #{personnelid,jdbcType=INTEGER},
+      </if>
+      <if test="personnelidfind != null">
+        #{personnelidfind,jdbcType=INTEGER},
+      </if>
+      <if test="istwo != null">
+        #{istwo,jdbcType=INTEGER},
+      </if>
+      <if test="addtime != null">
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=VARCHAR},
+      </if>
+      <if test="changetime != null">
+        #{changetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="iscall != null">
+        #{iscall,jdbcType=INTEGER},
+      </if>
+      <if test="customerid != null">
+        #{customerid,jdbcType=INTEGER},
+      </if>
+      <if test="test != null">
+        #{test,jdbcType=VARCHAR},
+      </if>
+      <if test="paytype != null">
+        #{paytype,jdbcType=INTEGER},
+      </if>
+      <if test="recordtype != null">
+        #{recordtype,jdbcType=INTEGER},
+      </if>
+      <if test="payaccount != null">
+        #{payaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="payname != null">
+        #{payname,jdbcType=VARCHAR},
+      </if>
+      <if test="collectaccount != null">
+        #{collectaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="paytime != null">
+        #{paytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recumentid != null">
+        #{recumentid,jdbcType=INTEGER},
+      </if>
+      <if test="recumentassistantid != null">
+        #{recumentassistantid,jdbcType=INTEGER},
+      </if>
+      <if test="serverstarttime != null">
+        #{serverstarttime,jdbcType=VARCHAR},
+      </if>
+      <if test="serverendtime != null">
+        #{serverendtime,jdbcType=VARCHAR},
+      </if>
+      <if test="invoicetitle != null">
+        #{invoicetitle,jdbcType=VARCHAR},
+      </if>
+      <if test="invoicenumber != null">
+        #{invoicenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="refundrcreenshots != null">
+        #{refundrcreenshots,jdbcType=VARCHAR},
+      </if>
+      <if test="jiesuan != null">
+        #{jiesuan,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

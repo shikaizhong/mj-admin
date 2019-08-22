@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mj.dao.repository.CustomerMapper">
+  <resultMap id="BaseResultMap" type="com.mj.dao.entity.Customer">
+    <result column="ID" jdbcType="INTEGER" property="id" />
+    <result column="WangWangNum" jdbcType="VARCHAR" property="wangwangnum" />
+    <result column="ServerName" jdbcType="VARCHAR" property="servername" />
+    <result column="ServerDeadline" jdbcType="VARCHAR" property="serverdeadline" />
+    <result column="Indeutry" jdbcType="VARCHAR" property="indeutry" />
+    <result column="ShoppType" jdbcType="VARCHAR" property="shopptype" />
+    <result column="ShoppRank" jdbcType="VARCHAR" property="shopprank" />
+    <result column="ShoppAddress" jdbcType="VARCHAR" property="shoppaddress" />
+    <result column="Name" jdbcType="VARCHAR" property="name" />
+    <result column="Phone" jdbcType="VARCHAR" property="phone" />
+    <result column="ContactAddress" jdbcType="VARCHAR" property="contactaddress" />
+    <result column="Place" jdbcType="VARCHAR" property="place" />
+    <result column="OddNumbers" jdbcType="VARCHAR" property="oddnumbers" />
+    <result column="Chat" jdbcType="VARCHAR" property="chat" />
+    <result column="flag" jdbcType="VARCHAR" property="flag" />
+    <result column="AddTime" jdbcType="TIMESTAMP" property="addtime" />
+    <result column="ServerDeadlineEnd" jdbcType="VARCHAR" property="serverdeadlineend" />
+    <result column="TScustomer" jdbcType="VARCHAR" property="tscustomer" />
+    <result column="State" jdbcType="INTEGER" property="state" />
+    <result column="WorkRecordState" jdbcType="INTEGER" property="workrecordstate" />
+    <result column="IsComplained" jdbcType="INTEGER" property="iscomplained" />
+    <result column="SendReportTime" jdbcType="TIMESTAMP" property="sendreporttime" />
+    <result column="WriteMethodTime" jdbcType="TIMESTAMP" property="writemethodtime" />
+    <result column="LinkedTime" jdbcType="TIMESTAMP" property="linkedtime" />
+    <result column="QuantumAccounts" jdbcType="VARCHAR" property="quantumaccounts" />
+    <result column="QuantumCryptography" jdbcType="VARCHAR" property="quantumcryptography" />
+    <result column="PurchaseChannels" jdbcType="VARCHAR" property="purchasechannels" />
+    <result column="IsCutPriceOrBrushSales" jdbcType="INTEGER" property="iscutpriceorbrushsales" />
+    <result column="IsOtherExtension" jdbcType="INTEGER" property="isotherextension" />
+    <result column="CommunicateMeans" jdbcType="VARCHAR" property="communicatemeans" />
+    <result column="CommunicateTime" jdbcType="VARCHAR" property="communicatetime" />
+    <result column="CommunicateFrequency" jdbcType="DOUBLE" property="communicatefrequency" />
+    <result column="ExpectationValue" jdbcType="VARCHAR" property="expectationvalue" />
+    <result column="ServiceFee" jdbcType="DOUBLE" property="servicefee" />
+    <result column="TechnologyWangwang" jdbcType="VARCHAR" property="technologywangwang" />
+    <result column="TimeOut" jdbcType="TIMESTAMP" property="timeout" />
+    <result column="Remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="IsHaveReNew" jdbcType="INTEGER" property="ishaverenew" />
+    <result column="ChildIndeutry" jdbcType="INTEGER" property="childindeutry" />
+    <result column="StoreWangWang" jdbcType="VARCHAR" property="storewangwang" />
+    <result column="ChildIndeutryName" jdbcType="VARCHAR" property="childindeutryname" />
+    <result column="IndeutryImg" jdbcType="VARCHAR" property="indeutryimg" />
+    <result column="CustType" jdbcType="INTEGER" property="custtype" />
+    <result column="ChildType" jdbcType="INTEGER" property="childtype" />
+    <result column="IsSEM" jdbcType="INTEGER" property="issem" />
+    <result column="CustomerTechnology" jdbcType="INTEGER" property="customertechnology" />
+    <result column="IsShowInReport" jdbcType="INTEGER" property="isshowinreport" />
+    <result column="TSrecruitmentId" jdbcType="INTEGER" property="tsrecruitmentid" />
+    <result column="TechnologyRecruitmentID" jdbcType="INTEGER" property="technologyrecruitmentid" />
+    <result column="ZtcOpTime" jdbcType="TIMESTAMP" property="ztcoptime" />
+    <result column="LastServerDeadlineEndWhenPaurse" jdbcType="TIMESTAMP" property="lastserverdeadlineendwhenpaurse" />
+  </resultMap>
+  <insert id="insert" parameterType="com.mj.dao.entity.Customer">
+    insert into t_customer (ID, WangWangNum, ServerName, 
+      ServerDeadline, Indeutry, ShoppType, 
+      ShoppRank, ShoppAddress, Name, 
+      Phone, ContactAddress, Place, 
+      OddNumbers, Chat, flag, 
+      AddTime, ServerDeadlineEnd, TScustomer, 
+      State, WorkRecordState, IsComplained, 
+      SendReportTime, WriteMethodTime, LinkedTime, 
+      QuantumAccounts, QuantumCryptography, PurchaseChannels, 
+      IsCutPriceOrBrushSales, IsOtherExtension, 
+      CommunicateMeans, CommunicateTime, CommunicateFrequency, 
+      ExpectationValue, ServiceFee, TechnologyWangwang, 
+      TimeOut, Remarks, IsHaveReNew, 
+      ChildIndeutry, StoreWangWang, ChildIndeutryName, 
+      IndeutryImg, CustType, ChildType, 
+      IsSEM, CustomerTechnology, IsShowInReport, 
+      TSrecruitmentId, TechnologyRecruitmentID, 
+      ZtcOpTime, LastServerDeadlineEndWhenPaurse
+      )
+    values (#{id,jdbcType=INTEGER}, #{wangwangnum,jdbcType=VARCHAR}, #{servername,jdbcType=VARCHAR}, 
+      #{serverdeadline,jdbcType=VARCHAR}, #{indeutry,jdbcType=VARCHAR}, #{shopptype,jdbcType=VARCHAR}, 
+      #{shopprank,jdbcType=VARCHAR}, #{shoppaddress,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{contactaddress,jdbcType=VARCHAR}, #{place,jdbcType=VARCHAR}, 
+      #{oddnumbers,jdbcType=VARCHAR}, #{chat,jdbcType=VARCHAR}, #{flag,jdbcType=VARCHAR}, 
+      #{addtime,jdbcType=TIMESTAMP}, #{serverdeadlineend,jdbcType=VARCHAR}, #{tscustomer,jdbcType=VARCHAR}, 
+      #{state,jdbcType=INTEGER}, #{workrecordstate,jdbcType=INTEGER}, #{iscomplained,jdbcType=INTEGER}, 
+      #{sendreporttime,jdbcType=TIMESTAMP}, #{writemethodtime,jdbcType=TIMESTAMP}, #{linkedtime,jdbcType=TIMESTAMP}, 
+      #{quantumaccounts,jdbcType=VARCHAR}, #{quantumcryptography,jdbcType=VARCHAR}, #{purchasechannels,jdbcType=VARCHAR}, 
+      #{iscutpriceorbrushsales,jdbcType=INTEGER}, #{isotherextension,jdbcType=INTEGER}, 
+      #{communicatemeans,jdbcType=VARCHAR}, #{communicatetime,jdbcType=VARCHAR}, #{communicatefrequency,jdbcType=DOUBLE}, 
+      #{expectationvalue,jdbcType=VARCHAR}, #{servicefee,jdbcType=DOUBLE}, #{technologywangwang,jdbcType=VARCHAR}, 
+      #{timeout,jdbcType=TIMESTAMP}, #{remarks,jdbcType=VARCHAR}, #{ishaverenew,jdbcType=INTEGER}, 
+      #{childindeutry,jdbcType=INTEGER}, #{storewangwang,jdbcType=VARCHAR}, #{childindeutryname,jdbcType=VARCHAR}, 
+      #{indeutryimg,jdbcType=VARCHAR}, #{custtype,jdbcType=INTEGER}, #{childtype,jdbcType=INTEGER}, 
+      #{issem,jdbcType=INTEGER}, #{customertechnology,jdbcType=INTEGER}, #{isshowinreport,jdbcType=INTEGER}, 
+      #{tsrecruitmentid,jdbcType=INTEGER}, #{technologyrecruitmentid,jdbcType=INTEGER}, 
+      #{ztcoptime,jdbcType=TIMESTAMP}, #{lastserverdeadlineendwhenpaurse,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mj.dao.entity.Customer">
+    insert into t_customer
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="wangwangnum != null">
+        WangWangNum,
+      </if>
+      <if test="servername != null">
+        ServerName,
+      </if>
+      <if test="serverdeadline != null">
+        ServerDeadline,
+      </if>
+      <if test="indeutry != null">
+        Indeutry,
+      </if>
+      <if test="shopptype != null">
+        ShoppType,
+      </if>
+      <if test="shopprank != null">
+        ShoppRank,
+      </if>
+      <if test="shoppaddress != null">
+        ShoppAddress,
+      </if>
+      <if test="name != null">
+        Name,
+      </if>
+      <if test="phone != null">
+        Phone,
+      </if>
+      <if test="contactaddress != null">
+        ContactAddress,
+      </if>
+      <if test="place != null">
+        Place,
+      </if>
+      <if test="oddnumbers != null">
+        OddNumbers,
+      </if>
+      <if test="chat != null">
+        Chat,
+      </if>
+      <if test="flag != null">
+        flag,
+      </if>
+      <if test="addtime != null">
+        AddTime,
+      </if>
+      <if test="serverdeadlineend != null">
+        ServerDeadlineEnd,
+      </if>
+      <if test="tscustomer != null">
+        TScustomer,
+      </if>
+      <if test="state != null">
+        State,
+      </if>
+      <if test="workrecordstate != null">
+        WorkRecordState,
+      </if>
+      <if test="iscomplained != null">
+        IsComplained,
+      </if>
+      <if test="sendreporttime != null">
+        SendReportTime,
+      </if>
+      <if test="writemethodtime != null">
+        WriteMethodTime,
+      </if>
+      <if test="linkedtime != null">
+        LinkedTime,
+      </if>
+      <if test="quantumaccounts != null">
+        QuantumAccounts,
+      </if>
+      <if test="quantumcryptography != null">
+        QuantumCryptography,
+      </if>
+      <if test="purchasechannels != null">
+        PurchaseChannels,
+      </if>
+      <if test="iscutpriceorbrushsales != null">
+        IsCutPriceOrBrushSales,
+      </if>
+      <if test="isotherextension != null">
+        IsOtherExtension,
+      </if>
+      <if test="communicatemeans != null">
+        CommunicateMeans,
+      </if>
+      <if test="communicatetime != null">
+        CommunicateTime,
+      </if>
+      <if test="communicatefrequency != null">
+        CommunicateFrequency,
+      </if>
+      <if test="expectationvalue != null">
+        ExpectationValue,
+      </if>
+      <if test="servicefee != null">
+        ServiceFee,
+      </if>
+      <if test="technologywangwang != null">
+        TechnologyWangwang,
+      </if>
+      <if test="timeout != null">
+        TimeOut,
+      </if>
+      <if test="remarks != null">
+        Remarks,
+      </if>
+      <if test="ishaverenew != null">
+        IsHaveReNew,
+      </if>
+      <if test="childindeutry != null">
+        ChildIndeutry,
+      </if>
+      <if test="storewangwang != null">
+        StoreWangWang,
+      </if>
+      <if test="childindeutryname != null">
+        ChildIndeutryName,
+      </if>
+      <if test="indeutryimg != null">
+        IndeutryImg,
+      </if>
+      <if test="custtype != null">
+        CustType,
+      </if>
+      <if test="childtype != null">
+        ChildType,
+      </if>
+      <if test="issem != null">
+        IsSEM,
+      </if>
+      <if test="customertechnology != null">
+        CustomerTechnology,
+      </if>
+      <if test="isshowinreport != null">
+        IsShowInReport,
+      </if>
+      <if test="tsrecruitmentid != null">
+        TSrecruitmentId,
+      </if>
+      <if test="technologyrecruitmentid != null">
+        TechnologyRecruitmentID,
+      </if>
+      <if test="ztcoptime != null">
+        ZtcOpTime,
+      </if>
+      <if test="lastserverdeadlineendwhenpaurse != null">
+        LastServerDeadlineEndWhenPaurse,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="wangwangnum != null">
+        #{wangwangnum,jdbcType=VARCHAR},
+      </if>
+      <if test="servername != null">
+        #{servername,jdbcType=VARCHAR},
+      </if>
+      <if test="serverdeadline != null">
+        #{serverdeadline,jdbcType=VARCHAR},
+      </if>
+      <if test="indeutry != null">
+        #{indeutry,jdbcType=VARCHAR},
+      </if>
+      <if test="shopptype != null">
+        #{shopptype,jdbcType=VARCHAR},
+      </if>
+      <if test="shopprank != null">
+        #{shopprank,jdbcType=VARCHAR},
+      </if>
+      <if test="shoppaddress != null">
+        #{shoppaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="contactaddress != null">
+        #{contactaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="place != null">
+        #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="oddnumbers != null">
+        #{oddnumbers,jdbcType=VARCHAR},
+      </if>
+      <if test="chat != null">
+        #{chat,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null">
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="serverdeadlineend != null">
+        #{serverdeadlineend,jdbcType=VARCHAR},
+      </if>
+      <if test="tscustomer != null">
+        #{tscustomer,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="workrecordstate != null">
+        #{workrecordstate,jdbcType=INTEGER},
+      </if>
+      <if test="iscomplained != null">
+        #{iscomplained,jdbcType=INTEGER},
+      </if>
+      <if test="sendreporttime != null">
+        #{sendreporttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="writemethodtime != null">
+        #{writemethodtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="linkedtime != null">
+        #{linkedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="quantumaccounts != null">
+        #{quantumaccounts,jdbcType=VARCHAR},
+      </if>
+      <if test="quantumcryptography != null">
+        #{quantumcryptography,jdbcType=VARCHAR},
+      </if>
+      <if test="purchasechannels != null">
+        #{purchasechannels,jdbcType=VARCHAR},
+      </if>
+      <if test="iscutpriceorbrushsales != null">
+        #{iscutpriceorbrushsales,jdbcType=INTEGER},
+      </if>
+      <if test="isotherextension != null">
+        #{isotherextension,jdbcType=INTEGER},
+      </if>
+      <if test="communicatemeans != null">
+        #{communicatemeans,jdbcType=VARCHAR},
+      </if>
+      <if test="communicatetime != null">
+        #{communicatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="communicatefrequency != null">
+        #{communicatefrequency,jdbcType=DOUBLE},
+      </if>
+      <if test="expectationvalue != null">
+        #{expectationvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="servicefee != null">
+        #{servicefee,jdbcType=DOUBLE},
+      </if>
+      <if test="technologywangwang != null">
+        #{technologywangwang,jdbcType=VARCHAR},
+      </if>
+      <if test="timeout != null">
+        #{timeout,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="ishaverenew != null">
+        #{ishaverenew,jdbcType=INTEGER},
+      </if>
+      <if test="childindeutry != null">
+        #{childindeutry,jdbcType=INTEGER},
+      </if>
+      <if test="storewangwang != null">
+        #{storewangwang,jdbcType=VARCHAR},
+      </if>
+      <if test="childindeutryname != null">
+        #{childindeutryname,jdbcType=VARCHAR},
+      </if>
+      <if test="indeutryimg != null">
+        #{indeutryimg,jdbcType=VARCHAR},
+      </if>
+      <if test="custtype != null">
+        #{custtype,jdbcType=INTEGER},
+      </if>
+      <if test="childtype != null">
+        #{childtype,jdbcType=INTEGER},
+      </if>
+      <if test="issem != null">
+        #{issem,jdbcType=INTEGER},
+      </if>
+      <if test="customertechnology != null">
+        #{customertechnology,jdbcType=INTEGER},
+      </if>
+      <if test="isshowinreport != null">
+        #{isshowinreport,jdbcType=INTEGER},
+      </if>
+      <if test="tsrecruitmentid != null">
+        #{tsrecruitmentid,jdbcType=INTEGER},
+      </if>
+      <if test="technologyrecruitmentid != null">
+        #{technologyrecruitmentid,jdbcType=INTEGER},
+      </if>
+      <if test="ztcoptime != null">
+        #{ztcoptime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastserverdeadlineendwhenpaurse != null">
+        #{lastserverdeadlineendwhenpaurse,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <!--自定义-->
+  <!--根据名字查询-->
+  <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    *
+    from t_customer
+    where WangWangNum = #{wangwangnum,jdbcType=VARCHAR}
+  </select>
+
+</mapper>

@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mj.dao.repository.PersonnelMapper">
+  <resultMap id="BaseResultMap" type="com.mj.dao.entity.Personnel">
+    <result column="ID" jdbcType="INTEGER" property="id" />
+    <result column="UserName" jdbcType="VARCHAR" property="username" />
+    <result column="Sex" jdbcType="VARCHAR" property="sex" />
+    <result column="TeamID" jdbcType="INTEGER" property="teamid" />
+    <result column="Flag" jdbcType="VARCHAR" property="flag" />
+    <result column="Pwd" jdbcType="CHAR" property="pwd" />
+    <result column="IndeustryID" jdbcType="INTEGER" property="indeustryid" />
+    <result column="shoppType" jdbcType="VARCHAR" property="shopptype" />
+    <result column="Ranges" jdbcType="VARCHAR" property="ranges" />
+    <result column="Isreceive" jdbcType="INTEGER" property="isreceive" />
+    <result column="WorkType" jdbcType="INTEGER" property="worktype" />
+    <result column="em" jdbcType="INTEGER" property="em" />
+    <result column="miaoshu" jdbcType="INTEGER" property="miaoshu" />
+    <result column="taidu" jdbcType="INTEGER" property="taidu" />
+    <result column="shudu" jdbcType="INTEGER" property="shudu" />
+    <result column="xiaoliang" jdbcType="INTEGER" property="xiaoliang" />
+    <result column="xinyongdengji" jdbcType="INTEGER" property="xinyongdengji" />
+    <result column="hangye" jdbcType="VARCHAR" property="hangye" />
+    <result column="badlv" jdbcType="INTEGER" property="badlv" />
+    <result column="MJscore" jdbcType="INTEGER" property="mjscore" />
+    <result column="MJbean" jdbcType="INTEGER" property="mjbean" />
+    <result column="FacePic" jdbcType="VARCHAR" property="facepic" />
+    <result column="Place" jdbcType="VARCHAR" property="place" />
+    <result column="IsPlaceSame" jdbcType="INTEGER" property="isplacesame" />
+    <result column="XiYongFirst" jdbcType="INTEGER" property="xiyongfirst" />
+    <result column="XiYongLast" jdbcType="INTEGER" property="xiyonglast" />
+    <result column="IsDirector" jdbcType="INTEGER" property="isdirector" />
+    <result column="RecruitmentId" jdbcType="INTEGER" property="recruitmentid" />
+    <result column="DesignerLevel" jdbcType="INTEGER" property="designerlevel" />
+    <result column="ShieldingTime" jdbcType="TIMESTAMP" property="shieldingtime" />
+    <result column="ShieldNumber" jdbcType="INTEGER" property="shieldnumber" />
+    <result column="LockTime" jdbcType="TIMESTAMP" property="locktime" />
+    <result column="ContainKeyWords" jdbcType="VARCHAR" property="containkeywords" />
+    <result column="UnContainKeyWords" jdbcType="VARCHAR" property="uncontainkeywords" />
+    <result column="NumberOfTradesStart" jdbcType="INTEGER" property="numberoftradesstart" />
+    <result column="NumberOfTradesEnd" jdbcType="INTEGER" property="numberoftradesend" />
+    <result column="Operation_levelID" jdbcType="INTEGER" property="operationLevelid" />
+    <result column="Recent_single_time" jdbcType="TIMESTAMP" property="recentSingleTime" />
+    <result column="is_stop" jdbcType="INTEGER" property="isStop" />
+  </resultMap>
+  <insert id="insert" parameterType="com.mj.dao.entity.Personnel">
+    insert into t_personnel (ID, UserName, Sex, 
+      TeamID, Flag, Pwd, IndeustryID, 
+      shoppType, Ranges, Isreceive, 
+      WorkType, em, miaoshu, 
+      taidu, shudu, xiaoliang, 
+      xinyongdengji, hangye, badlv, 
+      MJscore, MJbean, FacePic, 
+      Place, IsPlaceSame, XiYongFirst, 
+      XiYongLast, IsDirector, RecruitmentId, 
+      DesignerLevel, ShieldingTime, ShieldNumber, 
+      LockTime, ContainKeyWords, UnContainKeyWords, 
+      NumberOfTradesStart, NumberOfTradesEnd, 
+      Operation_levelID, Recent_single_time, is_stop
+      )
+    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
+      #{teamid,jdbcType=INTEGER}, #{flag,jdbcType=VARCHAR}, #{pwd,jdbcType=CHAR}, #{indeustryid,jdbcType=INTEGER}, 
+      #{shopptype,jdbcType=VARCHAR}, #{ranges,jdbcType=VARCHAR}, #{isreceive,jdbcType=INTEGER}, 
+      #{worktype,jdbcType=INTEGER}, #{em,jdbcType=INTEGER}, #{miaoshu,jdbcType=INTEGER}, 
+      #{taidu,jdbcType=INTEGER}, #{shudu,jdbcType=INTEGER}, #{xiaoliang,jdbcType=INTEGER}, 
+      #{xinyongdengji,jdbcType=INTEGER}, #{hangye,jdbcType=VARCHAR}, #{badlv,jdbcType=INTEGER}, 
+      #{mjscore,jdbcType=INTEGER}, #{mjbean,jdbcType=INTEGER}, #{facepic,jdbcType=VARCHAR}, 
+      #{place,jdbcType=VARCHAR}, #{isplacesame,jdbcType=INTEGER}, #{xiyongfirst,jdbcType=INTEGER}, 
+      #{xiyonglast,jdbcType=INTEGER}, #{isdirector,jdbcType=INTEGER}, #{recruitmentid,jdbcType=INTEGER}, 
+      #{designerlevel,jdbcType=INTEGER}, #{shieldingtime,jdbcType=TIMESTAMP}, #{shieldnumber,jdbcType=INTEGER}, 
+      #{locktime,jdbcType=TIMESTAMP}, #{containkeywords,jdbcType=VARCHAR}, #{uncontainkeywords,jdbcType=VARCHAR}, 
+      #{numberoftradesstart,jdbcType=INTEGER}, #{numberoftradesend,jdbcType=INTEGER}, 
+      #{operationLevelid,jdbcType=INTEGER}, #{recentSingleTime,jdbcType=TIMESTAMP}, #{isStop,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mj.dao.entity.Personnel">
+    insert into t_personnel
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="username != null">
+        UserName,
+      </if>
+      <if test="sex != null">
+        Sex,
+      </if>
+      <if test="teamid != null">
+        TeamID,
+      </if>
+      <if test="flag != null">
+        Flag,
+      </if>
+      <if test="pwd != null">
+        Pwd,
+      </if>
+      <if test="indeustryid != null">
+        IndeustryID,
+      </if>
+      <if test="shopptype != null">
+        shoppType,
+      </if>
+      <if test="ranges != null">
+        Ranges,
+      </if>
+      <if test="isreceive != null">
+        Isreceive,
+      </if>
+      <if test="worktype != null">
+        WorkType,
+      </if>
+      <if test="em != null">
+        em,
+      </if>
+      <if test="miaoshu != null">
+        miaoshu,
+      </if>
+      <if test="taidu != null">
+        taidu,
+      </if>
+      <if test="shudu != null">
+        shudu,
+      </if>
+      <if test="xiaoliang != null">
+        xiaoliang,
+      </if>
+      <if test="xinyongdengji != null">
+        xinyongdengji,
+      </if>
+      <if test="hangye != null">
+        hangye,
+      </if>
+      <if test="badlv != null">
+        badlv,
+      </if>
+      <if test="mjscore != null">
+        MJscore,
+      </if>
+      <if test="mjbean != null">
+        MJbean,
+      </if>
+      <if test="facepic != null">
+        FacePic,
+      </if>
+      <if test="place != null">
+        Place,
+      </if>
+      <if test="isplacesame != null">
+        IsPlaceSame,
+      </if>
+      <if test="xiyongfirst != null">
+        XiYongFirst,
+      </if>
+      <if test="xiyonglast != null">
+        XiYongLast,
+      </if>
+      <if test="isdirector != null">
+        IsDirector,
+      </if>
+      <if test="recruitmentid != null">
+        RecruitmentId,
+      </if>
+      <if test="designerlevel != null">
+        DesignerLevel,
+      </if>
+      <if test="shieldingtime != null">
+        ShieldingTime,
+      </if>
+      <if test="shieldnumber != null">
+        ShieldNumber,
+      </if>
+      <if test="locktime != null">
+        LockTime,
+      </if>
+      <if test="containkeywords != null">
+        ContainKeyWords,
+      </if>
+      <if test="uncontainkeywords != null">
+        UnContainKeyWords,
+      </if>
+      <if test="numberoftradesstart != null">
+        NumberOfTradesStart,
+      </if>
+      <if test="numberoftradesend != null">
+        NumberOfTradesEnd,
+      </if>
+      <if test="operationLevelid != null">
+        Operation_levelID,
+      </if>
+      <if test="recentSingleTime != null">
+        Recent_single_time,
+      </if>
+      <if test="isStop != null">
+        is_stop,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="teamid != null">
+        #{teamid,jdbcType=INTEGER},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null">
+        #{pwd,jdbcType=CHAR},
+      </if>
+      <if test="indeustryid != null">
+        #{indeustryid,jdbcType=INTEGER},
+      </if>
+      <if test="shopptype != null">
+        #{shopptype,jdbcType=VARCHAR},
+      </if>
+      <if test="ranges != null">
+        #{ranges,jdbcType=VARCHAR},
+      </if>
+      <if test="isreceive != null">
+        #{isreceive,jdbcType=INTEGER},
+      </if>
+      <if test="worktype != null">
+        #{worktype,jdbcType=INTEGER},
+      </if>
+      <if test="em != null">
+        #{em,jdbcType=INTEGER},
+      </if>
+      <if test="miaoshu != null">
+        #{miaoshu,jdbcType=INTEGER},
+      </if>
+      <if test="taidu != null">
+        #{taidu,jdbcType=INTEGER},
+      </if>
+      <if test="shudu != null">
+        #{shudu,jdbcType=INTEGER},
+      </if>
+      <if test="xiaoliang != null">
+        #{xiaoliang,jdbcType=INTEGER},
+      </if>
+      <if test="xinyongdengji != null">
+        #{xinyongdengji,jdbcType=INTEGER},
+      </if>
+      <if test="hangye != null">
+        #{hangye,jdbcType=VARCHAR},
+      </if>
+      <if test="badlv != null">
+        #{badlv,jdbcType=INTEGER},
+      </if>
+      <if test="mjscore != null">
+        #{mjscore,jdbcType=INTEGER},
+      </if>
+      <if test="mjbean != null">
+        #{mjbean,jdbcType=INTEGER},
+      </if>
+      <if test="facepic != null">
+        #{facepic,jdbcType=VARCHAR},
+      </if>
+      <if test="place != null">
+        #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="isplacesame != null">
+        #{isplacesame,jdbcType=INTEGER},
+      </if>
+      <if test="xiyongfirst != null">
+        #{xiyongfirst,jdbcType=INTEGER},
+      </if>
+      <if test="xiyonglast != null">
+        #{xiyonglast,jdbcType=INTEGER},
+      </if>
+      <if test="isdirector != null">
+        #{isdirector,jdbcType=INTEGER},
+      </if>
+      <if test="recruitmentid != null">
+        #{recruitmentid,jdbcType=INTEGER},
+      </if>
+      <if test="designerlevel != null">
+        #{designerlevel,jdbcType=INTEGER},
+      </if>
+      <if test="shieldingtime != null">
+        #{shieldingtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shieldnumber != null">
+        #{shieldnumber,jdbcType=INTEGER},
+      </if>
+      <if test="locktime != null">
+        #{locktime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="containkeywords != null">
+        #{containkeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="uncontainkeywords != null">
+        #{uncontainkeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="numberoftradesstart != null">
+        #{numberoftradesstart,jdbcType=INTEGER},
+      </if>
+      <if test="numberoftradesend != null">
+        #{numberoftradesend,jdbcType=INTEGER},
+      </if>
+      <if test="operationLevelid != null">
+        #{operationLevelid,jdbcType=INTEGER},
+      </if>
+      <if test="recentSingleTime != null">
+        #{recentSingleTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isStop != null">
+        #{isStop,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+
+  <!--自定义-->
+  <resultMap id="BaseResultMapS" type="com.mj.dao.vo.PersonnelVo">
+    <result column="ID" jdbcType="INTEGER" property="id" />
+    <result column="UserName" jdbcType="VARCHAR" property="username" />
+  </resultMap>
+
+  <resultMap id="BaseResultMapVo" type="com.mj.dao.vo.ComplaintVo">
+    <id column="pk_id" jdbcType="INTEGER" property="pkId" />
+    <result column="WangWangNum" jdbcType="VARCHAR" property="wangwangnum" />
+    <result column="complaintDate" jdbcType="TIMESTAMP" property="complaintdate" />
+    <result column="channel" jdbcType="INTEGER" property="channel" />
+    <result column="sceneRestoration" jdbcType="VARCHAR" property="scenerestoration" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="frequency" jdbcType="INTEGER" property="frequency" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="is_delete" jdbcType="TINYINT" property="isDelete" />
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+
+    <result column="ShoppType" jdbcType="VARCHAR" property="shopptype" />
+    <result column="CustType" jdbcType="INTEGER" property="custtype" />
+    <result column="TeamID" jdbcType="INTEGER" property="teamid" />
+    <result column="is_stop" jdbcType="INTEGER" property="isStop" />
+    <result column="TeamName" jdbcType="VARCHAR" property="teamname" />
+    <result column="Department" jdbcType="VARCHAR" property="department" />
+    <result column="PersonnelID" jdbcType="INTEGER" property="personnelid"/>
+    <result column="TScustomer" jdbcType="VARCHAR" property="tscustomer"/>
+    <result column="TechnologyRecruitmentID" jdbcType="INTEGER" property="technologyRecruitmentid"/>
+    <result column="parent_id" jdbcType="INTEGER" property="parentId" />
+    <result column="complaint_name" jdbcType="VARCHAR" property="complaintName" />
+    <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+
+    <result column="UserName" jdbcType="VARCHAR" property="username" />
+    <result column="ID" jdbcType="INTEGER" property="id" />
+    <result column="tename" jdbcType="VARCHAR" property="tename" />
+    <result column="pname" jdbcType="VARCHAR" property="pname" />
+
+  </resultMap>
+
+  <resultMap id="BaseResultMapVos" type="com.mj.dao.vo.TeamVo">
+    <result column="ID" jdbcType="INTEGER" property="id" />
+    <result column="TeamID" jdbcType="INTEGER" property="teamid" />
+    <result column="TScustomer" jdbcType="VARCHAR" property="tscustomer" />
+    <result column="TeamName" jdbcType="VARCHAR" property="teamname" />
+  </resultMap>
+  <!--用户登录-->
+  <select id="login" resultMap="BaseResultMap"  parameterType="java.lang.String">
+        select * from Personnel
+      where UserName = #{username}
+  </select>
+  <!--根据账户查询-->
+  <select id="selectInfo" parameterType="java.lang.String" resultType="java.util.Map">
+    select *
+    from Personnel
+    where UserName=#{username}
+  </select>
+  <!--通过id查询信息(本地)-->
+  <select id="selectInfoByID" resultType="com.mj.dao.vo.ComplaintVo">
+    SELECT pp.`UserName` FROM t_personnel pp WHERE pp.`ID` = #{id,jdbcType=INTEGER}
+  </select>
+  <!--通过id查询信息(远程)-->
+  <select id="selectInfoByIDs" resultType="com.mj.dao.vo.ComplaintVo">
+    SELECT pp.`UserName` FROM Personnel pp WHERE pp.`ID` = #{id,jdbcType=INTEGER}
+  </select>
+  <!--通过tid查询信息(本地)-->
+  <select id="selectInfoTID" resultType="com.mj.dao.vo.ComplaintVo">
+    SELECT pp.`UserName` FROM t_personnel pp WHERE pp.`ID` = #{tid,jdbcType=INTEGER}
+  </select>
+  <!--通过tid查询信息(远程)-->
+  <select id="selectInfoTIDs" resultType="com.mj.dao.vo.ComplaintVo">
+    SELECT pp.`UserName` FROM Personnel pp WHERE pp.`ID` = #{tid,jdbcType=INTEGER}
+  </select>
+  <!--责任人  (本地)-->
+  <select id="selectComplaintId" resultMap="BaseResultMapS">
+    SELECT DISTINCT pp.`ID`,pp.`UserName` FROM t_personnel pp
+  </select>
+  <!--责任人  (远程)-->
+  <select id="selectComplaintIds" resultMap="BaseResultMapS">
+    SELECT DISTINCT pp.ID,pp.UserName FROM Personnel pp
+  </select>
+  <!--通过id查询团队(本地)-->
+  <select id="selectTeam" resultType="com.mj.dao.vo.ComplaintVo">
+      SELECT DISTINCT tt.`TeamName` FROM (`t_personnel` pp LEFT JOIN t_team tt ON pp.TeamID = tt.ID)LEFT JOIN t_customer cc ON cc.TScustomer=pp.ID WHERE pp.`ID` = #{id,jdbcType=INTEGER}
+</select>
+  <!--通过id查询团队(远程)-->
+  <select id="selectTeamss" resultType="com.mj.dao.vo.ComplaintVo">
+    SELECT DISTINCT tt.`TeamName` FROM (Personnel pp LEFT JOIN Team tt ON pp.TeamID = tt.ID)LEFT JOIN Customer cc ON cc.TScustomer=pp.ID WHERE pp.`ID` = #{id,jdbcType=INTEGER}
+  </select>
+  <!--查询团队(本地)-->
+  <select id="selectTeams" resultMap="BaseResultMapVos">
+      select DISTINCT tt.`TeamName`,tt.ID FROM (`t_personnel` pp LEFT JOIN t_team tt ON pp.TeamID = tt.ID)LEFT JOIN t_customer cc ON cc.TScustomer=pp.ID
+  </select>
+  <!--查询团队(远程)-->
+  <select id="selectTeamsss" resultMap="BaseResultMapVos">
+    select DISTINCT tt.`TeamName`,tt.ID FROM (Personnel pp LEFT JOIN Team tt ON pp.TeamID = tt.ID)LEFT JOIN Customer cc ON cc.TScustomer=pp.ID
+  </select>
+
+  <!--查询拼接sqlserver-->
+  <select id="selectComplaintListOver" parameterType="java.util.Map" resultMap="BaseResultMapVo">
+    SELECT cu.WangWangNum,cu.TScustomer,cr.PersonnelID,cu.ShoppType,pp.UserName,
+    pp.TeamID,tt.TeamName,cu.TechnologyRecruitmentID,p2.UserName pname,p3.UserName tename
+    from Customer cu LEFT JOIN CustomerRecords cr ON cu.WangWangNum = cr.Trader
+    LEFT JOIN Personnel pp ON cu.TScustomer = pp.ID
+    LEFT JOIN Team tt ON tt.ID = pp.TeamID
+    LEFT JOIN Personnel p2 ON p2.ID = cr.PersonnelID
+    LEFT JOIN Personnel p3 on cu.TechnologyRecruitmentID =p3.ID
+    <trim prefix="WHERE"  prefixOverrides="AND|OR">
+      cu.WangWangNum =#{wangwangnum,jdbcType=VARCHAR}
+      <if test="TScustomer != null">
+        AND cu.TScustomer = #{TScustomer,jdbcType=VARCHAR}
+      </if>
+      <if test="TechnologyRecruitmentID != -1">
+        AND cu.TechnologyRecruitmentID =#{TechnologyRecruitmentID,jdbcType=INTEGER}
+      </if>
+      <if test="PersonnelID != -1">
+        AND cr.PersonnelID = #{PersonnelID,jdbcType=INTEGER}
+      </if>
+      <if test="TeamID != -1 ">
+        and pp.TeamID= #{TeamID,jdbcType=INTEGER}
+      </if>
+        <if test="TeamName != null ">
+            and tt.TeamName= #{TeamName,jdbcType=INTEGER}
+        </if>
+    </trim>
+
+
+  </select>
+</mapper>

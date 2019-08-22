@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <classPathEntry
+            location="D:/maven/mysql/mysql-connector-java/5.1.47/mysql-connector-java-5.1.47.jar"/>
+    <context id="my" targetRuntime="MyBatis3">
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
+
+        <!-- 自定义注释生成器 -->
+        <commentGenerator type="com.mj.dao.mybatis.MyCommentGenerator">
+            <!--<property name="suppressDate" value="false"/>-->
+            <!--<property name="suppressAllComments" value="true"/>-->
+        </commentGenerator>
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/db_mj?characterEncoding=UTF-8" userId="root" password="toot"/>
+                        <!--password="09161219"-->
+
+        <!-- 自定义 类型转换器 -->
+        <javaTypeResolver type="com.mj.dao.mybatis.MyJavaTypeResolver">
+            <property name="forceBigDecimals" value="false"></property>
+        </javaTypeResolver>
+
+
+        <!-- 指定生成 entity 位置 -->
+        <javaModelGenerator targetPackage="com.mj.dao.entity"
+                            targetProject="dao\src\main\java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!-- 指定生成 mapper 位置 -->
+        <sqlMapGenerator targetPackage="com.mj.dao.mapper"
+                         targetProject="dao\src\main\java">
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+
+        <!-- 指定生成 repository 位置 -->
+        <javaClientGenerator targetPackage="com.mj.dao.repository"
+                             targetProject="dao\src\main\java"
+                             type="XMLMAPPER">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+        <!-- **************************  对应关系  **************************** -->
+        <!--<table tableName="sys_admin"  domainObjectName="Admin"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false">-->
+            <!--<generatedKey column="pk_id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
+
+        <!--<table tableName="sys_role"  domainObjectName="Role"-->
+            <!--enableCountByExample="false" enableUpdateByExample="false"-->
+            <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+            <!--selectByExampleQueryId="false">-->
+        <!--<generatedKey column="pk_id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
+
+        <!--<table tableName="sys_resource"  domainObjectName="Resource"-->
+            <!--enableCountByExample="false" enableUpdateByExample="false"-->
+            <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+            <!--selectByExampleQueryId="false">-->
+        <!--<generatedKey column="pk_id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
+
+        <!--<table tableName="sys_admin_role"  domainObjectName="AdminRole"-->
+            <!--enableCountByExample="false" enableUpdateByExample="false"-->
+            <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+            <!--selectByExampleQueryId="false">-->
+        <!--<generatedKey column="pk_id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
+
+        <!--<table tableName="t_level"  domainObjectName="Level"-->
+        <!--enableCountByExample="false" enableUpdateByExample="false"-->
+        <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+        <!--selectByExampleQueryId="false">-->
+        <!--<generatedKey column="pk_id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
+
+        <!--<table tableName="sys_role_resource"  domainObjectName="RoleResource"-->
+            <!--enableCountByExample="false" enableUpdateByExample="false"-->
+            <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+            <!--selectByExampleQueryId="false">-->
+        <!--<generatedKey column="pk_id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
+
+        <!--<table tableName="t_personnel" domainObjectName="Personnel"-->
+        <!--enableCountByExample="false" enableUpdateByExample="false"-->
+        <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+        <!--selectByExampleQueryId="false">-->
+        <!--</table>-->
+
+        <!--<table tableName="t_customer" domainObjectName="Customer"-->
+        <!--enableCountByExample="false" enableUpdateByExample="false"-->
+        <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+        <!--selectByExampleQueryId="false">-->
+        <!--</table>-->
+        <!--<table tableName="t_complaint" domainObjectName="Complaint"-->
+        <!--enableCountByExample="false" enableUpdateByExample="false"-->
+        <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+        <!--selectByExampleQueryId="false">-->
+        <!--</table>-->
+        <!--<table tableName="t_team" domainObjectName="Team"-->
+        <!--enableCountByExample="false" enableUpdateByExample="false"-->
+        <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+        <!--selectByExampleQueryId="false">-->
+        <!--</table>-->
+        <!--<table tableName="t_complaint_level" domainObjectName="ComplaintLevel"-->
+        <!--enableCountByExample="false" enableUpdateByExample="false"-->
+        <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+        <!--selectByExampleQueryId="false">-->
+        <!--</table>-->
+        <!--<table tableName="t_file" domainObjectName="Files"-->
+        <!--enableCountByExample="false" enableUpdateByExample="false"-->
+        <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+        <!--selectByExampleQueryId="false">-->
+        <!--</table>-->
+        <table tableName=""/>
+
+
+    </context>
+</generatorConfiguration>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mj.dao.repository.TeamMapper">
+  <resultMap id="BaseResultMap" type="com.mj.dao.entity.Team">
+    <result column="ID" jdbcType="INTEGER" property="id" />
+    <result column="TeamName" jdbcType="VARCHAR" property="teamname" />
+    <result column="Flag" jdbcType="VARCHAR" property="flag" />
+    <result column="Department" jdbcType="VARCHAR" property="department" />
+    <result column="TargetAmount" jdbcType="VARCHAR" property="targetamount" />
+    <result column="TargetDate" jdbcType="VARCHAR" property="targetdate" />
+    <result column="TargetBeginDate" jdbcType="VARCHAR" property="targetbegindate" />
+    <result column="TargetEndDate" jdbcType="VARCHAR" property="targetenddate" />
+    <result column="DepartmentRealId" jdbcType="INTEGER" property="departmentrealid" />
+  </resultMap>
+  <insert id="insert" parameterType="com.mj.dao.entity.Team">
+    insert into t_team (ID, TeamName, Flag, 
+      Department, TargetAmount, TargetDate, 
+      TargetBeginDate, TargetEndDate, DepartmentRealId
+      )
+    values (#{id,jdbcType=INTEGER}, #{teamname,jdbcType=VARCHAR}, #{flag,jdbcType=VARCHAR}, 
+      #{department,jdbcType=VARCHAR}, #{targetamount,jdbcType=VARCHAR}, #{targetdate,jdbcType=VARCHAR}, 
+      #{targetbegindate,jdbcType=VARCHAR}, #{targetenddate,jdbcType=VARCHAR}, #{departmentrealid,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mj.dao.entity.Team">
+    insert into t_team
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="teamname != null">
+        TeamName,
+      </if>
+      <if test="flag != null">
+        Flag,
+      </if>
+      <if test="department != null">
+        Department,
+      </if>
+      <if test="targetamount != null">
+        TargetAmount,
+      </if>
+      <if test="targetdate != null">
+        TargetDate,
+      </if>
+      <if test="targetbegindate != null">
+        TargetBeginDate,
+      </if>
+      <if test="targetenddate != null">
+        TargetEndDate,
+      </if>
+      <if test="departmentrealid != null">
+        DepartmentRealId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="teamname != null">
+        #{teamname,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null">
+        #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="targetamount != null">
+        #{targetamount,jdbcType=VARCHAR},
+      </if>
+      <if test="targetdate != null">
+        #{targetdate,jdbcType=VARCHAR},
+      </if>
+      <if test="targetbegindate != null">
+        #{targetbegindate,jdbcType=VARCHAR},
+      </if>
+      <if test="targetenddate != null">
+        #{targetenddate,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentrealid != null">
+        #{departmentrealid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

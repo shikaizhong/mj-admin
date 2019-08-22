@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD SQL MAP Config 3.1//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <!-- 查询返回Map时设置值为null的字段也在结果集中 -->
+        <setting name="callSettersOnNulls" value="true"/>
+    </settings>
+</configuration>

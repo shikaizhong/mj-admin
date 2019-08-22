@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mj.dao.repository.ComplaintLevelMapper">
+  <resultMap id="BaseResultMap" type="com.mj.dao.entity.ComplaintLevel">
+    <id column="pk_id" jdbcType="INTEGER" property="pkId" />
+    <result column="parent_id" jdbcType="INTEGER" property="parentId" />
+    <result column="complaint_name" jdbcType="VARCHAR" property="complaintName" />
+    <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    pk_id, parent_id, complaint_name, is_delete, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_complaint_level
+    where pk_id = #{pkId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_complaint_level
+    where pk_id = #{pkId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mj.dao.entity.ComplaintLevel">
+    insert into t_complaint_level (pk_id, parent_id, complaint_name, 
+     is_delete, create_time
+      )
+    values (#{pkId,jdbcType=INTEGER}, #{parentId,jdbcType=INTEGER}, #{complaintName,jdbcType=VARCHAR}, 
+     #{isDelete,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mj.dao.entity.ComplaintLevel">
+    insert into t_complaint_level
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pkId != null">
+        pk_id,
+      </if>
+      <if test="parentId != null">
+        parent_id,
+      </if>
+      <if test="complaintName != null">
+        complaint_name,
+      </if>
+      <if test="isDelete != null">
+        is_delete,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pkId != null">
+        #{pkId,jdbcType=INTEGER},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="complaintName != null">
+        #{complaintName,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mj.dao.entity.ComplaintLevel">
+    update t_complaint_level
+    <set>
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="complaintName != null">
+        complaint_name = #{complaintName,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null">
+        is_delete = #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where pk_id = #{pkId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mj.dao.entity.ComplaintLevel">
+    update t_complaint_level
+    set parent_id = #{parentId,jdbcType=INTEGER},
+      complaint_name = #{complaintName,jdbcType=VARCHAR},
+      is_delete = #{isDelete,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where pk_id = #{pkId,jdbcType=INTEGER}
+  </update>
+  <!--自定义-->
+  <resultMap id="BaseResultMapVo" type="com.mj.dao.vo.ComplaintLevelVo">
+    <id column="pk_id" jdbcType="INTEGER" property="complaintIds" />
+    <result column="parent_id" jdbcType="INTEGER" property="parentId" />
+    <result column="complaint_name" jdbcType="VARCHAR" property="complaintName" />
+  </resultMap>
+  <!--根据parent_id客诉小类-->
+  <select id="getLevelName" resultMap="BaseResultMapVo" parameterType="java.util.HashMap">
+    SELECT DISTINCT cl.* FROM t_complaint_level cl
+    <trim prefix="where" prefixOverrides="AND|OR">
+        cl.`parent_id` = #{parentId,jdbcType=INTEGER}
+    </trim>
+  </select>
+</mapper>

@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mj.dao.repository.ComplaintMapper">
+  <resultMap id="BaseResultMap" type="com.mj.dao.entity.Complaint">
+    <id column="pk_id" jdbcType="INTEGER" property="pkId" />
+    <result column="WangWangNum" jdbcType="VARCHAR" property="wangwangnum" />
+    <result column="complaintDate" jdbcType="TIMESTAMP" property="complaintdate" />
+    <result column="channel" jdbcType="INTEGER" property="channel" />
+    <result column="sceneRestoration" jdbcType="VARCHAR" property="scenerestoration" /><!--该字段弃用-->
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="frequency" jdbcType="INTEGER" property="frequency" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="is_delete" jdbcType="TINYINT" property="isDelete" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.mj.dao.entity.Complaint">
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    pk_id, WangWangNum, complaintDate, channel, sceneRestoration, remarks, frequency,
+   status, is_delete
+  </sql>
+  <sql id="Blob_Column_List">
+    content
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_complaint
+    where pk_id = #{pkId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_complaint
+    where pk_id = #{pkId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mj.dao.entity.Complaint">
+    insert into t_complaint (pk_id, WangWangNum, complaintDate, 
+      channel, sceneRestoration, remarks, 
+      frequency,
+      content
+      )
+    values (#{pkId,jdbcType=INTEGER}, #{wangwangnum,jdbcType=VARCHAR}, #{complaintdate,jdbcType=TIMESTAMP}, 
+      #{channel,jdbcType=INTEGER}, #{scenerestoration,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}, 
+      #{frequency,jdbcType=INTEGER},
+     #{content,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mj.dao.entity.Complaint">
+    insert into t_complaint
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pkId != null">
+        pk_id,
+      </if>
+      <if test="wangwangnum != null">
+        WangWangNum,
+      </if>
+      <if test="complaintdate != null">
+        complaintDate,
+      </if>
+      <if test="channel != null">
+        channel,
+      </if>
+      <if test="scenerestoration != null">
+        sceneRestoration,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="frequency != null">
+        frequency,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="isDelete != null">
+        is_delete,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pkId != null">
+        #{pkId,jdbcType=INTEGER},
+      </if>
+      <if test="wangwangnum != null">
+        #{wangwangnum,jdbcType=VARCHAR},
+      </if>
+      <if test="complaintdate != null">
+        #{complaintdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="channel != null">
+        #{channel,jdbcType=INTEGER},
+      </if>
+      <if test="scenerestoration != null">
+        #{scenerestoration,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="frequency != null">
+        #{frequency,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=TINYINT},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mj.dao.entity.Complaint">
+    update t_complaint
+    <set>
+      <if test="wangwangnum != null">
+        WangWangNum = #{wangwangnum,jdbcType=VARCHAR},
+      </if>
+      <if test="complaintdate != null">
+        complaintDate = #{complaintdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="channel != null">
+        channel = #{channel,jdbcType=INTEGER},
+      </if>
+      <if test="scenerestoration != null">
+        sceneRestoration = #{scenerestoration,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="frequency != null">
+        frequency = #{frequency,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="isDelete != null">
+        is_delete = #{isDelete,jdbcType=TINYINT},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where pk_id = #{pkId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.mj.dao.entity.Complaint">
+    update t_complaint
+    set WangWangNum = #{wangwangnum,jdbcType=VARCHAR},
+      complaintDate = #{complaintdate,jdbcType=TIMESTAMP},
+      channel = #{channel,jdbcType=INTEGER},
+      sceneRestoration = #{scenerestoration,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      frequency = #{frequency,jdbcType=INTEGER},
+      content = #{content,jdbcType=LONGVARCHAR},
+        is_delete = #{isDelete,jdbcType=TINYINT},
+    where pk_id = #{pkId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mj.dao.entity.Complaint">
+    update t_complaint
+    set WangWangNum = #{wangwangnum,jdbcType=VARCHAR},
+      complaintDate = #{complaintdate,jdbcType=TIMESTAMP},
+      channel = #{channel,jdbcType=INTEGER},
+      sceneRestoration = #{scenerestoration,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      frequency = #{frequency,jdbcType=INTEGER},
+      status=#{status,jdbcType = INTEGER},
+      is_delete = #{isDelete,jdbcType=TINYINT},
+    where pk_id = #{pkId,jdbcType=INTEGER}
+  </update>
+  <!--自定义-->
+  <resultMap id="BaseResultMapVo" type="com.mj.dao.vo.ComplaintVo">
+    <id column="pk_id" jdbcType="INTEGER" property="pkId" />
+    <result column="WangWangNum" jdbcType="VARCHAR" property="wangwangnum" />
+    <result column="complaintDate" jdbcType="TIMESTAMP" property="complaintdate" />
+    <result column="channel" jdbcType="INTEGER" property="channel" />
+    <result column="sceneRestoration" jdbcType="VARCHAR" property="scenerestoration" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="frequency" jdbcType="INTEGER" property="frequency" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="is_delete" jdbcType="TINYINT" property="isDelete" />
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+
+    <result column="ShoppType" jdbcType="VARCHAR" property="shopptype" />
+    <result column="CustType" jdbcType="INTEGER" property="custtype" />
+    <result column="TeamID" jdbcType="INTEGER" property="teamid" />
+    <result column="is_stop" jdbcType="INTEGER" property="isStop" />
+    <result column="TeamName" jdbcType="VARCHAR" property="teamname" />
+    <result column="Department" jdbcType="VARCHAR" property="department" />
+    <result column="PersonnelID" jdbcType="INTEGER" property="personnelid"/>
+    <result column="TScustomer" jdbcType="VARCHAR" property="tscustomer"/>
+    <result column="TechnologyRecruitmentID" jdbcType="INTEGER" property="technologyRecruitmentid"/>
+    <result column="parent_id" jdbcType="INTEGER" property="parentId" />
+    <result column="complaint_name" jdbcType="VARCHAR" property="complaintName" />
+    <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+
+    <result column="UserName" jdbcType="VARCHAR" property="username" />
+    <result column="ID" jdbcType="INTEGER" property="id" />
+    <result column="UserName" jdbcType="VARCHAR" property="tename" />
+    <result column="UserName" jdbcType="VARCHAR" property="pname" />
+
+  </resultMap>
+  <resultMap id="BaseResultMapS" type="com.mj.dao.vo.Complaints">
+    <id column="level" jdbcType="INTEGER" property="level" />
+    <result column="level_name" jdbcType="VARCHAR" property="levelName"/>
+  </resultMap>
+
+  <!--查询分页加搜索不用了-->
+  <select id="selectComplaint" parameterType="java.util.HashMap" resultMap="BaseResultMapVo">
+    SELECT cu.`TechnologyRecruitmentID`,cu.`TScustomer`,
+           cr.`PersonnelID`,cc.*,cu.`ShoppType`
+    FROM (t_complaint cc LEFT JOIN t_customer cu ON cc.`WangWangNum` =  cu.`WangWangNum` )
+    LEFT JOIN t_customer_records cr ON cu.`WangWangNum` = cr.`Trader`
+    <trim prefix="WHERE" prefixOverrides="AND|OR">
+      cc.is_delete=0
+      <if test="keyword != null and keyword != ''">
+        AND ((cc.WangWangNum LIKE CONCAT('%', #{keyword}, '%')
+        <!--团队名称搜索-->
+        <!--时间搜索-->
+        OR cc.`complaintDate` LIKE CONCAT('%',#{keyword}, '%')))
+        <!--客诉类别搜索-->
+      </if>
+      <if test="status != -1">
+        AND cc.status=#{status,jdbcType=TINYINT}
+      </if>
+      <if test="tscustomer !=-1">
+      AND cu.`TScustomer`=#{tscustomer,jdbcType=VARCHAR}
+    </if>
+      <if test="technologyRecruitmentid !=-1">
+        AND cu.`TechnologyRecruitmentID` =#{technologyRecruitmentid,jdbcType=INTEGER}
+      </if>
+      <if test="personnelid !=-1">
+        AND cr.`PersonnelID` = #{personnelid,jdbcType=INTEGER}
+      </if>
+      <if test="frequency !=-1">
+        and cc.`frequency` > #{frequency,jdbcType=INTEGER}
+      </if>
+      <if test="channel !=-1">
+        and cc.`channel` = #{channel,jdbcType=INTEGER}
+      </if>
+      <if test="teamId !=-1">
+        and cu.`TScustomer`= #{teamId,jdbcType=INTEGER}
+      </if>
+      <!--<if test="startTime != null and endTime !=null ">-->
+      <!--and cc.complaintDate <![CDATA[>= ]]> #{startTime} and cc.complaintDate <![CDATA[<= ]]> #{endTime}-->
+      <!--</if>-->
+      <if test="startTime != '' and endTime !='' ">
+        and cc.complaintDate <![CDATA[>= ]]> #{startTime} and cc.complaintDate <![CDATA[<= ]]> #{endTime}
+      </if>
+    </trim>
+    order by cc.`complaintDate` DESC
+    <if test="pageNum != null and pageSize != null">
+      Limit #{pageNum},#{pageSize}
+    </if>
+  </select>
+  <!--查询分页加搜索改进版-->
+  <select id="selectComplaintList" parameterType="java.util.HashMap" resultMap="BaseResultMapVo">
+    SELECT * FROM t_complaint cc
+    <trim prefix="WHERE" prefixOverrides="AND|OR">
+    cc.is_delete=0
+    <if test="keyword != null and keyword != ''">
+      AND ((cc.WangWangNum LIKE CONCAT('%', #{keyword}, '%')
+        <!--团队名称搜索-->
+        <!--时间搜索-->
+      OR cc.`complaintDate` LIKE CONCAT('%',#{keyword}, '%')))
+      </if>
+      <!--按照状态搜索-->
+      <if test="status != -1">
+        AND cc.status=#{status,jdbcType=TINYINT}
+      </if>
+      <!--按照投诉次数管理-->
+      <if test="frequency !=-1">
+        and cc.`frequency` > #{frequency,jdbcType=INTEGER}
+      </if>
+      <!--按照投诉渠道搜索-->
+      <if test="channel !=-1">
+        and cc.`channel` = #{channel,jdbcType=INTEGER}
+      </if>
+      <if test="startTime != '' and endTime !='' ">
+        and cc.complaintDate <![CDATA[>= ]]> #{startTime} and cc.complaintDate <![CDATA[<= ]]> #{endTime}
+      </if>
+    </trim>
+    order by cc.`complaintDate` DESC
+      <if test="pageNum !=null and pageSize !=null">
+        Limit #{pageNum},#{pageSize}
+      </if>
+  </select>
+  <!--查询反馈总数-->
+  <select id="selectComplaintCount" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+    select count(*)FROM(t_complaint cc LEFT JOIN t_customer cu ON cc.`WangWangNum` =  cu.`WangWangNum` )
+    LEFT JOIN t_customer_records cr ON cu.`WangWangNum` = cr.`Trader`
+    <trim prefix="WHERE" prefixOverrides="AND|OR">
+      cc.is_delete=0
+      <if test="keyword != null and keyword != ''">
+        AND ((cc.WangWangNum LIKE CONCAT('%', #{keyword}, '%')
+        <!--团队名称搜索-->
+        <!--时间搜索-->
+        OR cc.`complaintDate` LIKE CONCAT('%',#{keyword}, '%')))
+        <!--客诉类别搜索-->
+      </if>
+      <if test="status != -1">
+        AND cc.status=#{status,jdbcType=TINYINT}
+      </if>
+      <if test="tscustomer !=-1">
+        AND cu.`TScustomer`=#{tscustomer,jdbcType=VARCHAR}
+      </if>
+      <if test="technologyRecruitmentid !=-1">
+        AND cu.`TechnologyRecruitmentID` =#{technologyRecruitmentid,jdbcType=INTEGER}
+      </if>
+      <if test="personnelid !=-1">
+        AND cr.`PersonnelID` = #{personnelid,jdbcType=INTEGER}
+      </if>
+      <if test="frequency !=-1">
+        and cc.`frequency` > #{frequency,jdbcType=INTEGER}
+      </if>
+      <if test="channel !=-1">
+        and cc.`channel` = #{channel,jdbcType=INTEGER}
+      </if>
+      <if test="teamId !=-1">
+        and cu.`TScustomer`= #{teamId,jdbcType=INTEGER}
+      </if>
+      <!--<if test="startTime != null and endTime !=null ">-->
+        <!--and cc.complaintDate <![CDATA[>= ]]> #{startTime} and cc.complaintDate <![CDATA[<= ]]> #{endTime}-->
+      <!--</if>-->
+      <if test="startTime != '' and endTime !='' ">
+        and cc.complaintDate <![CDATA[>= ]]> #{startTime} and cc.complaintDate <![CDATA[<= ]]> #{endTime}
+      </if>
+    </trim>
+  </select>
+  <!--查询客户反馈总数量-->
+  <select id="sumCustomerComplaint" resultType="java.lang.Integer" parameterType="java.lang.String">
+      select count(*) from t_complaint cc where
+      cc.`WangWangNum`=#{wangwangnum,jdbcType=VARCHAR} and cc.is_delete=0
+  </select>
+  <!--删除反馈信息-->
+  <!--批量删除-->
+  <update id="deleteBatch" parameterType="java.lang.Integer">
+    update t_complaint
+    set is_delete=1
+    where pk_id in
+    <foreach collection="array" index="index" item="item" separator="," open="(" close=")">
+      #{item}
+    </foreach>
+  </update>
+  <!--通过wangwangnum查询对应的历史记录-->
+  <select id="selectInfoByWangWangNum" resultType="com.mj.dao.vo.ComplaintVo">
+    SELECT cu.`TechnologyRecruitmentID`,cu.`TScustomer`,
+           cr.`PersonnelID`,cc.*,cu.`ShoppType`
+    FROM ((t_complaint cc LEFT JOIN t_customer cu ON cc.`WangWangNum` =  cu.`WangWangNum` )
+           LEFT JOIN t_customer_records cr ON cu.`WangWangNum` = cr.`Trader`)where
+   cc.WangWangNum = #{wangwangnum,jdbcType=VARCHAR} and  cc.is_delete=0
+  </select>
+  <!--通过complaintId查询对应的历史记录-->
+  <select id="selectFiles" resultType="com.mj.dao.entity.Files">
+    SELECT ff.* FROM t_files ff LEFT JOIN t_complaint cc ON ff.`complaint_id` = cc.`pk_id` where ff.`complaint_id` = #{complaintId}
+  </select>
+  <!--反馈大类(弃用)-->
+  <select id="selectLevel" resultMap="BaseResultMapS">
+    SELECT DISTINCT tt.level,tt.level_name FROM t_complaint tt
+  </select>
+  <!--删除指定文件(弃用)-->
+  <update id="deleteFile" parameterType="java.lang.String">
+  UPDATE t_complaint cc SET
+  cc.`sceneRestoration`= REPLACE (cc.`sceneRestoration`, cc.`sceneRestoration`= #{removeUrls,jdbcType=VARCHAR}, '');
+</update>
+</mapper>

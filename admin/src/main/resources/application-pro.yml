@@ -1,0 +1,35 @@
+# 项目服务器配置  打包用sdx的配置文件
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.1.251:3306/db_mj?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: maijia123
+    useSLL: true
+    initialSize: 1
+    minIdle: 5
+    maxActive: 100
+    maxWait: 60000
+    testWhileIdle: true
+    testOnReturn: false
+    testOnBorrow: false
+    validationQuery: SELECT 1
+    removeAbandoned: true
+    removeAbandonedTimeout: 1800
+    logAbandoned: true
+    filters: mergeStat
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 25200000
+
+
+    redis:
+      host: 127.0.0.1
+      password:
+#      port: 51141
+      #      password:
+      jedis:
+        pool:
+          min-idle: 0
+          max-idle: 20
+          #            max-wait: 5000
+          max-active: 100
