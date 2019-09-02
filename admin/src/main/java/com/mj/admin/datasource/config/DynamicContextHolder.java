@@ -12,10 +12,14 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 /**
- * 多数据源上下文
- *
- * @author Mark sunlightcs@gmail.com
+ * @Author Simon
+ * @Method 
+ * @Version 1.0
+ * @Return
+ * @Exception 多数据源上下文
+ * @Date 2019-08-23 0023 09:58:03
  */
+ 
 public class DynamicContextHolder {
     @SuppressWarnings("unchecked")
     private static final ThreadLocal<Deque<String>> CONTEXT_HOLDER = new ThreadLocal() {

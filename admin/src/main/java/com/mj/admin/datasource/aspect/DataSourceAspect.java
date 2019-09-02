@@ -24,11 +24,14 @@ import org.springframework.stereotype.Component;
 import java.lang.reflect.Method;
 
 /**
- * 多数据源，切面处理类
- *
- * @author Mark sunlightcs@gmail.com
- * @since 1.0.0
+ * @Author Simon
+ * @Method
+ * @Version 1.0
+ * @Return
+ * @Exception 多数据源，切面处理类
+ * @Date 2019-08-23 0023 09:52:09
  */
+
 @Aspect
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)

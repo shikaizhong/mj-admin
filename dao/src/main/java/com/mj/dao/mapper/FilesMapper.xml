@@ -6,9 +6,10 @@
     <result column="url" jdbcType="VARCHAR" property="url" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="complaint_id" jdbcType="INTEGER" property="complaintId" />
+    <result column="file_type" jdbcType="INTEGER" property="fileType" />
   </resultMap>
   <sql id="Base_Column_List">
-    pk_id, url, name, complaint_id
+    pk_id, url, name, complaint_id,file_type
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -22,9 +23,9 @@
   </delete>
   <insert id="insert" parameterType="com.mj.dao.entity.Files">
     insert into t_files (pk_id, url, name,
-      complaint_id)
+      complaint_id,file_type)
     values (#{pkId,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{complaintId,jdbcType=INTEGER})
+      #{complaintId,jdbcType=INTEGER},#{fileType,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.mj.dao.entity.Files">
     insert into t_files
@@ -41,6 +42,9 @@
       <if test="complaintId != null">
         complaint_id,
       </if>
+      <if test="fileType != null">
+        file_type
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="pkId != null">
@@ -54,6 +58,9 @@
       </if>
       <if test="complaintId != null">
         #{complaintId,jdbcType=INTEGER},
+      </if>
+      <if test="fileType != null">
+        #{fileType,jdbcType = INTEGER},
       </if>
     </trim>
   </insert>
@@ -69,6 +76,9 @@
       <if test="complaintId != null">
         complaint_id = #{complaintId,jdbcType=INTEGER},
       </if>
+      <if test="fileType != null">
+        file_type = #{fileType,jdbcType = INTEGER},
+      </if>
     </set>
     where pk_id = #{pkId,jdbcType=INTEGER}
   </update>
@@ -76,7 +86,8 @@
     update t_files
     set url = #{url,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
-      complaint_id = #{complaintId,jdbcType=INTEGER}
+      complaint_id = #{complaintId,jdbcType=INTEGER},
+      file_type = #{fileType,jdbcType = INTEGER},
     where pk_id = #{pkId,jdbcType=INTEGER}
   </update>
 </mapper>

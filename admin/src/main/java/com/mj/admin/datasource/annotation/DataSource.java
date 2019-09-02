@@ -11,11 +11,14 @@ package com.mj.admin.datasource.annotation;
 import java.lang.annotation.*;
 
 /**
- * 多数据源注解
- *
- * @author Mark sunlightcs@gmail.com
- * @since 1.0.0
+ * @Author Simon
+ * @Method
+ * @Version 1.0
+ * @Return
+ * @Exception 多文件注解
+ * @Date 2019-08-23 0023 09:49:53
  */
+
 @Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented

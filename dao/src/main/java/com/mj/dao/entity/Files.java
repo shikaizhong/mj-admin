@@ -21,6 +21,8 @@ public class Files {
      */
     private Integer complaintId;
 
+    //文件类型
+    private Integer fileType;
     /**
      * 主键id
      * @author Administrator
@@ -91,6 +93,14 @@ public class Files {
      */
     public void setComplaintId(Integer complaintId) {
         this.complaintId = complaintId;
+    }
+
+    public Integer getFileType() {
+        return fileType;
+    }
+
+    public void setFileType(Integer fileType) {
+        this.fileType = fileType;
     }
 
     /**

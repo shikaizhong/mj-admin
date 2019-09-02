@@ -67,4 +67,7 @@ public interface ComplaintMapper {
     //根据大类查询
     List<Complaints> selectLevel();
     int deleteFile(String removeUrl);
+
+    //根据id查询
+    List<ComplaintVo> selectById(Map params);
 }

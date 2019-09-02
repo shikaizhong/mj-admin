@@ -2,6 +2,10 @@ package com.mj.admin.controller;
 
 import com.mj.admin.service.PersonnelService;
 import com.mj.common.result.RestResult;
+import com.mj.common.result.RestResultBuilder;
+import com.mj.dao.vo.PageRequest;
+import com.mj.dao.vo.PageResult;
+import com.mj.dao.vo.ResponsibilityVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -80,4 +84,17 @@ public class PersonnelController {
         List<ComplaintVo> list =personnelService.selectComplaintListOver(wangwangnum);
         return  new RestResultBuilder().setCode(0).setMsg("请求成功").setData(list).build();
     }*/
+
+
+    //测试分页插件
+    @RequestMapping(value ="/testPage",method = RequestMethod.POST)
+    public PageResult findPage(@RequestBody PageRequest pageRequest) throws Exception {
+        return personnelService.testPageHelper(pageRequest);
+    }
+
+    @RequestMapping(value = "/tests",method = RequestMethod.POST)
+    public RestResult tests(@RequestBody Map map){
+        ResponsibilityVo list =personnelService.selectResponsibilityList(map);
+        return  new RestResultBuilder().setCode(0).setMsg("请求成功").setData(list).build();
+    }
 }

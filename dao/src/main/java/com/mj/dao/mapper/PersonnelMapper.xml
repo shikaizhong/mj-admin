@@ -360,6 +360,39 @@
     <result column="TScustomer" jdbcType="VARCHAR" property="tscustomer" />
     <result column="TeamName" jdbcType="VARCHAR" property="teamname" />
   </resultMap>
+
+  <resultMap id="BaseResultMapRo" type="com.mj.dao.vo.ResponsibilityVo">
+    <id column="pk_id" jdbcType="INTEGER" property="pkId" />
+    <result column="level" jdbcType="INTEGER" property="level" />
+    <result column="son_level" jdbcType="VARCHAR" property="sonLevel" />
+    <result column="result" jdbcType="INTEGER" property="result" />
+    <result column="responsibilityer" jdbcType="INTEGER" property="responsibilityer" />
+    <result column="grade" jdbcType="INTEGER" property="grade" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="responsibilityor" jdbcType="INTEGER" property="responsibilityor" />
+    <result column="complaint_id" jdbcType="INTEGER" property="complaintId" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="summary" jdbcType="LONGVARCHAR" property="summary" />
+    <result column="basic" jdbcType="LONGVARCHAR" property="basic" />
+    <result column="deal" jdbcType="LONGVARCHAR" property="deal" />
+
+    <result column="complaintDate" jdbcType="TIMESTAMP" property="complaintdate" />
+    <result column="channel" jdbcType="INTEGER" property="channel" />
+    <result column="WangWangNum" jdbcType="VARCHAR" property="wangwangnum" />
+
+    <result column="parent_id" jdbcType="INTEGER" property="parentId" />
+    <result column="complaint_name" jdbcType="VARCHAR" property="complaintName" />
+    <result column="parent_name" jdbcType="VARCHAR" property="parentName"/>
+
+    <result column="TScustomer" jdbcType="VARCHAR" property="tscustomer"/>
+    <result column="tename" jdbcType="VARCHAR" property="tename" />
+    <result column="TeamName" jdbcType="VARCHAR" property="teamname" />
+    <result column="ShoppType" jdbcType="VARCHAR" property="shopptype" />
+    <result column="ServerDeadline" jdbcType="VARCHAR" property="serverdeadline" />
+    <result column="PersonnelID" jdbcType="INTEGER" property="personnelid"/>
+    <result column="pname" jdbcType="VARCHAR" property="pname" />
+    <result column="pteamname" jdbcType="VARCHAR" property="pteamname" />
+  </resultMap>
   <!--用户登录-->
   <select id="login" resultMap="BaseResultMap"  parameterType="java.lang.String">
         select * from Personnel
@@ -441,5 +474,45 @@
     </trim>
 
 
+  </select>
+
+  <!--通过id查询-->
+  <select id="selectByPkId" parameterType="java.util.Map" resultMap="BaseResultMapVo">
+    SELECT cu.WangWangNum,cu.TScustomer,cr.PersonnelID,cu.ShoppType,pp.UserName,
+           pp.TeamID,tt.TeamName,cu.TechnologyRecruitmentID,p2.UserName pname,p3.UserName tename
+    from Customer cu LEFT JOIN CustomerRecords cr ON cu.WangWangNum = cr.Trader
+                     LEFT JOIN Personnel pp ON cu.TScustomer = pp.ID
+                     LEFT JOIN Team tt ON tt.ID = pp.TeamID
+                     LEFT JOIN Personnel p2 ON p2.ID = cr.PersonnelID
+                     LEFT JOIN Personnel p3 on cu.TechnologyRecruitmentID =p3.ID
+      where cu.WangWangNum =#{wangwangnum,jdbcType=VARCHAR}
+  </select>
+
+
+  <!--拼接查询sqlserver拼接到responsibility-->
+  <select id="selectResponsibilityList" parameterType="java.util.Map" resultMap="BaseResultMapRo">
+    SELECT p1.UserName tename,tt.TeamName,cc.ServerDeadline,cr.PersonnelID,p2.UserName pname,t2.TeamName pteamname,cc.ShoppType,cc.TScustomer
+      from Customer cc
+      LEFT JOIN Personnel p1 ON cc.TScustomer =p1.ID
+      LEFT JOIN Team tt ON p1.TeamID = tt.ID
+      LEFT JOIN CustomerRecords cr ON cc.WangWangNum = cr.Trader
+      LEFT JOIN Personnel p2 ON p2.ID = cr.PersonnelID
+      LEFT JOIN Team t2 ON p2.TeamID = t2.ID
+    <trim prefix="WHERE"  prefixOverrides="AND|OR">
+      cc.WangWangNum =#{wangwangnum,jdbcType=VARCHAR}
+      <if test="TScustomer != null">
+        AND cc.TScustomer = #{TScustomer,jdbcType=VARCHAR}
+      </if>
+      <if test="PersonnelID != -1">
+        AND cr.PersonnelID = #{PersonnelID,jdbcType=INTEGER}
+      </if>
+      <if test="TeamName != null ">
+        and tt.TeamName= #{TeamName,jdbcType=INTEGER}
+      </if>
+    </trim>
+  </select>
+  <!--测试分页插件-->
+  <select id="test" resultMap="BaseResultMap">
+    select * from t_personnel
   </select>
 </mapper>

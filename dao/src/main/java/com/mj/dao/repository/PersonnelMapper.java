@@ -3,6 +3,7 @@ package com.mj.dao.repository;
 import com.mj.dao.entity.Personnel;
 import com.mj.dao.vo.ComplaintVo;
 import com.mj.dao.vo.PersonnelVo;
+import com.mj.dao.vo.ResponsibilityVo;
 import com.mj.dao.vo.TeamVo;
 import org.apache.ibatis.annotations.Param;
 
@@ -52,4 +53,14 @@ public interface PersonnelMapper {
 
 
     ComplaintVo selectComplaintListOver(Map map);
+
+    //从sqlserver带出来判责要的数据
+    ResponsibilityVo selectResponsibilityList(Map map);
+
+    //测试分页插件
+    List<Personnel> test();
+
+
+    //一个条件查询
+    ComplaintVo selectByPkId(Map map);
 }

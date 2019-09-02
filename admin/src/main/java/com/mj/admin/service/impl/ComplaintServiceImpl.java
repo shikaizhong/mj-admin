@@ -18,13 +18,16 @@ import com.mj.dao.vo.Complaints;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
-import java.sql.*;
-import java.util.Date;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.*;
 
 @Service
@@ -74,10 +77,6 @@ public class ComplaintServiceImpl implements ComplaintService {
         params.put("pageSize",pagesize);
         params.put("keyword",keyword);
         params.put("status",status);
-//        params.put("tscustomer",tscustomers);
-////        params.put("technologyRecruitmentid",technologyRecruitmentids);
-////        params.put("personnelid",personnelids);
-////        params.put("teamId",teamId);
         if (Strings.isEmpty(startTime)){
             params.put("startTime",startTime);
         }
@@ -176,6 +175,7 @@ public class ComplaintServiceImpl implements ComplaintService {
         return new RestResultBuilder().setCode(0).setMsg("请求成功").setData(map).build();
     }
     //添加反馈
+    @Transactional
     @DataSource(value = "druid")
     @Override
     public RestResult addComplaint(Complaint complaint) {
@@ -210,6 +210,7 @@ public class ComplaintServiceImpl implements ComplaintService {
             return new RestResultBuilder().setCode(0).setMsg("请求成功").setData(complaint1).build();
     }
     //修改反馈信息
+    @Transactional
     @DataSource(value = "druid")
     @Override
     public RestResult updateComplaint(Complaint complaint) {
@@ -282,6 +283,7 @@ public class ComplaintServiceImpl implements ComplaintService {
         return new RestResultBuilder<>().success("修改成功");
     }
     //删除反馈信息
+    @Transactional
     @Override
     public RestResult deleteComlaint(List<Integer> pkIds) {
         Integer [] pkId=new Integer[pkIds.size()];
@@ -466,28 +468,29 @@ public class ComplaintServiceImpl implements ComplaintService {
     public RestResult upload(MultipartFile file) throws IOException {
             //获取文件名  场景还原文件名
             String fileName = file.getOriginalFilename();
+            String fileNames = fileName;
             System.out.println("文件名为"+fileName);
             //获取文件的后缀名
             String suffixName = fileName.substring(fileName.lastIndexOf("."));
             System.out.println("后缀名为"+suffixName);
             //解决中文问题,linux下中文路径,图片显示问题
-            fileName = UUID.randomUUID().toString().replace("-", "") + suffixName;
+            fileName =UUID.randomUUID().toString().replace("-", "") + suffixName+"_"+fileName;
             //返回客户端文件路径图片显示问题
             //情景还原url
             //远程linux服务器的
-        String url = "http://192.168.1.112:9090/mj-admin"+"/upload/"+fileName;
+//        String url = "http://192.168.1.112:9090/mj-admin"+"/upload/"+fileName;
             //格式化掉.便于显示
 //        String url ="/upload/"+fileName;
             //本地
-//            String url ="localhost:8090"+"/upload/"+fileName;
+            String url ="localhost:8090"+"/upload/"+fileName;
 //            Complaint complaintVo1 =  new Complaint();
             Files files = new Files();
             files.setUrl(url);
-            files.setName(fileName);
+            files.setName(fileNames);
 //            filesMapper.insertSelective(files);
             System.out.println("服务器返回的路径"+url);
-            File dest = new File(ApiConstant.UPLOAD_PATH + fileName);//服务器的
-//            File dest = new File(ApiConstant.DEV_UPLOAD_PATH+fileName);//本地的
+//            File dest = new File(ApiConstant.UPLOAD_PATH + fileName);//服务器的
+            File dest = new File(ApiConstant.DEV_UPLOAD_PATH+fileName);//本地的
             System.out.println("目录为"+dest);
             // 检测是否存在目录
             if (!dest.getParentFile().exists()) {
@@ -504,6 +507,7 @@ public class ComplaintServiceImpl implements ComplaintService {
         files1.setUrl(files.getUrl());
         files1.setName(files.getName());
         files1.setComplaintId(files.getComplaintId());
+        files1.setFileType(0);
         filesMapper.insertSelective(files1);
         return new RestResultBuilder().setCode(0).setMsg("请求成功").setData(files1).build();
     }

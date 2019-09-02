@@ -1,7 +1,10 @@
 package com.mj.admin.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.mj.admin.constants.AdminConstant;
 import com.mj.admin.datasource.annotation.DataSource;
+import com.mj.admin.datasource.config.DataSourceSwitch;
 import com.mj.admin.redis.JWTRedisDAO;
 import com.mj.admin.service.PersonnelService;
 import com.mj.common.enums.ResultCodeEnum;
@@ -9,12 +12,11 @@ import com.mj.common.result.RestResult;
 import com.mj.common.result.RestResultBuilder;
 import com.mj.common.result.ResultUtils;
 import com.mj.common.tools.JWTUtils;
+import com.mj.common.tools.PageUtils;
 import com.mj.common.tools.StringUtil;
 import com.mj.dao.entity.Personnel;
 import com.mj.dao.repository.PersonnelMapper;
-import com.mj.dao.vo.ComplaintVo;
-import com.mj.dao.vo.PersonnelVo;
-import com.mj.dao.vo.TeamVo;
+import com.mj.dao.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -147,5 +149,38 @@ public class PersonnelServiceImpl implements PersonnelService {
         System.out.println(map.get("wangwangnum"));
         /*ComplaintVo complaintVo = personnelMapper.selectComplaintListOver(map);*/
         return personnelMapper.selectComplaintListOver(map);
+    }
+    @DataSource(value = "slave1")
+    @Override
+    public ComplaintVo selectByPkId(Map map) {
+        return personnelMapper.selectByPkId(map);
+    }
+
+    //一个条件查询
+    @DataSource(value = "slave1")
+
+
+    //测试分页插件
+    @Override
+    public PageResult testPageHelper(PageRequest pageRequest) throws Exception {
+        return PageUtils.getPageResult(pageRequest,getPageInfo(pageRequest));
+    }
+
+    private PageInfo<Personnel> getPageInfo(PageRequest pageRequest) throws Exception {
+        int pageNum = pageRequest.getPageNum();
+        int pageSize = pageRequest.getPageSize();
+        PageHelper.startPage(pageNum, pageSize);
+        List<Personnel> personnels = personnelMapper.test();
+        for(Personnel p:personnels){
+            System.out.println(p.getUsername());
+        }
+        DataSourceSwitch.change("druid");
+        return new PageInfo<Personnel>(personnels);
+  }
+    @DataSource(value = "slave1")
+    @Override
+    public ResponsibilityVo selectResponsibilityList(Map map) {
+        System.out.println(map.get("wangwangnum")+"旺旺名是:--------");
+        return personnelMapper.selectResponsibilityList(map);
     }
 }

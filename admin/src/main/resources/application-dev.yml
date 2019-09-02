@@ -136,6 +136,15 @@ dynamic:
       password: 123456
 
 
+      #分页插件
+      pageheloer:
+        helperDialect: mysql
+        reasonable: true
+        supportMethodsArguments: true
+        params: count=countSql
+
+
+
 
 
 

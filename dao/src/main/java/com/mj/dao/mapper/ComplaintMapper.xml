@@ -205,7 +205,9 @@
   </resultMap>
   <resultMap id="BaseResultMapS" type="com.mj.dao.vo.Complaints">
     <id column="level" jdbcType="INTEGER" property="level" />
-    <result column="level_name" jdbcType="VARCHAR" property="levelName"/>
+    <result column="parent_name" jdbcType="VARCHAR" property="parentName"/>
+    <result column="parent_id" jdbcType="INTEGER" property="parentId" />
+    <result column="complaint_name" jdbcType="VARCHAR" property="complaintName"/>
   </resultMap>
 
   <!--查询分页加搜索不用了-->
@@ -288,6 +290,12 @@
         Limit #{pageNum},#{pageSize}
       </if>
   </select>
+
+  <!--根据pkId查询信息-->
+  <select id="selectById" parameterType="java.util.HashMap" resultMap="BaseResultMapVo">
+      select * FROM t_complaint cc where pk_id=#{pkId,jdbcType=INTEGER}
+  </select>
+
   <!--查询反馈总数-->
   <select id="selectComplaintCount" parameterType="java.util.HashMap" resultType="java.lang.Integer">
     select count(*)FROM(t_complaint cc LEFT JOIN t_customer cu ON cc.`WangWangNum` =  cu.`WangWangNum` )
@@ -357,9 +365,11 @@
   <select id="selectFiles" resultType="com.mj.dao.entity.Files">
     SELECT ff.* FROM t_files ff LEFT JOIN t_complaint cc ON ff.`complaint_id` = cc.`pk_id` where ff.`complaint_id` = #{complaintId}
   </select>
-  <!--反馈大类(弃用)-->
+  <!--反馈大类-->
   <select id="selectLevel" resultMap="BaseResultMapS">
-    SELECT DISTINCT tt.level,tt.level_name FROM t_complaint tt
+    <!--SELECT DISTINCT cl.`parent_name`,rr.`level`,cl.`parent_id`,cl.complaint_name FROM t_complaint_level cl LEFT JOIN t_responsibility rr ON rr.`level` = cl.`parent_id`-->
+    SELECT DISTINCT cl.`parent_name`,cl.`parent_id`
+    FROM t_complaint_level cl
   </select>
   <!--删除指定文件(弃用)-->
   <update id="deleteFile" parameterType="java.lang.String">

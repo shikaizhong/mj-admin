@@ -9,11 +9,14 @@
 package com.mj.admin.datasource.properties;
 
 /**
- * 多数据源属性
- *
- * @author Mark sunlightcs@gmail.com
- * @since 1.0.0
+ * @Author Simon
+ * @Method
+ * @Version 1.0
+ * @Return
+ * @Exception 多数据源属性
+ * @Date 2019-08-23 0023 10:14:18
  */
+
 public class DataSourceProperties {
     private String driverClassName;
     private String url;

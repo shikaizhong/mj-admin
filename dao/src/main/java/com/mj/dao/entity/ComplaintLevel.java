@@ -17,6 +17,8 @@ public class ComplaintLevel {
      * 客诉类别名 complaint_name
      */
     private String complaintName;
+    //客诉大类别名称parent_name
+    private String parentName;
 
     /**
      * 是否删除改分类:  0:正常  1:删除 is_delete
@@ -115,6 +117,14 @@ public class ComplaintLevel {
      */
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public String getParentName() {
+        return parentName;
+    }
+
+    public void setParentName(String parentName) {
+        this.parentName = parentName;
     }
 
     /**

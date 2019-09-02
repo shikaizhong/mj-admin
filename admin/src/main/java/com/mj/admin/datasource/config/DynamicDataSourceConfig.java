@@ -21,11 +21,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 配置多数据源
- *
- * @author Mark sunlightcs@gmail.com
- * @since 1.0.0
+ * @Author Simon
+ * @Method
+ * @Version 1.0
+ * @Return
+ * @Exception 配置多数据源
+ * @Date 2019-08-23 0023 10:05:01
  */
+
 @Configuration
 @EnableConfigurationProperties(DynamicDataSourceProperties.class)
 public class DynamicDataSourceConfig {

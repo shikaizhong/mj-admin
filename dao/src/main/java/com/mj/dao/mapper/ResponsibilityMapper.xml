@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mj.dao.repository.ResponsibilityMapper">
+  <resultMap id="BaseResultMap" type="com.mj.dao.entity.Responsibility">
+    <id column="pk_id" jdbcType="INTEGER" property="pkId" />
+    <result column="level" jdbcType="INTEGER" property="level" />
+    <result column="son_level" jdbcType="INTEGER" property="sonLevel" />
+    <result column="result" jdbcType="INTEGER" property="result" />
+    <result column="responsibilityer" jdbcType="INTEGER" property="responsibilityer" />
+    <result column="grade" jdbcType="INTEGER" property="grade" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="responsibilityor" jdbcType="INTEGER" property="responsibilityor" />
+    <result column="complaint_id" jdbcType="INTEGER" property="complaintId" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.mj.dao.entity.ResponsibilityWithBLOBs">
+    <result column="summary" jdbcType="LONGVARCHAR" property="summary" />
+    <result column="basic" jdbcType="LONGVARCHAR" property="basic" />
+    <result column="deal" jdbcType="LONGVARCHAR" property="deal" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    pk_id, level, son_level, result, responsibilityer, grade, create_time,
+    responsibilityor, complaint_id, type
+  </sql>
+  <sql id="Blob_Column_List">
+    summary, basic, deal
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_responsibility
+    where pk_id = #{pkId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_responsibility
+    where pk_id = #{pkId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mj.dao.entity.ResponsibilityWithBLOBs">
+    insert into t_responsibility (pk_id, level, level_name, 
+      result, responsibilityer, customer_id, 
+      grade, create_time, responsibilityor, 
+      complaint_id, type, summary, 
+      basic, deal)
+    values (#{pkId,jdbcType=INTEGER}, #{level,jdbcType=INTEGER}, #{levelName,jdbcType=VARCHAR}, 
+      #{result,jdbcType=INTEGER}, #{responsibilityer,jdbcType=INTEGER}, #{customerId,jdbcType=INTEGER}, 
+      #{grade,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{responsibilityor,jdbcType=INTEGER}, 
+      #{complaintId,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{summary,jdbcType=LONGVARCHAR}, 
+      #{basic,jdbcType=LONGVARCHAR}, #{deal,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mj.dao.entity.ResponsibilityWithBLOBs">
+    insert into t_responsibility
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pkId != null">
+        pk_id,
+      </if>
+      <if test="level != null">
+        level,
+      </if>
+      <if test="sonLevel != null">
+        son_level,
+      </if>
+      <if test="result != null">
+        result,
+      </if>
+      <if test="responsibilityer != null">
+        responsibilityer,
+      </if>
+      <if test="customerId != null">
+        customer_id,
+      </if>
+      <if test="grade != null">
+        grade,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="responsibilityor != null">
+        responsibilityor,
+      </if>
+      <if test="complaintId != null">
+        complaint_id,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="summary != null">
+        summary,
+      </if>
+      <if test="basic != null">
+        basic,
+      </if>
+      <if test="deal != null">
+        deal,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pkId != null">
+        #{pkId,jdbcType=INTEGER},
+      </if>
+      <if test="level != null">
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="sonLevel != null">
+        #{sonLevel,jdbcType=INTEGER},
+      </if>
+      <if test="result != null">
+        #{result,jdbcType=INTEGER},
+      </if>
+      <if test="responsibilityer != null">
+        #{responsibilityer,jdbcType=INTEGER},
+      </if>
+      <if test="customerId != null">
+        #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="grade != null">
+        #{grade,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="responsibilityor != null">
+        #{responsibilityor,jdbcType=INTEGER},
+      </if>
+      <if test="complaintId != null">
+        #{complaintId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="summary != null">
+        #{summary,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="basic != null">
+        #{basic,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="deal != null">
+        #{deal,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mj.dao.entity.ResponsibilityWithBLOBs">
+    update t_responsibility
+    <set>
+      <if test="level != null">
+        level = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="sonLevel != null">
+        son_level = #{sonLevel,jdbcType=INTEGER},
+      </if>
+      <if test="result != null">
+        result = #{result,jdbcType=INTEGER},
+      </if>
+      <if test="responsibilityer != null">
+        responsibilityer = #{responsibilityer,jdbcType=INTEGER},
+      </if>
+      <if test="customerId != null">
+        customer_id = #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="grade != null">
+        grade = #{grade,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="responsibilityor != null">
+        responsibilityor = #{responsibilityor,jdbcType=INTEGER},
+      </if>
+      <if test="complaintId != null">
+        complaint_id = #{complaintId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="summary != null">
+        summary = #{summary,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="basic != null">
+        basic = #{basic,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="deal != null">
+        deal = #{deal,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where pk_id = #{pkId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.mj.dao.entity.ResponsibilityWithBLOBs">
+    update t_responsibility
+    set level = #{level,jdbcType=INTEGER},
+      son_level = #{sonLevel,jdbcType=INTEGER},
+      result = #{result,jdbcType=INTEGER},
+      responsibilityer = #{responsibilityer,jdbcType=INTEGER},
+      customer_id = #{customerId,jdbcType=INTEGER},
+      grade = #{grade,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      responsibilityor = #{responsibilityor,jdbcType=INTEGER},
+      complaint_id = #{complaintId,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      summary = #{summary,jdbcType=LONGVARCHAR},
+      basic = #{basic,jdbcType=LONGVARCHAR},
+      deal = #{deal,jdbcType=LONGVARCHAR}
+    where pk_id = #{pkId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mj.dao.entity.Responsibility">
+    update t_responsibility
+    set level = #{level,jdbcType=INTEGER},
+      level_name = #{levelName,jdbcType=VARCHAR},
+      result = #{result,jdbcType=INTEGER},
+      responsibilityer = #{responsibilityer,jdbcType=INTEGER},
+      customer_id = #{customerId,jdbcType=INTEGER},
+      grade = #{grade,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      responsibilityor = #{responsibilityor,jdbcType=INTEGER},
+      complaint_id = #{complaintId,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER}
+    where pk_id = #{pkId,jdbcType=INTEGER}
+  </update>
+  <!--自定义-->
+  <resultMap id="BaseResultMapVo" type="com.mj.dao.vo.ResponsibilityVo">
+    <id column="pk_id" jdbcType="INTEGER" property="pkId" />
+    <result column="level" jdbcType="INTEGER" property="level" />
+    <result column="son_level" jdbcType="INTEGER" property="sonLevel" />
+    <result column="result" jdbcType="INTEGER" property="result" />
+    <result column="responsibilityer" jdbcType="INTEGER" property="responsibilityer" />
+    <result column="grade" jdbcType="INTEGER" property="grade" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="responsibilityor" jdbcType="INTEGER" property="responsibilityor" />
+    <result column="complaint_id" jdbcType="INTEGER" property="complaintId" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="summary" jdbcType="LONGVARCHAR" property="summary" />
+    <result column="basic" jdbcType="LONGVARCHAR" property="basic" />
+    <result column="deal" jdbcType="LONGVARCHAR" property="deal" />
+
+    <result column="complaintDate" jdbcType="TIMESTAMP" property="complaintdate" />
+    <result column="channel" jdbcType="INTEGER" property="channel" />
+    <result column="WangWangNum" jdbcType="VARCHAR" property="wangwangnum" />
+
+    <result column="parent_id" jdbcType="INTEGER" property="parentId" />
+    <result column="complaint_name" jdbcType="VARCHAR" property="complaintName" />
+    <result column="parent_name" jdbcType="VARCHAR" property="parentName"/>
+
+    <result column="TScustomer" jdbcType="VARCHAR" property="tscustomer"/>
+    <result column="tename" jdbcType="VARCHAR" property="tename" />
+    <result column="TeamName" jdbcType="VARCHAR" property="teamname" />
+    <result column="ShoppType" jdbcType="VARCHAR" property="shopptype" />
+    <result column="ServerDeadline" jdbcType="VARCHAR" property="serverdeadline" />
+    <result column="PersonnelID" jdbcType="INTEGER" property="personnelid"/>
+    <result column="pname" jdbcType="VARCHAR" property="pname" />
+    <result column="pteamname" jdbcType="VARCHAR" property="pteamname" />
+  </resultMap>
+  <!--查重-->
+  <select id="selectByComplaintId" parameterType="com.mj.dao.entity.ResponsibilityWithBLOBs" resultMap="ResultMapWithBLOBs">
+    select
+    *
+    from t_responsibility
+    where complaint_id = #{complaintId,jdbcType=INTEGER}
+  </select>
+
+  <!--查询加搜索-->
+  <select id="selectResponsiblity" parameterType="java.util.HashMap" resultMap="BaseResultMapVo">
+    <!--投诉-->
+    <if test="type ==0">
+      SELECT *  FROM t_complaint cc left join t_responsibility rr ON rr.`complaint_id` = cc.`pk_id`
+      <if test="level !=null">
+        left join t_complaint_level cl ON rr.`level` = cl.parent_id
+        <trim prefix="WHERE" prefixOverrides="AND|OR">
+          <if test="parentName !=null and parentName != ''">
+            AND rr.`parent_name` =#{parentName,jdbcType=VARCHAR}
+          </if>
+          <if test="keyword != null and keyword != ''">
+            AND (cc.WangWangNum LIKE CONCAT('%', #{keyword}, '%')
+          </if>
+          <if test="startTime != '' and endTime !='' ">
+            and rr.createTime <![CDATA[>= ]]> #{startTime}  and rr.createTime <![CDATA[<= ]]> #{endTime}
+          </if>
+          <if test="result !=-1">
+            AND rr.`result` =#{result,jdbcType=INTEGER}
+          </if>
+          <if test="grade !=null or grade != ''">
+            AND rr.`grade` =#{grade}
+          </if>
+        </trim>
+      </if>
+    <if test="level ==null">
+      <trim prefix="WHERE" prefixOverrides="AND|OR">
+          cc.is_delete=0
+          <if test="keyword != null and keyword != ''">
+            AND (cc.WangWangNum LIKE CONCAT('%', #{keyword}, '%')
+          </if>
+          <if test="startTime != '' and endTime !='' ">
+            and rr.`create_time` <![CDATA[>= ]]> #{startTime}  and rr.`create_time` <![CDATA[<= ]]> #{endTime}
+          </if>
+          <if test="result !=-1">
+            AND rr.`result` =#{result,jdbcType=INTEGER}
+          </if>
+          <if test="grade !=null">
+            AND rr.`grade` =#{grade}
+          </if>
+        </trim>
+      </if>
+      order by cc.`complaintDate` DESC
+      <if test="pageNum !=null and pageSize !=null">
+        Limit #{pageNum},#{pageSize}
+      </if>
+    </if>
+    <!--隐患-->
+    <if test="type ==1">
+      SELECT *  FROM t_hidden_trouble ht left join t_responsibility rr on rr.`complaint_id` = ht.`pk_id`
+      <if test="level !=null">
+        left join t_complaint_level cl ON rr.`level` = cl.parent_id
+      </if>
+      <trim prefix="WHERE" prefixOverrides="AND|OR">
+          ht.is_delete = 0
+        <if test="keyword != null and keyword != ''">
+          AND (ht.WangWangNum LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+      </trim>
+      order by ht.`complaintDate` DESC
+      <if test="pageNum !=null and pageSize !=null">
+        Limit #{pageNum},#{pageSize}
+      </if>
+    </if>
+    <!--退款-->
+    <if test="type ==2">
+      SELECT *  FROM t_refund rf left join t_responsibility rr on rr.`complaint_id` = rf.`pk_id`
+      <if test="level !=null">
+        left join t_complaint_level cl ON rr.`level` = cl.parent_id
+      </if>
+      <trim prefix="WHERE" prefixOverrides="AND|OR">
+        rf.is_delete = 0
+        <if test="keyword != null and keyword != ''">
+          AND (rf.WangWangNum LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+      </trim>
+      order by rf.`complaintDate` DESC
+      <if test="pageNum !=null and pageSize !=null">
+        Limit #{pageNum},#{pageSize}
+      </if>
+    </if>
+  </select>
+  <select id="selectComplaintCount" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+    select count(*)FROM t_complaint cc left join t_responsibility rr ON rr.`complaint_id` = cc.`pk_id`
+    <trim prefix="WHERE" prefixOverrides="AND|OR">
+      cc.is_delete=0
+      <if test="keyword != null and keyword != ''">
+        AND (cc.WangWangNum LIKE CONCAT('%', #{keyword}, '%')
+      </if>
+      <if test="startTime != '' and endTime !='' ">
+        and rr.`create_time` <![CDATA[>= ]]> #{startTime} and rr.`create_time` <![CDATA[<= ]]> #{endTime}
+      </if>
+      <if test="result !=-1">
+        AND rr.`result` =#{result,jdbcType=INTEGER}
+      </if>
+    </trim>
+  </select>
+  <!--插件分页-->
+  <select id="page" resultMap="BaseResultMap">
+      select * from t_responsibility
+  </select>
+</mapper>

@@ -5,8 +5,33 @@ public class Complaints {
      * 客诉类别 level
      */
     private Integer level;
-    //客诉类别名
-    private String levelName;
+    //投诉大类别名称
+    private String parentName;
+    /**
+     * 客诉类别大类id: parent_id
+     */
+    private Integer parentId;
+
+    /**
+     * 客诉小类别名 complaint_name
+     */
+    private String complaintName;
+
+    public String getComplaintName() {
+        return complaintName;
+    }
+
+    public void setComplaintName(String complaintName) {
+        this.complaintName = complaintName;
+    }
+
+    public Integer getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Integer parentId) {
+        this.parentId = parentId;
+    }
 
     public Integer getLevel() {
         return level;
@@ -16,11 +41,12 @@ public class Complaints {
         this.level = level;
     }
 
-    public String getLevelName() {
-        return levelName;
+
+    public String getParentName() {
+        return parentName;
     }
 
-    public void setLevelName(String levelName) {
-        this.levelName = levelName;
+    public void setParentName(String parentName) {
+        this.parentName = parentName;
     }
 }

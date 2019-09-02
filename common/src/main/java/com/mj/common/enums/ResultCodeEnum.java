@@ -31,6 +31,7 @@ public enum ResultCodeEnum {
 
     DEVICE_NOT_FOUND(300001, "设备找不到");
 
+
     private int code;
     private String msg;
 

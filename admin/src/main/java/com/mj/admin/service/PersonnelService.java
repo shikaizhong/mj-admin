@@ -2,6 +2,9 @@ package com.mj.admin.service;
 
 import com.mj.common.result.RestResult;
 import com.mj.dao.vo.ComplaintVo;
+import com.mj.dao.vo.PageRequest;
+import com.mj.dao.vo.PageResult;
+import com.mj.dao.vo.ResponsibilityVo;
 
 import java.util.Map;
 
@@ -31,4 +34,13 @@ public interface PersonnelService {
 
     //查询分页加搜索改进版
     ComplaintVo selectComplaintListOver(Map map);
+
+    //带出sqlserver数据库的判责数据
+    ResponsibilityVo selectResponsibilityList(Map map);
+
+
+    //一个条件查询
+    ComplaintVo selectByPkId(Map map);
+    //测试分页插件
+    PageResult testPageHelper(PageRequest pageRequest) throws Exception;
 }

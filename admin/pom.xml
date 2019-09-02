@@ -107,6 +107,12 @@
             <!--<groupId>commons-net</groupId>-->
             <!--<artifactId>commons-net</artifactId>-->
         <!--</dependency>-->
+        <!--分页插件-->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+            <version>3.4.2</version>
+        </dependency>
     </dependencies>
 
     <build>

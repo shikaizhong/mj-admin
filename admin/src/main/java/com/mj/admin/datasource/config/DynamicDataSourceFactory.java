@@ -14,11 +14,14 @@ import com.mj.admin.datasource.properties.DataSourceProperties;
 import java.sql.SQLException;
 
 /**
- * DruidDataSource
- *
- * @author Mark sunlightcs@gmail.com
- * @since 1.0.0
+ * @Author Simon
+ * @Method
+ * @Version 1.0
+ * @Return
+ * @Exception DruidDataSource
+ * @Date 2019-08-23 0023 10:06:37
  */
+
 public class DynamicDataSourceFactory {
 
     public static DruidDataSource buildDruidDataSource(DataSourceProperties properties) {
