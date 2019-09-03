@@ -43,7 +43,7 @@ public class Responsibility {
     /**
      * 判责日期 create_time
      */
-    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd")
+    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss.SSS")
     private Date createTime;
 
     /**

@@ -415,5 +415,13 @@
     from t_customer
     where WangWangNum = #{wangwangnum,jdbcType=VARCHAR}
   </select>
+  <!--根据名字查询-->
 
+  <resultMap id="BaseResultVo" type="com.mj.dao.vo.CustomerVo">
+    <result column="WangWangNum" jdbcType="VARCHAR" property="wangwangnum" />
+  </resultMap>
+
+  <select id="selectBywangwangnum" parameterType="java.util.HashMap" resultMap="BaseResultVo">
+    SELECT * FROM Customer WHERE WangWangNum = #{wangwangnum}
+  </select>
 </mapper>

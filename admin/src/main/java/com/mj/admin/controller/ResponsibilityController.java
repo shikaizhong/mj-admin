@@ -9,6 +9,7 @@ import com.mj.dao.vo.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.Map;
 
 @RestController
@@ -39,8 +40,16 @@ public class ResponsibilityController {
 
     //根据id查询
     @RequestMapping(value = "/selectById",method = RequestMethod.POST)
-    public RestResult selectById(@RequestBody Map params){
-        return responsibilityService.selectById(params);
+    public RestResult selectById(@RequestBody Map params) throws ParseException {
+        Integer type = Integer.valueOf(String.valueOf(params.get("type")));
+        if (type ==2){
+            return responsibilityService.selectInfoByPkId(params);
+
+        }else if (type ==1) {
+            return responsibilityService.selectByHId(params);
+        }else {
+            return responsibilityService.selectById(params);
+        }
     }
 }
 

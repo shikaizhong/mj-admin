@@ -5,21 +5,16 @@ import com.github.pagehelper.PageInfo;
 import com.mj.admin.service.ResponsibilityService;
 import com.mj.common.result.RestResult;
 import com.mj.common.result.RestResultBuilder;
+import com.mj.common.tools.DateUtil;
 import com.mj.common.tools.PageUtils;
-import com.mj.dao.entity.Files;
-import com.mj.dao.entity.Responsibility;
-import com.mj.dao.entity.ResponsibilityWithBLOBs;
-import com.mj.dao.repository.ComplaintMapper;
-import com.mj.dao.repository.FilesMapper;
-import com.mj.dao.repository.ResponsibilityMapper;
-import com.mj.dao.vo.ComplaintVo;
-import com.mj.dao.vo.PageRequest;
-import com.mj.dao.vo.PageResult;
-import com.mj.dao.vo.ResponsibilityVo;
+import com.mj.dao.entity.*;
+import com.mj.dao.repository.*;
+import com.mj.dao.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.ParseException;
 import java.util.*;
 
 @Service
@@ -33,11 +28,16 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
     private FilesMapper filesMapper;
     @Autowired
     private ComplaintMapper complaintMapper;
+    @Autowired
+    private RefundMapper refundMapper;
+    @Autowired
+    private HiddenTroubleMapper hiddenTroubleMapper;
     //查询搜索
     @Override
     public RestResult selectResponsiblity(Map params) throws Exception {
         Integer pageNum = Integer.valueOf(String.valueOf(params.get("pageNum")));
         Integer pageSize = Integer.valueOf(String.valueOf(params.get("pageSize")));
+        Integer typess = Integer.valueOf(String.valueOf(params.get("type")));
         if (pageSize>=10){
             pageSize = 10;
         }if (pageNum == 1){
@@ -47,7 +47,7 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
         }
         params.put("pageNum",pageNum);
         params.put("pageSize",pageSize);
-
+        params.put("type",typess);
         List<ResponsibilityVo> list = responsibilityMapper.selectResponsiblity(params);
         List<ResponsibilityVo> result = new ArrayList<ResponsibilityVo>();
         //循环拿数据
@@ -92,7 +92,8 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
                 result.add(responsibilityVo);
             }
         }
-        Integer type = Integer.valueOf((Integer) params.get("type"));
+        String types = String.valueOf(params.get("type"));
+        Integer type = Integer.parseInt(types);
         Integer total = 0;
         if (type == 0){
             total = responsibilityMapper.selectComplaintCount(params);
@@ -123,6 +124,7 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
     //修改判责信息
     public RestResult updataResponsiblity(ResponsibilityWithBLOBs responsibilityWithBLOBs) {
         ResponsibilityWithBLOBs responsibilityWithBLOBs1 = responsibilityMapper.selectByComplaintId(responsibilityWithBLOBs.getComplaintId());
+        System.out.println("传入的时间为"+responsibilityWithBLOBs.getCreateTime());
         //如果实体里面有数据则是修改
         if (responsibilityWithBLOBs1 !=null){
             responsibilityWithBLOBs1.setBasic(responsibilityWithBLOBs.getBasic());
@@ -134,11 +136,12 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
             responsibilityWithBLOBs1.setResponsibilityer(responsibilityWithBLOBs.getResponsibilityer());
             responsibilityWithBLOBs1.setResponsibilityor(responsibilityWithBLOBs.getResponsibilityor());
             responsibilityWithBLOBs1.setGrade(responsibilityWithBLOBs.getGrade());
+            responsibilityWithBLOBs1.setType(responsibilityWithBLOBs.getType());
+            responsibilityWithBLOBs1.setCreateTime(DateUtil.getHourAfter(responsibilityWithBLOBs.getCreateTime(),8));
             responsibilityMapper.updateByPrimaryKeySelective(responsibilityWithBLOBs1);
         }
         //如果实体里面没有数据则是增加
         if (responsibilityWithBLOBs1 ==null){
-            System.out.println("进来这里喽弟弟!");
             ResponsibilityWithBLOBs responsibilityWithBLOBs2 = new ResponsibilityWithBLOBs();
             responsibilityWithBLOBs2.setBasic(responsibilityWithBLOBs.getBasic());
             responsibilityWithBLOBs2.setDeal(responsibilityWithBLOBs.getDeal());
@@ -169,7 +172,7 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
         return new RestResultBuilder().setCode(0).setMsg("请求成功").setData(files1).build();
     }
 
-    //根据id查询
+    //根据id查询投诉信息
     @Override
     public RestResult selectById(Map params) {
         List<ComplaintVo> list = complaintMapper.selectById(params);
@@ -205,6 +208,83 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
                 complaintVo.setPname(complaintVos.getPname());
                 complaintVo.setTename(complaintVos.getTename());
                 result.add(complaintVo);
+            }
+        }
+        Map map = new HashMap();
+        map.put("list",result);
+        return new RestResultBuilder().setCode(0).setMsg("请求成功").setData(map).build();
+    }
+
+    //根据id查询退款信息
+    @Override
+    public RestResult selectInfoByPkId(Map params) throws ParseException {
+        List<Refund> list = refundMapper.selectInfoByPkId(params);
+        List<RefundVo> result = new ArrayList<>();
+        for (Refund vo:list) {
+            RefundVo refundVo = new RefundVo();
+            String wangwangnum = vo.getWangwangnum();
+            params.put("wangwangnum", wangwangnum);
+            List<SQLServerVo> sqlServerVo = personnelService.selectByDatebase(params);
+            refundVo.setWangWangNum(vo.getWangwangnum());
+            refundVo.setRefundDate(vo.getRefundDate());
+            refundVo.setRefundCause(vo.getRefundCause());
+            refundVo.setRefundChannel(vo.getRefundChannel());
+            refundVo.setRemark(vo.getRemark());
+            refundVo.setIsDelete(vo.getIsDelete());
+            refundVo.setPkId(vo.getPkId());
+            refundVo.setRefundAmount(vo.getRefundAmount());
+            refundVo.setLevel(vo.getLevel());
+            refundVo.setStatus(vo.getStatus());
+            if (!sqlServerVo.isEmpty()) {
+                for (SQLServerVo sqlList : sqlServerVo) {
+                    refundVo.setDeadline(sqlList.getDeadline());
+                    refundVo.setCusttype(sqlList.getCusttype());
+                    refundVo.setChildtype(sqlList.getChildtype());
+                    refundVo.setShopptype(sqlList.getShopptype());
+                    refundVo.setTeamname(sqlList.getTeamname());
+                    refundVo.setUsername1(sqlList.getUsername1());
+                    refundVo.setUsername2(sqlList.getUsername2());
+                }
+            }
+            result.add(refundVo);
+        }
+            Map map = new HashMap();
+            map.put("list",result);
+        return new RestResultBuilder().setCode(0).setMsg("请求成功").setData(map).build();
+    }
+
+    //根据id查询隐患信息
+
+    @Override
+    public RestResult selectByHId(Map params) throws ParseException {
+        List<HiddenTrouble> hiddenTroubles = hiddenTroubleMapper.selectById(params);
+        List<HiddenTroubleVo> result = new ArrayList();
+        if(!hiddenTroubles.isEmpty()) {
+            for (HiddenTrouble listHidden : hiddenTroubles) {
+                HiddenTroubleVo hiddenTroubleVo = new HiddenTroubleVo();
+                String wangwangnum = listHidden.getWangwangnum();
+                hiddenTroubleVo.setWangWangNum(listHidden.getWangwangnum());
+                hiddenTroubleVo.setFrequency(listHidden.getFrequency());
+                hiddenTroubleVo.setHiddenDate(listHidden.getHiddenDate());
+                hiddenTroubleVo.setHiddenContent(listHidden.getHiddenContent());
+                hiddenTroubleVo.setIsDelete(listHidden.getIsDelete());
+                hiddenTroubleVo.setLevel(listHidden.getLevel());
+                hiddenTroubleVo.setPkId(listHidden.getPkId());
+                hiddenTroubleVo.setRemark(listHidden.getRemark());
+                hiddenTroubleVo.setStatus(listHidden.getStatus());
+                params.put("wangwangnum", wangwangnum);
+                List<SQLServerVo> sqlServerVo = personnelService.selectByDatebase(params);
+                if(!sqlServerVo.isEmpty()) {
+                    for (SQLServerVo listVo : sqlServerVo) {
+                        hiddenTroubleVo.setCusttype(listVo.getCusttype());
+                        hiddenTroubleVo.setChildtype(listVo.getChildtype());
+                        hiddenTroubleVo.setShopptype(listVo.getShopptype());
+                        hiddenTroubleVo.setTeamname(listVo.getTeamname());
+                        hiddenTroubleVo.setUsername1(listVo.getUsername1());
+                        hiddenTroubleVo.setUsername2(listVo.getUsername2());
+                    }
+                }
+                result.add(hiddenTroubleVo);
             }
         }
         Map map = new HashMap();

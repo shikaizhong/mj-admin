@@ -1,11 +1,10 @@
 package com.mj.admin.service;
 
 import com.mj.common.result.RestResult;
-import com.mj.dao.vo.ComplaintVo;
-import com.mj.dao.vo.PageRequest;
-import com.mj.dao.vo.PageResult;
-import com.mj.dao.vo.ResponsibilityVo;
+import com.mj.dao.vo.*;
 
+import java.text.ParseException;
+import java.util.List;
 import java.util.Map;
 
 public interface PersonnelService {
@@ -43,4 +42,10 @@ public interface PersonnelService {
     ComplaintVo selectByPkId(Map map);
     //测试分页插件
     PageResult testPageHelper(PageRequest pageRequest) throws Exception;
+
+
+
+    //根据旺旺名查询退款数据
+    List<SQLServerVo> selectByDatebase(Map params) throws ParseException;
+
 }

@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mj.dao.repository.LoseMapper">
+    <resultMap id="BaseResultMap" type="com.mj.dao.entity.Lose">
+        <id column="pk_id" jdbcType="INTEGER" property="pkId"/>
+        <result column="wang_wang_num" jdbcType="VARCHAR" property="wangWangNum"/>
+        <result column="revisit_date" jdbcType="TIMESTAMP" property="revisitDate"/>
+        <result column="satisfaction" jdbcType="TINYINT" property="satisfaction"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="level" jdbcType="INTEGER" property="level"/>
+        <result column="is_delete" jdbcType="TINYINT" property="isDelete"/>
+        <result column="status" jdbcType="TINYINT" property="status"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.mj.dao.entity.Lose">
+        <result column="improvement" jdbcType="LONGVARCHAR" property="improvement"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        pk_id, wang_wang_num, revisit_date, satisfaction,
+        remark, level, is_delete, status
+    </sql>
+    <sql id="Blob_Column_List">
+        improvement
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from t_lose
+        where pk_id = #{pkId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+      delete from t_lose
+      where pk_id = #{pkId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.mj.dao.entity.Lose">
+      insert into t_lose (pk_id, wang_wang_num,
+        revisit_date, satisfaction,
+        remark, level, is_delete,
+        status, improvement)
+      values (#{pkId,jdbcType=INTEGER}, #{wangWangNum,jdbcType=VARCHAR},
+        #{revisitDate,jdbcType=TIMESTAMP}, #{satisfaction,jdbcType=TINYINT},
+        #{remark,jdbcType=VARCHAR}, #{level,jdbcType=INTEGER}, #{isDelete,jdbcType=TINYINT},
+        #{status,jdbcType=TINYINT}, #{improvement,jdbcType=LONGVARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.mj.dao.entity.Lose">
+        insert into t_lose
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pkId != null">
+                pk_id,
+            </if>
+            <if test="wangWangNum != null">
+                wang_wang_num,
+            </if>
+            <if test="revisitDate != null">
+                revisit_date,
+            </if>
+            <if test="satisfaction != null">
+                satisfaction,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="level != null">
+                level,
+            </if>
+            <if test="isDelete != null">
+                is_delete,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="improvement != null">
+                improvement,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="pkId != null">
+                #{pkId,jdbcType=INTEGER},
+            </if>
+            <if test="wangWangNum != null">
+                #{wangWangNum,jdbcType=VARCHAR},
+            </if>
+            <if test="revisitDate != null">
+                #{revisitDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="satisfaction != null">
+                #{satisfaction,jdbcType=TINYINT},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="level != null">
+                #{level,jdbcType=INTEGER},
+            </if>
+            <if test="isDelete != null">
+                #{isDelete,jdbcType=TINYINT},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=TINYINT},
+            </if>
+            <if test="improvement != null">
+                #{improvement,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.mj.dao.entity.Lose">
+        update t_lose
+        <set>
+            <if test="wangWangNum != null">
+                wang_wang_num = #{wangWangNum,jdbcType=VARCHAR},
+            </if>
+            <if test="revisitDate != null">
+                revisit_date = #{revisitDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="satisfaction != null">
+                satisfaction = #{satisfaction,jdbcType=TINYINT},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="level != null">
+                level = #{level,jdbcType=INTEGER},
+            </if>
+            <if test="isDelete != null">
+                is_delete = #{isDelete,jdbcType=TINYINT},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=TINYINT},
+            </if>
+            <if test="improvement != null">
+                improvement = #{improvement,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where pk_id = #{pkId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.mj.dao.entity.Lose">
+      update t_lose
+          set wang_wang_num = #{wangWangNum,jdbcType=VARCHAR},
+            revisit_date = #{revisitDate,jdbcType=TIMESTAMP},
+            satisfaction = #{satisfaction,jdbcType=TINYINT},
+            remark = #{remark,jdbcType=VARCHAR},
+            level = #{level,jdbcType=INTEGER},
+            is_delete = #{isDelete,jdbcType=TINYINT},
+            status = #{status,jdbcType=TINYINT},
+            improvement = #{improvement,jdbcType=LONGVARCHAR}
+            where pk_id = #{pkId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.mj.dao.entity.Lose">
+      update t_lose
+          set wang_wang_num = #{wangWangNum,jdbcType=VARCHAR},
+            revisit_date = #{revisitDate,jdbcType=TIMESTAMP},
+            satisfaction = #{satisfaction,jdbcType=TINYINT},
+            remark = #{remark,jdbcType=VARCHAR},
+            level = #{level,jdbcType=INTEGER},
+            is_delete = #{isDelete,jdbcType=TINYINT},
+            status = #{status,jdbcType=TINYINT}
+          where pk_id = #{pkId,jdbcType=INTEGER}
+    </update>
+
+
+    <!--自定义-->
+    <resultMap id="BaseResultMapVo" type="com.mj.dao.entity.Lose">
+        <id column="pk_id" jdbcType="INTEGER" property="pkId"/>
+        <result column="wang_wang_num" jdbcType="VARCHAR" property="wangWangNum"/>
+        <result column="revisit_date" jdbcType="TIMESTAMP" property="revisitDate"/>
+        <result column="satisfaction" jdbcType="TINYINT" property="satisfaction"/>
+        <result column="improvement" jdbcType="LONGVARCHAR" property="improvement"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="level" jdbcType="INTEGER" property="level"/>
+        <result column="is_delete" jdbcType="TINYINT" property="isDelete"/>
+        <result column="status" jdbcType="TINYINT" property="status"/>
+    </resultMap>
+
+    <!--总数据，分页，查询-->
+    <select id="selectLose" parameterType="java.util.HashMap" resultMap="BaseResultMapVo">
+        SELECT * FROM t_lose ll
+        <trim prefix="WHERE" prefixOverrides="AND|OR">
+            AND ll.`is_delete` = 0
+            <if test="wangWangNum != null and wangWangNum != ''">
+                AND ll.`wang_wang_num` = #{wangWangNum,jdbcType=VARCHAR}
+            </if>
+            <if test="startTime != null and endTime != null">
+                AND ll.`revisit_date` &gt;= #{startTime}
+                AND ll.`revisit_date` &lt;= #{endTime}
+            </if>
+            <if test="status != -1">
+                AND ll.`status` = #{status,jdbcType=INTEGER}
+            </if>
+        </trim>
+        ORDER BY ll.`revisit_date` DESC
+        <if test="pageSize != null and pageNum != null">
+            LIMIT #{pageNum},#{pageSize}
+        </if>
+    </select>
+
+    <!--流失总数-->
+    <select id="countLose" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM t_lose WHERE is_delete = 0
+    </select>
+
+    <!--删除-->
+    <update id="deleteLoseByPkId" parameterType="java.lang.Integer">
+        UPDATE t_lose ll SET ll.`is_delete` = 1 WHERE ll.`pk_id`
+        <foreach collection="array" index="index" separator="," item="item" open="(" close=")">
+            #{item}
+        </foreach>
+    </update>
+
+    <!--根据旺旺名查历史记录-->
+
+    <!---->
+
+</mapper>

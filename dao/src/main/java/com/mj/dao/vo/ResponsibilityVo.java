@@ -94,7 +94,6 @@ public class ResponsibilityVo {
      */
     private String wangwangnum;
 
-
     /**
      * 客诉类别大类id: parent_id
      */
@@ -138,7 +137,19 @@ public class ResponsibilityVo {
      * 招商顾问teamname
      */
     private String pteamname;
+    /**
+     * 隐患日期 hidden_date
+     */
+    private Date hiddenDate;
+    /**
+     * 隐患原因 hidden_content
+     */
+    private String hiddenContent;
 
+    /**
+     * 退款日期 refund_date
+     */
+    private Date refundDate;
 
 
     //生产get.set方法
@@ -357,4 +368,29 @@ public class ResponsibilityVo {
     public void setParentName(String parentName) {
         this.parentName = parentName;
     }
+
+    public Date getHiddenDate() {
+        return hiddenDate;
+    }
+
+    public void setHiddenDate(Date hiddenDate) {
+        this.hiddenDate = hiddenDate;
+    }
+
+    public String getHiddenContent() {
+        return hiddenContent;
+    }
+
+    public void setHiddenContent(String hiddenContent) {
+        this.hiddenContent = hiddenContent;
+    }
+
+    public Date getRefundDate() {
+        return refundDate;
+    }
+
+    public void setRefundDate(Date refundDate) {
+        this.refundDate = refundDate;
+    }
+
 }

@@ -1,6 +1,10 @@
 package com.mj.dao.repository;
 
 import com.mj.dao.entity.Customer;
+import com.mj.dao.vo.CustomerVo;
+
+import java.util.List;
+import java.util.Map;
 
 public interface CustomerMapper {
     /**
@@ -17,4 +21,8 @@ public interface CustomerMapper {
 
     //根据店铺名查询
     Customer selectByName(String wangwangnum);
+
+
+    //根据旺旺名查
+    List<CustomerVo> selectBywangwangnum(Map params);
 }

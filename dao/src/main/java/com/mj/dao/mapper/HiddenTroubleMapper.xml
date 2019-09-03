@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mj.dao.repository.HiddenTroubleMapper">
+    <resultMap id="BaseResultMap" type="com.mj.dao.entity.HiddenTrouble">
+        <id column="pk_id" jdbcType="INTEGER" property="pkId"/>
+        <result column="WangWangNum" jdbcType="VARCHAR" property="wangwangnum" />
+        <result column="hidden_date" jdbcType="TIMESTAMP" property="hiddenDate"/>
+        <result column="status" jdbcType="TINYINT" property="status"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="frequency" jdbcType="INTEGER" property="frequency"/>
+        <result column="is_delete" jdbcType="TINYINT" property="isDelete"/>
+        <result column="level" jdbcType="INTEGER" property="level"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.mj.dao.entity.HiddenTrouble">
+        <result column="hidden_content" jdbcType="LONGVARCHAR" property="hiddenContent"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    pk_id, WangWangNum, hidden_date, status, remark, frequency,
+    is_delete, level
+  </sql>
+    <sql id="Blob_Column_List">
+    hidden_content
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from t_hidden_trouble
+        where pk_id = #{pkId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_hidden_trouble
+    where pk_id = #{pkId,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.mj.dao.entity.HiddenTrouble">
+    insert into t_hidden_trouble (pk_id, WangWangNum,
+      hidden_date, status, remark,
+      frequency, is_delete, level,
+      hidden_content)
+    values (#{pkId,jdbcType=INTEGER}, #{wangwangnum,jdbcType=VARCHAR}, #{hiddenDate,jdbcType=TIMESTAMP},
+      #{status,jdbcType=TINYINT}, #{remark,jdbcType=VARCHAR},
+      #{frequency,jdbcType=INTEGER}, #{isDelete,jdbcType=TINYINT}, #{level,jdbcType=INTEGER},
+      #{hiddenContent,jdbcType=LONGVARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.mj.dao.entity.HiddenTrouble">
+        insert into t_hidden_trouble
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pkId != null">
+                pk_id,
+            </if>
+            <if test="wangwangnum != null">
+                WangWangNum,
+            </if>
+            <if test="hiddenDate != null">
+                hidden_date,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="frequency != null">
+                frequency,
+            </if>
+            <if test="isDelete != null">
+                is_delete,
+            </if>
+            <if test="level != null">
+                level,
+            </if>
+            <if test="hiddenContent != null">
+                hidden_content,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="pkId != null">
+                #{pkId,jdbcType=INTEGER},
+            </if>
+            <if test="wangwangnum != null">
+                #{wangwangnum,jdbcType=VARCHAR},
+            </if>
+            <if test="hiddenDate != null">
+                #{hiddenDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=TINYINT},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="frequency != null">
+                #{frequency,jdbcType=INTEGER},
+            </if>
+            <if test="isDelete != null">
+                #{isDelete,jdbcType=TINYINT},
+            </if>
+            <if test="level != null">
+                #{level,jdbcType=INTEGER},
+            </if>
+            <if test="hiddenContent != null">
+                #{hiddenContent,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.mj.dao.entity.HiddenTrouble">
+        update t_hidden_trouble
+        <set>
+            <if test="wangwangnum != null">
+                WangWangNum = #{wangwangnum,jdbcType=VARCHAR},
+            </if>
+            <if test="hiddenDate != null">
+                hidden_date = #{hiddenDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=TINYINT},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="frequency != null">
+                frequency = #{frequency,jdbcType=INTEGER},
+            </if>
+            <if test="isDelete != null">
+                is_delete = #{isDelete,jdbcType=TINYINT},
+            </if>
+            <if test="level != null">
+                level = #{level,jdbcType=INTEGER},
+            </if>
+            <if test="hiddenContent != null">
+                hidden_content = #{hiddenContent,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where pk_id = #{pkId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.mj.dao.entity.HiddenTrouble">
+    update t_hidden_trouble
+    set WangWangNum = #{wangwangnum,jdbcType=VARCHAR},
+      hidden_date = #{hiddenDate,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT},
+      remark = #{remark,jdbcType=VARCHAR},
+      frequency = #{frequency,jdbcType=INTEGER},
+      is_delete = #{isDelete,jdbcType=TINYINT},
+      level = #{level,jdbcType=INTEGER},
+      hidden_content = #{hiddenContent,jdbcType=LONGVARCHAR}
+    where pk_id = #{pkId,jdbcType=INTEGER}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.mj.dao.entity.HiddenTrouble">
+    update t_hidden_trouble
+    set WangWangNum = #{wangwangnum,jdbcType=VARCHAR},
+      hidden_date = #{hiddenDate,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT},
+      remark = #{remark,jdbcType=VARCHAR},
+      frequency = #{frequency,jdbcType=INTEGER},
+      is_delete = #{isDelete,jdbcType=TINYINT},
+      level = #{level,jdbcType=INTEGER}
+    where pk_id = #{pkId,jdbcType=INTEGER}
+  </update>
+
+    <!--自定义-->
+    <!--<resultMap id="BaseResultMapVo" type="com.mj.dao.vo.HiddenTroubleVo">
+        <id column="pk_id" jdbcType="INTEGER" property="pkId"/>
+        <result column="wang_wang_num" jdbcType="VARCHAR" property="wangWangNum"/>
+        <result column="hidden_date" jdbcType="TIMESTAMP" property="hiddenDate"/>
+        <result column="status" jdbcType="TINYINT" property="status"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="frequency" jdbcType="INTEGER" property="frequency"/>
+        <result column="is_delete" jdbcType="TINYINT" property="isDelete"/>
+        <result column="level" jdbcType="INTEGER" property="level"/>
+        <result column="hidden_content" jdbcType="LONGVARCHAR" property="hiddenContent"/>
+
+        <result column="CustType" jdbcType="VARCHAR" property="custtype"/>
+        <result column="ChildType" jdbcType="VARCHAR" property="childtype"/>
+
+        <result column="dz" jdbcType="VARCHAR" property="username1"/>
+        <result column="zsgw" jdbcType="VARCHAR" property="username2"/>
+        <result column="TeamName" jdbcType="VARCHAR" property="teamname"/>
+        <result column="ShoppType" jdbcType="VARCHAR" property="shopptype"/>
+    </resultMap>-->
+    <resultMap id="BaseResultMapVo" type="com.mj.dao.entity.HiddenTrouble">
+        <id column="pk_id" jdbcType="INTEGER" property="pkId"/>
+        <result column="WangWangNum" jdbcType="VARCHAR" property="wangwangnum" />
+        <result column="hidden_date" jdbcType="TIMESTAMP" property="hiddenDate"/>
+        <result column="status" jdbcType="TINYINT" property="status"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="frequency" jdbcType="INTEGER" property="frequency"/>
+        <result column="is_delete" jdbcType="TINYINT" property="isDelete"/>
+        <result column="level" jdbcType="INTEGER" property="level"/>
+        <result column="hidden_content" jdbcType="LONGVARCHAR" property="hiddenContent"/>
+    </resultMap>
+
+    <!--总查询，条件查询，分页-->
+    <!--<select id="selectHidden" parameterType="java.util.HashMap" resultMap="BaseResultMapVo">
+        SELECT ct.`CustType`,cc.`ChildType`,cu.`ShoppType`,p1.`UserName` AS dz,tt.`TeamName`,p2.`UserName` AS zsgw,ht.*
+        FROM ((((((t_hidden_trouble ht LEFT JOIN t_customer cu ON ht.`wang_wang_num` = cu.`WangWangNum`)
+        LEFT JOIN t_customer_records cr ON ht.`wang_wang_num` = cr.`Trader`)
+        LEFT JOIN t_customer_type ct ON cu.`CustTypeID` = ct.`ct_id`)
+        LEFT JOIN t_customer_child_type cc ON cu.`ChildTypeID` = cc.`cc_id`)
+        LEFT JOIN t_personnel p1 ON p1.`ID` = cu.`TScustomer`)
+        LEFT JOIN t_personnel p2 ON p2.`ID` = cr.`PersonnelID`)
+        LEFT JOIN t_team tt ON p1.`TeamID` = tt.`ID`
+        <trim prefix="WHERE" prefixOverrides="AND|OR">
+            AND ht.`is_delete` = 0
+            /*根据旺旺名查询，模糊查询*/
+            <if test="wangWangNum != null and wangWangNum != ''">
+                AND ht.`wang_wang_num` LIKE CONCAT('%',#{wangWangNum,jdbcType=VARCHAR},'%')
+            </if>
+            /*根据店铺查询，模糊查询*/
+            <if test="shopptype != null and shopptype != ''">
+                AND cu.`ShoppType` LIKE CONCAT('%',#{shopptype,jdbcType=VARCHAR},'%')
+            </if>
+            /*根据店长查询，模糊查询*/
+            <if test="dz != null and dz != ''">
+                AND p1.`UserName` LIKE CONCAT('%',#{dz,jdbcType=VARCHAR},'%')
+            </if>
+            /*根据招商顾问查询，模糊查询*/
+            <if test="zsgw != null and zsgw != ''">
+                AND p2.`UserName` LIKE CONCAT('%',#{zsgw,jdbcType=VARCHAR},'%')
+            </if>
+            /*根据所属团队查询，模糊查询*/
+            <if test="teamname != null and teamname != ''">
+                AND tt.`TeamName` LIKE CONCAT('%',#{teamname,jdbcType=VARCHAR},'%')
+            </if>
+            /*根据隐患的次数查询，模糊查询*/
+            <if test="frequency != null and frequency != ''">
+                AND ht.`frequency` = #{frequency,jdbcType=INTEGER}
+            </if>
+            /*根据开始时间，结束时间查询*/
+            <if test="startTime != null and endTime != null">
+                AND ht.`hidden_date` &gt;= #{startTime}
+                AND ht.`hidden_date` &lt;= #{endTime}
+            </if>
+            <if test="status != -1">
+                AND status = #{status,jdbcType=INTEGER}
+            </if>
+        </trim>
+        /*将数据根据时间的降序排列*/
+        ORDER BY ht.`hidden_date` DESC
+        /*分页*/
+        <if test="pageNum != null and pageSize != null">
+            LIMIT #{pageNum},#{pageSize}
+        </if>
+    </select>-->
+    <select id="selectHiddenList" parameterType="java.util.HashMap" resultMap="BaseResultMapVo">
+        SELECT * FROM t_hidden_trouble ht
+        <trim prefix="WHERE" prefixOverrides="AND|OR">
+            AND ht.`is_delete` = 0
+            <if test="wangWangNum != null and wangWangNum != ''">
+                AND ht.`WangWangNum` LIKE CONCAT ("%",#{wangwangnum},"%")
+            </if>
+            /*根据隐患的次数查询*/
+            <if test="frequency != null and frequency != ''">
+                AND ht.`frequency` = #{frequency,jdbcType=INTEGER}
+            </if>
+            /*根据开始时间，结束时间查询*/
+            <if test="startTime != null and endTime != null">
+                AND ht.`hidden_date` &gt;= #{startTime}
+                AND ht.`hidden_date` &lt;= #{endTime}
+            </if>
+            <if test="status != -1">
+                AND status = #{status,jdbcType=INTEGER}
+            </if>
+            /*将数据根据时间的降序排列*/
+            ORDER BY ht.`hidden_date` DESC
+            /*分页*/
+            <if test="pageNum != null and pageSize != null">
+                LIMIT #{pageNum},#{pageSize}
+            </if>
+        </trim>
+    </select>
+
+
+    <!--查询数据总数-->
+    <select id="total" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM t_hidden_trouble ht WHERE ht.`is_delete` = 0
+    </select>
+
+    <!--根据旺旺名查该店铺的隐患次数，到第几次-->
+    <select id="totalWangWangNum" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT ht.`frequency` FROM t_hidden_trouble ht where ht.`WangWangNum` = #{wangwangnum,jdbcType=VARCHAR}
+            ORDER BY pk_id desc limit 1
+    </select>
+
+    <!--删除隐患-->
+    <update id="deleteHidden" parameterType="java.lang.Integer">
+        UPDATE t_hidden_trouble SET is_delete = 1 WHERE pk_id IN
+        <foreach collection="array" index="index" separator="," item="item" open="(" close=")">
+            #{item}
+        </foreach>
+    </update>
+
+    <!--根据旺旺名查询全部-->
+    <select id="selectByWangWangNum" resultMap="BaseResultMapVo">
+        SELECT ht.* FROM t_hidden_trouble ht WHERE ht.`WangWangNum` = #{wangwangnum,jdbcType=VARCHAR}
+            AND ht.`is_delete` = 0 ORDER BY ht.`hidden_date` DESC
+    </select>
+
+    <!--根据pkId查询详情-->
+    <select id="selectByPkId" resultMap="BaseResultMapVo">
+        SELECT ht.* FROM t_hidden_trouble ht WHERE ht.`pk_id` = #{pkId,jdbcType=INTEGER}
+            AND ht.`is_delete` = 0
+    </select>
+
+    <!--通过refundId查询对应的历史记录-->
+    <select id="selectFiles" resultType="com.mj.dao.entity.Files">
+        SELECT ff.* FROM t_files ff LEFT JOIN t_hidden_trouble ht ON ff.`relevance_id` = ht.`pk_id`
+            WHERE ff.`hidden_id` = #{relevanceId,jdbcType=INTEGER} AND ff.`file_type` = 3 ORDER BY ff.`pk_id` DESC
+    </select>
+
+    <!--根据pkId查询详情-->
+    <select id="selectById" parameterType="java.util.HashMap" resultMap="BaseResultMapVo">
+        SELECT ht.* FROM t_hidden_trouble ht WHERE ht.`pk_id` = #{pkId,jdbcType=INTEGER}
+        AND ht.`is_delete` = 0
+    </select>
+</mapper>

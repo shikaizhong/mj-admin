@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mj.dao.repository.RefundMapper">
+    <resultMap id="BaseResultMap" type="com.mj.dao.entity.Refund">
+        <id column="pk_id" jdbcType="INTEGER" property="pkId"/>
+        <result column="WangWangNum" jdbcType="VARCHAR" property="wangwangnum" />
+        <result column="refund_date" jdbcType="TIMESTAMP" property="refundDate"/>
+        <result column="refund_channel" jdbcType="TINYINT" property="refundChannel"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="refund_amount" jdbcType="DECIMAL" property="refundAmount"/>
+        <result column="status" jdbcType="TINYINT" property="status"/>
+        <result column="is_delete" jdbcType="TINYINT" property="isDelete"/>
+        <result column="level" jdbcType="INTEGER" property="level"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.mj.dao.entity.Refund">
+        <result column="refund_cause" jdbcType="LONGVARCHAR" property="refundCause"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        pk_id, WangWangNum, refund_date, refund_channel, remark,
+        refund_amount, status, is_delete, level
+    </sql>
+    <sql id="Blob_Column_List">
+        refund_cause
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from t_refund
+        where pk_id = #{pkId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_refund
+    where pk_id = #{pkId,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.mj.dao.entity.Refund">
+    insert into t_refund (pk_id, WangWangNum, refund_date,
+      refund_channel, remark,
+      refund_amount, status, is_delete, 
+      level, refund_cause)
+    values (#{pkId,jdbcType=INTEGER}, #{wangwangnum,jdbcType=VARCHAR}, #{refundDate,jdbcType=TIMESTAMP},
+      #{refundChannel,jdbcType=TINYINT}, #{remark,jdbcType=VARCHAR},
+      #{refundAmount,jdbcType=DECIMAL}, #{status,jdbcType=TINYINT}, #{isDelete,jdbcType=TINYINT}, 
+      #{level,jdbcType=INTEGER}, #{refundCause,jdbcType=LONGVARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.mj.dao.entity.Refund">
+        insert into t_refund
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pkId != null">
+                pk_id,
+            </if>
+            <if test="wangwangnum != null">
+                WangWangNum,
+            </if>
+            <if test="refundDate != null">
+                refund_date,
+            </if>
+            <if test="refundChannel != null">
+                refund_channel,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="refundAmount != null">
+                refund_amount,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="isDelete != null">
+                is_delete,
+            </if>
+            <if test="level != null">
+                level,
+            </if>
+            <if test="refundCause != null">
+                refund_cause,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="pkId != null">
+                #{pkId,jdbcType=INTEGER},
+            </if>
+            <if test="wangwangnum != null">
+                #{wangwangnum,jdbcType=VARCHAR},
+            </if>
+            <if test="refundDate != null">
+                #{refundDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="refundChannel != null">
+                #{refundChannel,jdbcType=TINYINT},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="refundAmount != null">
+                #{refundAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=TINYINT},
+            </if>
+            <if test="isDelete != null">
+                #{isDelete,jdbcType=TINYINT},
+            </if>
+            <if test="level != null">
+                #{level,jdbcType=INTEGER},
+            </if>
+            <if test="refundCause != null">
+                #{refundCause,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.mj.dao.entity.Refund">
+        update t_refund
+        <set>
+            <if test="wangwangnum != null">
+                WangWangNum = #{wangwangnum,jdbcType=VARCHAR},
+            </if>
+            <if test="refundDate != null">
+                refund_date = #{refundDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="refundChannel != null">
+                refund_channel = #{refundChannel,jdbcType=TINYINT},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="refundAmount != null">
+                refund_amount = #{refundAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=TINYINT},
+            </if>
+            <if test="isDelete != null">
+                is_delete = #{isDelete,jdbcType=TINYINT},
+            </if>
+            <if test="level != null">
+                level = #{level,jdbcType=INTEGER},
+            </if>
+            <if test="refundCause != null">
+                refund_cause = #{refundCause,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where pk_id = #{pkId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.mj.dao.entity.Refund">
+    update t_refund
+    set WangWangNum = #{wangwangnum,jdbcType=VARCHAR},
+      refund_date = #{refundDate,jdbcType=TIMESTAMP},
+      refund_channel = #{refundChannel,jdbcType=TINYINT},
+      remark = #{remark,jdbcType=VARCHAR},
+      refund_amount = #{refundAmount,jdbcType=DECIMAL},
+      status = #{status,jdbcType=TINYINT},
+      is_delete = #{isDelete,jdbcType=TINYINT},
+      level = #{level,jdbcType=INTEGER},
+      refund_cause = #{refundCause,jdbcType=LONGVARCHAR}
+    where pk_id = #{pkId,jdbcType=INTEGER}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.mj.dao.entity.Refund">
+    update t_refund
+    set WangWangNum = #{wangwangnum,jdbcType=VARCHAR},
+      refund_date = #{refundDate,jdbcType=TIMESTAMP},
+      refund_channel = #{refundChannel,jdbcType=TINYINT},
+      remark = #{remark,jdbcType=VARCHAR},
+      refund_amount = #{refundAmount,jdbcType=DECIMAL},
+      status = #{status,jdbcType=TINYINT},
+      is_delete = #{isDelete,jdbcType=TINYINT},
+      level = #{level,jdbcType=INTEGER}
+    where pk_id = #{pkId,jdbcType=INTEGER}
+  </update>
+
+    <!--自定义-->
+    <!--<resultMap id="BaseResultMapVo" type="com.mj.dao.vo.RefundVo">
+        <id column="pk_id" jdbcType="INTEGER" property="pkId"/>
+        <result column="wang_wang_num" jdbcType="VARCHAR"
+                property="wangWangNum"/>
+        <result column="refund_date" jdbcType="TIMESTAMP"
+                property="refundDate"/>
+        <result column="refund_channel" jdbcType="TINYINT"
+                property="refundChannel"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="refund_amount" jdbcType="DECIMAL"
+                property="refundAmount"/>
+        <result column="status" jdbcType="TINYINT" property="status"/>
+        <result column="is_delete" jdbcType="TINYINT" property="isDelete"
+        />
+        <result column="level" jdbcType="INTEGER" property="level"/>
+        <result column="refund_cause" jdbcType="VARCHAR"
+                property="refundCause"/>
+
+        <result column="CustType" jdbcType="VARCHAR" property="custtype"
+        />
+        <result column="ChildType" jdbcType="VARCHAR" property="childtype"
+        />
+
+        <result column="dz" jdbcType="VARCHAR" property="username1"></result>
+        <result column="zsgw" jdbcType="VARCHAR" property="username2"></result>
+        <result column="TeamName" jdbcType="VARCHAR" property="teamname"></result>
+        <result column="ServerDeadline" jdbcType="DATE"
+                property="serverdeadline"/>
+        <result column="ServerDeadlineEnd" jdbcType="DATE"
+                property="serverdeadlineend"/>
+        <result column="ShoppType" jdbcType="VARCHAR" property="shopptype"></result>
+
+    </resultMap>-->
+
+    <resultMap id="BaseResultMapVo" type="com.mj.dao.entity.Refund">
+        <id column="pk_id" jdbcType="INTEGER" property="pkId"/>
+        <result column="WangWangNum" jdbcType="VARCHAR" property="wangwangnum" />
+        <result column="refund_date" jdbcType="TIMESTAMP"
+                property="refundDate"/>
+        <result column="refund_channel" jdbcType="TINYINT"
+                property="refundChannel"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="refund_amount" jdbcType="DECIMAL"
+                property="refundAmount"/>
+        <result column="status" jdbcType="TINYINT" property="status"/>
+        <result column="is_delete" jdbcType="TINYINT" property="isDelete"
+        />
+        <result column="level" jdbcType="INTEGER" property="level"/>
+        <result column="refund_cause" jdbcType="VARCHAR"
+                property="refundCause"/>
+    </resultMap>
+
+    <!--    <select id="selectRefundAll" parameterType="java.util.HashMap" resultType="BaseResultMapVo">-->
+    <!--        select * from t_refund-->
+    <!--        order by rr.`refund_date` DESC-->
+    <!--        <if test="pageNum != null and pageSize != null">-->
+    <!--            Limit #{pageNum},#{pageSize}-->
+    <!--        </if>-->
+    <!--    </select>-->
+
+    <!--查询，分页,搜索-->
+    <!--<select id="selectRefund" parameterType="java.util.HashMap" resultMap="BaseResultMapVo">
+        SELECT
+        ct.`CustType`,cc.`ChildType`, cu.`ServerDeadline`,cu.`ServerDeadlineEnd`,cu.`ShoppType`,
+        cr.`TurnoverMoney`, p1.`UserName` AS dz, tt.`TeamName`, p2.`UserName` AS zsgw,rr.*
+        FROM ((((((t_refund rr LEFT JOIN t_customer cu ON rr.`wang_wang_num` = cu.`WangWangNum`)
+        LEFT JOIN t_customer_records cr ON rr.`wang_wang_num` = cr.`Trader`)
+        LEFT JOIN t_customer_type ct ON cu.`CustTypeID`=ct.`ct_id`)
+        LEFT JOIN t_customer_child_type cc ON cu.`ChildTypeID` = cc.`cc_id`)
+        LEFT JOIN t_personnel p1 ON p1.`ID` = cu.`TScustomer`)
+        LEFT JOIN t_personnel p2 ON p2.`ID` = cr.`PersonnelID`)
+        LEFT JOIN t_team tt ON p1.`TeamID` = tt.`ID`
+        <trim prefix="WHERE" prefixOverrides="AND|OR">
+            AND rr.`is_delete` = 0
+            /*根据旺旺名查询，模糊查询*/
+            <if test="wangWangNum != null and wangWangNum != ''">
+                AND rr.`wang_wang_num` LIKE CONCAT('%',#{wangWangNum,jdbcType=VARCHAR},'%')
+            </if>
+            /*根据店铺查询，模糊查询*/
+            <if test="shopptype != null and shopptype != ''">
+                AND cu.`ShoppType` LIKE CONCAT('%',#{shopptype,jdbcType=VARCHAR},'%')
+            </if>
+            /*根据店长查询，模糊查询*/
+            <if test="dz != null and dz != ''">
+                AND p1.`UserName` LIKE CONCAT('%',#{dz,jdbcType=VARCHAR},'%')
+            </if>
+            /*根据招商顾问查询，模糊查询*/
+            <if test="zsgw != null and zsgw != ''">
+                AND p2.`UserName` LIKE CONCAT('%',#{zsgw,jdbcType=VARCHAR},'%')
+            </if>
+            /*根据所属团队查询，模糊查询*/
+            <if test="teamname != null and teamname != ''">
+                AND tt.`TeamName` LIKE CONCAT('%',#{teamname,jdbcType=VARCHAR},'%')
+            </if>
+            /*根据日期区间查询它的合同签订时间*/
+            /*开始创建时间，结束创建时间都不为空*/
+            <if test="beginCreateTime != null and endCreateTime != null">
+                AND rr.`refund_date` &gt;= #{beginCreateTime}
+                AND rr.`refund_date` &lt;= #{endCreateTime}
+            </if>
+            <if test="status != -1">
+                AND rr.status=#{status,jdbcType=TINYINT}
+            </if>
+        </trim>
+        order by rr.`refund_date` DESC
+        <if test="pageNum != null and pageSize != null">
+            Limit #{pageNum},#{pageSize}
+        </if>
+    </select>-->
+
+    <!--查询退款表所有数据-->
+    <select id="selectRefundList" parameterType="java.util.HashMap" resultMap="BaseResultMapVo">
+        SELECT * FROM t_refund rr
+        <trim prefix="WHERE" prefixOverrides="AND|OR">
+            rr.`is_delete` = 0
+            <if test="WangWangNum != null and WangWangNum != ''">
+                AND rr.`WangWangNum` LIKE CONCAT ("%",#{WangWangNum},"%")
+            </if>
+            <if test="startTime != null and endTime != null">
+                AND rr.`refund_date` &gt;= #{startTime}
+                AND rr.`refund_date` &lt;= #{endTime}
+            </if>
+            <if test="status != -1">
+                AND rr.status=#{status,jdbcType=TINYINT}
+            </if>
+        </trim>
+        ORDER BY rr.`refund_date` DESC
+        <if test="pageSize != null and pageNum != null">
+            LIMIT #{pageNum},#{pageSize}
+        </if>
+    </select>
+
+    <!--查询退款总数-->
+    <select id="selectRefundCount" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM t_refund rr WHERE rr.`is_delete` = 0
+    </select>
+
+    <!--删除-->
+    <update id="deleteBatch" parameterType="java.lang.Integer">
+        update t_refund set is_delete = 1 where pk_id in
+        <foreach collection="array" index="index" item="item"
+                 separator="," open="(" close=")">
+            #{item}
+        </foreach>
+    </update>
+
+    <!--根据wangwangnum查看历史记录-->
+    <select id="selectInfoByWangWangNum" resultMap="BaseResultMapVo">
+        SELECT * FROM t_refund rr WHERE rr.`WangWangNum` = #{wangwangnum,jdbcType=VARCHAR}
+            AND rr.`is_delete` = 0
+    </select>
+
+    <!--根据pk_id查询详情-->
+    <select id="selectInfoByPkId" parameterType="java.util.HashMap"  resultMap="BaseResultMapVo">
+        SELECT * FROM t_refund rr WHERE rr.`pk_id` = #{pkId,jdbcType=INTEGER}
+            AND rr.`is_delete` = 0
+    </select>
+
+    <!--通过refundId查询对应的历史记录-->
+    <select id="selectFiles" resultType="com.mj.dao.entity.Files">
+        SELECT ff.* FROM t_files ff LEFT JOIN t_refund rr ON ff.`relevance_id` = rr.`pk_id`
+            where ff.`relevance_id` = #{relevanceId,jdbcType=INTEGER} AND ff.`file_type` = 2 ORDER BY ff.`pk_id` DESC
+    </select>
+
+</mapper>

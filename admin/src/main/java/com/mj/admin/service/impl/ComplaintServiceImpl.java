@@ -499,8 +499,8 @@ public class ComplaintServiceImpl implements ComplaintService {
             file.transferTo(dest);
         return new RestResultBuilder().setCode(0).setMsg("长传成功").setData(files).build();
     }
-    //添加文件
 
+    //添加文件
     @Override
     public RestResult addFile(Files files) {
         Files files1 = new Files();

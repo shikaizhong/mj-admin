@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -96,5 +97,15 @@ public class PersonnelController {
     public RestResult tests(@RequestBody Map map){
         ResponsibilityVo list =personnelService.selectResponsibilityList(map);
         return  new RestResultBuilder().setCode(0).setMsg("请求成功").setData(list).build();
+    }
+
+
+
+
+
+    //查询refund所需数据
+    @RequestMapping(value = "/selectRefund", method = RequestMethod.POST)
+    public List selectRefund(@RequestBody Map params) throws Exception {
+        return personnelService.selectByDatebase(params);
     }
 }

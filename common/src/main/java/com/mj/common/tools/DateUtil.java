@@ -321,6 +321,22 @@ public class DateUtil {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         return simpleDateFormat.format(now.getTime());
     }
+    /**
+     * @Author Simon
+     * @Method
+     * @Version 1.0
+     * @Return
+     * @Exception 得到几个小时后的时间
+     * @Date 2019-09-03 0003 11:30:04
+     */
+    public static Date getHourAfter(Date d,int hour){
+        Calendar now = Calendar.getInstance();
+        now.setTime(d);
+        now.set(Calendar.HOUR,now.get(Calendar.HOUR)+hour);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        return now.getTime();
+    }
+
     public static Date getAfter(Date d,int day){
         Calendar now = Calendar.getInstance();
         now.setTime(d);

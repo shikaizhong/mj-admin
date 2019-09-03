@@ -21,6 +21,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -182,5 +185,75 @@ public class PersonnelServiceImpl implements PersonnelService {
     public ResponsibilityVo selectResponsibilityList(Map map) {
         System.out.println(map.get("wangwangnum")+"旺旺名是:--------");
         return personnelMapper.selectResponsibilityList(map);
+    }
+
+
+
+
+
+
+
+    //根据旺旺名查询退款数据
+    @DataSource(value = "slave1")
+    @Override
+    public List selectByDatebase(Map params) throws ParseException {
+        //根据旺旺名查询
+        String wangwangnum = String.valueOf(params.get("wangwangnum"));
+        //根据店铺类型查询
+        String shopptype = String.valueOf(params.get("shopptype"));
+        //根据店长查询
+        String username1 = String.valueOf(params.get("username1"));
+        //根据招商顾问查询
+        String username2 = String.valueOf(params.get("username2"));
+        //根据团队名查询
+        String teamname = String.valueOf(params.get("teamname"));
+
+        params.put("wangwangnum", wangwangnum);
+        Map map = new HashMap();
+        map.put("wangwangnum",wangwangnum);
+        System.out.println("personnel_params集合值为："+params);
+        System.out.println("personnel_map集合值为1："+map);
+        params.put("shopptype", shopptype);
+        params.put("username1", username1);
+        params.put("username2", username2);
+        params.put("teamname", teamname);
+        System.out.println("personnel_map集合值为2："+map);
+
+        List<SQLServerVo> list = personnelMapper.selectBySQL(map);
+        System.out.println("personnel_查看通过sqlserver获取的值为："+list.size());
+
+        for(SQLServerVo sqlServerVo : list){
+            System.out.println("personnel_进入加强for循环："+sqlServerVo.getWangwangnum());
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String serverdeadline = sqlServerVo.getServerdeadline();
+            String serverdeadlineend = sqlServerVo.getServerdeadlineend();
+            if (serverdeadline != null && serverdeadlineend != null && !serverdeadline.equals("null") && !serverdeadlineend.equals("null")) {
+                if (!serverdeadline.isEmpty() && !serverdeadlineend.isEmpty()) {
+                    int index1 = serverdeadline.indexOf(' ');
+                    int index2 = serverdeadlineend.indexOf(' ');
+                    if (index1 > 9) {
+                        serverdeadline = serverdeadline.substring(0, index1 - 1);
+                    }
+                    if (index2 > 9) {
+                        serverdeadlineend = serverdeadlineend.substring(0, index2 - 1);
+                    }
+                    serverdeadline = serverdeadline.replaceAll("/", "-");
+                    serverdeadlineend = serverdeadlineend.replaceAll("/", "-");
+                    serverdeadline = serverdeadline.replace('.', '-');
+                    serverdeadlineend = serverdeadlineend.replace('.', '-');
+                    Date date1 = sdf.parse(serverdeadline);
+                    Date date2 = sdf.parse(serverdeadlineend);
+                    Long day = (date2.getTime() - date1.getTime()) / (24 * 60 * 60 * 1000);
+                    if (day < 0) {
+                        day = day + 365;
+                    }
+                    sqlServerVo.setDeadline(day);
+                } else {
+                    sqlServerVo.setDeadline(0L);
+                }
+            }
+        }
+        System.out.println("personnel结束出来的list值为："+list.size());
+        return list;
     }
 }
