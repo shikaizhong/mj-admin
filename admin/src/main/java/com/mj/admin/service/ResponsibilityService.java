@@ -15,7 +15,7 @@ public interface ResponsibilityService {
     //使用分页插件来分页分页插件
     PageResult pageHelper(PageRequest pageRequest) throws Exception;
     //修改
-    RestResult updataResponsiblity(ResponsibilityWithBLOBs responsibilityWithBLOBs);
+    RestResult updataResponsiblity(ResponsibilityWithBLOBs responsibilityWithBLOBs)throws ParseException;
     //添加文件
     RestResult addFile(Files files);
 

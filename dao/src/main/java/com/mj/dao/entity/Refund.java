@@ -20,9 +20,14 @@ public class Refund {
      * 退款日期 refund_date
      */
 //    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
-    @JsonFormat(locale = "zh",timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(locale = "zh",timezone="GMT+8", pattern="yyyy-MM-dd HH:mm")
 //    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
     private Date refundDate;
+
+    /**
+     * 获取前端的时间而新增的，数据库中并无该字段，Vo层中也没有该字段
+     */
+    private String hDate;
 
     private String refunddate;
 
@@ -237,6 +242,14 @@ public class Refund {
 
     public void setRefunddate(String refunddate) {
         this.refunddate = refunddate;
+    }
+
+    public String gethDate() {
+        return hDate;
+    }
+
+    public void sethDate(String hDate) {
+        this.hDate = hDate;
     }
 
     /**

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
@@ -27,13 +28,13 @@ public class RefundController {
 
     //添加反馈
     @RequestMapping(value = "/addRefund", method = RequestMethod.POST)
-    public RestResult addRefund(@RequestBody Refund refund) throws Exception {
+    public RestResult addRefund(@RequestBody Refund refund) throws ParseException {
         return refundService.addRefund(refund);
     }
 
     //修改反馈
-    @RequestMapping(value = "/updateRefund", method = {RequestMethod.POST, RequestMethod.GET})
-    public RestResult updateRefund(@RequestBody Refund refund){
+    @RequestMapping(value = "/updateRefund", method = RequestMethod.POST)
+    public RestResult updateRefund(@RequestBody Refund refund)throws ParseException{
         return refundService.updateRefund(refund);
     }
 

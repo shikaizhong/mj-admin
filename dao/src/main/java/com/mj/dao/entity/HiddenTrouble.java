@@ -17,8 +17,13 @@ public class HiddenTrouble {
     /**
      * 隐患日期 hidden_date
      */
-    @JsonFormat(locale = "zh", timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(locale = "zh", timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm")
     private Date hiddenDate;
+
+    /**
+     * 获取前端的时间而新增的，数据库中并无该字段，Vo层中也没有该字段
+     */
+    private String hDate;
 
 //    /**
 //     * 场景还原 scenario_reduction
@@ -240,6 +245,14 @@ public class HiddenTrouble {
      */
     public void setHiddenContent(String hiddenContent) {
         this.hiddenContent = hiddenContent == null ? null : hiddenContent.trim();
+    }
+
+    public String gethDate() {
+        return hDate;
+    }
+
+    public void sethDate(String hDate) {
+        this.hDate = hDate;
     }
 
     /**

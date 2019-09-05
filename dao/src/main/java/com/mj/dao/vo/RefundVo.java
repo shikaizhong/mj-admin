@@ -20,7 +20,7 @@ public class RefundVo {
     /**
      * 退款日期 refund_date
      */
-    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm")
 //    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
     private Date refundDate;
 

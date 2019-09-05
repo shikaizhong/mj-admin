@@ -29,7 +29,7 @@ public class ResponsibilityController {
     }
     //修改
     @RequestMapping("/update")
-    public  RestResult update(@RequestBody ResponsibilityWithBLOBs responsibilityWithBLOBs){
+    public  RestResult update(@RequestBody ResponsibilityWithBLOBs responsibilityWithBLOBs) throws ParseException{
         return responsibilityService.updataResponsiblity(responsibilityWithBLOBs);
     }
     //添加文件

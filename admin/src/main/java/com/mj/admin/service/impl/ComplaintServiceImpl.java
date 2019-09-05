@@ -478,19 +478,19 @@ public class ComplaintServiceImpl implements ComplaintService {
             //返回客户端文件路径图片显示问题
             //情景还原url
             //远程linux服务器的
-//        String url = "http://192.168.1.112:9090/mj-admin"+"/upload/"+fileName;
+        String url = "http://192.168.1.112:9090/mj-admin"+"/upload/"+fileName;
             //格式化掉.便于显示
 //        String url ="/upload/"+fileName;
             //本地
-            String url ="localhost:8090"+"/upload/"+fileName;
+//            String url ="localhost:8090"+"/upload/"+fileName;
 //            Complaint complaintVo1 =  new Complaint();
             Files files = new Files();
             files.setUrl(url);
             files.setName(fileNames);
 //            filesMapper.insertSelective(files);
             System.out.println("服务器返回的路径"+url);
-//            File dest = new File(ApiConstant.UPLOAD_PATH + fileName);//服务器的
-            File dest = new File(ApiConstant.DEV_UPLOAD_PATH+fileName);//本地的
+            File dest = new File(ApiConstant.UPLOAD_PATH + fileName);//服务器的
+//            File dest = new File(ApiConstant.DEV_UPLOAD_PATH+fileName);//本地的
             System.out.println("目录为"+dest);
             // 检测是否存在目录
             if (!dest.getParentFile().exists()) {

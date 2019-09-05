@@ -5,7 +5,6 @@ import com.github.pagehelper.PageInfo;
 import com.mj.admin.service.ResponsibilityService;
 import com.mj.common.result.RestResult;
 import com.mj.common.result.RestResultBuilder;
-import com.mj.common.tools.DateUtil;
 import com.mj.common.tools.PageUtils;
 import com.mj.dao.entity.*;
 import com.mj.dao.repository.*;
@@ -15,7 +14,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 //@Transactional
@@ -48,6 +50,14 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
         params.put("pageNum",pageNum);
         params.put("pageSize",pageSize);
         params.put("type",typess);
+//        List<ResponsibilityVo> list = new ArrayList<ResponsibilityVo>();
+//        if (typess ==1){
+//            list = responsibilityMapper.selectHiddenTrouble(params);
+//        }else if (typess == 2){
+//            list = responsibilityMapper.selectRefund(params);
+//        }else {
+//            list = responsibilityMapper.selectResponsiblityList(params);
+//        }
         List<ResponsibilityVo> list = responsibilityMapper.selectResponsiblity(params);
         List<ResponsibilityVo> result = new ArrayList<ResponsibilityVo>();
         //循环拿数据
@@ -122,9 +132,11 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
     @Transactional
     @Override
     //修改判责信息
-    public RestResult updataResponsiblity(ResponsibilityWithBLOBs responsibilityWithBLOBs) {
+    public RestResult updataResponsiblity(ResponsibilityWithBLOBs responsibilityWithBLOBs) throws ParseException{
+        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         ResponsibilityWithBLOBs responsibilityWithBLOBs1 = responsibilityMapper.selectByComplaintId(responsibilityWithBLOBs.getComplaintId());
-        System.out.println("传入的时间为"+responsibilityWithBLOBs.getCreateTime());
+//        System.out.println("传入的时间为"+responsibilityWithBLOBs.getCreateTime());
         //如果实体里面有数据则是修改
         if (responsibilityWithBLOBs1 !=null){
             responsibilityWithBLOBs1.setBasic(responsibilityWithBLOBs.getBasic());
@@ -137,7 +149,38 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
             responsibilityWithBLOBs1.setResponsibilityor(responsibilityWithBLOBs.getResponsibilityor());
             responsibilityWithBLOBs1.setGrade(responsibilityWithBLOBs.getGrade());
             responsibilityWithBLOBs1.setType(responsibilityWithBLOBs.getType());
-            responsibilityWithBLOBs1.setCreateTime(DateUtil.getHourAfter(responsibilityWithBLOBs.getCreateTime(),8));
+
+            String str = responsibilityWithBLOBs.gethDate();
+//        System.out.println("从测试环境获取的时间为："+str);
+            //正则表达式，判断字符串长度是否在3~20之间
+            String pattern = "^.{3,20}$";
+            Pattern p = Pattern.compile(pattern);
+            Matcher m = p.matcher(str);
+            //根据正则表达式判断
+            if (m.matches()) {
+                //如果为true，则执行这里的
+                Date date1 = sdf2.parse(str);
+                //从前端iview获取的时间为格林威治时间，所以需要加上8个小时为本地时间
+                long rightTime = (long) (date1.getTime() + 8 * 60 * 60 * 1000);
+                //格式转化
+                String newTime = sdf2.format(rightTime);
+                //将String类型的转化成Date类型
+                date1 = sdf2.parse(newTime);
+//            System.out.println("时间为（正常）："+date1);
+                //将修改后的时间传给回访时间
+                responsibilityWithBLOBs1.setCreateTime(date1);
+            } else {
+                //如果为false，则执行这里的
+                //从前端iview获取的时间为格林威治时间，所以需要加上8个小时为本地时间
+                long rightTime = (long) (sdf1.parse(str).getTime() + 8 * 60 * 60 * 1000);
+                //格式转化
+                String newtime = sdf2.format(rightTime);
+//            System.out.println("时间为（格林威治时间）："+sdf2.parse(newtime));
+                //将修改后的时间传给回访时间
+                responsibilityWithBLOBs1.setCreateTime(sdf2.parse(newtime));
+            }
+
+//            responsibilityWithBLOBs1.setCreateTime(DateUtil.getHourAfter(responsibilityWithBLOBs.getCreateTime(),8));
             responsibilityMapper.updateByPrimaryKeySelective(responsibilityWithBLOBs1);
         }
         //如果实体里面没有数据则是增加
@@ -263,7 +306,7 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
             for (HiddenTrouble listHidden : hiddenTroubles) {
                 HiddenTroubleVo hiddenTroubleVo = new HiddenTroubleVo();
                 String wangwangnum = listHidden.getWangwangnum();
-                hiddenTroubleVo.setWangWangNum(listHidden.getWangwangnum());
+                hiddenTroubleVo.setWangwangnum(listHidden.getWangwangnum());
                 hiddenTroubleVo.setFrequency(listHidden.getFrequency());
                 hiddenTroubleVo.setHiddenDate(listHidden.getHiddenDate());
                 hiddenTroubleVo.setHiddenContent(listHidden.getHiddenContent());

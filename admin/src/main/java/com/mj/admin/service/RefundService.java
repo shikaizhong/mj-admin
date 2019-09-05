@@ -6,6 +6,7 @@ import com.mj.dao.entity.Refund;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
@@ -14,10 +15,10 @@ public interface RefundService {
     RestResult selectRefund(Map params) throws Exception;
 
     //添加
-    RestResult addRefund(Refund refund) throws Exception;
+    RestResult addRefund(Refund refund) throws ParseException;
 
     //修改
-    RestResult updateRefund(Refund refund);
+    RestResult updateRefund(Refund refund)throws ParseException;
 
     //批量删除退款
     RestResult deleteRefund(List<Integer> pkIds);

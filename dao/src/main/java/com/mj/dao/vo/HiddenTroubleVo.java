@@ -13,12 +13,12 @@ public class HiddenTroubleVo {
     /**
      * 客户名 wang_wang_num
      */
-    private String wangWangNum;
+    private String wangwangnum;
 
     /**
      * 隐患日期 hidden_date
      */
-    @JsonFormat(locale = "zh", pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(locale = "zh", pattern = "yyyy-MM-dd HH:mm")
     private Date hiddenDate;
 
     /**
@@ -101,24 +101,12 @@ public class HiddenTroubleVo {
         this.pkId = pkId;
     }
 
-    /**
-     * 客户名
-     *
-     * @return wang_wang_num 客户名
-     * @author Administrator
-     */
-    public String getWangWangNum() {
-        return wangWangNum;
+    public String getWangwangnum() {
+        return wangwangnum;
     }
 
-    /**
-     * 客户名
-     *
-     * @param wangWangNum 客户名
-     * @author Administrator
-     */
-    public void setWangWangNum(String wangWangNum) {
-        this.wangWangNum = wangWangNum == null ? null : wangWangNum.trim();
+    public void setWangwangnum(String wangwangnum) {
+        this.wangwangnum = wangwangnum;
     }
 
     /**

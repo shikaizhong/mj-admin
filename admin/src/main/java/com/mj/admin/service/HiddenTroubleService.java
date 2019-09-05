@@ -6,6 +6,7 @@ import com.mj.dao.entity.HiddenTrouble;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
@@ -15,16 +16,16 @@ public interface HiddenTroubleService {
     RestResult selectHidden(Map params) throws Exception;
 
     //添加
-    RestResult addHidden(HiddenTrouble hiddenTrouble);
+    RestResult addHidden(HiddenTrouble hiddenTrouble)throws ParseException;
 
     //删除
     RestResult deleteHidden(List<Integer> pkIds);
 
     //修改
-    RestResult updateHidden(HiddenTrouble hiddenTrouble);
+    RestResult updateHidden(HiddenTrouble hiddenTrouble)throws ParseException;
 
     //根据旺旺名查看历史记录
-    RestResult selectInfoByWangWangNum(Map params);
+    RestResult selectInfoByWangWangNum(Map params)throws ParseException;
 
     //根据pkId查询详情
     RestResult selectInfoByPkId(Map params);

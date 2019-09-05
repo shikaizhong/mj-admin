@@ -331,8 +331,8 @@
 
     <!--通过refundId查询对应的历史记录-->
     <select id="selectFiles" resultType="com.mj.dao.entity.Files">
-        SELECT ff.* FROM t_files ff LEFT JOIN t_refund rr ON ff.`relevance_id` = rr.`pk_id`
-            where ff.`relevance_id` = #{relevanceId,jdbcType=INTEGER} AND ff.`file_type` = 2 ORDER BY ff.`pk_id` DESC
+        SELECT ff.* FROM t_files ff LEFT JOIN t_refund rr ON ff.`complaint_id` = rr.`pk_id`
+            where ff.`complaint_id` = #{complaintId,jdbcType=INTEGER} AND ff.`file_type` = 2 ORDER BY ff.`pk_id` DESC
     </select>
 
 </mapper>

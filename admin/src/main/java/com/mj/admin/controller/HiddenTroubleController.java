@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
@@ -29,13 +30,13 @@ public class HiddenTroubleController {
 
     //添加隐患
     @RequestMapping(value = "/addHidden", method = RequestMethod.POST)
-    public RestResult addHiddenController(@RequestBody HiddenTrouble hiddenTrouble1) {
+    public RestResult addHiddenController(@RequestBody HiddenTrouble hiddenTrouble1) throws ParseException {
         return hiddenTroubleService.addHidden(hiddenTrouble1);
     }
 
     //修改隐患
     @RequestMapping(value = "updateHidden", method = RequestMethod.POST)
-    public RestResult updateHiddenController(@RequestBody HiddenTrouble hiddenTrouble) {
+    public RestResult updateHiddenController(@RequestBody HiddenTrouble hiddenTrouble) throws ParseException {
         return hiddenTroubleService.updateHidden(hiddenTrouble);
     }
 
@@ -48,7 +49,7 @@ public class HiddenTroubleController {
 
     //根据旺旺名查询历史记录
     @RequestMapping(value = "/selectByWangWangNum", method = RequestMethod.POST)
-    public RestResult selectByWangWangNumController(@RequestBody Map params) {
+    public RestResult selectByWangWangNumController(@RequestBody Map params) throws ParseException {
         return hiddenTroubleService.selectInfoByWangWangNum(params);
     }
 

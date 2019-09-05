@@ -53,6 +53,12 @@ public interface ResponsibilityMapper {
     ResponsibilityWithBLOBs selectByComplaintId(Integer complaintId);
     //查询加搜索
     List<ResponsibilityVo> selectResponsiblity(Map params);
+//    <!--type为0时,查询投诉信息-->
+    List<ResponsibilityVo> selectResponsiblityList(Map params);
+//    type为1时,查询隐患信息
+    List<ResponsibilityVo> selectHiddenTrouble(Map params);
+//    type为2时,查询退款管理
+    List<ResponsibilityVo> selectRefund(Map params);
     //使用分页插件来分页
     //测试分页插件
     List<Responsibility> page();

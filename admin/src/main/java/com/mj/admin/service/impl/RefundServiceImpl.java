@@ -20,8 +20,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 /**
@@ -175,8 +178,9 @@ public class RefundServiceImpl implements RefundService {
     //添加退款
     @DataSource(value = "druid")
     @Override
-    public RestResult addRefund(Refund refund) throws Exception {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+    public RestResult addRefund(Refund refund) throws ParseException {
+        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         Calendar calendar = new GregorianCalendar();
         //判断旺旺名是否存在
 //        System.out.println("获取旺旺名1:" + refund.getWangWangNum());
@@ -199,10 +203,36 @@ public class RefundServiceImpl implements RefundService {
 //                date = sdf.parse(sdf.format(date));
                 refund1.setRefundDate(date);
             } else {
-//                calendar.setTime(refund.getRefundDate());
-//                calendar.add(calendar.DATE, 1);
-//                refund.setRefundDate(calendar.getTime());
-                refund1.setRefundDate(refund.getRefundDate());
+                String str = refund.gethDate();
+//        System.out.println("从测试环境获取的时间为："+str);
+                //正则表达式，判断字符串长度是否在3~20之间
+                String pattern = "^.{3,20}$";
+                Pattern p = Pattern.compile(pattern);
+                Matcher m = p.matcher(str);
+                //根据正则表达式判断
+                if (m.matches()) {
+                    //如果为true，则执行这里的
+                    Date date1 = sdf2.parse(str);
+                    //从前端iview获取的时间为格林威治时间，所以需要加上8个小时为本地时间
+                    long rightTime = (long) (date1.getTime() + 8 * 60 * 60 * 1000);
+                    //格式转化
+                    String newTime = sdf2.format(rightTime);
+                    //将String类型的转化成Date类型
+                    date1 = sdf2.parse(newTime);
+//            System.out.println("时间为（正常）："+date1);
+                    //将修改后的时间传给回访时间
+                    refund1.setRefundDate(date1);
+                } else {
+                    //如果为false，则执行这里的
+                    //从前端iview获取的时间为格林威治时间，所以需要加上8个小时为本地时间
+                    long rightTime = (long) (sdf1.parse(str).getTime() + 8 * 60 * 60 * 1000);
+                    //格式转化
+                    String newtime = sdf2.format(rightTime);
+//            System.out.println("时间为（格林威治时间）："+sdf2.parse(newtime));
+                    //将修改后的时间传给回访时间
+                    refund1.setRefundDate(sdf2.parse(newtime));
+                }
+
             }
             refund1.setRefundCause(refund.getRefundCause());
             refund1.setRefundAmount(refund.getRefundAmount());
@@ -216,17 +246,49 @@ public class RefundServiceImpl implements RefundService {
     //修改退款信息
     @DataSource(value = "druid")
     @Override
-    public RestResult updateRefund(Refund refund){
+    public RestResult updateRefund(Refund refund) throws ParseException {
+        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 //        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //        Calendar calendar = new GregorianCalendar();
 
         //根据ID查询
         Refund refund2 = refundMapper.selectByPrimaryKey(refund.getPkId());
         //初始化
-        System.out.println("获取退款时间："+refund.getRefunddate());
+//        System.out.println("获取退款时间："+refund.getRefunddate());
+
+        String str = refund.gethDate();
+//        System.out.println("从测试环境获取的时间为："+str);
+        //正则表达式，判断字符串长度是否在3~20之间
+        String pattern = "^.{3,20}$";
+        Pattern p = Pattern.compile(pattern);
+        Matcher m = p.matcher(str);
+        //根据正则表达式判断
+        if (m.matches()) {
+            //如果为true，则执行这里的
+            Date date1 = sdf2.parse(str);
+            //从前端iview获取的时间为格林威治时间，所以需要加上8个小时为本地时间
+            long rightTime = (long) (date1.getTime() + 8 * 60 * 60 * 1000);
+            //格式转化
+            String newTime = sdf2.format(rightTime);
+            //将String类型的转化成Date类型
+            date1 = sdf2.parse(newTime);
+//            System.out.println("时间为（正常）："+date1);
+            //将修改后的时间传给回访时间
+            refund2.setRefundDate(date1);
+        } else {
+            //如果为false，则执行这里的
+            //从前端iview获取的时间为格林威治时间，所以需要加上8个小时为本地时间
+            long rightTime = (long) (sdf1.parse(str).getTime() + 8 * 60 * 60 * 1000);
+            //格式转化
+            String newtime = sdf2.format(rightTime);
+//            System.out.println("时间为（格林威治时间）："+sdf2.parse(newtime));
+            //将修改后的时间传给回访时间
+            refund2.setRefundDate(sdf2.parse(newtime));
+        }
 
         refund2.setRefundChannel(refund.getRefundChannel());
-        refund2.setRefundDate(refund.getRefundDate());
+//        refund2.setRefundDate(refund.getRefundDate());
         refund2.setRemark(refund.getRemark());
         refund2.setWangwangnum(refund.getWangwangnum());
         refund2.setRefundCause(refund.getRefundCause());
@@ -321,6 +383,7 @@ public class RefundServiceImpl implements RefundService {
                     refundVo.setChildtype(sqlList.getChildtype());
                     refundVo.setShopptype(sqlList.getShopptype());
                     refundVo.setTeamname(sqlList.getTeamname());
+                    refundVo.setTurnovermoney(sqlList.getTurnovermoney());
                     refundVo.setUsername1(sqlList.getUsername1());
                     refundVo.setUsername2(sqlList.getUsername2());
                 }
@@ -364,8 +427,8 @@ public class RefundServiceImpl implements RefundService {
         //情景还原url
         //远程linux服务器的
 //        System.out.println("文件名为"+fileName);
-        String url = "http://localhost:8080" + "/file/" + fileName1;
-//        String url = "http://192.168.1.112:9090/mj-admin" + "/upload/" + fileName;
+//        String url = "http://localhost:8080" + "/file/" + fileName1;
+        String url = "http://192.168.1.112:9090/mj-admin" + "/upload/" + fileName1;
         //格式化掉.便于显示
 //        String url ="/upload/"+fileName;
         //本地
@@ -376,8 +439,8 @@ public class RefundServiceImpl implements RefundService {
         files.setName(fileName);
 //            filesMapper.insertSelective(files);
 //        System.out.println("服务器返回的路径:" + url);
-//        File dest = new File(ApiConstant.UPLOAD_PATH + fileName);//服务器的
-        File dest = new File(ApiConstant.DEV_UPLOAD_PATH + fileName1);//本地的
+        File dest = new File(ApiConstant.UPLOAD_PATH + fileName1);//服务器的
+//        File dest = new File(ApiConstant.DEV_UPLOAD_PATH + fileName1);//本地的
 //        System.out.println("目录为:" + dest);
         // 检测是否存在目录
         if (!dest.getParentFile().exists()) {
@@ -410,10 +473,12 @@ public class RefundServiceImpl implements RefundService {
     //根据relevanceId查询历史记录
     @Override
     public RestResult selectFiles(Map params) {
-        Integer relevanceId = Integer.valueOf(String.valueOf(params.get("relevanceId")));
+        System.out.println("获取的值为:"+Integer.valueOf(String.valueOf(params.get("complaintId"))));
+        Integer complaintId = Integer.valueOf(String.valueOf(params.get("complaintId")));
 //        System.out.println("refundId为111111111:" + refundId);
         Map map = new HashMap();
-        map.put("relevanceId", relevanceId);
+        map.put("complaintId", complaintId);
+        System.out.println("map值为:"+map);
         List<Files> files = refundMapper.selectFiles(map);
         return new RestResultBuilder().setCode(0).setMsg("查询成功").setData(files).build();
     }
