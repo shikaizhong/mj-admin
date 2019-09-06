@@ -79,6 +79,25 @@
       <if test="content != null">
         content,
       </if>
+
+      <if test="turnover != null">
+        turnover,
+      </if>
+      <if test="number != null">
+        number,
+      </if>
+      <if test="industry != null">
+        industry,
+      </if>
+      <if test="followPersonel != null">
+        follow_personel,
+      </if>
+      <if test="processingScheme != null">
+        processing_scheme,
+      </if>
+      <if test="followProcess != null">
+        follow_process,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="pkId != null">
@@ -110,6 +129,25 @@
       </if>
       <if test="content != null">
         #{content,jdbcType=LONGVARCHAR},
+      </if>
+
+      <if test="turnover != null">
+        #{turnover,jdbcType=INTEGER},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="industry != null">
+        #{industry,jdbcType=INTEGER},
+      </if>
+      <if test="followPersonel != null">
+        #{followPersonel,jdbcType=INTEGER},
+      </if>
+      <if test="processingScheme != null">
+        #{processingScheme,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="followProcess != null">
+        #{followProcess,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -182,6 +220,12 @@
     <result column="status" jdbcType="TINYINT" property="status" />
     <result column="is_delete" jdbcType="TINYINT" property="isDelete" />
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
+    <result column="turnover" jdbcType="INTEGER" property="turnover" />
+    <result column="number" jdbcType="INTEGER" property="number" />
+    <result column="industry" jdbcType="INTEGER" property="industry" />
+    <result column="follow_personel" jdbcType="INTEGER" property="followPersonel" />
+    <result column="processing_scheme" jdbcType="LONGVARCHAR" property="processingScheme" />
+    <result column="follow_process" jdbcType="LONGVARCHAR" property="followProcess" />
 
     <result column="ShoppType" jdbcType="VARCHAR" property="shopptype" />
     <result column="CustType" jdbcType="INTEGER" property="custtype" />

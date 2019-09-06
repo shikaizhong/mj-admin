@@ -102,7 +102,7 @@ public class ComplaintServiceImpl implements ComplaintService {
         if (TechnologyRecruitmentID != -1){
             params.put("TechnologyRecruitmentID",TechnologyRecruitmentID);
         }
-        if (PersonnelID != -1 ){
+        if (PersonnelID !=-1 && PersonnelID != null){
             params.put("PersonnelID",PersonnelID);
         }
         //调用dao层
@@ -154,6 +154,12 @@ public class ComplaintServiceImpl implements ComplaintService {
             complaintVo.setFrequency(vo.getFrequency());
             complaintVo.setContent(vo.getContent());
             complaintVo.setWangwangnum(vo.getWangwangnum());
+            complaintVo.setNumber(vo.getNumber());
+            complaintVo.setIndustry(vo.getIndustry());
+            complaintVo.setFollowPersonel(vo.getFollowPersonel());
+            complaintVo.setTurnover(vo.getTurnover());
+            complaintVo.setProcessingScheme(vo.getProcessingScheme());
+            complaintVo.setFollowProcess(vo.getFollowProcess());
             if (complaintVos !=null) {
             complaintVo.setTechnologyrecruitmentid(complaintVos.getTechnologyrecruitmentid());
             complaintVo.setShopptype(complaintVos.getShopptype());
@@ -188,12 +194,13 @@ public class ComplaintServiceImpl implements ComplaintService {
             complaint1.setContent(complaint.getContent());
             //反馈次数自动加1
             complaint1.setFrequency(frequency + 1);
-//        complaint1.setLevel(complaint.getLevel());
             complaint1.setRemarks(complaint.getRemarks());
-//            complaint1.setSceneRestorationName(complaint.getSceneRestorationName());
-//            complaint1.setScenerestoration(complaint.getScenerestoration());
-//        complaint1.setResponsibility(complaint.getResponsibility());
-//        complaint1.setResult(complaint.getResult());
+            complaint1.setNumber(complaint.getNumber());
+            complaint1.setTurnover(complaint.getTurnover());
+            complaint1.setIndustry(complaint.getIndustry());
+            complaint1.setFollowPersonel(complaint.getFollowPersonel());
+            complaint1.setProcessingScheme(complaint.getProcessingScheme());
+            complaint1.setFollowProcess(complaint.getFollowProcess());
             Files files = new Files();
             files.setComplaintId(complaint1.getPkId());
             complaint1.setComplaintdate(DateUtil.getAfter(complaint.getComplaintdate(), 1));
@@ -307,130 +314,41 @@ public class ComplaintServiceImpl implements ComplaintService {
         map.put("wangwangnum",wangwangNum);
         List<ComplaintVo> complaints = complaintMapper.selectInfoByWangWangNum(map);
         //新建一个集合来存储所有数据
-        List<ComplaintVo> lists = new ArrayList<ComplaintVo>();
-        //新建一个实体用作封装所有需要的数据
-
-        //遍历第一个接口的数据
-        for (int i = 0; i < complaints.size(); i++) {
-            ComplaintVo complaintVo = complaints.get(i);
-            String id = complaintVo.getTscustomer();
-            if (id != null) {
-                Integer tscustomer = Integer.parseInt(id);
-                System.out.println(id);
-                ComplaintVo complaintVo1 = new ComplaintVo();
-                List<ComplaintVo> complaintVos =new ArrayList<ComplaintVo>();
-                //sql
-                String sql ="SELECT DISTINCT tm.TeamName FROM (Personnel pp LEFT JOIN Team tm ON pp.TeamID = tm.ID)LEFT JOIN Customer cc ON cc.TScustomer = pp.ID  WHERE cc.TScustomer ="+tscustomer;
-                //得到连接
-                Connection connection = null;
-                Statement statement = null;
-                ResultSet resultSet = null;
-                try {
-                    connection = DBHelp.connection();
-                    statement =connection.createStatement();
-                    resultSet = statement.executeQuery(sql);
-                    if (resultSet.next()){
-                        ComplaintVo complaintVo2 = new ComplaintVo();
-                        complaintVo2.setTeamname(resultSet.getString("teamname"));
-                        complaintVos.add(complaintVo2);
-                    }
-                }catch (SQLException e){
-                    e.printStackTrace();
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                } finally {
-                    //关闭连接
-                    DBHelp.closeAll(connection,statement,resultSet);
-                }
-//                List<ComplaintVo> complaintVos = personnelMapper.selectTeam(tscustomer);
-                List<ComplaintVo> username = new ArrayList<ComplaintVo>();
-                //sql
-                String sql1 ="SELECT pp.UserName FROM Personnel pp WHERE pp.ID ="+tscustomer;
-                //得到连接
-                Connection connection1 = null;
-                Statement statement1 = null;
-                ResultSet resultSet1 = null;
-                try {
-                    connection1 = DBHelp.connection();
-                    statement1 =connection1.createStatement();
-                    resultSet1 = statement1.executeQuery(sql1);
-                    if (resultSet1.next()){
-                        ComplaintVo complaintVo2 = new ComplaintVo();
-                        complaintVo2.setUsername(resultSet1.getString("username"));
-                        username.add(complaintVo2);
-                    }
-                }catch (SQLException e){
-                    e.printStackTrace();
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                } finally {
-                    //关闭连接
-                    DBHelp.closeAll(connection,statement,resultSet);
-                }
-//                List<ComplaintVo> username = personnelMapper.selectInfoByID(tscustomer);
-                System.out.println(complaintVos + "长度为");
-                if (complaintVos.size() != 0) {
-                    for (int m = 0; m < complaintVos.size(); m++) {
-                        complaintVo1.setTeamname(complaintVos.get(m).getTeamname());
-                        System.out.println(complaintVos.get(m).getTeamname() + "名字为");
-                    }
-                }
-                if (username.size() != 0) {
-                    for (int z = 0; z < username.size(); z++) {
-                        String ids = complaintVo.getTscustomer();
-                        String wangwangnum = complaintVo.getWangwangnum();
-                        Integer pkId = complaintVo.getPkId();
-                        Date complaintdate = complaintVo.getComplaintdate();
-                        Integer channel = complaintVo.getChannel();
-                        String scenerestoration = complaintVo.getScenerestoration();
-                        String remarks = complaintVo.getRemarks();
-                        Integer frequency = complaintVo.getFrequency();
-                        Integer statuss = complaintVo.getStatus();
-                        Integer isDelete = complaintVo.getIsDelete();
-                        String content = complaintVo.getContent();
-                        String shopptype = complaintVo.getShopptype();
-                        String teamname = complaintVo.getTeamname();
-                        String department = complaintVo.getDepartment();
-                        Integer isStop = complaintVo.getIsStop();
-                        Integer custtype = complaintVo.getCusttype();
-                        Integer worktype = complaintVo.getWorktype();
-                        Integer technologyRecruitmentid = complaintVo.getTechnologyrecruitmentid();
-                        Integer personnelid = complaintVo.getPersonnelid();
-                        String name = username.get(z).getUsername();
-                        System.out.println(name+"名字为");
-                        complaintVo1.setTscustomer(ids);
-                        complaintVo1.setUsername(name);
-                        System.out.println("后来的名字"+complaintVo1.getUsername());
-                        complaintVo1.setWangwangnum(wangwangnum);
-                        complaintVo1.setChannel(channel);
-                        complaintVo1.setComplaintdate(complaintdate);
-                        complaintVo1.setContent(content);
-                        complaintVo1.setDepartment(department);
-                        complaintVo1.setWorktype(worktype);
-                        complaintVo1.setTechnologyrecruitmentid(technologyRecruitmentid);
-                        complaintVo1.setStatus(statuss);
-                        complaintVo1.setShopptype(shopptype);
-                        complaintVo1.setScenerestoration(scenerestoration);
-                        complaintVo1.setRemarks(remarks);
-                        complaintVo1.setPkId(pkId);
-                        complaintVo1.setPersonnelid(personnelid);
-                        complaintVo1.setIsStop(isStop);
-                        complaintVo1.setIsDelete(isDelete);
-                        complaintVo1.setFrequency(frequency);
-                        complaintVo1.setCusttype(custtype);
-                        complaintVo1.setContent(content);
-                        complaintVo1.setStatus(statuss);
-//                        complaintVo1.setTeamname(teamname);
-                        System.out.println("后团队为"+complaintVo1.getTeamname());
-                        lists.add(complaintVo1);
-//                        ComplaintVo complaintVo1 = username.get(z);
-//                        list.add(complaintVo1);
-//                        lists.add(list);
-                    }
-                }
+        List<ComplaintVo> result = new ArrayList<>();
+        for (ComplaintVo vo:complaints){
+            String wangwangnum = vo.getWangwangnum();
+            params.put("wangwangnum",wangwangnum);
+            ComplaintVo complaintVos = personnelService.selectComplaintListOver(params);
+            ComplaintVo complaintVo = new ComplaintVo();
+            complaintVo.setScenerestoration(vo.getScenerestoration());
+            complaintVo.setStatus(vo.getStatus());
+            complaintVo.setCreateTime(vo.getCreateTime());
+            complaintVo.setId(vo.getId());
+            complaintVo.setChannel(vo.getChannel());
+            complaintVo.setComplaintdate(vo.getComplaintdate());
+            complaintVo.setDepartment(vo.getDepartment());
+            complaintVo.setWorktype(vo.getWorktype());
+            complaintVo.setRemarks(vo.getRemarks());
+            complaintVo.setPkId(vo.getPkId());
+            complaintVo.setIsStop(vo.getIsStop());
+            complaintVo.setIsDelete(vo.getIsDelete());
+            complaintVo.setFrequency(vo.getFrequency());
+            complaintVo.setContent(vo.getContent());
+            complaintVo.setWangwangnum(vo.getWangwangnum());
+            if (complaintVos !=null) {
+                complaintVo.setTechnologyrecruitmentid(complaintVos.getTechnologyrecruitmentid());
+                complaintVo.setShopptype(complaintVos.getShopptype());
+                complaintVo.setPersonnelid(complaintVos.getPersonnelid());
+                complaintVo.setTscustomer(complaintVos.getTscustomer());
+                complaintVo.setTeamid(complaintVos.getTeamid());
+                complaintVo.setTeamname(complaintVos.getTeamname());
+                complaintVo.setUsername(complaintVos.getUsername());
+                complaintVo.setPname(complaintVos.getPname());
+                complaintVo.setTename(complaintVos.getTename());
+                result.add(complaintVo);
             }
         }
-        return new RestResultBuilder().setCode(0).setMsg("请求成功").setData(lists).build();
+        return new RestResultBuilder().setCode(0).setMsg("请求成功").setData(result ).build();
     }
     //根据complaintId查询历史记录
     @Override

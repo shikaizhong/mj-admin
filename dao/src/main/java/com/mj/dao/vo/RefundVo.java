@@ -15,7 +15,7 @@ public class RefundVo {
     /**
      * 退款客户 wang_wang_num
      */
-    private String wangWangNum;
+    private String wangwangnum;
 
     /**
      * 退款日期 refund_date
@@ -101,6 +101,19 @@ public class RefundVo {
     */
     private String shopptype;
 
+    /***
+     * 外因external_cause
+     */
+    public String externalCause;
+
+    public String getExternalCause() {
+        return externalCause;
+    }
+
+    public void setExternalCause(String externalCause) {
+        this.externalCause = externalCause;
+    }
+
     /**
      * 合同期限
      */
@@ -123,12 +136,12 @@ public class RefundVo {
         this.pkId = pkId;
     }
 
-    public String getWangWangNum() {
-        return wangWangNum;
+    public String getWangwangnum() {
+        return wangwangnum;
     }
 
-    public void setWangWangNum(String wangWangNum) {
-        this.wangWangNum = wangWangNum;
+    public void setWangwangnum(String wangwangnum) {
+        this.wangwangnum = wangwangnum;
     }
 
     public Date getRefundDate() {

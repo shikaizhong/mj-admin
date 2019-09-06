@@ -55,6 +55,39 @@ public class Complaint {
      * 投诉内容 content
      */
     private String content;
+    /***
+     * 店铺近30天成交额
+     */
+    private Integer turnover;
+
+    /***
+     * 店铺近30天成交笔数
+     * @return
+     */
+    private Integer number;
+
+    /***
+     *店铺行业
+     * @return
+     */
+    private Integer industry;
+
+    /***
+     *跟进人员
+     * @return
+     */
+    private Integer followPersonel;
+
+    /***
+     * 处理方案
+     */
+    private String processingScheme;
+
+    /***
+     * 处理过程
+     * @return
+     */
+    private String followProcess;
 
     public Integer getPkId() {
         return pkId;
@@ -112,46 +145,6 @@ public class Complaint {
         this.frequency = frequency;
     }
 
-//    public Integer getLevel() {
-//        return level;
-//    }
-//
-//    public void setLevel(Integer level) {
-//        this.level = level;
-//    }
-//
-//    public Integer getResult() {
-//        return result;
-//    }
-//
-//    public void setResult(Integer result) {
-//        this.result = result;
-//    }
-//
-//    public Integer getResponsibility() {
-//        return responsibility;
-//    }
-//
-//    public void setResponsibility(Integer responsibility) {
-//        this.responsibility = responsibility;
-//    }
-//
-//    public Integer getComplaintid() {
-//        return complaintid;
-//    }
-//
-//    public void setComplaintid(Integer complaintid) {
-//        this.complaintid = complaintid;
-//    }
-
-//    public Integer getComplaintId() {
-//        return complaintId;
-//    }
-//
-//    public void setComplaintId(Integer complaintId) {
-//        this.complaintId = complaintId;
-//    }
-
     public Integer getStatus() {
         return status;
     }
@@ -168,19 +161,59 @@ public class Complaint {
         this.isDelete = isDelete;
     }
 
-//    public String getLevelName() {
-//        return levelName;
-//    }
-//
-//    public void setLevelName(String levelName) {
-//        this.levelName = levelName;
-//    }
-
     public String getContent() {
         return content;
     }
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public Integer getTurnover() {
+        return turnover;
+    }
+
+    public void setTurnover(Integer turnover) {
+        this.turnover = turnover;
+    }
+
+    public Integer getNumber() {
+        return number;
+    }
+
+    public void setNumber(Integer number) {
+        this.number = number;
+    }
+
+    public Integer getIndustry() {
+        return industry;
+    }
+
+    public void setIndustry(Integer industry) {
+        this.industry = industry;
+    }
+
+    public Integer getFollowPersonel() {
+        return followPersonel;
+    }
+
+    public void setFollowPersonel(Integer followPersonel) {
+        this.followPersonel = followPersonel;
+    }
+
+    public String getProcessingScheme() {
+        return processingScheme;
+    }
+
+    public void setProcessingScheme(String processingScheme) {
+        this.processingScheme = processingScheme;
+    }
+
+    public String getFollowProcess() {
+        return followProcess;
+    }
+
+    public void setFollowProcess(String followProcess) {
+        this.followProcess = followProcess;
     }
 }

@@ -481,7 +481,7 @@
       <if test="TeamID != -1 ">
         and pp.TeamID= #{TeamID,jdbcType=INTEGER}
       </if>
-        <if test="TeamName != null ">
+        <if test="TeamName != null">
             and tt.TeamName= #{TeamName,jdbcType=INTEGER}
         </if>
     </trim>

@@ -136,7 +136,7 @@ public class RefundServiceImpl implements RefundService {
             List<SQLServerVo> listVos = personnelServiceImpl.selectByDatebase(put1);
             //新建一个RefundVo对象，用来存放从Refund和SQLServerVo中获取的数据
             RefundVo refundVo = new RefundVo();
-            refundVo.setWangWangNum(refund.getWangwangnum());
+            refundVo.setWangwangnum(refund.getWangwangnum());
             refundVo.setRefundCause(refund.getRefundCause());
             refundVo.setRefundChannel(refund.getRefundChannel());
             refundVo.setRefundDate(refund.getRefundDate());
@@ -342,7 +342,7 @@ public class RefundServiceImpl implements RefundService {
     @Override
     public RestResult selectInfoByWangWangNum(Map params) throws Exception {
         //根据旺旺名查询
-        String wangwangnum = String.valueOf(params.get("wangWangNum"));
+        String wangwangnum = String.valueOf(params.get("wangwangnum"));
         //根据店铺类型查询
         String shopptype = String.valueOf(params.get("shopptype"));
         //根据店长查询
@@ -366,7 +366,7 @@ public class RefundServiceImpl implements RefundService {
             map.put("username2", username2);
             map.put("teamname", teamname);
             List<SQLServerVo> sqlServerVo = personnelServiceImpl.selectByDatebase(map);
-            refundVo.setWangWangNum(list.getWangwangnum());
+            refundVo.setWangwangnum(list.getWangwangnum());
             refundVo.setRefundDate(list.getRefundDate());
             refundVo.setRefundCause(list.getRefundCause());
             refundVo.setRefundChannel(list.getRefundChannel());

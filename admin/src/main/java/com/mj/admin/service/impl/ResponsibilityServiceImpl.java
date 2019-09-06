@@ -40,6 +40,18 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
         Integer pageNum = Integer.valueOf(String.valueOf(params.get("pageNum")));
         Integer pageSize = Integer.valueOf(String.valueOf(params.get("pageSize")));
         Integer typess = Integer.valueOf(String.valueOf(params.get("type")));
+        String PersonnelID = String.valueOf(params.get("PersonnelID"));
+        if (PersonnelID =="null"){
+            params.put("PersonnelID",-1);
+        }
+        String TeamName = String.valueOf(params.get("TeamName"));
+        if (TeamName ==""){
+            params.put("TeamName",null);
+        }
+        String results = String.valueOf(params.get("result"));
+        if (results =="null"){
+            params.put("result",-1);
+        }
         if (pageSize>=10){
             pageSize = 10;
         }if (pageNum == 1){
@@ -139,49 +151,96 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
 //        System.out.println("传入的时间为"+responsibilityWithBLOBs.getCreateTime());
         //如果实体里面有数据则是修改
         if (responsibilityWithBLOBs1 !=null){
-            responsibilityWithBLOBs1.setBasic(responsibilityWithBLOBs.getBasic());
-            responsibilityWithBLOBs1.setDeal(responsibilityWithBLOBs.getDeal());
-            responsibilityWithBLOBs1.setSummary(responsibilityWithBLOBs.getSummary());
-            responsibilityWithBLOBs1.setLevel(responsibilityWithBLOBs.getLevel());
-            responsibilityWithBLOBs1.setSonLevel(responsibilityWithBLOBs.getSonLevel());
-            responsibilityWithBLOBs1.setResult(responsibilityWithBLOBs.getResult());
-            responsibilityWithBLOBs1.setResponsibilityer(responsibilityWithBLOBs.getResponsibilityer());
-            responsibilityWithBLOBs1.setResponsibilityor(responsibilityWithBLOBs.getResponsibilityor());
-            responsibilityWithBLOBs1.setGrade(responsibilityWithBLOBs.getGrade());
-            responsibilityWithBLOBs1.setType(responsibilityWithBLOBs.getType());
-
-            String str = responsibilityWithBLOBs.gethDate();
+            //如果是无责或者待定的状态产生联动
+            if (responsibilityWithBLOBs.getResult()==1 || responsibilityWithBLOBs.getResult() == 2){
+                responsibilityWithBLOBs1.setResult(responsibilityWithBLOBs.getResult());
+                responsibilityWithBLOBs1.setLevel(0);
+                responsibilityWithBLOBs1.setSonLevel(0);
+                responsibilityWithBLOBs1.setResponsibilityer(0);
+                responsibilityWithBLOBs1.setGrade(0);
+                responsibilityWithBLOBs1.setBasic(responsibilityWithBLOBs.getBasic());
+                responsibilityWithBLOBs1.setDeal(responsibilityWithBLOBs.getDeal());
+                responsibilityWithBLOBs1.setSummary(responsibilityWithBLOBs.getSummary());
+                responsibilityWithBLOBs1.setResponsibilityor(responsibilityWithBLOBs.getResponsibilityor());
+                responsibilityWithBLOBs1.setType(responsibilityWithBLOBs.getType());
+                String str = responsibilityWithBLOBs.gethDate();
 //        System.out.println("从测试环境获取的时间为："+str);
-            //正则表达式，判断字符串长度是否在3~20之间
-            String pattern = "^.{3,20}$";
-            Pattern p = Pattern.compile(pattern);
-            Matcher m = p.matcher(str);
-            //根据正则表达式判断
-            if (m.matches()) {
-                //如果为true，则执行这里的
-                Date date1 = sdf2.parse(str);
-                //从前端iview获取的时间为格林威治时间，所以需要加上8个小时为本地时间
-                long rightTime = (long) (date1.getTime() + 8 * 60 * 60 * 1000);
-                //格式转化
-                String newTime = sdf2.format(rightTime);
-                //将String类型的转化成Date类型
-                date1 = sdf2.parse(newTime);
+                //正则表达式，判断字符串长度是否在3~20之间
+                String pattern = "^.{3,20}$";
+                Pattern p = Pattern.compile(pattern);
+                Matcher m = p.matcher(str);
+                //根据正则表达式判断
+                if (m.matches()) {
+                    //如果为true，则执行这里的
+                    Date date1 = sdf2.parse(str);
+                    //从前端iview获取的时间为格林威治时间，所以需要加上8个小时为本地时间
+                    long rightTime = (long) (date1.getTime() + 8 * 60 * 60 * 1000);
+                    //格式转化
+                    String newTime = sdf2.format(rightTime);
+                    //将String类型的转化成Date类型
+                    date1 = sdf2.parse(newTime);
 //            System.out.println("时间为（正常）："+date1);
-                //将修改后的时间传给回访时间
-                responsibilityWithBLOBs1.setCreateTime(date1);
-            } else {
-                //如果为false，则执行这里的
-                //从前端iview获取的时间为格林威治时间，所以需要加上8个小时为本地时间
-                long rightTime = (long) (sdf1.parse(str).getTime() + 8 * 60 * 60 * 1000);
-                //格式转化
-                String newtime = sdf2.format(rightTime);
+                    //将修改后的时间传给回访时间
+                    responsibilityWithBLOBs1.setCreateTime(date1);
+                } else {
+                    //如果为false，则执行这里的
+                    //从前端iview获取的时间为格林威治时间，所以需要加上8个小时为本地时间
+                    long rightTime = (long) (sdf1.parse(str).getTime() + 8 * 60 * 60 * 1000);
+                    //格式转化
+                    String newtime = sdf2.format(rightTime);
 //            System.out.println("时间为（格林威治时间）："+sdf2.parse(newtime));
-                //将修改后的时间传给回访时间
-                responsibilityWithBLOBs1.setCreateTime(sdf2.parse(newtime));
-            }
+                    //将修改后的时间传给回访时间
+                    responsibilityWithBLOBs1.setCreateTime(sdf2.parse(newtime));
+                }
 
 //            responsibilityWithBLOBs1.setCreateTime(DateUtil.getHourAfter(responsibilityWithBLOBs.getCreateTime(),8));
-            responsibilityMapper.updateByPrimaryKeySelective(responsibilityWithBLOBs1);
+                responsibilityMapper.updateByPrimaryKeySelective(responsibilityWithBLOBs1);
+            }else {
+                responsibilityWithBLOBs1.setResult(responsibilityWithBLOBs.getResult());
+                responsibilityWithBLOBs1.setResponsibilityer(responsibilityWithBLOBs.getResponsibilityer());
+                responsibilityWithBLOBs1.setGrade(responsibilityWithBLOBs.getGrade());
+                responsibilityWithBLOBs1.setType(responsibilityWithBLOBs.getType());
+                responsibilityWithBLOBs1.setLevel(responsibilityWithBLOBs.getLevel());
+                responsibilityWithBLOBs1.setSonLevel(responsibilityWithBLOBs.getSonLevel());
+                responsibilityWithBLOBs1.setBasic(responsibilityWithBLOBs.getBasic());
+                responsibilityWithBLOBs1.setDeal(responsibilityWithBLOBs.getDeal());
+                responsibilityWithBLOBs1.setSummary(responsibilityWithBLOBs.getSummary());
+                responsibilityWithBLOBs1.setResponsibilityor(responsibilityWithBLOBs.getResponsibilityor());
+                responsibilityWithBLOBs1.setType(responsibilityWithBLOBs.getType());
+                String str = responsibilityWithBLOBs.gethDate();
+//        System.out.println("从测试环境获取的时间为："+str);
+                //正则表达式，判断字符串长度是否在3~20之间
+                String pattern = "^.{3,20}$";
+                Pattern p = Pattern.compile(pattern);
+                Matcher m = p.matcher(str);
+                //根据正则表达式判断
+                if (m.matches()) {
+                    //如果为true，则执行这里的
+                    Date date1 = sdf2.parse(str);
+                    //从前端iview获取的时间为格林威治时间，所以需要加上8个小时为本地时间
+                    long rightTime = (long) (date1.getTime() + 8 * 60 * 60 * 1000);
+                    //格式转化
+                    String newTime = sdf2.format(rightTime);
+                    //将String类型的转化成Date类型
+                    date1 = sdf2.parse(newTime);
+//            System.out.println("时间为（正常）："+date1);
+                    //将修改后的时间传给回访时间
+                    responsibilityWithBLOBs1.setCreateTime(date1);
+                } else {
+                    //如果为false，则执行这里的
+                    //从前端iview获取的时间为格林威治时间，所以需要加上8个小时为本地时间
+                    long rightTime = (long) (sdf1.parse(str).getTime() + 8 * 60 * 60 * 1000);
+                    //格式转化
+                    String newtime = sdf2.format(rightTime);
+//            System.out.println("时间为（格林威治时间）："+sdf2.parse(newtime));
+                    //将修改后的时间传给回访时间
+                    responsibilityWithBLOBs1.setCreateTime(sdf2.parse(newtime));
+                }
+
+//            responsibilityWithBLOBs1.setCreateTime(DateUtil.getHourAfter(responsibilityWithBLOBs.getCreateTime(),8));
+                responsibilityMapper.updateByPrimaryKeySelective(responsibilityWithBLOBs1);
+            }
+
         }
         //如果实体里面没有数据则是增加
         if (responsibilityWithBLOBs1 ==null){
@@ -268,7 +327,7 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
             String wangwangnum = vo.getWangwangnum();
             params.put("wangwangnum", wangwangnum);
             List<SQLServerVo> sqlServerVo = personnelService.selectByDatebase(params);
-            refundVo.setWangWangNum(vo.getWangwangnum());
+            refundVo.setWangwangnum(vo.getWangwangnum());
             refundVo.setRefundDate(vo.getRefundDate());
             refundVo.setRefundCause(vo.getRefundCause());
             refundVo.setRefundChannel(vo.getRefundChannel());

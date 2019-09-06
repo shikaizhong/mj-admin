@@ -138,9 +138,6 @@
             <if test="level != null">
                 level = #{level,jdbcType=INTEGER},
             </if>
-            <if test="refundCause != null">
-                refund_cause = #{refundCause,jdbcType=LONGVARCHAR},
-            </if>
         </set>
         where pk_id = #{pkId,jdbcType=INTEGER}
     </update>

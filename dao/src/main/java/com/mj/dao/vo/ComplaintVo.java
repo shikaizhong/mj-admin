@@ -165,6 +165,40 @@ public class ComplaintVo {
      */
     private Date createTime;
 
+    /***
+     * 店铺近30天成交额
+     */
+    private Integer turnover;
+
+    /***
+     * 店铺近30天成交笔数
+     * @return
+     */
+    private Integer number;
+
+    /***
+     *店铺行业
+     * @return
+     */
+    private Integer industry;
+
+    /***
+     *跟进人员
+     * @return
+     */
+    private Integer followPersonel;
+
+    /***
+     * 处理方案
+     */
+    private String processingScheme;
+
+    /***
+     * 处理过程
+     * @return
+     */
+    private String followProcess;
+
 
     public Integer getIsDelete() {
         return isDelete;
@@ -316,5 +350,53 @@ public class ComplaintVo {
 
     public void setTscustomer(String tscustomer) {
         this.tscustomer = tscustomer;
+    }
+
+    public Integer getTurnover() {
+        return turnover;
+    }
+
+    public void setTurnover(Integer turnover) {
+        this.turnover = turnover;
+    }
+
+    public Integer getNumber() {
+        return number;
+    }
+
+    public void setNumber(Integer number) {
+        this.number = number;
+    }
+
+    public Integer getIndustry() {
+        return industry;
+    }
+
+    public void setIndustry(Integer industry) {
+        this.industry = industry;
+    }
+
+    public Integer getFollowPersonel() {
+        return followPersonel;
+    }
+
+    public void setFollowPersonel(Integer followPersonel) {
+        this.followPersonel = followPersonel;
+    }
+
+    public String getProcessingScheme() {
+        return processingScheme;
+    }
+
+    public void setProcessingScheme(String processingScheme) {
+        this.processingScheme = processingScheme;
+    }
+
+    public String getFollowProcess() {
+        return followProcess;
+    }
+
+    public void setFollowProcess(String followProcess) {
+        this.followProcess = followProcess;
     }
 }

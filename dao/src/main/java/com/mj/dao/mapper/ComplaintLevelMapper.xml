@@ -7,9 +7,10 @@
     <result column="complaint_name" jdbcType="VARCHAR" property="complaintName" />
     <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="external_cause" jdbcType="LONGVARCHAR" property="externalCause"/>
   </resultMap>
   <sql id="Base_Column_List">
-    pk_id, parent_id, complaint_name, is_delete, create_time
+    pk_id, parent_id, complaint_name, is_delete, create_time,external_cause
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -23,10 +24,10 @@
   </delete>
   <insert id="insert" parameterType="com.mj.dao.entity.ComplaintLevel">
     insert into t_complaint_level (pk_id, parent_id, complaint_name, 
-     is_delete, create_time
+     is_delete, create_time,external_cause
       )
     values (#{pkId,jdbcType=INTEGER}, #{parentId,jdbcType=INTEGER}, #{complaintName,jdbcType=VARCHAR}, 
-     #{isDelete,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}
+     #{isDelete,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP},#{externalCause,jdbcType=LONGVARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.mj.dao.entity.ComplaintLevel">
@@ -47,6 +48,9 @@
       <if test="createTime != null">
         create_time,
       </if>
+      <if test="externalCause != null">
+        #{external_cause,jdbcType=LONGVARCHAR},
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="pkId != null">
@@ -63,6 +67,9 @@
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="externalCause != null">
+        #{externalCause,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -81,6 +88,9 @@
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="externalCause != null">
+        #{external_cause,jdbcType=LONGVARCHAR},
+      </if>
     </set>
     where pk_id = #{pkId,jdbcType=INTEGER}
   </update>
@@ -89,7 +99,8 @@
     set parent_id = #{parentId,jdbcType=INTEGER},
       complaint_name = #{complaintName,jdbcType=VARCHAR},
       is_delete = #{isDelete,jdbcType=INTEGER},
-      create_time = #{createTime,jdbcType=TIMESTAMP}
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      external_cause =  #{external_cause,jdbcType=LONGVARCHAR}
     where pk_id = #{pkId,jdbcType=INTEGER}
   </update>
   <!--自定义-->

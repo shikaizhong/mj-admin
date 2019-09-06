@@ -29,6 +29,18 @@ public class ComplaintLevel {
      * 客诉类别创建时间 create_time
      */
     private Date createTime;
+    /***
+     * 外因external_cause
+     */
+    public String externalCause;
+
+    public String getExternalCause() {
+        return externalCause;
+    }
+
+    public void setExternalCause(String externalCause) {
+        this.externalCause = externalCause;
+    }
 
     /**
      * 客诉类别主键id
