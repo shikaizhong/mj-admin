@@ -7,6 +7,7 @@ import com.mj.common.result.RestResult;
 import com.mj.common.result.RestResultBuilder;
 import com.mj.common.result.ResultUtils;
 import com.mj.common.tools.ApiConstant;
+import com.mj.common.tools.DateUtil;
 import com.mj.dao.entity.Files;
 import com.mj.dao.entity.HiddenTrouble;
 import com.mj.dao.repository.FilesMapper;
@@ -72,53 +73,19 @@ public class HiddenTroubleServiceImpl implements HiddenTroubleService {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Calendar calendar = new GregorianCalendar();
         String str1 = ObjectUtils.toString(params.get("startTime"), "");
-        if(!StringUtils.isNotBlank(str1)){
-            Date startTime = sdf2.parse("2000-1-1 00:00:00");
-            params.put("startTime", startTime);
+        if(StringUtils.isNotBlank(str1)){
+            Date startTime = sdf1.parse(String.valueOf(params.get("startTime")));
+            params.put("startTime", DateUtil.getHourAfter(startTime, 8));
         }else{
-            String startTime = String.valueOf(params.get("startTime"));
-            String pattern = "^.{3,20}$";
-            Pattern p = Pattern.compile(pattern);
-            Matcher m = p.matcher(startTime);
-            //根据正则表达式判断
-            if (m.matches()) {
-                Date date1 = sdf2.parse(startTime);
-                long rightTime = (long) (date1.getTime() + 8 * 60 * 60 * 1000);
-                String newTime = sdf2.format(rightTime);
-                date1 = sdf2.parse(newTime);
-                params.put("startTime", date1);
-            } else {
-                Date date1 = new Date();
-                long rightTime = (long) (sdf1.parse(startTime).getTime() + 8 * 60 * 60 * 1000);
-                String newTime = sdf2.format(rightTime);
-                date1 = sdf2.parse(newTime);
-                params.put("startTime", date1);
-            }
+            params.put("startTime", null);
         }
 
         String str2 = ObjectUtils.toString(params.get("endTime"), "");
-        if(!StringUtils.isNotBlank(str2)){
-            Date endTime = sdf2.parse("2099-12-31 23:59:59");
-            params.put("endTime", endTime);
+        if(StringUtils.isNotBlank(str2)){
+            Date endTime = sdf1.parse(String.valueOf(params.get("endTime")));
+            params.put("endTime", DateUtil.getHourAfter(endTime, 8));
         }else{
-            String endTime = String.valueOf(params.get("endTime"));
-            String pattern = "^.{3,20}$";
-            Pattern p = Pattern.compile(pattern);
-            Matcher m = p.matcher(endTime);
-            //根据正则表达式判断
-            if (m.matches()) {
-                Date date1 = sdf2.parse(endTime);
-                long rightTime = (long) (date1.getTime() + 8 * 60 * 60 * 1000);
-                String newTime = sdf2.format(rightTime);
-                date1 = sdf2.parse(newTime);
-                params.put("startTime", date1);
-            } else {
-                Date date1 = new Date();
-                long rightTime = (long) (sdf1.parse(endTime).getTime() + 8 * 60 * 60 * 1000);
-                String newTime = sdf2.format(rightTime);
-                date1 = sdf2.parse(newTime);
-                params.put("endTime", date1);
-            }
+            params.put("endTime", null);
         }
 
         if (pageNum == 1) {
