@@ -16,7 +16,7 @@
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
   </resultMap>
   <sql id="Base_Column_List">
-    pk_id, WangWangNum, complaintDate, channel, sceneRestoration, remarks, frequency,
+    pk_id, WangWangNum, complaintDate, channel, remarks, frequency,
    status, is_delete
   </sql>
   <sql id="Blob_Column_List">

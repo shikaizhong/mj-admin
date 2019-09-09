@@ -276,7 +276,7 @@
             AND rr.`parent_name` =#{parentName,jdbcType=VARCHAR}
           </if>
           <if test="keyword != null and keyword != ''">
-            AND (cc.WangWangNum LIKE CONCAT('%', #{keyword}, '%')
+            AND (cc.WangWangNum LIKE CONCAT('%', #{keyword}, '%'))
           </if>
           <if test="startTime != '' and endTime !='' ">
             and rr.createTime <![CDATA[>= ]]> #{startTime}  and rr.createTime <![CDATA[<= ]]> #{endTime}
@@ -285,7 +285,7 @@
             AND rr.`result` =#{result,jdbcType=INTEGER}
           </if>
           <if test="grade !=null or grade != ''">
-            AND rr.`grade` =#{grade}
+            AND rr.`grade` =#{grade,jdbcType=VARCHAR}
           </if>
         </trim>
       </if>
@@ -293,7 +293,7 @@
       <trim prefix="WHERE" prefixOverrides="AND|OR">
           cc.is_delete=0
           <if test="keyword != null and keyword != ''">
-            AND (cc.WangWangNum LIKE CONCAT('%', #{keyword}, '%')
+            AND (cc.WangWangNum LIKE CONCAT('%', #{keyword}, '%'))
           </if>
           <if test="startTime != '' and endTime !='' ">
             and rr.`create_time` <![CDATA[>= ]]> #{startTime}  and rr.`create_time` <![CDATA[<= ]]> #{endTime}
@@ -322,7 +322,7 @@
             AND rr.`parent_name` =#{parentName,jdbcType=VARCHAR}
           </if>
           <if test="keyword != null and keyword != ''">
-            AND (ht.WangWangNum LIKE CONCAT('%', #{keyword}, '%')
+            AND (ht.WangWangNum LIKE CONCAT('%', #{keyword}, '%'))
           </if>
           <if test="startTime != '' and endTime !='' ">
             and rr.createTime <![CDATA[>= ]]> #{startTime}  and rr.createTime <![CDATA[<= ]]> #{endTime}
@@ -339,7 +339,7 @@
         <trim prefix="WHERE" prefixOverrides="AND|OR">
           ht.is_delete = 0
           <if test="keyword != null and keyword != ''">
-            AND (ht.WangWangNum LIKE CONCAT('%', #{keyword}, '%')
+            AND (ht.WangWangNum LIKE CONCAT('%', #{keyword}, '%'))
           </if>
           <if test="startTime != '' and endTime !='' ">
             and rr.`create_time` <![CDATA[>= ]]> #{startTime}  and rr.`create_time` <![CDATA[<= ]]> #{endTime}
@@ -368,7 +368,7 @@
                 AND rr.`parent_name` =#{parentName,jdbcType=VARCHAR}
               </if>
               <if test="keyword != null and keyword != ''">
-                AND (rf.WangWangNum LI KE CONCAT('%', #{keyword}, '%')
+                AND (rf.WangWangNum LIKE CONCAT('%', #{keyword}, '%'))
               </if>
               <if test="startTime != '' and endTime !='' ">
                 and rr.createTime <![CDATA[>= ]]> #{startTime}  and rr.createTime <![CDATA[<= ]]> #{endTime}
@@ -385,7 +385,7 @@
         <trim prefix="WHERE" prefixOverrides="AND|OR">
           rf.`is_delete` = 0
           <if test="keyword != null and keyword != ''">
-            AND rr.`wang_wang_num` LIKE CONCAT ("%",#{wangWangNum},"%")
+            AND (rr.WangWangNum LIKE CONCAT('%', #{keyword}, '%'))
           </if>
           <if test="startTime != '' and endTime !='' ">
             and rr.`create_time` <![CDATA[>= ]]> #{startTime}  and rr.`create_time` <![CDATA[<= ]]> #{endTime}
@@ -549,7 +549,7 @@
     <trim prefix="WHERE" prefixOverrides="AND|OR">
       cc.is_delete=0
       <if test="keyword != null and keyword != ''">
-        AND (cc.WangWangNum LIKE CONCAT('%', #{keyword}, '%')
+        AND (cc.WangWangNum LIKE CONCAT('%', #{keyword}, '%'))
       </if>
       <if test="startTime != '' and endTime !='' ">
         and rr.`create_time` <![CDATA[>= ]]> #{startTime} and rr.`create_time` <![CDATA[<= ]]> #{endTime}

@@ -41,6 +41,7 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
         Integer pageSize = Integer.valueOf(String.valueOf(params.get("pageSize")));
         Integer typess = Integer.valueOf(String.valueOf(params.get("type")));
         String PersonnelID = String.valueOf(params.get("PersonnelID"));
+        String keyword = String.valueOf(params.get("keyword"));
         if (PersonnelID =="null"){
             params.put("PersonnelID",-1);
         }
@@ -52,6 +53,10 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
         if (results =="null"){
             params.put("result",-1);
         }
+        String grade = String.valueOf(params.get("grade"));
+        if(grade ==""){
+            params.put("grade",null);
+        }
         if (pageSize>=10){
             pageSize = 10;
         }if (pageNum == 1){
@@ -62,6 +67,7 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
         params.put("pageNum",pageNum);
         params.put("pageSize",pageSize);
         params.put("type",typess);
+        params.put("keyword",keyword);
 //        List<ResponsibilityVo> list = new ArrayList<ResponsibilityVo>();
 //        if (typess ==1){
 //            list = responsibilityMapper.selectHiddenTrouble(params);

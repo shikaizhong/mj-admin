@@ -283,8 +283,8 @@
         SELECT * FROM t_refund rr
         <trim prefix="WHERE" prefixOverrides="AND|OR">
             rr.`is_delete` = 0
-            <if test="WangWangNum != null and WangWangNum != ''">
-                AND rr.`WangWangNum` LIKE CONCAT ("%",#{WangWangNum},"%")
+            <if test="wangwangnum != null and wangwangnum != ''">
+                AND rr.`WangWangNum` = #{wangwangnum, jdbcType=VARCHAR}
             </if>
             <if test="startTime != null and endTime != null">
                 AND rr.`refund_date` &gt;= #{startTime}

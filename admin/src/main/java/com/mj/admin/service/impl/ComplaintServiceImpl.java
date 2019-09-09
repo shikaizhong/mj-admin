@@ -57,15 +57,26 @@ public class ComplaintServiceImpl implements ComplaintService {
         String keyword = String.valueOf(params.get("keyword"));
         String startTime = String.valueOf(params.get("startTime"));
         String endTime = String.valueOf(params.get("endTime"));
-        Integer status = Integer.valueOf(String.valueOf(params.get("status")));
-        Integer channels = Integer.valueOf(String.valueOf(params.get("channel")));
+        String status = String.valueOf(params.get("status"));
+        String channel = String.valueOf(params.get("channel"));
         String frequency = String.valueOf(params.get("frequency"));
         String TScustomer = String.valueOf(params.get("TScustomer"));
-        System.out.println(TScustomer+"店长id为");
-        Integer TechnologyRecruitmentID =Integer.valueOf(String.valueOf(params.get("TechnologyRecruitmentID")));
-        Integer PersonnelID = Integer.valueOf(String.valueOf(params.get("PersonnelID")));
+        String TechnologyRecruitmentID =String.valueOf(params.get("TechnologyRecruitmentID"));
+        String PersonnelID = String.valueOf(params.get("PersonnelID"));
         Integer TeamID = Integer.valueOf(String.valueOf(params.get("TeamID")));
         String TeamName = String.valueOf(params.get("TeamName"));
+        if (frequency == ""){
+            params.put("frequency",-1);
+        }
+        if (PersonnelID =="null"){
+            params.put("PersonnelID",-1);
+        }
+        if (status =="null"){
+            params.put("status",-1);
+        }
+        if (channel == "null"){
+            params.put("channel",-1);
+        }
         if (pagesize>=10){
             pagesize = 10;
         }if (pageNum == 1){
@@ -76,34 +87,24 @@ public class ComplaintServiceImpl implements ComplaintService {
         params.put("pageNum",pageNum);
         params.put("pageSize",pagesize);
         params.put("keyword",keyword);
-        params.put("status",status);
         if (Strings.isEmpty(startTime)){
             params.put("startTime",startTime);
         }
         if (Strings.isEmpty(endTime)) {
             params.put("endTime", endTime);
         }
-        if (channels !=-1){
-        params.put("channels",channels);
-        }
-        if (frequency.isEmpty()) {
-            params.put("frequencys", frequency);
-        }
         if (Strings.isEmpty(TScustomer)){
 //            Integer ts = Integer.parseInt(tscustomers);
             params.put("TScustomer",TScustomer);
         }
-        if (Strings.isEmpty(TeamName)){
-            params.put("TeamName",TeamName);
+        if (TeamName == ""){
+            params.put("TeamName",null);
         }
         if (TeamID !=-1){
             params.put("TeamID",TeamID);
         }
-        if (TechnologyRecruitmentID != -1){
-            params.put("TechnologyRecruitmentID",TechnologyRecruitmentID);
-        }
-        if (PersonnelID !=-1 && PersonnelID != null){
-            params.put("PersonnelID",PersonnelID);
+        if (TechnologyRecruitmentID == "null"){
+            params.put("TechnologyRecruitmentID",-1);
         }
         //调用dao层
 //        List<ComplaintVo> list = complaintMapper.selectComplaint(params);

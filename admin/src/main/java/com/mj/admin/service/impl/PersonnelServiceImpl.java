@@ -183,15 +183,8 @@ public class PersonnelServiceImpl implements PersonnelService {
     @DataSource(value = "slave1")
     @Override
     public ResponsibilityVo selectResponsibilityList(Map map) {
-        System.out.println(map.get("wangwangnum")+"旺旺名是:--------");
         return personnelMapper.selectResponsibilityList(map);
     }
-
-
-
-
-
-
 
     //根据旺旺名查询退款数据
     @DataSource(value = "slave1")
@@ -210,20 +203,23 @@ public class PersonnelServiceImpl implements PersonnelService {
 
         params.put("wangwangnum", wangwangnum);
         Map map = new HashMap();
-        map.put("wangwangnum",wangwangnum);
-        System.out.println("personnel_params集合值为："+params);
-        System.out.println("personnel_map集合值为1："+map);
-        params.put("shopptype", shopptype);
-        params.put("username1", username1);
-        params.put("username2", username2);
-        params.put("teamname", teamname);
-        System.out.println("personnel_map集合值为2："+map);
-
+        if(!wangwangnum.isEmpty()){
+            map.put("wangwangnum",wangwangnum);
+        }
+        if(!shopptype.isEmpty() && shopptype !="null"){
+            map.put("shopptype", shopptype);
+        }
+        if(!username1.isEmpty() && username1 !="null"){
+            map.put("username1", username1);
+        }
+        if(!username2.isEmpty() && username2 !="null"){
+            map.put("username2", username2);
+        }
+        if(!teamname.isEmpty() && teamname !="null"){
+            map.put("teamname", teamname);
+        }
         List<SQLServerVo> list = personnelMapper.selectBySQL(map);
-        System.out.println("personnel_查看通过sqlserver获取的值为："+list.size());
-
         for(SQLServerVo sqlServerVo : list){
-            System.out.println("personnel_进入加强for循环："+sqlServerVo.getWangwangnum());
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             String serverdeadline = sqlServerVo.getServerdeadline();
             String serverdeadlineend = sqlServerVo.getServerdeadlineend();
@@ -253,7 +249,6 @@ public class PersonnelServiceImpl implements PersonnelService {
                 }
             }
         }
-        System.out.println("personnel结束出来的list值为："+list.size());
         return list;
     }
 }

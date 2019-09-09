@@ -13,6 +13,8 @@ import com.mj.dao.repository.FilesMapper;
 import com.mj.dao.repository.HiddenTroubleMapper;
 import com.mj.dao.vo.HiddenTroubleVo;
 import com.mj.dao.vo.SQLServerVo;
+import org.apache.commons.lang.ObjectUtils;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -45,10 +47,13 @@ public class HiddenTroubleServiceImpl implements HiddenTroubleService {
     @DataSource(value = "druid")
     @Override
     public RestResult selectHidden(Map params) throws Exception {
+        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         //分页
         Integer pageSize = Integer.valueOf(String.valueOf(params.get("pageSize")));
         Integer pageNum = Integer.valueOf(String.valueOf(params.get("pageNum")));
-        Integer status = Integer.valueOf(String.valueOf(params.get("status")));
+        String status = String.valueOf(params.get("status"));
+
 
         //根据店铺类型查询
         String shopptype = String.valueOf(params.get("shopptype"));
@@ -58,34 +63,62 @@ public class HiddenTroubleServiceImpl implements HiddenTroubleService {
         String username2 = String.valueOf(params.get("username2"));
         //根据团队名查询
         String teamname = String.valueOf(params.get("teamname"));
-
         //根据旺旺名查询
         String wangwangnum = String.valueOf(params.get("wangwangnum"));
         //根据隐患次数查询
-        Integer frequency = Integer.valueOf(String.valueOf(params.get("frequency")));
+        String frequency = String.valueOf(params.get("frequency"));
 
         //根据开始时间，结束时间查询
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Calendar calendar = new GregorianCalendar();
-        if ((String.valueOf(params.get("startTime"))).isEmpty()) {
-            Date startTime = sdf.parse("2000-1-1 00:00:00");
+        String str1 = ObjectUtils.toString(params.get("startTime"), "");
+        if(!StringUtils.isNotBlank(str1)){
+            Date startTime = sdf2.parse("2000-1-1 00:00:00");
             params.put("startTime", startTime);
-        } else {
-            Date startTime = sdf.parse(String.valueOf(params.get("startTime")));
-//            calendar.setTime(startTime);
-//            calendar.add(calendar.DATE, 1);
-//            startTime = calendar.getTime();
-            params.put("startTime", startTime);
+        }else{
+            String startTime = String.valueOf(params.get("startTime"));
+            String pattern = "^.{3,20}$";
+            Pattern p = Pattern.compile(pattern);
+            Matcher m = p.matcher(startTime);
+            //根据正则表达式判断
+            if (m.matches()) {
+                Date date1 = sdf2.parse(startTime);
+                long rightTime = (long) (date1.getTime() + 8 * 60 * 60 * 1000);
+                String newTime = sdf2.format(rightTime);
+                date1 = sdf2.parse(newTime);
+                params.put("startTime", date1);
+            } else {
+                Date date1 = new Date();
+                long rightTime = (long) (sdf1.parse(startTime).getTime() + 8 * 60 * 60 * 1000);
+                String newTime = sdf2.format(rightTime);
+                date1 = sdf2.parse(newTime);
+                params.put("startTime", date1);
+            }
         }
-        if ((String.valueOf(params.get("endTime"))).isEmpty()) {
-            Date endTime = sdf.parse("2099-12-31 23:59:59");
+
+        String str2 = ObjectUtils.toString(params.get("endTime"), "");
+        if(!StringUtils.isNotBlank(str2)){
+            Date endTime = sdf2.parse("2099-12-31 23:59:59");
             params.put("endTime", endTime);
-        } else {
-            Date endTime = sdf.parse(String.valueOf(params.get("endTime")));
-//            calendar.setTime(endTime);
-//            calendar.add(calendar.DATE, 1);
-//            endTime = calendar.getTime();
-            params.put("endTime", endTime);
+        }else{
+            String endTime = String.valueOf(params.get("endTime"));
+            String pattern = "^.{3,20}$";
+            Pattern p = Pattern.compile(pattern);
+            Matcher m = p.matcher(endTime);
+            //根据正则表达式判断
+            if (m.matches()) {
+                Date date1 = sdf2.parse(endTime);
+                long rightTime = (long) (date1.getTime() + 8 * 60 * 60 * 1000);
+                String newTime = sdf2.format(rightTime);
+                date1 = sdf2.parse(newTime);
+                params.put("startTime", date1);
+            } else {
+                Date date1 = new Date();
+                long rightTime = (long) (sdf1.parse(endTime).getTime() + 8 * 60 * 60 * 1000);
+                String newTime = sdf2.format(rightTime);
+                date1 = sdf2.parse(newTime);
+                params.put("endTime", date1);
+            }
         }
 
         if (pageNum == 1) {
@@ -99,28 +132,15 @@ public class HiddenTroubleServiceImpl implements HiddenTroubleService {
         if (!wangwangnum.isEmpty()) {
             params.put("wangwangnum", wangwangnum);
         }
-//        if (!shopptype.isEmpty()) {
-//            params.put("shopptype", shopptype);
-//        }
-//        if (!dz.isEmpty()) {
-//            params.put("dz", dz);
-//        }
-//        if (!zsgw.isEmpty()) {
-//            params.put("zsgw", zsgw);
-//        }
-//        if (!teamname.isEmpty()) {
-//            params.put("teamname", teamname);
-//        }
-        if (frequency != 0) {
-            params.put("frequency", frequency);
+        if (frequency == "null") {
+            params.put("frequency", null);
+        }
+        if(status == "null"){
+            params.put("status", -1);
         }
 
-        params.put("status", status);
-
         //调用查询数据总数的dao层
-//        System.out.println("获取的map集合值为："+ params);
         List<HiddenTrouble> hiddenTroubles = hiddenTroubleMapper.selectHiddenList(params);
-//        System.out.println("在hidden类里查询的值："+hiddenTroubles.size());
         List<HiddenTroubleVo> result = new ArrayList();
         if(!hiddenTroubles.isEmpty()) {
             for (HiddenTrouble listHidden : hiddenTroubles) {
@@ -136,31 +156,43 @@ public class HiddenTroubleServiceImpl implements HiddenTroubleService {
                 hiddenTroubleVo.setRemark(listHidden.getRemark());
                 hiddenTroubleVo.setStatus(listHidden.getStatus());
                 Map map = new HashMap();
-                map.put("wangwangnum", wangwangnums);
-                map.put("username1", username1);
-                map.put("username2", username2);
-                map.put("shopptype", shopptype);
-                map.put("teamname", teamname);
-                List<SQLServerVo> sqlServerVo = personnelServiceImpl.selectByDatebase(map);
-                for (SQLServerVo listVo : sqlServerVo) {
-                    hiddenTroubleVo.setCusttype(listVo.getCusttype());
-                    hiddenTroubleVo.setChildtype(listVo.getChildtype());
-                    hiddenTroubleVo.setShopptype(listVo.getShopptype());
-                    hiddenTroubleVo.setTeamname(listVo.getTeamname());
-                    hiddenTroubleVo.setUsername1(listVo.getUsername1());
-                    hiddenTroubleVo.setUsername2(listVo.getUsername2());
+                if(!wangwangnums.isEmpty()){
+                    map.put("wangwangnum", wangwangnums);
                 }
-                result.add(hiddenTroubleVo);
+                if(!username1.isEmpty()){
+                    map.put("username1", username1);
+                }
+                if(!username2.isEmpty()){
+                    map.put("username2", username2);
+                }
+                if(!shopptype.isEmpty()){
+                    map.put("shopptype", shopptype);
+                }
+                if(!teamname.isEmpty()){
+                    map.put("teamname", teamname);
+                }
+                List<SQLServerVo> sqlServerVo = personnelServiceImpl.selectByDatebase(map);
+                    if (!sqlServerVo.isEmpty()) {
+                        for (SQLServerVo listVo : sqlServerVo) {
+                            hiddenTroubleVo.setCusttype(listVo.getCusttype());
+                            hiddenTroubleVo.setChildtype(listVo.getChildtype());
+                            hiddenTroubleVo.setShopptype(listVo.getShopptype());
+                            hiddenTroubleVo.setTeamname(listVo.getTeamname());
+                            hiddenTroubleVo.setUsername1(listVo.getUsername1());
+                            hiddenTroubleVo.setUsername2(listVo.getUsername2());
+                        }
+                        result.add(hiddenTroubleVo);
+                    }
+
+
             }
         }
 
         //调用查询的dao层
         Integer total = hiddenTroubleMapper.total(params);
-        System.out.println("total为：" + total);
         Map map = new HashMap();
         map.put("list", result);
         map.put("total", total);
-//        System.out.println(list.get(0).getHiddenDate()+"时间为");
         return new RestResultBuilder().setCode(0).setMsg("请求成功").setData(map).build();
     }
 

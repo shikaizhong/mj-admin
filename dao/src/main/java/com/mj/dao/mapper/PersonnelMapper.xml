@@ -533,34 +533,31 @@
 
   <!--查询退款，隐患，流失-->
   <select id="selectBySQL" parameterType="java.util.HashMap" resultMap="BaseResultVo">
-    SELECT cu.WangWangNum, ct.CustType,cc.ChildType,cu.ServerDeadline,cu.ServerDeadlineEnd,cu.ShoppType,cr.TurnoverMoney,
-    p1.UserName AS dz,tt.TeamName,p2.UserName AS zsgw
-    FROM
-    Customer cu
-    LEFT JOIN CustomerRecords cr ON cu.WangWangNum = cr.Trader
-    LEFT JOIN CustomerType ct ON cu.CustType = ct.ID
-    LEFT JOIN CustomerChildType cc ON cu.ChildType = cc.ID
-    LEFT JOIN Personnel p1 ON p1.ID = cu.TScustomer
-    LEFT JOIN Personnel p2 ON p2.ID = cr.PersonnelID
-    LEFT JOIN Team tt ON p1.TeamID = tt.ID
-    <trim prefix="WHERE" prefixOverrides="AND|OR">
-      <if test="wangwangnum != null and wangwangnum != ''">
-        AND cu.WangWangNum = #{wangwangnum}
-      </if>
-      <if test="shopptype != null and shopptype != ''">
-        AND cu.ShoppType = #{shopptype,jdbcType=VARCHAR}
-      </if>
-      <if test="username1 != null and username1 != ''">
-        AND p1.UserName = #{username1,jdbcType=VARCHAR}
-      </if>
-      <if test="username2 != null and username2 != ''">
-        AND p2.UserName = #{username2,jdbcType=VARCHAR}
-      </if>
-      <if test="teamname != null and teamname != ''">
-        AND tt.TeamName = #{teamname,jdbcType=VARCHAR}
-      </if>
-    </trim>
-    ORDER BY cu.ServerDeadlineEnd DESC
+    <!--<if test="wangwangnum != null and wangwangnum != ''">-->
+      SELECT cu.WangWangNum, ct.CustType,cc.ChildType,cu.ServerDeadline,cu.ServerDeadlineEnd,
+      cu.ShoppType,cr.TurnoverMoney,p1.UserName AS dz,tt.TeamName,p2.UserName AS zsgw
+      FROM (SELECT TOP 1 * FROM CustomerRecords WHERE Trader = #{wangwangnum,jdbcType=VARCHAR} ORDER BY ID DESC) AS cr
+      LEFT JOIN (SELECT TOP 1 * FROM Customer WHERE WangWangNum = #{wangwangnum,jdbcType=VARCHAR} ORDER BY ID DESC) AS cu ON cr.Trader = cu.WangWangNum
+      LEFT JOIN CustomerType ct ON cu.CustType = ct.ID
+      LEFT JOIN CustomerChildType cc ON cu.ChildType = cc.ID
+      LEFT JOIN Personnel p1 ON p1.ID = cu.TScustomer
+      LEFT JOIN Personnel p2 ON p2.ID = cr.PersonnelID
+      LEFT JOIN Team tt ON p1.TeamID = tt.ID
+      <trim prefix="WHERE" prefixOverrides="AND|OR">
+        <if test="shopptype != null and shopptype != ''">
+          AND cu.ShoppType = #{shopptype,jdbcType=VARCHAR}
+        </if>
+        <if test="username1 != null and username1 != ''">
+          AND p1.UserName = #{username1,jdbcType=VARCHAR}
+        </if>
+        <if test="username2 != null and username2 != ''">
+          AND p2.UserName = #{username2,jdbcType=VARCHAR}
+        </if>
+        <if test="teamname != null and teamname != ''">
+          AND tt.TeamName = #{teamname,jdbcType=VARCHAR}
+        </if>
+      </trim>
+    <!--</if>-->
   </select>
 
 </mapper>
