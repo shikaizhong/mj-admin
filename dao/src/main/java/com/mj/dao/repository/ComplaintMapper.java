@@ -4,6 +4,7 @@ import com.mj.dao.entity.Complaint;
 import com.mj.dao.entity.Files;
 import com.mj.dao.vo.ComplaintVo;
 import com.mj.dao.vo.Complaints;
+import com.mj.dao.vo.ResponsibilityVo;
 
 import java.util.List;
 import java.util.Map;
@@ -70,4 +71,12 @@ public interface ComplaintMapper {
 
     //根据id查询
     List<ComplaintVo> selectById(Map params);
+
+
+    //通过wangwangnum查询投诉信息
+    List<ResponsibilityVo> selelctComplaintByWangWangNum(Map params);
+    //通过wangwangnum查询隐患信息
+    List<ResponsibilityVo> selectHiddenByWangWangNum(Map params);
+    //通过wangwangnum查询退款信息
+    List<ResponsibilityVo> selectRefundByWangWangNum(Map params);
 }

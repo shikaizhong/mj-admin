@@ -81,6 +81,8 @@ public class HiddenTroubleVo {
      */
     private String shopptype;
 
+    private Integer result;
+
     /**
      * 主键，隐患表
      *
@@ -295,5 +297,13 @@ public class HiddenTroubleVo {
 
     public void setShopptype(String shopptype) {
         this.shopptype = shopptype;
+    }
+
+    public Integer getResult() {
+        return result;
+    }
+
+    public void setResult(Integer result) {
+        this.result = result;
     }
 }

@@ -151,6 +151,61 @@ public class ResponsibilityVo {
      */
     private Date refundDate;
 
+    /**
+     * 备注 remark
+     */
+    private String remark;
+
+    /**
+     * 次数
+     */
+    private Integer frequency;
+
+    /**
+     * 退款渠道：1、SEM在线订购 2、支付宝转账 3、网银转账 4、定制市场订购 5、现金 6、POS机 7、京东在线订购 8、微信支付 refund_channel
+     */
+    private Integer refundChannel;
+
+    /**
+     * 退款金额 refund_amount
+     */
+    private Long refundAmount;
+
+    /**
+     * 退款原因 refund_cause
+     */
+    private String refundCause;
+    /***
+     * 外因external_cause
+     */
+    public String externalCause;
+    /**
+     * 合同期限
+     */
+    private Long deadline;
+
+    /**
+     * ServerDeadlineEnd，合同结束日期
+     */
+    private String serverdeadlineend;
+
+    //投诉类型
+    private Integer complaintType;
+
+    //隐患类型
+    private Integer hiddenType;
+
+    //退款类型
+    private Integer refundType;
+
+    //客户类型
+    private  String custtype;
+
+    //客户类型子
+    private  String childtype;
+
+    //合同金额
+    private Double turnovermoney;
 
     //生产get.set方法
     public Integer getPkId() {
@@ -393,4 +448,116 @@ public class ResponsibilityVo {
         this.refundDate = refundDate;
     }
 
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public Integer getFrequency() {
+        return frequency;
+    }
+
+    public void setFrequency(Integer frequency) {
+        this.frequency = frequency;
+    }
+
+
+    public Integer getRefundChannel() {
+        return refundChannel;
+    }
+
+    public void setRefundChannel(Integer refundChannel) {
+        this.refundChannel = refundChannel;
+    }
+
+    public Long getRefundAmount() {
+        return refundAmount;
+    }
+
+    public void setRefundAmount(Long refundAmount) {
+        this.refundAmount = refundAmount;
+    }
+
+    public String getRefundCause() {
+        return refundCause;
+    }
+
+    public void setRefundCause(String refundCause) {
+        this.refundCause = refundCause;
+    }
+
+    public String getExternalCause() {
+        return externalCause;
+    }
+
+    public void setExternalCause(String externalCause) {
+        this.externalCause = externalCause;
+    }
+
+    public Long getDeadline() {
+        return deadline;
+    }
+
+    public void setDeadline(Long deadline) {
+        this.deadline = deadline;
+    }
+
+    public String getServerdeadlineend() {
+        return serverdeadlineend;
+    }
+
+    public void setServerdeadlineend(String serverdeadlineend) {
+        this.serverdeadlineend = serverdeadlineend;
+    }
+
+    public Integer getComplaintType() {
+        return complaintType;
+    }
+
+    public void setComplaintType(Integer complaintType) {
+        this.complaintType = complaintType;
+    }
+
+    public Integer getHiddenType() {
+        return hiddenType;
+    }
+
+    public void setHiddenType(Integer hiddenType) {
+        this.hiddenType = hiddenType;
+    }
+
+    public Integer getRefundType() {
+        return refundType;
+    }
+
+    public void setRefundType(Integer refundType) {
+        this.refundType = refundType;
+    }
+
+    public String getCusttype() {
+        return custtype;
+    }
+
+    public void setCusttype(String custtype) {
+        this.custtype = custtype;
+    }
+
+    public String getChildtype() {
+        return childtype;
+    }
+
+    public void setChildtype(String childtype) {
+        this.childtype = childtype;
+    }
+
+    public Double getTurnovermoney() {
+        return turnovermoney;
+    }
+
+    public void setTurnovermoney(Double turnovermoney) {
+        this.turnovermoney = turnovermoney;
+    }
 }

@@ -97,6 +97,16 @@ public class ComplaintVo {
      *  TeamID团队id
      */
     private Integer teamid;
+    //判责状态
+    private Integer result;
+
+    public Integer getResult() {
+        return result;
+    }
+
+    public void setResult(Integer result) {
+        this.result = result;
+    }
 
     public Integer getTechnologyrecruitmentid() {
         return technologyrecruitmentid;

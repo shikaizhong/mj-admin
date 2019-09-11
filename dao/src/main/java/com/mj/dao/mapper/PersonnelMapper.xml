@@ -392,6 +392,9 @@
     <result column="PersonnelID" jdbcType="INTEGER" property="personnelid"/>
     <result column="pname" jdbcType="VARCHAR" property="pname" />
     <result column="pteamname" jdbcType="VARCHAR" property="pteamname" />
+
+    <result column="ServerDeadline" jdbcType="VARCHAR" property="serverdeadline" />
+    <result column="ServerDeadlineEnd" jdbcType="VARCHAR" property="serverdeadlineend" />
   </resultMap>
 
   <!--退款字段-->
@@ -471,6 +474,9 @@
       cu.WangWangNum =#{wangwangnum,jdbcType=VARCHAR}
       <if test="TScustomer != null">
         AND cu.TScustomer = #{TScustomer,jdbcType=VARCHAR}
+      </if>
+      <if test="keyword != null and keyword != ''">
+        AND (cu.WangWangNum LIKE CONCAT('%', #{keyword}, '%'))
       </if>
       <if test="TechnologyRecruitmentID != -1">
         AND cu.TechnologyRecruitmentID =#{TechnologyRecruitmentID,jdbcType=INTEGER}

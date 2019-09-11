@@ -2,12 +2,16 @@ package com.mj.admin.controller;
 
 import com.mj.admin.service.ResponsibilityService;
 import com.mj.common.result.RestResult;
+import com.mj.dao.entity.ComplaintLevel;
 import com.mj.dao.entity.Files;
 import com.mj.dao.entity.ResponsibilityWithBLOBs;
 import com.mj.dao.vo.PageRequest;
 import com.mj.dao.vo.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.text.ParseException;
 import java.util.Map;
@@ -18,7 +22,7 @@ public class ResponsibilityController {
     @Autowired
     private ResponsibilityService responsibilityService;
     //查询
-    @RequestMapping("/list")
+    @RequestMapping("/listAll")
     public RestResult list (@RequestBody Map map) throws Exception {
         return responsibilityService.selectResponsiblity(map);
     }
@@ -44,12 +48,23 @@ public class ResponsibilityController {
         Integer type = Integer.valueOf(String.valueOf(params.get("type")));
         if (type ==2){
             return responsibilityService.selectInfoByPkId(params);
-
         }else if (type ==1) {
             return responsibilityService.selectByHId(params);
         }else {
             return responsibilityService.selectById(params);
         }
+    }
+
+
+    //查询所有
+    @RequestMapping("/list")
+    public RestResult listAll (@RequestBody Map map) throws Exception {
+        return responsibilityService.selectAll(map);
+    }
+    //修改客诉类别
+    @RequestMapping(value = "/updataLevel",method = RequestMethod.POST)
+    public RestResult updataLevel(@RequestBody ComplaintLevel complaintLevel){
+        return responsibilityService.updataLevel(complaintLevel);
     }
 }
 

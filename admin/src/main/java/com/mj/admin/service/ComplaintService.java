@@ -6,6 +6,7 @@ import com.mj.dao.entity.Files;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
@@ -34,4 +35,8 @@ public interface ComplaintService {
     RestResult addFile(Files files);
     //查看用户是否存在
     RestResult exist(Complaint complaint);
+
+
+    //通过wangwangnum查询出所有记录
+    RestResult selectAllByWangWangNum(Map params) throws ParseException;
 }

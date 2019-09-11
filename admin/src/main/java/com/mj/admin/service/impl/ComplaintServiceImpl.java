@@ -15,6 +15,8 @@ import com.mj.dao.entity.Files;
 import com.mj.dao.repository.*;
 import com.mj.dao.vo.ComplaintVo;
 import com.mj.dao.vo.Complaints;
+import com.mj.dao.vo.ResponsibilityVo;
+import com.mj.dao.vo.SQLServerVo;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +30,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Service
@@ -52,11 +56,13 @@ public class ComplaintServiceImpl implements ComplaintService {
     @DataSource(value = "druid")
     @Override
     public RestResult selectComplaint(Map params) throws Exception {
+        //格式化时间
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
         Integer pageNum = Integer.valueOf(String.valueOf(params.get("pageNum")));
         Integer pagesize = Integer.valueOf(String.valueOf(params.get("pagesize")));
         String keyword = String.valueOf(params.get("keyword"));
-        String startTime = String.valueOf(params.get("startTime"));
-        String endTime = String.valueOf(params.get("endTime"));
         String status = String.valueOf(params.get("status"));
         String channel = String.valueOf(params.get("channel"));
         String frequency = String.valueOf(params.get("frequency"));
@@ -87,12 +93,42 @@ public class ComplaintServiceImpl implements ComplaintService {
         params.put("pageNum",pageNum);
         params.put("pageSize",pagesize);
         params.put("keyword",keyword);
-        if (Strings.isEmpty(startTime)){
-            params.put("startTime",startTime);
+
+        //时间区间的判断，若前端没有值传输，则为：[, ]
+        String a = "[, ]";
+        if(!String.valueOf(params.get("dateTime")).equals(a)){
+            //获取前端传到后端的时间，并用字符串接受，格式为：[yyyy-MM-dd'T'HH:mm:ss.SSS'Z', yyyy-MM-dd'T'HH:mm:ss.SSS'Z']
+            String dateTime = String.valueOf(params.get("dateTime"));
+            //获取开始的值
+            int index1 = dateTime.indexOf('[');
+            //获取字符串之间的逗号所在的位置
+            int index2 = dateTime.indexOf(',');
+            //获取字符串之间的空格所在的位置
+            int index3 = dateTime.indexOf(' ');
+            //获取最后的值
+            int index4 = dateTime.indexOf(']');
+            //截断字符串，获取开始时间的值
+            String startTime = dateTime.substring(index1+1,index2);
+            //截断字符串，获取结束时间的值
+            String endTime = dateTime.substring(index3+1,index4);
+            //将开始时间转化为Date类型
+            Date date1 = sdf1.parse(startTime);
+            calendar.setTime(date1);
+            calendar.add(Calendar.HOUR, 8);// 24小时制
+            date1 = calendar.getTime();
+            //将结束时间转化为Date类型
+            Date date2 = sdf1.parse(endTime);
+            calendar.setTime(date2);
+            calendar.add(Calendar.HOUR, 32);// 24小时制
+            date2 = calendar.getTime();
+            //将时间传输给Map集合
+            params.put("startTime", date1);
+            params.put("endTime", date2);
+        }else{
+            params.put("startTime", null);
+            params.put("endTime", null);
         }
-        if (Strings.isEmpty(endTime)) {
-            params.put("endTime", endTime);
-        }
+
         if (Strings.isEmpty(TScustomer)){
 //            Integer ts = Integer.parseInt(tscustomers);
             params.put("TScustomer",TScustomer);
@@ -467,5 +503,160 @@ public class ComplaintServiceImpl implements ComplaintService {
         }
 
         return new RestResultBuilder().setCode(0).setMsg("查询成功").setData(complaint1).build();
+    }
+
+
+
+    //通过wangwangnum查询所有记录
+
+    @Override
+    public RestResult selectAllByWangWangNum(Map params) throws ParseException {
+        String wangwangNum = String.valueOf(params.get("wangwangnum"));
+        String PersonnelID = String.valueOf(String.valueOf(params.get("PersonnelID")));
+        params.put("wangwangnum",wangwangNum);
+        if(PersonnelID == "null"){
+            params.put("PersonnelID",-1);
+        }
+        //投诉数据
+        List<ResponsibilityVo> list = complaintMapper.selelctComplaintByWangWangNum(params);
+        //隐患数据
+        List<ResponsibilityVo> list1 = complaintMapper.selectHiddenByWangWangNum(params);
+        //退款数据
+        List<ResponsibilityVo> list2 = complaintMapper.selectRefundByWangWangNum(params);
+        //存放投诉数据
+        List<ResponsibilityVo> result = new ArrayList<ResponsibilityVo>();
+        //循环拿数据
+        for (ResponsibilityVo vo : list) {
+            String wangwangnum = vo.getWangwangnum();
+            params.put("wangwangnum", wangwangnum);
+            ResponsibilityVo responsibilityVo = new ResponsibilityVo();
+            ResponsibilityVo responsibilityVos = personnelService.selectResponsibilityList(params);
+            //取出mysql数据库数据
+            responsibilityVo.setBasic(vo.getBasic());
+            responsibilityVo.setChannel(vo.getChannel());
+            responsibilityVo.setComplaintId(vo.getComplaintId());
+            responsibilityVo.setComplaintName(vo.getComplaintName());
+            responsibilityVo.setCreateTime(vo.getComplaintdate());
+            responsibilityVo.setDeal(vo.getDeal());
+            responsibilityVo.setGrade(vo.getGrade());
+            responsibilityVo.setFrequency(vo.getFrequency());
+            if (vo.getLevel() != null) {
+                responsibilityVo.setLevel(vo.getLevel());
+            }
+            responsibilityVo.setSonLevel(vo.getSonLevel());
+            responsibilityVo.setParentName(vo.getParentName());
+            responsibilityVo.setParentId(vo.getParentId());
+            responsibilityVo.setPkId(vo.getPkId());
+            //责任人
+            responsibilityVo.setResponsibilityer(vo.getResponsibilityer());
+            //判责人员
+            responsibilityVo.setResponsibilityor(vo.getResponsibilityor());
+            responsibilityVo.setResult(vo.getResult());
+            responsibilityVo.setSummary(vo.getSummary());
+            responsibilityVo.setType(vo.getComplaintType());
+            responsibilityVo.setWangwangnum(vo.getWangwangnum());
+            if (responsibilityVos != null) {
+                responsibilityVo.setPersonnelid(responsibilityVos.getPersonnelid());
+                responsibilityVo.setPname(responsibilityVos.getPname());
+                responsibilityVo.setPteamname(responsibilityVos.getPteamname());
+                responsibilityVo.setTscustomer(responsibilityVos.getTscustomer());
+                responsibilityVo.setTename(responsibilityVos.getTename());
+                responsibilityVo.setTeamname(responsibilityVos.getTeamname());
+                responsibilityVo.setShopptype(responsibilityVos.getShopptype());
+                responsibilityVo.setServerdeadline(responsibilityVos.getServerdeadline());
+            }
+            result.add(responsibilityVo);
+        }
+        if (!list1.isEmpty()) {
+            for (ResponsibilityVo listHidden : list1) {
+                String wangwangnum = listHidden.getWangwangnum();
+                params.put("wangwangnum", wangwangnum);
+                List<SQLServerVo> sqlServerVos = personnelService.selectByDatebase(params);
+                ResponsibilityVo responsibilityVo = new ResponsibilityVo();
+                responsibilityVo.setWangwangnum(listHidden.getWangwangnum());
+                responsibilityVo.setHiddenContent(listHidden.getHiddenContent());
+                responsibilityVo.setCreateTime(listHidden.getHiddenDate());
+                responsibilityVo.setResult(listHidden.getResult());
+                responsibilityVo.setRemark(listHidden.getRemark());
+                responsibilityVo.setFrequency(listHidden.getFrequency());
+                responsibilityVo.setPkId(listHidden.getPkId());
+                if (responsibilityVo.getLevel() != null) {
+                    responsibilityVo.setLevel(responsibilityVo.getLevel());
+                }
+                responsibilityVo.setSonLevel(listHidden.getSonLevel());
+                responsibilityVo.setResponsibilityer(listHidden.getResponsibilityer());
+                responsibilityVo.setResponsibilityor(listHidden.getResponsibilityor());
+                responsibilityVo.setSummary(listHidden.getSummary());
+                responsibilityVo.setBasic(listHidden.getBasic());
+                responsibilityVo.setDeal(listHidden.getDeal());
+                responsibilityVo.setComplaintId(listHidden.getComplaintId());
+                responsibilityVo.setType(listHidden.getHiddenType());
+                responsibilityVo.setComplaintName(listHidden.getComplaintName());
+                responsibilityVo.setParentName(listHidden.getParentName());
+                responsibilityVo.setExternalCause(listHidden.getExternalCause());
+                responsibilityVo.setGrade(listHidden.getGrade());
+                if (sqlServerVos != null) {
+                    for (SQLServerVo sqlServerVo : sqlServerVos) {
+                        responsibilityVo.setCusttype(sqlServerVo.getCusttype());
+                        responsibilityVo.setChildtype(sqlServerVo.getChildtype());
+                        responsibilityVo.setPname(sqlServerVo.getUsername2());
+                        responsibilityVo.setTename(sqlServerVo.getUsername1());
+                        responsibilityVo.setTeamname(sqlServerVo.getTeamname());
+                        responsibilityVo.setShopptype(sqlServerVo.getShopptype());
+                    }
+                }
+                result.add(responsibilityVo);
+            }
+        }
+        if (!list2.isEmpty()){
+            for (ResponsibilityVo listRefund : list2){
+                String wangwangnum = listRefund.getWangwangnum();
+                params.put("wangwangnum", wangwangnum);
+                List<SQLServerVo> sqlServerVos = personnelService.selectByDatebase(params);
+                ResponsibilityVo responsibilityVo = new ResponsibilityVo();
+                responsibilityVo.setWangwangnum(listRefund.getWangwangnum());
+                responsibilityVo.setRemark(listRefund.getRemark());
+                responsibilityVo.setRefundCause(listRefund.getRefundCause());
+                responsibilityVo.setRefundChannel(listRefund.getRefundChannel());
+                responsibilityVo.setCreateTime(listRefund.getRefundDate());
+                responsibilityVo.setRemark(listRefund.getRemark());
+                responsibilityVo.setRefundAmount(listRefund.getRefundAmount());
+                responsibilityVo.setPkId(listRefund.getPkId());
+
+                if (responsibilityVo.getLevel() != null) {
+                    responsibilityVo.setLevel(responsibilityVo.getLevel());
+                }
+                responsibilityVo.setResult(listRefund.getResult());
+                responsibilityVo.setDeadline(listRefund.getDeadline());
+                responsibilityVo.setSonLevel(listRefund.getSonLevel());
+                responsibilityVo.setResponsibilityer(listRefund.getResponsibilityer());
+                responsibilityVo.setResponsibilityor(listRefund.getResponsibilityor());
+                responsibilityVo.setSummary(listRefund.getSummary());
+                responsibilityVo.setBasic(listRefund.getBasic());
+                responsibilityVo.setDeal(listRefund.getDeal());
+                responsibilityVo.setComplaintId(listRefund.getComplaintId());
+                responsibilityVo.setType(listRefund.getRefundType());
+                responsibilityVo.setComplaintName(listRefund.getComplaintName());
+                responsibilityVo.setParentName(listRefund.getParentName());
+                responsibilityVo.setExternalCause(listRefund.getExternalCause());
+                responsibilityVo.setGrade(listRefund.getGrade());
+                if (sqlServerVos != null) {
+                    for(SQLServerVo sqlServerVo : sqlServerVos) {
+                        responsibilityVo.setCusttype(sqlServerVo.getCusttype());
+                        responsibilityVo.setChildtype(sqlServerVo.getChildtype());
+                        responsibilityVo.setPname(sqlServerVo.getUsername2());
+                        responsibilityVo.setTename(sqlServerVo.getUsername1());
+                        responsibilityVo.setTeamname(sqlServerVo.getTeamname());
+                        responsibilityVo.setTurnovermoney(sqlServerVo.getTurnovermoney());
+                        responsibilityVo.setShopptype(sqlServerVo.getShopptype());
+                        responsibilityVo.setDeadline(sqlServerVo.getDeadline());
+                    }
+                }
+                result.add(responsibilityVo);
+            }
+        }
+//        Map maps = new HashMap();
+//        maps.put("list", result);
+        return new RestResultBuilder().setCode(0).setMsg("请求成功").setData(result).build();
     }
 }

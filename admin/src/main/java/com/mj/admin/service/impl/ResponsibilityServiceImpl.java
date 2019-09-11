@@ -34,54 +34,89 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
     private RefundMapper refundMapper;
     @Autowired
     private HiddenTroubleMapper hiddenTroubleMapper;
-    //查询搜索
+    @Autowired
+    private ComplaintLevelMapper complaintLevelMapper;
+    private Map params;
+
+    //查询搜索弃用
     @Override
     public RestResult selectResponsiblity(Map params) throws Exception {
+        //格式化时间
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
         Integer pageNum = Integer.valueOf(String.valueOf(params.get("pageNum")));
         Integer pageSize = Integer.valueOf(String.valueOf(params.get("pageSize")));
         Integer typess = Integer.valueOf(String.valueOf(params.get("type")));
         String PersonnelID = String.valueOf(params.get("PersonnelID"));
         String keyword = String.valueOf(params.get("keyword"));
-        if (PersonnelID =="null"){
-            params.put("PersonnelID",-1);
+        //时间区间的判断，若前端没有值传输，则为：[, ]
+        String a = "[, ]";
+        if(!String.valueOf(params.get("dateTime")).equals(a)){
+            //获取前端传到后端的时间，并用字符串接受，格式为：[yyyy-MM-dd'T'HH:mm:ss.SSS'Z', yyyy-MM-dd'T'HH:mm:ss.SSS'Z']
+            String dateTime = String.valueOf(params.get("dateTime"));
+            //获取开始的值
+            int index1 = dateTime.indexOf('[');
+            //获取字符串之间的逗号所在的位置
+            int index2 = dateTime.indexOf(',');
+            //获取字符串之间的空格所在的位置
+            int index3 = dateTime.indexOf(' ');
+            //获取最后的值
+            int index4 = dateTime.indexOf(']');
+            //截断字符串，获取开始时间的值
+            String startTime = dateTime.substring(index1+1,index2);
+            //截断字符串，获取结束时间的值
+            String endTime = dateTime.substring(index3+1,index4);
+            //将开始时间转化为Date类型
+            Date date1 = sdf1.parse(startTime);
+            calendar.setTime(date1);
+            calendar.add(Calendar.HOUR, 8);// 24小时制
+            date1 = calendar.getTime();
+            //将结束时间转化为Date类型
+            Date date2 = sdf1.parse(endTime);
+            calendar.setTime(date2);
+            calendar.add(Calendar.HOUR, 32);// 24小时制
+            date2 = calendar.getTime();
+            //将时间传输给Map集合
+            params.put("startTime", date1);
+            params.put("endTime", date2);
+        }else{
+            params.put("startTime", null);
+            params.put("endTime", null);
+        }
+        if (PersonnelID == "null") {
+            params.put("PersonnelID", -1);
         }
         String TeamName = String.valueOf(params.get("TeamName"));
-        if (TeamName ==""){
-            params.put("TeamName",null);
+        if (TeamName == "") {
+            params.put("TeamName", null);
         }
         String results = String.valueOf(params.get("result"));
-        if (results =="null"){
-            params.put("result",-1);
+        if (results == "null") {
+            params.put("result", -1);
         }
         String grade = String.valueOf(params.get("grade"));
-        if(grade ==""){
-            params.put("grade",null);
+        if (grade == "") {
+            params.put("grade", null);
         }
-        if (pageSize>=10){
+        if (pageSize >= 10) {
             pageSize = 10;
-        }if (pageNum == 1){
-            pageNum = 0;
-        }else {
-            pageNum=(pageNum-1)*pageSize;
         }
-        params.put("pageNum",pageNum);
-        params.put("pageSize",pageSize);
-        params.put("type",typess);
-        params.put("keyword",keyword);
-//        List<ResponsibilityVo> list = new ArrayList<ResponsibilityVo>();
-//        if (typess ==1){
-//            list = responsibilityMapper.selectHiddenTrouble(params);
-//        }else if (typess == 2){
-//            list = responsibilityMapper.selectRefund(params);
-//        }else {
-//            list = responsibilityMapper.selectResponsiblityList(params);
-//        }
+        if (pageNum == 1) {
+            pageNum = 0;
+        } else {
+            pageNum = (pageNum - 1) * pageSize;
+        }
+        params.put("pageNum", pageNum);
+        params.put("pageSize", pageSize);
+        params.put("type", typess);
+        params.put("keyword", keyword);
         List<ResponsibilityVo> list = responsibilityMapper.selectResponsiblity(params);
         List<ResponsibilityVo> result = new ArrayList<ResponsibilityVo>();
         //循环拿数据
-        for(ResponsibilityVo vo:list){
+        for (ResponsibilityVo vo : list) {
             String wangwangnum = vo.getWangwangnum();
-            params.put("wangwangnum",wangwangnum);
+            params.put("wangwangnum", wangwangnum);
             ResponsibilityVo responsibilityVo = new ResponsibilityVo();
             ResponsibilityVo responsibilityVos = personnelService.selectResponsibilityList(params);
             //取出mysql数据库数据
@@ -93,7 +128,7 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
             responsibilityVo.setCreateTime(vo.getCreateTime());
             responsibilityVo.setDeal(vo.getDeal());
             responsibilityVo.setGrade(vo.getGrade());
-            if (vo.getLevel() != null){
+            if (vo.getLevel() != null) {
                 responsibilityVo.setLevel(vo.getLevel());
             }
             responsibilityVo.setSonLevel(vo.getSonLevel());
@@ -108,7 +143,7 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
             responsibilityVo.setSummary(vo.getSummary());
             responsibilityVo.setType(vo.getType());
             responsibilityVo.setWangwangnum(vo.getWangwangnum());
-            if (responsibilityVos != null){
+            if (responsibilityVos != null) {
                 responsibilityVo.setPersonnelid(responsibilityVos.getPersonnelid());
                 responsibilityVo.setPname(responsibilityVos.getPname());
                 responsibilityVo.setPteamname(responsibilityVos.getPteamname());
@@ -123,42 +158,45 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
         String types = String.valueOf(params.get("type"));
         Integer type = Integer.parseInt(types);
         Integer total = 0;
-        if (type == 0){
+        if (type == 0) {
             total = responsibilityMapper.selectComplaintCount(params);
         }
         Map map = new HashMap();
-        map.put("list",result);
-        map.put("total",total);
-        return  new RestResultBuilder().setCode(0).setMsg("请求成功").setData(map).build();
+        map.put("list", result);
+        map.put("total", total);
+        return new RestResultBuilder().setCode(0).setMsg("请求成功").setData(map).build();
     }
+
     //使用分页插件分页
     @Override
     public PageResult pageHelper(PageRequest pageRequest) throws Exception {
-        return PageUtils.getPageResult(pageRequest,getPageInfo(pageRequest));
+        return PageUtils.getPageResult(pageRequest, getPageInfo(pageRequest));
     }
+
     private PageInfo<Responsibility> getPageInfo(PageRequest pageRequest) throws Exception {
         int pageNum = pageRequest.getPageNum();
         int pageSize = pageRequest.getPageSize();
         PageHelper.startPage(pageNum, pageSize);
         List<Responsibility> responsibilities = responsibilityMapper.page();
-        for(Responsibility p:responsibilities){
+        for (Responsibility p : responsibilities) {
             System.out.println(p.getType());
             System.out.println("进来哦弟弟");
         }
         return new PageInfo<Responsibility>(responsibilities);
     }
+
     @Transactional
     @Override
     //修改判责信息
-    public RestResult updataResponsiblity(ResponsibilityWithBLOBs responsibilityWithBLOBs) throws ParseException{
+    public RestResult updataResponsiblity(ResponsibilityWithBLOBs responsibilityWithBLOBs) throws ParseException {
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
         SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         ResponsibilityWithBLOBs responsibilityWithBLOBs1 = responsibilityMapper.selectByComplaintId(responsibilityWithBLOBs.getComplaintId());
 //        System.out.println("传入的时间为"+responsibilityWithBLOBs.getCreateTime());
         //如果实体里面有数据则是修改
-        if (responsibilityWithBLOBs1 !=null){
+        if (responsibilityWithBLOBs1 != null) {
             //如果是无责或者待定的状态产生联动
-            if (responsibilityWithBLOBs.getResult()==1 || responsibilityWithBLOBs.getResult() == 2){
+            if (responsibilityWithBLOBs.getResult() == 1 || responsibilityWithBLOBs.getResult() == 2) {
                 responsibilityWithBLOBs1.setResult(responsibilityWithBLOBs.getResult());
                 responsibilityWithBLOBs1.setLevel(0);
                 responsibilityWithBLOBs1.setSonLevel(0);
@@ -201,7 +239,7 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
 
 //            responsibilityWithBLOBs1.setCreateTime(DateUtil.getHourAfter(responsibilityWithBLOBs.getCreateTime(),8));
                 responsibilityMapper.updateByPrimaryKeySelective(responsibilityWithBLOBs1);
-            }else {
+            } else {
                 responsibilityWithBLOBs1.setResult(responsibilityWithBLOBs.getResult());
                 responsibilityWithBLOBs1.setResponsibilityer(responsibilityWithBLOBs.getResponsibilityer());
                 responsibilityWithBLOBs1.setGrade(responsibilityWithBLOBs.getGrade());
@@ -249,7 +287,7 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
 
         }
         //如果实体里面没有数据则是增加
-        if (responsibilityWithBLOBs1 ==null){
+        if (responsibilityWithBLOBs1 == null) {
             ResponsibilityWithBLOBs responsibilityWithBLOBs2 = new ResponsibilityWithBLOBs();
             responsibilityWithBLOBs2.setBasic(responsibilityWithBLOBs.getBasic());
             responsibilityWithBLOBs2.setDeal(responsibilityWithBLOBs.getDeal());
@@ -267,6 +305,7 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
         }
         return new RestResultBuilder<>().success("操作成功");
     }
+
     //添加文件
     @Transactional
     @Override
@@ -285,13 +324,13 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
     public RestResult selectById(Map params) {
         List<ComplaintVo> list = complaintMapper.selectById(params);
         List<ComplaintVo> result = new ArrayList<>();
-        for (ComplaintVo vo:list){
+        for (ComplaintVo vo : list) {
             String wangwangnum = vo.getWangwangnum();
-            params.put("wangwangnum",wangwangnum);
+            params.put("wangwangnum", wangwangnum);
             ComplaintVo complaintVos = personnelService.selectByPkId(params);
             ComplaintVo complaintVo = new ComplaintVo();
             complaintVo.setScenerestoration(vo.getScenerestoration());
-            complaintVo.setStatus(vo.getStatus());
+            complaintVo.setResult(vo.getResult());
             complaintVo.setCreateTime(vo.getCreateTime());
             complaintVo.setId(vo.getId());
             complaintVo.setChannel(vo.getChannel());
@@ -305,7 +344,7 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
             complaintVo.setFrequency(vo.getFrequency());
             complaintVo.setContent(vo.getContent());
             complaintVo.setWangwangnum(vo.getWangwangnum());
-            if (complaintVos !=null) {
+            if (complaintVos != null) {
                 complaintVo.setTechnologyrecruitmentid(complaintVos.getTechnologyrecruitmentid());
                 complaintVo.setShopptype(complaintVos.getShopptype());
                 complaintVo.setPersonnelid(complaintVos.getPersonnelid());
@@ -319,7 +358,7 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
             }
         }
         Map map = new HashMap();
-        map.put("list",result);
+        map.put("list", result);
         return new RestResultBuilder().setCode(0).setMsg("请求成功").setData(map).build();
     }
 
@@ -328,7 +367,7 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
     public RestResult selectInfoByPkId(Map params) throws ParseException {
         List<Refund> list = refundMapper.selectInfoByPkId(params);
         List<RefundVo> result = new ArrayList<>();
-        for (Refund vo:list) {
+        for (Refund vo : list) {
             RefundVo refundVo = new RefundVo();
             String wangwangnum = vo.getWangwangnum();
             params.put("wangwangnum", wangwangnum);
@@ -341,8 +380,7 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
             refundVo.setIsDelete(vo.getIsDelete());
             refundVo.setPkId(vo.getPkId());
             refundVo.setRefundAmount(vo.getRefundAmount());
-            refundVo.setLevel(vo.getLevel());
-            refundVo.setStatus(vo.getStatus());
+            refundVo.setResult(vo.getResult());
             if (!sqlServerVo.isEmpty()) {
                 for (SQLServerVo sqlList : sqlServerVo) {
                     refundVo.setDeadline(sqlList.getDeadline());
@@ -356,8 +394,8 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
             }
             result.add(refundVo);
         }
-            Map map = new HashMap();
-            map.put("list",result);
+        Map map = new HashMap();
+        map.put("list", result);
         return new RestResultBuilder().setCode(0).setMsg("请求成功").setData(map).build();
     }
 
@@ -367,7 +405,7 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
     public RestResult selectByHId(Map params) throws ParseException {
         List<HiddenTrouble> hiddenTroubles = hiddenTroubleMapper.selectById(params);
         List<HiddenTroubleVo> result = new ArrayList();
-        if(!hiddenTroubles.isEmpty()) {
+        if (!hiddenTroubles.isEmpty()) {
             for (HiddenTrouble listHidden : hiddenTroubles) {
                 HiddenTroubleVo hiddenTroubleVo = new HiddenTroubleVo();
                 String wangwangnum = listHidden.getWangwangnum();
@@ -376,13 +414,12 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
                 hiddenTroubleVo.setHiddenDate(listHidden.getHiddenDate());
                 hiddenTroubleVo.setHiddenContent(listHidden.getHiddenContent());
                 hiddenTroubleVo.setIsDelete(listHidden.getIsDelete());
-                hiddenTroubleVo.setLevel(listHidden.getLevel());
                 hiddenTroubleVo.setPkId(listHidden.getPkId());
                 hiddenTroubleVo.setRemark(listHidden.getRemark());
-                hiddenTroubleVo.setStatus(listHidden.getStatus());
+                hiddenTroubleVo.setResult(listHidden.getResult());
                 params.put("wangwangnum", wangwangnum);
                 List<SQLServerVo> sqlServerVo = personnelService.selectByDatebase(params);
-                if(!sqlServerVo.isEmpty()) {
+                if (!sqlServerVo.isEmpty()) {
                     for (SQLServerVo listVo : sqlServerVo) {
                         hiddenTroubleVo.setCusttype(listVo.getCusttype());
                         hiddenTroubleVo.setChildtype(listVo.getChildtype());
@@ -396,7 +433,246 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
             }
         }
         Map map = new HashMap();
-        map.put("list",result);
+        map.put("list", result);
         return new RestResultBuilder().setCode(0).setMsg("请求成功").setData(map).build();
+    }
+
+
+    //查询所有信息
+
+    @Override
+    public RestResult selectAll(Map params) throws ParseException {
+        Integer pageNum = Integer.valueOf(String.valueOf(params.get("pageNum")));
+        Integer pageSize = Integer.valueOf(String.valueOf(params.get("pageSize")));
+        String PersonnelID = String.valueOf(params.get("PersonnelID"));
+        String keyword = String.valueOf(params.get("keyword"));
+        String channel = String.valueOf(params.get("channel"));
+        String frequency = String.valueOf(params.get("frequency"));
+        //格式化时间
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
+        //时间区间的判断，若前端没有值传输，则为：[, ]
+        String a = "[, ]";
+        if(!String.valueOf(params.get("dateTime")).equals(a)){
+            //获取前端传到后端的时间，并用字符串接受，格式为：[yyyy-MM-dd'T'HH:mm:ss.SSS'Z', yyyy-MM-dd'T'HH:mm:ss.SSS'Z']
+            String dateTime = String.valueOf(params.get("dateTime"));
+            //获取开始的值
+            int index1 = dateTime.indexOf('[');
+            //获取字符串之间的逗号所在的位置
+            int index2 = dateTime.indexOf(',');
+            //获取字符串之间的空格所在的位置
+            int index3 = dateTime.indexOf(' ');
+            //获取最后的值
+            int index4 = dateTime.indexOf(']');
+            //截断字符串，获取开始时间的值
+            String startTime = dateTime.substring(index1+1,index2);
+            //截断字符串，获取结束时间的值
+            String endTime = dateTime.substring(index3+1,index4);
+            //将开始时间转化为Date类型
+            Date date1 = sdf1.parse(startTime);
+            calendar.setTime(date1);
+            calendar.add(Calendar.HOUR, 8);// 24小时制
+            date1 = calendar.getTime();
+            //将结束时间转化为Date类型
+            Date date2 = sdf1.parse(endTime);
+            calendar.setTime(date2);
+            calendar.add(Calendar.HOUR, 32);// 24小时制
+            date2 = calendar.getTime();
+            //将时间传输给Map集合
+            params.put("startTime", date1);
+            params.put("endTime", date2);
+        }else{
+            params.put("startTime", null);
+            params.put("endTime", null);
+        }
+        if(channel == "null"){
+            params.put("channel",-1);
+        }
+        if (frequency =="null"){
+            params.put("frequency",-1);
+        }
+        if (PersonnelID == "null") {
+            params.put("PersonnelID", -1);
+        }
+        String TeamName = String.valueOf(params.get("TeamName"));
+        if (TeamName == "") {
+            params.put("TeamName", null);
+        }
+        String results = String.valueOf(params.get("result"));
+        if (results == "null") {
+            params.put("result", -1);
+        }
+        String grade = String.valueOf(params.get("grade"));
+        if (grade == "") {
+            params.put("grade", null);
+        }
+        if (pageSize >= 10) {
+            pageSize = 10;
+        }
+        if (pageNum == 1) {
+            pageNum = 0;
+        } else {
+            pageNum = (pageNum - 1) * pageSize;
+        }
+        params.put("pageNum", pageNum);
+        params.put("pageSize", pageSize);
+        params.put("keyword", keyword);
+        //投诉数据
+        List<ResponsibilityVo> list = responsibilityMapper.selectResponsiblityList(params);
+        //隐患数据
+        List<ResponsibilityVo> list1 = responsibilityMapper.selectHiddenTrouble(params);
+        //退款数据
+        List<ResponsibilityVo> list2 = responsibilityMapper.selectRefund(params);
+        //存放投诉数据
+        List<ResponsibilityVo> result = new ArrayList<ResponsibilityVo>();
+        //循环拿数据
+        for (ResponsibilityVo vo : list) {
+            String wangwangnum = vo.getWangwangnum();
+            params.put("wangwangnum", wangwangnum);
+            ResponsibilityVo responsibilityVo = new ResponsibilityVo();
+            ResponsibilityVo responsibilityVos = personnelService.selectResponsibilityList(params);
+            //取出mysql数据库数据
+            responsibilityVo.setBasic(vo.getBasic());
+            responsibilityVo.setChannel(vo.getChannel());
+            responsibilityVo.setComplaintdate(vo.getComplaintdate());
+            responsibilityVo.setComplaintId(vo.getComplaintId());
+            responsibilityVo.setComplaintName(vo.getComplaintName());
+            responsibilityVo.setCreateTime(vo.getCreateTime());
+            responsibilityVo.setDeal(vo.getDeal());
+            responsibilityVo.setGrade(vo.getGrade());
+            if (vo.getLevel() != null) {
+                responsibilityVo.setLevel(vo.getLevel());
+            }
+            responsibilityVo.setSonLevel(vo.getSonLevel());
+            responsibilityVo.setParentName(vo.getParentName());
+            responsibilityVo.setParentId(vo.getParentId());
+            responsibilityVo.setPkId(vo.getPkId());
+            //责任人
+            responsibilityVo.setResponsibilityer(vo.getResponsibilityer());
+            //判责人员
+            responsibilityVo.setResponsibilityor(vo.getResponsibilityor());
+            responsibilityVo.setResult(vo.getResult());
+            responsibilityVo.setSummary(vo.getSummary());
+            responsibilityVo.setType(vo.getComplaintType());
+            responsibilityVo.setWangwangnum(vo.getWangwangnum());
+            if (responsibilityVos != null) {
+                responsibilityVo.setPersonnelid(responsibilityVos.getPersonnelid());
+                responsibilityVo.setPname(responsibilityVos.getPname());
+                responsibilityVo.setPteamname(responsibilityVos.getPteamname());
+                responsibilityVo.setTscustomer(responsibilityVos.getTscustomer());
+                responsibilityVo.setTename(responsibilityVos.getTename());
+                responsibilityVo.setTeamname(responsibilityVos.getTeamname());
+                responsibilityVo.setShopptype(responsibilityVos.getShopptype());
+                responsibilityVo.setServerdeadline(responsibilityVos.getServerdeadline());
+            }
+            result.add(responsibilityVo);
+        }
+        if (!list1.isEmpty()) {
+            for (ResponsibilityVo listHidden : list1) {
+                String wangwangnum = listHidden.getWangwangnum();
+                params.put("wangwangnum", wangwangnum);
+                List<SQLServerVo> sqlServerVos = personnelService.selectByDatebase(params);
+                ResponsibilityVo responsibilityVo = new ResponsibilityVo();
+                responsibilityVo.setWangwangnum(listHidden.getWangwangnum());
+                responsibilityVo.setHiddenContent(listHidden.getHiddenContent());
+                responsibilityVo.setCreateTime(listHidden.getHiddenDate());
+                responsibilityVo.setResult(listHidden.getResult());
+                responsibilityVo.setRemark(listHidden.getRemark());
+                responsibilityVo.setFrequency(listHidden.getFrequency());
+                responsibilityVo.setPkId(listHidden.getPkId());
+                if (responsibilityVo.getLevel() != null) {
+                    responsibilityVo.setLevel(responsibilityVo.getLevel());
+                }
+                responsibilityVo.setSonLevel(listHidden.getSonLevel());
+                responsibilityVo.setResponsibilityer(listHidden.getResponsibilityer());
+                responsibilityVo.setResponsibilityor(listHidden.getResponsibilityor());
+                responsibilityVo.setSummary(listHidden.getSummary());
+                responsibilityVo.setBasic(listHidden.getBasic());
+                responsibilityVo.setDeal(listHidden.getDeal());
+                responsibilityVo.setComplaintId(listHidden.getComplaintId());
+                responsibilityVo.setType(listHidden.getHiddenType());
+                responsibilityVo.setComplaintName(listHidden.getComplaintName());
+                responsibilityVo.setParentName(listHidden.getParentName());
+                responsibilityVo.setExternalCause(listHidden.getExternalCause());
+                responsibilityVo.setGrade(listHidden.getGrade());
+                if (sqlServerVos != null) {
+                    for (SQLServerVo sqlServerVo : sqlServerVos) {
+                        responsibilityVo.setCusttype(sqlServerVo.getCusttype());
+                        responsibilityVo.setChildtype(sqlServerVo.getChildtype());
+                        responsibilityVo.setPname(sqlServerVo.getUsername2());
+                        responsibilityVo.setTename(sqlServerVo.getUsername1());
+                        responsibilityVo.setTeamname(sqlServerVo.getTeamname());
+                        responsibilityVo.setShopptype(sqlServerVo.getShopptype());
+                    }
+                }
+                result.add(responsibilityVo);
+            }
+        }
+        if (!list2.isEmpty()){
+            for (ResponsibilityVo listRefund : list2){
+                String wangwangnum = listRefund.getWangwangnum();
+                params.put("wangwangnum", wangwangnum);
+                List<SQLServerVo> sqlServerVos = personnelService.selectByDatebase(params);
+                ResponsibilityVo responsibilityVo = new ResponsibilityVo();
+                    responsibilityVo.setWangwangnum(listRefund.getWangwangnum());
+                    responsibilityVo.setRemark(listRefund.getRemark());
+                    responsibilityVo.setRefundCause(listRefund.getRefundCause());
+                    responsibilityVo.setRefundChannel(listRefund.getRefundChannel());
+                    responsibilityVo.setCreateTime(listRefund.getRefundDate());
+                    responsibilityVo.setRemark(listRefund.getRemark());
+                    responsibilityVo.setRefundAmount(listRefund.getRefundAmount());
+                    responsibilityVo.setPkId(listRefund.getPkId());
+
+                if (responsibilityVo.getLevel() != null) {
+                    responsibilityVo.setLevel(responsibilityVo.getLevel());
+                }
+                responsibilityVo.setResult(listRefund.getResult());
+                responsibilityVo.setDeadline(listRefund.getDeadline());
+                responsibilityVo.setSonLevel(listRefund.getSonLevel());
+                responsibilityVo.setResponsibilityer(listRefund.getResponsibilityer());
+                responsibilityVo.setResponsibilityor(listRefund.getResponsibilityor());
+                responsibilityVo.setSummary(listRefund.getSummary());
+                responsibilityVo.setBasic(listRefund.getBasic());
+                responsibilityVo.setDeal(listRefund.getDeal());
+                responsibilityVo.setComplaintId(listRefund.getComplaintId());
+                responsibilityVo.setType(listRefund.getRefundType());
+                responsibilityVo.setComplaintName(listRefund.getComplaintName());
+                responsibilityVo.setParentName(listRefund.getParentName());
+                responsibilityVo.setExternalCause(listRefund.getExternalCause());
+                responsibilityVo.setGrade(listRefund.getGrade());
+                if (sqlServerVos != null) {
+                    for(SQLServerVo sqlServerVo : sqlServerVos) {
+                        responsibilityVo.setCusttype(sqlServerVo.getCusttype());
+                        responsibilityVo.setChildtype(sqlServerVo.getChildtype());
+                        responsibilityVo.setPname(sqlServerVo.getUsername2());
+                        responsibilityVo.setTename(sqlServerVo.getUsername1());
+                        responsibilityVo.setTeamname(sqlServerVo.getTeamname());
+                        responsibilityVo.setShopptype(sqlServerVo.getShopptype());
+                        responsibilityVo.setDeadline(sqlServerVo.getDeadline());
+                    }
+                }
+                result.add(responsibilityVo);
+            }
+        }
+        Integer total1 = complaintMapper.selectComplaintCount(params);
+        Integer total2 = hiddenTroubleMapper.total(params);
+        Integer total3 = refundMapper.selectRefundCount(params);
+        Integer total = total1 + total2 + total3;
+        Map map = new HashMap();
+        map.put("list", result);
+        map.put("total", total);
+        return new RestResultBuilder().setCode(0).setMsg("请求成功").setData(map).build();
+    }
+
+    //修改客诉类别
+    @Override
+    public RestResult updataLevel(ComplaintLevel complaintLevel) {
+        ComplaintLevel complaintLevel1 = complaintLevelMapper.selectByPrimaryKey(complaintLevel.getPkId());
+        complaintLevel1.setParentId(complaintLevel.getParentId());
+        complaintLevel1.setPkId(complaintLevel.getPkId());
+        complaintLevel1.setExternalCause(complaintLevel.getExternalCause());
+        complaintLevelMapper.updateByPrimaryKeySelective(complaintLevel1);
+        return new RestResultBuilder<>().success("修改成功");
     }
 }

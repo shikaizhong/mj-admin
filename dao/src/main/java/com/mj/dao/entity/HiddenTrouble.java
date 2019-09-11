@@ -31,11 +31,6 @@ public class HiddenTrouble {
 //    private String scenarioReduction;
 
     /**
-     * 状态：0、待受理 1、处理中 2、待审核 3、已完结 status
-     */
-    private Integer status;
-
-    /**
      * 备注 remark
      */
     private String remark;
@@ -51,14 +46,11 @@ public class HiddenTrouble {
     private Integer isDelete;
 
     /**
-     * 投诉类别，对应判责表客诉类型 level
-     */
-    private Integer level;
-
-    /**
      * 隐患原因 hidden_content
      */
     private String hiddenContent;
+
+    private Integer result;
 
     /**
      * 主键，隐患表
@@ -128,26 +120,6 @@ public class HiddenTrouble {
 //    }
 
     /**
-     * 状态：0、待受理 1、处理中 2、待审核 3、已完结
-     *
-     * @return status 状态：0、待受理 1、处理中 2、待审核 3、已完结
-     * @author Administrator
-     */
-    public Integer getStatus() {
-        return status;
-    }
-
-    /**
-     * 状态：0、待受理 1、处理中 2、待审核 3、已完结
-     *
-     * @param status 状态：0、待受理 1、处理中 2、待审核 3、已完结
-     * @author Administrator
-     */
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    /**
      * 备注
      *
      * @return remark 备注
@@ -208,26 +180,6 @@ public class HiddenTrouble {
     }
 
     /**
-     * 投诉类别，对应判责表客诉类型
-     *
-     * @return level 投诉类别，对应判责表客诉类型
-     * @author Administrator
-     */
-    public Integer getLevel() {
-        return level;
-    }
-
-    /**
-     * 投诉类别，对应判责表客诉类型
-     *
-     * @param level 投诉类别，对应判责表客诉类型
-     * @author Administrator
-     */
-    public void setLevel(Integer level) {
-        this.level = level;
-    }
-
-    /**
      * 隐患原因
      *
      * @return hidden_content 隐患原因
@@ -255,6 +207,14 @@ public class HiddenTrouble {
         this.hDate = hDate;
     }
 
+    public Integer getResult() {
+        return result;
+    }
+
+    public void setResult(Integer result) {
+        this.result = result;
+    }
+
     /**
      * @mbg.generated 2019-08-20 15:42:25
      */
@@ -267,11 +227,10 @@ public class HiddenTrouble {
         sb.append(", pkId=").append(pkId);
         sb.append(", hiddenDate=").append(hiddenDate);
 //        sb.append(", scenarioReduction=").append(scenarioReduction);
-        sb.append(", status=").append(status);
+        sb.append(", result=").append(result);
         sb.append(", remark=").append(remark);
         sb.append(", frequency=").append(frequency);
         sb.append(", isDelete=").append(isDelete);
-        sb.append(", level=").append(level);
         sb.append(", hiddenContent=").append(hiddenContent);
         sb.append("]");
         return sb.toString();

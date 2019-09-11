@@ -245,13 +245,70 @@
     <result column="ID" jdbcType="INTEGER" property="id" />
     <result column="UserName" jdbcType="VARCHAR" property="tename" />
     <result column="UserName" jdbcType="VARCHAR" property="pname" />
-
+    <result column="result" jdbcType="INTEGER" property="result"/>
   </resultMap>
   <resultMap id="BaseResultMapS" type="com.mj.dao.vo.Complaints">
     <id column="level" jdbcType="INTEGER" property="level" />
     <result column="parent_name" jdbcType="VARCHAR" property="parentName"/>
     <result column="parent_id" jdbcType="INTEGER" property="parentId" />
     <result column="complaint_name" jdbcType="VARCHAR" property="complaintName"/>
+  </resultMap>
+
+  <resultMap id="BaseResultMapRVo" type="com.mj.dao.vo.ResponsibilityVo">
+    <id column="pk_id" jdbcType="INTEGER" property="pkId" />
+    <result column="level" jdbcType="INTEGER" property="level" />
+    <result column="son_level" jdbcType="INTEGER" property="sonLevel" />
+    <result column="result" jdbcType="INTEGER" property="result" />
+    <result column="responsibilityer" jdbcType="INTEGER" property="responsibilityer" />
+    <result column="grade" jdbcType="INTEGER" property="grade" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="responsibilityor" jdbcType="INTEGER" property="responsibilityor" />
+    <result column="complaint_id" jdbcType="INTEGER" property="complaintId" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="summary" jdbcType="LONGVARCHAR" property="summary" />
+    <result column="basic" jdbcType="LONGVARCHAR" property="basic" />
+    <result column="deal" jdbcType="LONGVARCHAR" property="deal" />
+
+    <result column="complaintDate" jdbcType="TIMESTAMP" property="complaintdate" />
+    <result column="channel" jdbcType="INTEGER" property="channel" />
+    <result column="WangWangNum" jdbcType="VARCHAR" property="wangwangnum" />
+
+    <result column="parent_id" jdbcType="INTEGER" property="parentId" />
+    <result column="complaint_name" jdbcType="VARCHAR" property="complaintName" />
+    <result column="parent_name" jdbcType="VARCHAR" property="parentName"/>
+
+    <result column="TScustomer" jdbcType="VARCHAR" property="tscustomer"/>
+    <result column="tename" jdbcType="VARCHAR" property="tename" />
+    <result column="TeamName" jdbcType="VARCHAR" property="teamname" />
+    <result column="ShoppType" jdbcType="VARCHAR" property="shopptype" />
+    <result column="ServerDeadline" jdbcType="VARCHAR" property="serverdeadline" />
+    <result column="PersonnelID" jdbcType="INTEGER" property="personnelid"/>
+    <result column="pname" jdbcType="VARCHAR" property="pname" />
+    <result column="pteamname" jdbcType="VARCHAR" property="pteamname" />
+
+    <result column="hidden_content" jdbcType="LONGVARCHAR" property="hiddenContent"/>
+    <result column="hidden_date" jdbcType="TIMESTAMP" property="hiddenDate"/>
+
+    <result column="remark" jdbcType="VARCHAR" property="remark"/>
+    <result column="frequency" jdbcType="INTEGER" property="frequency"/>
+
+    <result column="refund_date" jdbcType="TIMESTAMP" property="refundDate"/>
+    <result column="refund_channel" jdbcType="TINYINT"
+            property="refundChannel"/>
+    <result column="refund_amount" jdbcType="DECIMAL"
+            property="refundAmount"/>
+    <result column="refund_cause" jdbcType="VARCHAR"
+            property="refundCause"/>
+    <result column="external_cause" jdbcType="VARCHAR"
+            property="externalCause"/>
+
+    <result column="refund_type" jdbcType="INTEGER"
+            property="refundType"/>
+    <result column="hidden_type" jdbcType="INTEGER"
+            property="hiddenType"/>
+    <result column="complaint_type" jdbcType="INTEGER"
+            property="complaintType"/>
+    <result column="result" jdbcType="INTEGER" property="result"/>
   </resultMap>
 
   <!--查询分页加搜索不用了-->
@@ -325,8 +382,8 @@
       <if test="channel !=-1">
         and cc.`channel` = #{channel,jdbcType=INTEGER}
       </if>
-      <if test="startTime != '' and endTime !='' ">
-        and cc.complaintDate <![CDATA[>= ]]> #{startTime} and cc.complaintDate <![CDATA[<= ]]> #{endTime}
+      <if test="startTime != null and endTime !=null ">
+        and cc.complaintDate &gt;= #{startTime} and cc.complaintDate &lt; #{endTime}
       </if>
     </trim>
     order by cc.`complaintDate` DESC
@@ -342,8 +399,7 @@
 
   <!--查询反馈总数-->
   <select id="selectComplaintCount" parameterType="java.util.HashMap" resultType="java.lang.Integer">
-    select count(*)FROM(t_complaint cc LEFT JOIN t_customer cu ON cc.`WangWangNum` =  cu.`WangWangNum` )
-    LEFT JOIN t_customer_records cr ON cu.`WangWangNum` = cr.`Trader`
+    select count(*)FROM t_complaint cc
     <trim prefix="WHERE" prefixOverrides="AND|OR">
       cc.is_delete=0
       <if test="keyword != null and keyword != ''">
@@ -351,34 +407,17 @@
         <!--团队名称搜索-->
         <!--时间搜索-->
         OR cc.`complaintDate` LIKE CONCAT('%',#{keyword}, '%')))
-        <!--客诉类别搜索-->
       </if>
-      <if test="status != -1">
-        AND cc.status=#{status,jdbcType=TINYINT}
-      </if>
-      <if test="tscustomer !=-1">
-        AND cu.`TScustomer`=#{tscustomer,jdbcType=VARCHAR}
-      </if>
-      <if test="technologyRecruitmentid !=-1">
-        AND cu.`TechnologyRecruitmentID` =#{technologyRecruitmentid,jdbcType=INTEGER}
-      </if>
-      <if test="personnelid !=-1">
-        AND cr.`PersonnelID` = #{personnelid,jdbcType=INTEGER}
-      </if>
+      <!--按照投诉次数管理-->
       <if test="frequency !=-1">
         and cc.`frequency` > #{frequency,jdbcType=INTEGER}
       </if>
+      <!--按照投诉渠道搜索-->
       <if test="channel !=-1">
         and cc.`channel` = #{channel,jdbcType=INTEGER}
       </if>
-      <if test="teamId !=-1">
-        and cu.`TScustomer`= #{teamId,jdbcType=INTEGER}
-      </if>
-      <!--<if test="startTime != null and endTime !=null ">-->
-        <!--and cc.complaintDate <![CDATA[>= ]]> #{startTime} and cc.complaintDate <![CDATA[<= ]]> #{endTime}-->
-      <!--</if>-->
-      <if test="startTime != '' and endTime !='' ">
-        and cc.complaintDate <![CDATA[>= ]]> #{startTime} and cc.complaintDate <![CDATA[<= ]]> #{endTime}
+      <if test="startTime != null and endTime !=null ">
+        and cc.complaintDate &gt;= #{startTime} and cc.complaintDate &lt; #{endTime}
       </if>
     </trim>
   </select>
@@ -420,4 +459,29 @@
   UPDATE t_complaint cc SET
   cc.`sceneRestoration`= REPLACE (cc.`sceneRestoration`, cc.`sceneRestoration`= #{removeUrls,jdbcType=VARCHAR}, '');
 </update>
+
+  <!--通过wangwangnum查询投诉信息-->
+  <select id="selelctComplaintByWangWangNum" resultType="com.mj.dao.vo.ResponsibilityVo">
+    SELECT * FROM t_complaint cc LEFT JOIN t_responsibility rr
+    ON cc.`pk_id` = rr.`complaint_id`
+    LEFT JOIN t_complaint_level cl ON rr.`son_level` = cl.`pk_id`
+    WHERE cc.`WangWangNum` = #{wangwangnum,jdbcType=VARCHAR}
+    and  cc.is_delete=0
+  </select>
+  <!--通过wangwangnum查询隐患信息-->
+  <select id="selectHiddenByWangWangNum" resultType="com.mj.dao.vo.ResponsibilityVo">
+    SELECT *  FROM t_hidden_trouble ht LEFT JOIN t_responsibility rr
+      ON rr.`complaint_id` = ht.`pk_id`
+   LEFT JOIN t_complaint_level cl ON rr.`level` = cl.parent_id
+    WHERE ht.WangWangNum =#{wangwangnum,jdbcType=VARCHAR}
+      and  ht.is_delete=0
+  </select>
+  <!--通过wangwangnum查询退款信息-->
+  <select id="selectRefundByWangWangNum" resultType="com.mj.dao.vo.ResponsibilityVo">
+    SELECT *  FROM t_refund rf LEFT JOIN t_responsibility rr
+    ON rr.`complaint_id` = rf.`pk_id`
+    LEFT JOIN t_complaint_level cl ON rr.`level` = cl.parent_id
+    WHERE rf.WangWangNum =#{wangwangnum,jdbcType=VARCHAR}
+      and  rf.is_delete=0
+  </select>
 </mapper>

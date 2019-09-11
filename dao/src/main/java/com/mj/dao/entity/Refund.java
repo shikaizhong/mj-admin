@@ -47,24 +47,19 @@ public class Refund {
     private Long refundAmount;
 
     /**
-     * 状态：0、待受理 1、处理中 2、待审核 3、已完结 status
-     */
-    private Integer status;
-
-    /**
      * 删除：0、显示 1、删除 is_delete
      */
     private Integer isDelete;
 
     /**
-     * 判责 level
-     */
-    private Integer level;
-
-    /**
      * 退款原因 refund_cause
      */
     private String refundCause;
+
+    /**
+     * 判责结果:0:微责  1:无责  2:重责 3:中责 4:轻责 5:待定 result
+     */
+    private Integer result;
 
     /**
      * 主键
@@ -165,24 +160,6 @@ public class Refund {
     }
 
     /**
-     * 状态：0、待受理 1、处理中 2、待审核 3、已完结
-     * @author Administrator
-     * @return status 状态：0、待受理 1、处理中 2、待审核 3、已完结
-     */
-    public Integer getStatus() {
-        return status;
-    }
-
-    /**
-     * 状态：0、待受理 1、处理中 2、待审核 3、已完结
-     * @author Administrator
-     * @param status 状态：0、待受理 1、处理中 2、待审核 3、已完结
-     */
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    /**
      * 删除：0、显示 1、删除
      * @author Administrator
      * @return is_delete 删除：0、显示 1、删除
@@ -198,24 +175,6 @@ public class Refund {
      */
     public void setIsDelete(Integer isDelete) {
         this.isDelete = isDelete;
-    }
-
-    /**
-     * 判责
-     * @author Administrator
-     * @return level 判责
-     */
-    public Integer getLevel() {
-        return level;
-    }
-
-    /**
-     * 判责
-     * @author Administrator
-     * @param level 判责
-     */
-    public void setLevel(Integer level) {
-        this.level = level;
     }
 
     /**
@@ -252,6 +211,14 @@ public class Refund {
         this.hDate = hDate;
     }
 
+    public Integer getResult() {
+        return result;
+    }
+
+    public void setResult(Integer result) {
+        this.result = result;
+    }
+
     /**
      *
      * @mbg.generated 2019-08-08 14:15:51
@@ -267,9 +234,8 @@ public class Refund {
         sb.append(", refundChannel=").append(refundChannel);
         sb.append(", remark=").append(remark);
         sb.append(", refundAmount=").append(refundAmount);
-        sb.append(", status=").append(status);
+        sb.append(", result=").append(result);
         sb.append(", isDelete=").append(isDelete);
-        sb.append(", level=").append(level);
         sb.append(", refundCause=").append(refundCause);
         sb.append("]");
         return sb.toString();

@@ -24,6 +24,11 @@ public class RefundVo {
 //    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
     private Date refundDate;
 
+    /**
+     * 判责结果:0:微责  1:无责  2:重责 3:中责 4:轻责 5:待定 result
+     */
+    private Integer result;
+
 
     /**
      * 退款渠道：1、SEM在线订购 2、支付宝转账 3、网银转账 4、定制市场订购 5、现金 6、POS机 7、京东在线订购 8、微信支付 refund_channel
@@ -41,11 +46,6 @@ public class RefundVo {
     private Long refundAmount;
 
     /**
-     * 状态：0、待受理 1、处理中 2、待审核 3、已完结 status
-     */
-    private Integer status;
-
-    /**
      * 删除：0、显示 1、删除 is_delete
      */
     private Integer isDelete;
@@ -54,12 +54,6 @@ public class RefundVo {
      * 退款原因 refund_cause
      */
     private String refundCause;
-
-    /**
-     * 判责 level
-     *
-     */
-    private Integer level;
 
     /**
      *  CustType 客户类型 父 t_customer_type表中
@@ -176,14 +170,6 @@ public class RefundVo {
         this.refundAmount = refundAmount;
     }
 
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
     public Integer getIsDelete() {
         return isDelete;
     }
@@ -198,14 +184,6 @@ public class RefundVo {
 
     public void setRefundCause(String refundCause) {
         this.refundCause = refundCause;
-    }
-
-    public Integer getLevel() {
-        return level;
-    }
-
-    public void setLevel(Integer level) {
-        this.level = level;
     }
 
     public String getCusttype() {
@@ -262,5 +240,13 @@ public class RefundVo {
 
     public void setShopptype(String shopptype) {
         this.shopptype = shopptype;
+    }
+
+    public Integer getResult() {
+        return result;
+    }
+
+    public void setResult(Integer result) {
+        this.result = result;
     }
 }

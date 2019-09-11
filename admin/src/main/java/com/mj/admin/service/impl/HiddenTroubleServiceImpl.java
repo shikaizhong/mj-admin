@@ -7,15 +7,12 @@ import com.mj.common.result.RestResult;
 import com.mj.common.result.RestResultBuilder;
 import com.mj.common.result.ResultUtils;
 import com.mj.common.tools.ApiConstant;
-import com.mj.common.tools.DateUtil;
 import com.mj.dao.entity.Files;
 import com.mj.dao.entity.HiddenTrouble;
 import com.mj.dao.repository.FilesMapper;
 import com.mj.dao.repository.HiddenTroubleMapper;
 import com.mj.dao.vo.HiddenTroubleVo;
 import com.mj.dao.vo.SQLServerVo;
-import org.apache.commons.lang.ObjectUtils;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -48,13 +45,18 @@ public class HiddenTroubleServiceImpl implements HiddenTroubleService {
     @DataSource(value = "druid")
     @Override
     public RestResult selectHidden(Map params) throws Exception {
+        //格式化时间
+        Calendar calendar = Calendar.getInstance();
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
         //分页
         Integer pageSize = Integer.valueOf(String.valueOf(params.get("pageSize")));
         Integer pageNum = Integer.valueOf(String.valueOf(params.get("pageNum")));
-        String status = String.valueOf(params.get("status"));
 
+        String result = String.valueOf(params.get("result"));
+        if (result == "null"){
+            params.put("result",-1);
+        }
 
         //根据店铺类型查询
         String shopptype = String.valueOf(params.get("shopptype"));
@@ -69,22 +71,38 @@ public class HiddenTroubleServiceImpl implements HiddenTroubleService {
         //根据隐患次数查询
         String frequency = String.valueOf(params.get("frequency"));
 
-        //根据开始时间，结束时间查询
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Calendar calendar = new GregorianCalendar();
-        String str1 = ObjectUtils.toString(params.get("startTime"), "");
-        if(StringUtils.isNotBlank(str1)){
-            Date startTime = sdf1.parse(String.valueOf(params.get("startTime")));
-            params.put("startTime", DateUtil.getHourAfter(startTime, 8));
+        //时间区间的判断，若前端没有值传输，则为：[, ]
+        String a = "[, ]";
+        if(!String.valueOf(params.get("dateTime")).equals(a)){
+            //获取前端传到后端的时间，并用字符串接受，格式为：[yyyy-MM-dd'T'HH:mm:ss.SSS'Z', yyyy-MM-dd'T'HH:mm:ss.SSS'Z']
+            String dateTime = String.valueOf(params.get("dateTime"));
+            //获取开始的值
+            int index1 = dateTime.indexOf('[');
+            //获取字符串之间的逗号所在的位置
+            int index2 = dateTime.indexOf(',');
+            //获取字符串之间的空格所在的位置
+            int index3 = dateTime.indexOf(' ');
+            //获取最后的值
+            int index4 = dateTime.indexOf(']');
+            //截断字符串，获取开始时间的值
+            String startTime = dateTime.substring(index1+1,index2);
+            //截断字符串，获取结束时间的值
+            String endTime = dateTime.substring(index3+1,index4);
+            //将开始时间转化为Date类型
+            Date date1 = sdf1.parse(startTime);
+            calendar.setTime(date1);
+            calendar.add(Calendar.HOUR, 8);// 24小时制
+            date1 = calendar.getTime();
+            //将结束时间转化为Date类型
+            Date date2 = sdf1.parse(endTime);
+            calendar.setTime(date2);
+            calendar.add(Calendar.HOUR, 32);// 24小时制
+            date2 = calendar.getTime();
+            //将时间传输给Map集合
+            params.put("startTime", date1);
+            params.put("endTime", date2);
         }else{
             params.put("startTime", null);
-        }
-
-        String str2 = ObjectUtils.toString(params.get("endTime"), "");
-        if(StringUtils.isNotBlank(str2)){
-            Date endTime = sdf1.parse(String.valueOf(params.get("endTime")));
-            params.put("endTime", DateUtil.getHourAfter(endTime, 8));
-        }else{
             params.put("endTime", null);
         }
 
@@ -102,13 +120,10 @@ public class HiddenTroubleServiceImpl implements HiddenTroubleService {
         if (frequency == "null") {
             params.put("frequency", null);
         }
-        if(status == "null"){
-            params.put("status", -1);
-        }
 
         //调用查询数据总数的dao层
         List<HiddenTrouble> hiddenTroubles = hiddenTroubleMapper.selectHiddenList(params);
-        List<HiddenTroubleVo> result = new ArrayList();
+        List<HiddenTroubleVo> result1 = new ArrayList();
         if(!hiddenTroubles.isEmpty()) {
             for (HiddenTrouble listHidden : hiddenTroubles) {
                 HiddenTroubleVo hiddenTroubleVo = new HiddenTroubleVo();
@@ -118,10 +133,9 @@ public class HiddenTroubleServiceImpl implements HiddenTroubleService {
                 hiddenTroubleVo.setHiddenDate(listHidden.getHiddenDate());
                 hiddenTroubleVo.setHiddenContent(listHidden.getHiddenContent());
                 hiddenTroubleVo.setIsDelete(listHidden.getIsDelete());
-                hiddenTroubleVo.setLevel(listHidden.getLevel());
                 hiddenTroubleVo.setPkId(listHidden.getPkId());
+                hiddenTroubleVo.setResult(listHidden.getResult());
                 hiddenTroubleVo.setRemark(listHidden.getRemark());
-                hiddenTroubleVo.setStatus(listHidden.getStatus());
                 Map map = new HashMap();
                 if(!wangwangnums.isEmpty()){
                     map.put("wangwangnum", wangwangnums);
@@ -148,17 +162,15 @@ public class HiddenTroubleServiceImpl implements HiddenTroubleService {
                             hiddenTroubleVo.setUsername1(listVo.getUsername1());
                             hiddenTroubleVo.setUsername2(listVo.getUsername2());
                         }
-                        result.add(hiddenTroubleVo);
+                        result1.add(hiddenTroubleVo);
                     }
-
-
             }
         }
 
         //调用查询的dao层
         Integer total = hiddenTroubleMapper.total(params);
         Map map = new HashMap();
-        map.put("list", result);
+        map.put("list", result1);
         map.put("total", total);
         return new RestResultBuilder().setCode(0).setMsg("请求成功").setData(map).build();
     }
@@ -170,7 +182,6 @@ public class HiddenTroubleServiceImpl implements HiddenTroubleService {
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
         SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         Calendar calendar = new GregorianCalendar();
-
         //判断旺旺名是否存在
         Map map = new HashMap();
         String wangwangnum = hiddenTrouble.getWangwangnum();
@@ -179,9 +190,7 @@ public class HiddenTroubleServiceImpl implements HiddenTroubleService {
             return ResultUtils.error(ResultCodeEnum.ROLE_NOT_FOUND.getCode(), ResultCodeEnum.ROLE_NOT_FOUND.getMsg());
         } else {
             //查询该旺旺名的隐患总数
-//            System.out.println("hiddenTrouble为:" + hiddenTrouble);
             Integer frequency = hiddenTroubleMapper.totalWangWangNum(hiddenTrouble.getWangwangnum());
-//            System.out.println("frequency为：" + frequency);
             //初始化
             HiddenTrouble hiddenTrouble1 = new HiddenTrouble();
             hiddenTrouble1.setWangwangnum(hiddenTrouble.getWangwangnum());
@@ -195,10 +204,8 @@ public class HiddenTroubleServiceImpl implements HiddenTroubleService {
             if (hiddenTrouble.getHiddenDate() == null) {
                 Date date = new Date();
                 hiddenTrouble1.setHiddenDate(date);
-//                System.out.println("date为:" + hiddenTrouble1.getHiddenDate());
             } else {
                 String str = hiddenTrouble.gethDate();
-//        System.out.println("从测试环境获取的时间为："+str);
                 //正则表达式，判断字符串长度是否在3~20之间
                 String pattern = "^.{3,20}$";
                 Pattern p = Pattern.compile(pattern);
@@ -213,7 +220,6 @@ public class HiddenTroubleServiceImpl implements HiddenTroubleService {
                     String newTime = sdf2.format(rightTime);
                     //将String类型的转化成Date类型
                     date1 = sdf2.parse(newTime);
-//            System.out.println("时间为（正常）："+date1);
                     //将修改后的时间传给回访时间
                     hiddenTrouble1.setHiddenDate(date1);
                 } else {
@@ -222,16 +228,12 @@ public class HiddenTroubleServiceImpl implements HiddenTroubleService {
                     long rightTime = (long) (sdf1.parse(str).getTime() + 8 * 60 * 60 * 1000);
                     //格式转化
                     String newtime = sdf2.format(rightTime);
-//            System.out.println("时间为（格林威治时间）："+sdf2.parse(newtime));
                     //将修改后的时间传给回访时间
                     hiddenTrouble1.setHiddenDate(sdf2.parse(newtime));
                 }
             }
-//            System.out.println("hiddenTrouble1为：" + hiddenTrouble1);
-
             //调用添加的dao层
             hiddenTroubleMapper.insertSelective(hiddenTrouble1);
-
             return new RestResultBuilder().setCode(0).setMsg("请求成功").setData(hiddenTrouble1).build();
         }
     }
@@ -260,49 +262,27 @@ public class HiddenTroubleServiceImpl implements HiddenTroubleService {
     public RestResult updateHidden(HiddenTrouble hiddenTrouble) throws ParseException {
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
         SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        Calendar calendar = new GregorianCalendar();
         HiddenTrouble hiddenTrouble1 = hiddenTroubleMapper.selectByPrimaryKey(hiddenTrouble.getPkId());
-//        System.out.println("从前端获取的时间为："+hiddenTrouble.getHiddenDate());
         hiddenTrouble1.setHiddenContent(hiddenTrouble.getHiddenContent());
-//        calendar.setTime(hiddenTrouble.getHiddenDate());
-//        calendar.add(calendar.DATE, 1);
-//        hiddenTrouble1.setRemark(hiddenTrouble.getRemark());
-//        hiddenTrouble1.setHiddenDate(calendar.getTime());
-//        System.out.println("隐患时间为："+hiddenTrouble.getHiddenDate());
+        //初始化
         String str = hiddenTrouble.gethDate();
-//        System.out.println("从测试环境获取的时间为："+str);
-        //正则表达式，判断字符串长度是否在3~20之间
+        //通过正则表达式判断前端获取的时间是否为格林威治时间
         String pattern = "^.{3,20}$";
-        Pattern p = Pattern.compile(pattern);
-        Matcher m = p.matcher(str);
-        //根据正则表达式判断
+        Pattern r = Pattern.compile(pattern);
+        Matcher m = r.matcher(str);
+        //若是格林威治时间，则执行else，若不是，则直接执行
         if (m.matches()) {
-            //如果为true，则执行这里的
             Date date1 = sdf2.parse(str);
-            //从前端iview获取的时间为格林威治时间，所以需要加上8个小时为本地时间
             long rightTime = (long) (date1.getTime() + 8 * 60 * 60 * 1000);
-            //格式转化
-            String newTime = sdf2.format(rightTime);
-            //将String类型的转化成Date类型
-            date1 = sdf2.parse(newTime);
-//            System.out.println("时间为（正常）："+date1);
-            //将修改后的时间传给回访时间
+            String newtime = sdf2.format(rightTime);
+            date1 = sdf2.parse(newtime);
             hiddenTrouble1.setHiddenDate(date1);
         } else {
-            //如果为false，则执行这里的
-            //从前端iview获取的时间为格林威治时间，所以需要加上8个小时为本地时间
             long rightTime = (long) (sdf1.parse(str).getTime() + 8 * 60 * 60 * 1000);
-            //格式转化
             String newtime = sdf2.format(rightTime);
-//            System.out.println("时间为（格林威治时间）："+sdf2.parse(newtime));
-            //将修改后的时间传给回访时间
             hiddenTrouble1.setHiddenDate(sdf2.parse(newtime));
         }
-
-//        hiddenTrouble1.setHiddenDate(hiddenTrouble.getHiddenDate());
-//        System.out.println("隐患修改后的时间为："+hiddenTrouble1.getHiddenDate());
         hiddenTrouble1.setRemark(hiddenTrouble.getRemark());
-//        System.out.println("修改时间为："+calendar.getTime());
         //调用修改的dao方法
         hiddenTroubleMapper.updateByPrimaryKeySelective(hiddenTrouble1);
         return new RestResultBuilder<>().success("修改成功");
@@ -346,8 +326,7 @@ public class HiddenTroubleServiceImpl implements HiddenTroubleService {
             hiddenTroubleVo.setIsDelete(list.getIsDelete());
             hiddenTroubleVo.setHiddenContent(list.getHiddenContent());
             hiddenTroubleVo.setPkId(list.getPkId());
-            hiddenTroubleVo.setLevel(list.getLevel());
-            hiddenTroubleVo.setStatus(list.getStatus());
+            hiddenTroubleVo.setResult(list.getResult());
             hiddenTroubleVo.setHiddenDate(list.getHiddenDate());
 //            System.out.println("Refund_获取refund里的值后：" + refundVo);
             if (!sqlServerVo.isEmpty()) {

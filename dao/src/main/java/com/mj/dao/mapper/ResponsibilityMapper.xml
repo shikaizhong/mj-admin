@@ -252,7 +252,29 @@
     <result column="hidden_content" jdbcType="LONGVARCHAR" property="hiddenContent"/>
     <result column="hidden_date" jdbcType="TIMESTAMP" property="hiddenDate"/>
 
+      <result column="remark" jdbcType="VARCHAR" property="remark"/>
+      <result column="frequency" jdbcType="INTEGER" property="frequency"/>
+
     <result column="refund_date" jdbcType="TIMESTAMP" property="refundDate"/>
+    <result column="refund_channel" jdbcType="TINYINT"
+              property="refundChannel"/>
+    <result column="refund_amount" jdbcType="DECIMAL"
+              property="refundAmount"/>
+    <result column="refund_cause" jdbcType="VARCHAR"
+              property="refundCause"/>
+    <result column="external_cause" jdbcType="VARCHAR"
+              property="externalCause"/>
+
+      <result column="refund_type" jdbcType="INTEGER"
+              property="refundType"/>
+      <result column="hidden_type" jdbcType="INTEGER"
+              property="hiddenType"/>
+      <result column="complaint_type" jdbcType="INTEGER"
+              property="complaintType"/>
+
+      <result column="CustType" jdbcType="VARCHAR" property="custtype"/>
+      <result column="ChildType" jdbcType="VARCHAR" property="childtype"/>
+      <result column="TurnoverMoney" jdbcType="FLOAT" property="turnovermaoey"/>
   </resultMap>
   <!--查重-->
   <select id="selectByComplaintId" parameterType="com.mj.dao.entity.ResponsibilityWithBLOBs" resultMap="ResultMapWithBLOBs">
@@ -278,14 +300,14 @@
           <if test="keyword != null and keyword != ''">
             AND (cc.WangWangNum LIKE CONCAT('%', #{keyword}, '%'))
           </if>
-          <if test="startTime != '' and endTime !='' ">
-            and rr.createTime <![CDATA[>= ]]> #{startTime}  and rr.createTime <![CDATA[<= ]]> #{endTime}
+          <if test="startTime != null and endTime !=null ">
+            and rr.create_time &gt;= #{startTime} and rr.create_time &lt; #{endTime}
           </if>
           <if test="result !=-1">
             AND rr.`result` =#{result,jdbcType=INTEGER}
           </if>
           <if test="grade !=null or grade != ''">
-            AND rr.`grade` =#{grade,jdbcType=VARCHAR}
+            AND cl.`grade` =#{grade,jdbcType=VARCHAR}
           </if>
         </trim>
       </if>
@@ -295,8 +317,8 @@
           <if test="keyword != null and keyword != ''">
             AND (cc.WangWangNum LIKE CONCAT('%', #{keyword}, '%'))
           </if>
-          <if test="startTime != '' and endTime !='' ">
-            and rr.`create_time` <![CDATA[>= ]]> #{startTime}  and rr.`create_time` <![CDATA[<= ]]> #{endTime}
+          <if test="startTime != null and endTime !=null ">
+            and rr.create_time &gt;= #{startTime} and rr.create_time &lt; #{endTime}
           </if>
           <if test="result !=-1">
             AND rr.`result` =#{result,jdbcType=INTEGER}
@@ -321,11 +343,8 @@
           <if test="parentName !=null and parentName != ''">
             AND rr.`parent_name` =#{parentName,jdbcType=VARCHAR}
           </if>
-          <if test="keyword != null and keyword != ''">
-            AND (ht.WangWangNum LIKE CONCAT('%', #{keyword}, '%'))
-          </if>
           <if test="startTime != '' and endTime !='' ">
-            and rr.createTime <![CDATA[>= ]]> #{startTime}  and rr.createTime <![CDATA[<= ]]> #{endTime}
+            and rr.create_time &gt;= #{startTime} and rr.create_time &lt; #{endTime}
           </if>
           <if test="result !=-1">
             AND rr.`result` =#{result,jdbcType=INTEGER}
@@ -342,7 +361,7 @@
             AND (ht.WangWangNum LIKE CONCAT('%', #{keyword}, '%'))
           </if>
           <if test="startTime != '' and endTime !='' ">
-            and rr.`create_time` <![CDATA[>= ]]> #{startTime}  and rr.`create_time` <![CDATA[<= ]]> #{endTime}
+            and rr.create_time &gt;= #{startTime} and rr.create_time &lt; #{endTime}
           </if>
           <if test="result !=-1">
             AND rr.`result` =#{result,jdbcType=INTEGER}
@@ -367,11 +386,8 @@
               <if test="parentName !=null and parentName != ''">
                 AND rr.`parent_name` =#{parentName,jdbcType=VARCHAR}
               </if>
-              <if test="keyword != null and keyword != ''">
-                AND (rf.WangWangNum LIKE CONCAT('%', #{keyword}, '%'))
-              </if>
               <if test="startTime != '' and endTime !='' ">
-                and rr.createTime <![CDATA[>= ]]> #{startTime}  and rr.createTime <![CDATA[<= ]]> #{endTime}
+                and rr.create_time &gt;= #{startTime} and rr.create_time &lt; #{endTime}
               </if>
               <if test="result !=-1">
                 AND rr.`result` =#{result,jdbcType=INTEGER}
@@ -388,7 +404,7 @@
             AND (rr.WangWangNum LIKE CONCAT('%', #{keyword}, '%'))
           </if>
           <if test="startTime != '' and endTime !='' ">
-            and rr.`create_time` <![CDATA[>= ]]> #{startTime}  and rr.`create_time` <![CDATA[<= ]]> #{endTime}
+            and rr.create_time &gt;= #{startTime} and rr.create_time &lt; #{endTime}
           </if>
           <if test="result !=-1">
             AND rr.`result` =#{result,jdbcType=INTEGER}
@@ -407,36 +423,15 @@
 
     <!--type为0时,查询投诉信息-->
     <select id="selectResponsiblityList" parameterType="java.util.HashMap" resultMap="BaseResultMapVo">
-        SELECT *  FROM t_complaint cc left join t_responsibility rr ON rr.`complaint_id` = cc.`pk_id`
-        <if test="level !=null">
-            left join t_complaint_level cl ON rr.`level` = cl.parent_id
+        SELECT *  FROM t_complaint cc LEFT JOIN t_responsibility rr ON rr.`complaint_id` = cc.`pk_id`
+           LEFT JOIN t_complaint_level cl ON rr.`level` = cl.parent_id
             <trim prefix="WHERE" prefixOverrides="AND|OR">
-                rr.`type` = 0
-                <if test="parentName !=null and parentName != ''">
-                    AND rr.`parent_name` =#{parentName,jdbcType=VARCHAR}
-                </if>
+                cc.is_delete=0
                 <if test="keyword != null and keyword != ''">
-                    AND (cc.WangWangNum LIKE CONCAT('%', #{keyword}, '%')
+                  AND (cc.WangWangNum LIKE CONCAT('%', #{keyword}, '%'))
                 </if>
-                <if test="startTime != '' and endTime !='' ">
-                    and rr.createTime <![CDATA[>= ]]> #{startTime}  and rr.createTime <![CDATA[<= ]]> #{endTime}
-                </if>
-                <if test="result !=-1">
-                    AND rr.`result` =#{result,jdbcType=INTEGER}
-                </if>
-                <if test="grade !=null or grade != ''">
-                    AND rr.`grade` =#{grade}
-                </if>
-            </trim>
-        </if>
-        <if test="level ==null">
-            <trim prefix="WHERE" prefixOverrides="AND|OR">
-                cc.is_delete=0 and rr.`type` = 0
-                <if test="keyword != null and keyword != ''">
-                    AND (cc.WangWangNum LIKE CONCAT('%', #{keyword}, '%')
-                </if>
-                <if test="startTime != '' and endTime !='' ">
-                    and rr.`create_time` <![CDATA[>= ]]> #{startTime}  and rr.`create_time` <![CDATA[<= ]]> #{endTime}
+                <if test="startTime != null and endTime !=null ">
+                  and rr.create_time &gt;= #{startTime} and rr.create_time &lt; #{endTime}
                 </if>
                 <if test="result !=-1">
                     AND rr.`result` =#{result,jdbcType=INTEGER}
@@ -445,7 +440,6 @@
                     AND rr.`grade` =#{grade}
                 </if>
             </trim>
-        </if>
         order by cc.`complaintDate` DESC
         <if test="pageNum !=null and pageSize !=null">
             Limit #{pageNum},#{pageSize}
@@ -453,45 +447,23 @@
     </select>
     <!--type为1时,查询隐患信息-->
     <select id="selectHiddenTrouble" parameterType="java.util.HashMap" resultMap="BaseResultMapVo">
-        SELECT *  FROM t_hidden_trouble ht left join t_responsibility rr on rr.`complaint_id` = ht.`pk_id`
-        <if test="level !=null">
-            left join t_complaint_level cl ON rr.`level` = cl.parent_id
-            <trim prefix="WHERE" prefixOverrides="AND|OR">
-                ht.is_delete = 0
-                <if test="parentName !=null and parentName != ''">
-                    AND rr.`parent_name` =#{parentName,jdbcType=VARCHAR}
-                </if>
-                <if test="keyword != null and keyword != ''">
-                    AND (ht.WangWangNum LIKE CONCAT('%', #{keyword}, '%')
-                </if>
-                <if test="startTime != '' and endTime !='' ">
-                    and rr.createTime <![CDATA[>= ]]> #{startTime}  and rr.createTime <![CDATA[<= ]]> #{endTime}
-                </if>
-                <if test="result !=-1">
-                    AND rr.`result` =#{result,jdbcType=INTEGER}
-                </if>
-                <if test="grade !=null or grade != ''">
-                    AND rr.`grade` =#{grade}
-                </if>
-            </trim>
-        </if>
-        <if test="level ==null">
+        SELECT *  FROM t_hidden_trouble ht LEFT JOIN t_responsibility rr ON rr.`complaint_id` = ht.`pk_id`
+           LEFT JOIN t_complaint_level cl ON rr.`level` = cl.parent_id
             <trim prefix="WHERE" prefixOverrides="AND|OR">
                 ht.is_delete = 0
                 <if test="keyword != null and keyword != ''">
-                    AND (ht.WangWangNum LIKE CONCAT('%', #{keyword}, '%')
+                  AND (ht.WangWangNum LIKE CONCAT('%', #{keyword}, '%'))
                 </if>
-                <if test="startTime != '' and endTime !='' ">
-                    and rr.`create_time` <![CDATA[>= ]]> #{startTime}  and rr.`create_time` <![CDATA[<= ]]> #{endTime}
+                <if test="startTime != null and endTime !=null ">
+                  and rr.create_time &gt;= #{startTime} and rr.create_time &lt; #{endTime}
                 </if>
                 <if test="result !=-1">
                     AND rr.`result` =#{result,jdbcType=INTEGER}
                 </if>
                 <if test="grade !=null">
-                    AND rr.`grade` =#{grade}
+                    AND cl.`grade` =#{grade}
                 </if>
             </trim>
-        </if>
         ORDER BY ht.`hidden_date` DESC
         <if test="pageNum !=null and pageSize !=null">
             Limit #{pageNum},#{pageSize}
@@ -499,45 +471,26 @@
     </select>
     <!--type为2时,查询退款管理-->
     <select id="selectRefund" parameterType="java.util.HashMap" resultMap="BaseResultMapVo">
-        SELECT *  FROM t_refund rf left join t_responsibility rr on rr.`complaint_id` = rf.`pk_id`
-        <if test="level !=null">
-            left join t_complaint_level cl ON rr.`level` = cl.parent_id
+        SELECT *  FROM t_refund rf LEFT JOIN t_responsibility rr ON rr.`complaint_id` = rf.`pk_id`
+          LEFT JOIN t_complaint_level cl ON rr.`level` = cl.parent_id
             <trim prefix="WHERE" prefixOverrides="AND|OR">
                 rf.is_delete = 0
+                <if test="keyword != null and keyword != ''">
+                  AND (rf.WangWangNum LIKE CONCAT('%', #{keyword}, '%'))
+                </if>
                 <if test="parentName !=null and parentName != ''">
                     AND rr.`parent_name` =#{parentName,jdbcType=VARCHAR}
                 </if>
-                <if test="keyword != null and keyword != ''">
-                    AND (rf.WangWangNum LI KE CONCAT('%', #{keyword}, '%')
-                </if>
-                <if test="startTime != '' and endTime !='' ">
-                    and rr.createTime <![CDATA[>= ]]> #{startTime}  and rr.createTime <![CDATA[<= ]]> #{endTime}
+                <if test="startTime != null and endTime !=null ">
+                  and rr.create_time &gt;= #{startTime} and rr.create_time &lt; #{endTime}
                 </if>
                 <if test="result !=-1">
                     AND rr.`result` =#{result,jdbcType=INTEGER}
                 </if>
-                <if test="grade !=null or grade != ''">
-                    AND rr.`grade` =#{grade}
+                <if test="grade !=null and grade != ''">
+                    AND cl.`grade` =#{grade,jdbcType=INTEGER}
                 </if>
             </trim>
-        </if>
-        <if test="level ==null">
-            <trim prefix="WHERE" prefixOverrides="AND|OR">
-                rf.`is_delete` = 0
-                <if test="keyword != null and keyword != ''">
-                    AND rr.`wang_wang_num` LIKE CONCAT ("%",#{wangWangNum},"%")
-                </if>
-                <if test="startTime != '' and endTime !='' ">
-                    and rr.`create_time` <![CDATA[>= ]]> #{startTime}  and rr.`create_time` <![CDATA[<= ]]> #{endTime}
-                </if>
-                <if test="result !=-1">
-                    AND rr.`result` =#{result,jdbcType=INTEGER}
-                </if>
-                <if test="grade !=null">
-                    AND rr.`grade` =#{grade}
-                </if>
-            </trim>
-        </if>
         order by rf.`refund_date` DESC
         <if test="pageNum !=null and pageSize !=null">
             Limit #{pageNum},#{pageSize}
@@ -548,11 +501,8 @@
     select count(*)FROM t_complaint cc left join t_responsibility rr ON rr.`complaint_id` = cc.`pk_id`
     <trim prefix="WHERE" prefixOverrides="AND|OR">
       cc.is_delete=0
-      <if test="keyword != null and keyword != ''">
-        AND (cc.WangWangNum LIKE CONCAT('%', #{keyword}, '%'))
-      </if>
-      <if test="startTime != '' and endTime !='' ">
-        and rr.`create_time` <![CDATA[>= ]]> #{startTime} and rr.`create_time` <![CDATA[<= ]]> #{endTime}
+      <if test="startTime != null and endTime !=null ">
+        and rr.create_time &gt;= #{startTime} and rr.create_time &lt; #{endTime}
       </if>
       <if test="result !=-1">
         AND rr.`result` =#{result,jdbcType=INTEGER}
@@ -563,4 +513,7 @@
   <select id="page" resultMap="BaseResultMap">
       select * from t_responsibility
   </select>
+
+
+
 </mapper>

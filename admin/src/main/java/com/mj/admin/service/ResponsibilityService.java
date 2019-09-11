@@ -1,6 +1,7 @@
 package com.mj.admin.service;
 
 import com.mj.common.result.RestResult;
+import com.mj.dao.entity.ComplaintLevel;
 import com.mj.dao.entity.Files;
 import com.mj.dao.entity.ResponsibilityWithBLOBs;
 import com.mj.dao.vo.PageRequest;
@@ -27,4 +28,14 @@ public interface ResponsibilityService {
 
     //根据id查询隐患信息
     RestResult selectByHId(Map params) throws ParseException;
+
+
+
+
+    //不带type的查询
+    //查询
+    RestResult selectAll(Map params) throws Exception;
+
+    //修改客诉类别
+    RestResult updataLevel(ComplaintLevel complaintLevel);
 }

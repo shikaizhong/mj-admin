@@ -35,7 +35,7 @@ public class HiddenTroubleController {
     }
 
     //修改隐患
-    @RequestMapping(value = "updateHidden", method = RequestMethod.POST)
+    @RequestMapping(value = "updateHidden", method = {RequestMethod.POST,RequestMethod.GET})
     public RestResult updateHiddenController(@RequestBody HiddenTrouble hiddenTrouble) throws ParseException {
         return hiddenTroubleService.updateHidden(hiddenTrouble);
     }

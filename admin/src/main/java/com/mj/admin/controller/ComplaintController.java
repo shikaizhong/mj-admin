@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -55,8 +56,9 @@ public class ComplaintController {
     }
     //根据wangwangNum查询对应的历史记录
     @RequestMapping(value = "/selectInfoByWangWangNum",method = RequestMethod.POST)
-    public RestResult selectInfoByWangWangNum(@RequestBody Map params){
-        return complaintService.selectInfoByWangWangNum(params);
+    public RestResult selectInfoByWangWangNum(@RequestBody Map params) throws ParseException{
+//        return complaintService.selectInfoByWangWangNum(params);
+        return complaintService.selectAllByWangWangNum(params);
     }
     //根据complaintId查询对应的历史记录
     @RequestMapping(value = "/selectFiles",method = RequestMethod.POST)
@@ -144,5 +146,13 @@ public class ComplaintController {
     @RequestMapping(value = "/exist",method = RequestMethod.POST)
     public RestResult exist(@RequestBody Complaint complaint){
         return complaintService.exist(complaint);
+    }
+
+
+
+    //查询所有历史记录
+    @RequestMapping(value = "/selectAllByWangWangNum",method = RequestMethod.POST)
+    public RestResult selectAllByWangWangNum(@RequestBody Map params) throws ParseException {
+        return complaintService.selectAllByWangWangNum(params);
     }
 }

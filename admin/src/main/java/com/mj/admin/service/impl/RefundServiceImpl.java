@@ -6,7 +6,6 @@ import com.mj.common.result.RestResult;
 import com.mj.common.result.RestResultBuilder;
 import com.mj.common.result.ResultUtils;
 import com.mj.common.tools.ApiConstant;
-import com.mj.common.tools.DateUtil;
 import com.mj.dao.annotate.DataSource;
 import com.mj.dao.entity.Files;
 import com.mj.dao.entity.Refund;
@@ -15,8 +14,6 @@ import com.mj.dao.repository.FilesMapper;
 import com.mj.dao.repository.RefundMapper;
 import com.mj.dao.vo.RefundVo;
 import com.mj.dao.vo.SQLServerVo;
-import org.apache.commons.lang.ObjectUtils;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -56,69 +53,65 @@ public class RefundServiceImpl implements RefundService {
     @DataSource(value = "druid")
     @Override
     public RestResult selectRefund(Map params) throws Exception {
+        //格式化时间
+        Calendar calendar = Calendar.getInstance();
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
+
         //第几页
         Integer pageNum = Integer.valueOf(String.valueOf(params.get("pageNum")));
         //一页中有多少条数据
         Integer pageSize = Integer.valueOf(String.valueOf(params.get("pageSize")));
-
-        String str1 = ObjectUtils.toString(params.get("startTime"), "");
-        if(StringUtils.isNotBlank(str1)){
-            Date startTime = sdf1.parse(String.valueOf(params.get("startTime")));
-            params.put("startTime", DateUtil.getHourAfter(startTime, 8));
-        }else{
-            params.put("startTime", null);
-        }
-
-        String str2 = ObjectUtils.toString(params.get("endTime"), "");
-        if(StringUtils.isNotBlank(str2)){
-            Date endTime = sdf1.parse(String.valueOf(params.get("endTime")));
-            params.put("endTime", DateUtil.getHourAfter(endTime, 8));
-        }else{
-            params.put("endTime", null);
-        }
-
         //根据旺旺名查询
         String wangwangnum = String.valueOf(params.get("wangwangnum"));
         //根据店铺类型查询
         String shopptype = String.valueOf(params.get("shopptype"));
-        System.out.println("shopptype值为:"+shopptype);
         //根据店长查询
         String username1 = String.valueOf(params.get("username1"));
         //根据招商顾问查询
         String username2 = String.valueOf(params.get("username2"));
         //根据团队名查询
         String teamname = String.valueOf(params.get("teamname"));
-//        Calendar calendar = new GregorianCalendar();
-        //时间区间，判断开始时间
-//        if (String.valueOf(params.get("startTime")).isEmpty()) {
-//            Date startTime = sdf.parse("2000-1-1 00:00:00");
-//            params.put("startTime", startTime);
-//        } else {
-//            System.out.println("查询开始时间为:"+String.valueOf(params.get("startTime")));
-//            Date startTime = sdf.parse(String.valueOf(params.get("startTime")));
-////            calendar.setTime(startTime);
-////            calendar.add(calendar.DATE, 1);
-////            startTime = calendar.getTime();
-//            params.put("startTime", startTime);
-//        }
-        //时间区间，判断结束时间
-//        if (String.valueOf(params.get("endTime")).isEmpty()) {
-//            Date endTime = sdf.parse("2099-12-31 23:59:59");
-//            params.put("endTime", endTime);
-//        } else {
-//            System.out.println("查询结束时间为:"+String.valueOf(params.get("endTime")));
-//            Date endTime = sdf.parse(String.valueOf(params.get("endTime")));
-////            calendar.setTime(endTime);
-////            calendar.add(calendar.DATE, 1);
-////            endTime = calendar.getTime();
-//            params.put("endTime", endTime);
-//        }
+
+        //时间区间的判断，若前端没有值传输，则为：[, ]
+        String a = "[, ]";
+        if(!String.valueOf(params.get("dateTime")).equals(a)){
+            //获取前端传到后端的时间，并用字符串接受，格式为：[yyyy-MM-dd'T'HH:mm:ss.SSS'Z', yyyy-MM-dd'T'HH:mm:ss.SSS'Z']
+            String dateTime = String.valueOf(params.get("dateTime"));
+            //获取开始的值
+            int index1 = dateTime.indexOf('[');
+            //获取字符串之间的逗号所在的位置
+            int index2 = dateTime.indexOf(',');
+            //获取字符串之间的空格所在的位置
+            int index3 = dateTime.indexOf(' ');
+            //获取最后的值
+            int index4 = dateTime.indexOf(']');
+            //截断字符串，获取开始时间的值
+            String startTime = dateTime.substring(index1+1,index2);
+            //截断字符串，获取结束时间的值
+            String endTime = dateTime.substring(index3+1,index4);
+            //将开始时间转化为Date类型
+            Date date1 = sdf1.parse(startTime);
+            calendar.setTime(date1);
+            calendar.add(Calendar.HOUR, 8);// 24小时制
+            date1 = calendar.getTime();
+            //将结束时间转化为Date类型
+            Date date2 = sdf1.parse(endTime);
+            calendar.setTime(date2);
+            calendar.add(Calendar.HOUR, 32);// 24小时制
+            date2 = calendar.getTime();
+            //将时间传输给Map集合
+            params.put("startTime", date1);
+            params.put("endTime", date2);
+        }else{
+            params.put("startTime", null);
+            params.put("endTime", null);
+        }
+
         //状态
-        String status = String.valueOf(params.get("status"));
-        if (status == "null"){
-            params.put("status",-1);
+        String result = String.valueOf(params.get("result"));
+        if (result == "null"){
+            params.put("result",-1);
         }
 //        if (pageSize >= 10) {
 //            pageSize = pageSize;
@@ -143,7 +136,7 @@ public class RefundServiceImpl implements RefundService {
         //调用dao层
         List<Refund> list = refundMapper.selectRefundList(params);
         //新建一个结果集对象
-        List<RefundVo> result = new ArrayList();
+        List<RefundVo> result1 = new ArrayList();
         for (Refund refund : list) {
             //获取旺旺名
             String wangwangnum1 = refund.getWangwangnum();
@@ -166,9 +159,8 @@ public class RefundServiceImpl implements RefundService {
             refundVo.setRefundDate(refund.getRefundDate());
             refundVo.setRemark(refund.getRemark());
             refundVo.setIsDelete(refund.getIsDelete());
-            refundVo.setLevel(refund.getLevel());
             refundVo.setPkId(refund.getPkId());
-            refundVo.setStatus(refund.getStatus());
+            refundVo.setResult(refund.getResult());
             refundVo.setRefundAmount(refund.getRefundAmount());
 //            System.out.println("获取refund里的值后："+refundVo.getRefundDate());
             if (!listVos.isEmpty()) {
@@ -184,7 +176,7 @@ public class RefundServiceImpl implements RefundService {
                     refundVo.setUsername2(sqlServerVo.getUsername2());
 //                    System.out.println("获取refundVos里的值后："+refundVo);
                 }
-                result.add(refundVo);
+                result1.add(refundVo);
             }
         }
 
@@ -193,7 +185,7 @@ public class RefundServiceImpl implements RefundService {
         //结果集Map集合
         Map map = new HashMap();
 //            System.out.println("将refundVo里的值封装给result后：" + result);
-        map.put("list", result);
+        map.put("list", result1);
         map.put("total", total);
         return new RestResultBuilder().setCode(0).setMsg("请求成功").setData(map).build();
 
@@ -391,8 +383,7 @@ public class RefundServiceImpl implements RefundService {
             refundVo.setIsDelete(list.getIsDelete());
             refundVo.setPkId(list.getPkId());
             refundVo.setRefundAmount(list.getRefundAmount());
-            refundVo.setLevel(list.getLevel());
-            refundVo.setStatus(list.getStatus());
+            refundVo.setResult(list.getResult());
             if (!sqlServerVo.isEmpty()) {
                 for (SQLServerVo sqlList : sqlServerVo) {
                     refundVo.setDeadline(sqlList.getDeadline());

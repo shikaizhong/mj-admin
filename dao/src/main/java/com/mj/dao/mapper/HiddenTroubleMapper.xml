@@ -5,18 +5,16 @@
         <id column="pk_id" jdbcType="INTEGER" property="pkId"/>
         <result column="WangWangNum" jdbcType="VARCHAR" property="wangwangnum" />
         <result column="hidden_date" jdbcType="TIMESTAMP" property="hiddenDate"/>
-        <result column="status" jdbcType="TINYINT" property="status"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="frequency" jdbcType="INTEGER" property="frequency"/>
         <result column="is_delete" jdbcType="TINYINT" property="isDelete"/>
-        <result column="level" jdbcType="INTEGER" property="level"/>
     </resultMap>
     <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.mj.dao.entity.HiddenTrouble">
         <result column="hidden_content" jdbcType="LONGVARCHAR" property="hiddenContent"/>
     </resultMap>
     <sql id="Base_Column_List">
-    pk_id, WangWangNum, hidden_date, status, remark, frequency,
-    is_delete, level
+    pk_id, WangWangNum, hidden_date, remark, frequency,
+    is_delete
   </sql>
     <sql id="Blob_Column_List">
     hidden_content
@@ -35,12 +33,12 @@
   </delete>
     <insert id="insert" parameterType="com.mj.dao.entity.HiddenTrouble">
     insert into t_hidden_trouble (pk_id, WangWangNum,
-      hidden_date, status, remark,
-      frequency, is_delete, level,
+      hidden_date, remark,
+      frequency, is_delete
       hidden_content)
     values (#{pkId,jdbcType=INTEGER}, #{wangwangnum,jdbcType=VARCHAR}, #{hiddenDate,jdbcType=TIMESTAMP},
-      #{status,jdbcType=TINYINT}, #{remark,jdbcType=VARCHAR},
-      #{frequency,jdbcType=INTEGER}, #{isDelete,jdbcType=TINYINT}, #{level,jdbcType=INTEGER},
+       #{remark,jdbcType=VARCHAR},
+      #{frequency,jdbcType=INTEGER}, #{isDelete,jdbcType=TINYINT},
       #{hiddenContent,jdbcType=LONGVARCHAR})
   </insert>
     <insert id="insertSelective" parameterType="com.mj.dao.entity.HiddenTrouble">
@@ -55,9 +53,6 @@
             <if test="hiddenDate != null">
                 hidden_date,
             </if>
-            <if test="status != null">
-                status,
-            </if>
             <if test="remark != null">
                 remark,
             </if>
@@ -66,9 +61,6 @@
             </if>
             <if test="isDelete != null">
                 is_delete,
-            </if>
-            <if test="level != null">
-                level,
             </if>
             <if test="hiddenContent != null">
                 hidden_content,
@@ -84,9 +76,6 @@
             <if test="hiddenDate != null">
                 #{hiddenDate,jdbcType=TIMESTAMP},
             </if>
-            <if test="status != null">
-                #{status,jdbcType=TINYINT},
-            </if>
             <if test="remark != null">
                 #{remark,jdbcType=VARCHAR},
             </if>
@@ -95,9 +84,6 @@
             </if>
             <if test="isDelete != null">
                 #{isDelete,jdbcType=TINYINT},
-            </if>
-            <if test="level != null">
-                #{level,jdbcType=INTEGER},
             </if>
             <if test="hiddenContent != null">
                 #{hiddenContent,jdbcType=LONGVARCHAR},
@@ -113,9 +99,6 @@
             <if test="hiddenDate != null">
                 hidden_date = #{hiddenDate,jdbcType=TIMESTAMP},
             </if>
-            <if test="status != null">
-                status = #{status,jdbcType=TINYINT},
-            </if>
             <if test="remark != null">
                 remark = #{remark,jdbcType=VARCHAR},
             </if>
@@ -124,9 +107,6 @@
             </if>
             <if test="isDelete != null">
                 is_delete = #{isDelete,jdbcType=TINYINT},
-            </if>
-            <if test="level != null">
-                level = #{level,jdbcType=INTEGER},
             </if>
             <if test="hiddenContent != null">
                 hidden_content = #{hiddenContent,jdbcType=LONGVARCHAR},
@@ -138,11 +118,9 @@
     update t_hidden_trouble
     set WangWangNum = #{wangwangnum,jdbcType=VARCHAR},
       hidden_date = #{hiddenDate,jdbcType=TIMESTAMP},
-      status = #{status,jdbcType=TINYINT},
       remark = #{remark,jdbcType=VARCHAR},
       frequency = #{frequency,jdbcType=INTEGER},
       is_delete = #{isDelete,jdbcType=TINYINT},
-      level = #{level,jdbcType=INTEGER},
       hidden_content = #{hiddenContent,jdbcType=LONGVARCHAR}
     where pk_id = #{pkId,jdbcType=INTEGER}
   </update>
@@ -150,11 +128,9 @@
     update t_hidden_trouble
     set WangWangNum = #{wangwangnum,jdbcType=VARCHAR},
       hidden_date = #{hiddenDate,jdbcType=TIMESTAMP},
-      status = #{status,jdbcType=TINYINT},
       remark = #{remark,jdbcType=VARCHAR},
       frequency = #{frequency,jdbcType=INTEGER},
       is_delete = #{isDelete,jdbcType=TINYINT},
-      level = #{level,jdbcType=INTEGER}
     where pk_id = #{pkId,jdbcType=INTEGER}
   </update>
 
@@ -182,12 +158,11 @@
         <id column="pk_id" jdbcType="INTEGER" property="pkId"/>
         <result column="WangWangNum" jdbcType="VARCHAR" property="wangwangnum" />
         <result column="hidden_date" jdbcType="TIMESTAMP" property="hiddenDate"/>
-        <result column="status" jdbcType="TINYINT" property="status"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="frequency" jdbcType="INTEGER" property="frequency"/>
         <result column="is_delete" jdbcType="TINYINT" property="isDelete"/>
-        <result column="level" jdbcType="INTEGER" property="level"/>
         <result column="hidden_content" jdbcType="LONGVARCHAR" property="hiddenContent"/>
+        <result column="result" jdbcType="INTEGER" property="result" />
     </resultMap>
 
     <!--总查询，条件查询，分页-->
@@ -243,37 +218,32 @@
         </if>
     </select>-->
     <select id="selectHiddenList" parameterType="java.util.HashMap" resultMap="BaseResultMapVo">
-        SELECT * FROM t_hidden_trouble ht
+        SELECT ht.*,re.`result` FROM t_hidden_trouble ht LEFT JOIN t_responsibility re ON ht.`pk_id` = re.`complaint_id`
         <trim prefix="WHERE" prefixOverrides="AND|OR">
+            AND re.`type` = 1
             AND ht.`is_delete` = 0
             <if test="wangwangnum != null and wangwangnum != ''">
-                AND ht.`WangWangNum` LIKE CONCAT ("%",#{wangwangnum},"%")
+                AND ht.`WangWangNum` = #{wangwangnum,jdbcType=VARCHAR}
             </if>
-            /*根据隐患的次数查询*/
-            <if test="frequency != null and frequency != ''">
-                AND ht.`frequency` = #{frequency,jdbcType=INTEGER}
-            </if>
-            /*根据开始时间，结束时间查询*/
             <if test="startTime != null and endTime != null">
                 AND ht.`hidden_date` &gt;= #{startTime}
-                AND ht.`hidden_date` &lt;= #{endTime}
+                AND ht.`hidden_date` &lt; #{endTime}
             </if>
-            <if test="status != -1">
-                AND status = #{status,jdbcType=INTEGER}
-            </if>
-            /*将数据根据时间的降序排列*/
-            ORDER BY ht.`hidden_date` DESC
-            /*分页*/
-            <if test="pageNum != null and pageSize != null">
-                LIMIT #{pageNum},#{pageSize}
+            <if test="result != -1">
+                AND re.`result` = #{result}
             </if>
         </trim>
+        ORDER BY ht.`hidden_date` DESC
+        <if test="pageSize != null and pageNum != null">
+            LIMIT #{pageNum},#{pageSize}
+        </if>
     </select>
 
 
     <!--查询数据总数-->
     <select id="total" parameterType="java.util.HashMap" resultType="java.lang.Integer">
-        SELECT COUNT(*) FROM t_hidden_trouble ht WHERE ht.`is_delete` = 0
+      SELECT COUNT(*) FROM t_hidden_trouble ht LEFT JOIN t_responsibility re ON ht.`pk_id` = re.`complaint_id`
+          WHERE re.`type` = 1 AND ht.`is_delete` = 0
     </select>
 
     <!--根据旺旺名查该店铺的隐患次数，到第几次-->
