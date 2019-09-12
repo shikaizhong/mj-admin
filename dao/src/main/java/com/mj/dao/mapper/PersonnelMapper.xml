@@ -408,6 +408,8 @@
     <result column="dz" jdbcType="VARCHAR" property="username1" />
     <result column="TeamName" jdbcType="VARCHAR" property="teamname" />
     <result column="zsgw" jdbcType="VARCHAR" property="username2" />
+    <result column="PersonnelID" jdbcType="INTEGER" property="personnelid"/>
+    <result column="TScustomer" jdbcType="VARCHAR" property="tscustomer"/>
   </resultMap>
   <!--用户登录-->
   <select id="login" resultMap="BaseResultMap"  parameterType="java.lang.String">
@@ -463,7 +465,7 @@
 
   <!--查询拼接sqlserver-->
   <select id="selectComplaintListOver" parameterType="java.util.Map" resultMap="BaseResultMapVo">
-    SELECT cu.WangWangNum,cu.TScustomer,cr.PersonnelID,cu.ShoppType,pp.UserName,
+    SELECT DISTINCT cu.WangWangNum,cu.TScustomer,cr.PersonnelID,cu.ShoppType,pp.UserName,
     pp.TeamID,tt.TeamName,cu.TechnologyRecruitmentID,p2.UserName pname,p3.UserName tename
     from Customer cu LEFT JOIN CustomerRecords cr ON cu.WangWangNum = cr.Trader
     LEFT JOIN Personnel pp ON cu.TScustomer = pp.ID
@@ -474,9 +476,6 @@
       cu.WangWangNum =#{wangwangnum,jdbcType=VARCHAR}
       <if test="TScustomer != null">
         AND cu.TScustomer = #{TScustomer,jdbcType=VARCHAR}
-      </if>
-      <if test="keyword != null and keyword != ''">
-        AND (cu.WangWangNum LIKE CONCAT('%', #{keyword}, '%'))
       </if>
       <if test="TechnologyRecruitmentID != -1">
         AND cu.TechnologyRecruitmentID =#{TechnologyRecruitmentID,jdbcType=INTEGER}
@@ -497,7 +496,7 @@
 
   <!--通过id查询-->
   <select id="selectByPkId" parameterType="java.util.Map" resultMap="BaseResultMapVo">
-    SELECT cu.WangWangNum,cu.TScustomer,cr.PersonnelID,cu.ShoppType,pp.UserName,
+    SELECT DISTINCT cu.WangWangNum,cu.TScustomer,cr.PersonnelID,cu.ShoppType,pp.UserName,
            pp.TeamID,tt.TeamName,cu.TechnologyRecruitmentID,p2.UserName pname,p3.UserName tename
     from Customer cu LEFT JOIN CustomerRecords cr ON cu.WangWangNum = cr.Trader
                      LEFT JOIN Personnel pp ON cu.TScustomer = pp.ID
@@ -510,7 +509,7 @@
 
   <!--拼接查询sqlserver拼接到responsibility-->
   <select id="selectResponsibilityList" parameterType="java.util.Map" resultMap="BaseResultMapRo">
-    SELECT p1.UserName tename,tt.TeamName,cc.ServerDeadline,cr.PersonnelID,p2.UserName pname,t2.TeamName pteamname,cc.ShoppType,cc.TScustomer
+    SELECT DISTINCT p1.UserName tename,tt.TeamName,cc.ServerDeadline,cr.PersonnelID,p2.UserName pname,t2.TeamName pteamname,cc.ShoppType,cc.TScustomer
       from Customer cc
       LEFT JOIN Personnel p1 ON cc.TScustomer =p1.ID
       LEFT JOIN Team tt ON p1.TeamID = tt.ID
@@ -540,7 +539,7 @@
   <!--查询退款，隐患，流失-->
   <select id="selectBySQL" parameterType="java.util.HashMap" resultMap="BaseResultVo">
     <!--<if test="wangwangnum != null and wangwangnum != ''">-->
-      SELECT cu.WangWangNum, ct.CustType,cc.ChildType,cu.ServerDeadline,cu.ServerDeadlineEnd,
+      SELECT cu.TScustomer,cr.PersonnelID,cu.WangWangNum, ct.CustType,cc.ChildType,cu.ServerDeadline,cu.ServerDeadlineEnd,
       cu.ShoppType,cr.TurnoverMoney,p1.UserName AS dz,tt.TeamName,p2.UserName AS zsgw
       FROM (SELECT TOP 1 * FROM CustomerRecords WHERE Trader = #{wangwangnum,jdbcType=VARCHAR} ORDER BY ID DESC) AS cr
       LEFT JOIN (SELECT TOP 1 * FROM Customer WHERE WangWangNum = #{wangwangnum,jdbcType=VARCHAR} ORDER BY ID DESC) AS cu ON cr.Trader = cu.WangWangNum
@@ -559,8 +558,14 @@
         <if test="username2 != null and username2 != ''">
           AND p2.UserName = #{username2,jdbcType=VARCHAR}
         </if>
-        <if test="teamname != null and teamname != ''">
-          AND tt.TeamName = #{teamname,jdbcType=VARCHAR}
+        <if test="TeamName != null and TeamName != ''">
+          AND tt.TeamName = #{TeamName,jdbcType=VARCHAR}
+        </if>
+        <if test="TScustomer != null">
+          AND cu.TScustomer = #{TScustomer,jdbcType=VARCHAR}
+        </if>
+        <if test="PersonnelID != -1">
+          AND cr.PersonnelID = #{PersonnelID,jdbcType=INTEGER}
         </if>
       </trim>
     <!--</if>-->

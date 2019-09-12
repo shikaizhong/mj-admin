@@ -220,7 +220,6 @@
     <select id="selectHiddenList" parameterType="java.util.HashMap" resultMap="BaseResultMapVo">
         SELECT ht.*,re.`result` FROM t_hidden_trouble ht LEFT JOIN t_responsibility re ON ht.`pk_id` = re.`complaint_id`
         <trim prefix="WHERE" prefixOverrides="AND|OR">
-            AND re.`type` = 1
             AND ht.`is_delete` = 0
             <if test="wangwangnum != null and wangwangnum != ''">
                 AND ht.`WangWangNum` = #{wangwangnum,jdbcType=VARCHAR}
@@ -231,6 +230,9 @@
             </if>
             <if test="result != -1">
                 AND re.`result` = #{result}
+            </if>
+            <if test="frequency !=-1">
+                and ht.frequency = #{frequency}
             </if>
         </trim>
         ORDER BY ht.`hidden_date` DESC
@@ -243,7 +245,7 @@
     <!--查询数据总数-->
     <select id="total" parameterType="java.util.HashMap" resultType="java.lang.Integer">
       SELECT COUNT(*) FROM t_hidden_trouble ht LEFT JOIN t_responsibility re ON ht.`pk_id` = re.`complaint_id`
-          WHERE re.`type` = 1 AND ht.`is_delete` = 0
+          WHERE ht.`is_delete` = 0
     </select>
 
     <!--根据旺旺名查该店铺的隐患次数，到第几次-->

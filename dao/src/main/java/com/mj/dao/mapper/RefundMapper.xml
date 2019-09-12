@@ -256,7 +256,6 @@
     <select id="selectRefundList" parameterType="java.util.HashMap" resultMap="BaseResultMapVo">
         SELECT rr.*,re.`result` FROM t_refund rr LEFT JOIN t_responsibility re ON rr.`pk_id` = re.`complaint_id`
         <trim prefix="WHERE" prefixOverrides="AND|OR">
-            AND re.`type` = 2
             AND rr.`is_delete` = 0
             <if test="wangwangnum != null and wangwangnum != ''">
                 AND rr.`WangWangNum` = #{wangwangnum,jdbcType=VARCHAR}
@@ -278,7 +277,7 @@
     <!--查询退款总数-->
     <select id="selectRefundCount" parameterType="java.util.HashMap" resultType="java.lang.Integer">
         SELECT COUNT(*) FROM t_refund rr LEFT JOIN t_responsibility re ON rr.`pk_id` = re.`complaint_id`
-          WHERE re.`type` = 2 AND rr.`is_delete` = 0
+          WHERE rr.`is_delete` = 0
     </select>
 
     <!--删除-->

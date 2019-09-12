@@ -57,6 +57,30 @@ public class SQLServerVo {
      * 店铺类型
      */
     private String shopptype;
+    /**
+     *  TScustomer车手
+     */
+    private String tscustomer;
+    /**
+     *  PersonnelID招商顾问id
+     */
+    private Integer personnelid;
+
+    public String getTscustomer() {
+        return tscustomer;
+    }
+
+    public void setTscustomer(String tscustomer) {
+        this.tscustomer = tscustomer;
+    }
+
+    public Integer getPersonnelid() {
+        return personnelid;
+    }
+
+    public void setPersonnelid(Integer personnelid) {
+        this.personnelid = personnelid;
+    }
 
     public String getWangwangnum() {
         return wangwangnum;

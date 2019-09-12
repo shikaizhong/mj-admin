@@ -207,6 +207,9 @@ public class ResponsibilityVo {
     //合同金额
     private Double turnovermoney;
 
+    //投诉日期
+    private Date reDate;
+
     //生产get.set方法
     public Integer getPkId() {
         return pkId;
@@ -559,5 +562,13 @@ public class ResponsibilityVo {
 
     public void setTurnovermoney(Double turnovermoney) {
         this.turnovermoney = turnovermoney;
+    }
+
+    public Date getReDate() {
+        return reDate;
+    }
+
+    public void setReDate(Date reDate) {
+        this.reDate = reDate;
     }
 }

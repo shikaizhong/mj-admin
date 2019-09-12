@@ -65,11 +65,17 @@ public class HiddenTroubleServiceImpl implements HiddenTroubleService {
         //根据招商顾问查询
         String username2 = String.valueOf(params.get("username2"));
         //根据团队名查询
-        String teamname = String.valueOf(params.get("teamname"));
+        String TeamName = String.valueOf(params.get("TeamName"));
         //根据旺旺名查询
         String wangwangnum = String.valueOf(params.get("wangwangnum"));
         //根据隐患次数查询
         String frequency = String.valueOf(params.get("frequency"));
+
+        //店长ID
+        String TScustomer = String.valueOf(params.get("TScustomer"));
+        //招商顾问ID
+        Integer PersonnelID = Integer.valueOf((Integer) params.get("PersonnelID"));
+
 
         //时间区间的判断，若前端没有值传输，则为：[, ]
         String a = "[, ]";
@@ -117,8 +123,8 @@ public class HiddenTroubleServiceImpl implements HiddenTroubleService {
         if (!wangwangnum.isEmpty()) {
             params.put("wangwangnum", wangwangnum);
         }
-        if (frequency == "null") {
-            params.put("frequency", null);
+        if (frequency == "") {
+            params.put("frequency", -1);
         }
 
         //调用查询数据总数的dao层
@@ -149,9 +155,11 @@ public class HiddenTroubleServiceImpl implements HiddenTroubleService {
                 if(!shopptype.isEmpty()){
                     map.put("shopptype", shopptype);
                 }
-                if(!teamname.isEmpty()){
-                    map.put("teamname", teamname);
+                if(!TeamName.isEmpty()){
+                    map.put("TeamName", TeamName);
                 }
+                map.put("TScustomer",TScustomer);
+                map.put("PersonnelID",PersonnelID);
                 List<SQLServerVo> sqlServerVo = personnelServiceImpl.selectByDatebase(map);
                     if (!sqlServerVo.isEmpty()) {
                         for (SQLServerVo listVo : sqlServerVo) {
@@ -301,7 +309,7 @@ public class HiddenTroubleServiceImpl implements HiddenTroubleService {
         //根据招商顾问查询
         String username2 = String.valueOf(params.get("username2"));
         //根据团队名查询
-        String teamname = String.valueOf(params.get("teamname"));
+        String TeamName = String.valueOf(params.get("TeamName"));
 //        System.out.println("Refund_旺旺名为:" + wangwangnum);
         List<HiddenTrouble> hiddenTrouble = hiddenTroubleMapper.selectByWangWangNum(wangwangnum);
 
@@ -315,7 +323,7 @@ public class HiddenTroubleServiceImpl implements HiddenTroubleService {
             map.put("shopptype", shopptype);
             map.put("username1", username1);
             map.put("username2", username2);
-            map.put("teamname", teamname);
+            map.put("TeamName", TeamName);
 //            System.out.println("Refund_map集合里的数据：" + map);
             List<SQLServerVo> sqlServerVo = personnelServiceImpl.selectByDatebase(map);
 //            System.out.println("干啥呢？不想好了？");

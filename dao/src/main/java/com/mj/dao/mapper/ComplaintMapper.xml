@@ -9,15 +9,13 @@
     <result column="sceneRestoration" jdbcType="VARCHAR" property="scenerestoration" /><!--该字段弃用-->
     <result column="remarks" jdbcType="VARCHAR" property="remarks" />
     <result column="frequency" jdbcType="INTEGER" property="frequency" />
-    <result column="status" jdbcType="TINYINT" property="status" />
     <result column="is_delete" jdbcType="TINYINT" property="isDelete" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.mj.dao.entity.Complaint">
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
   </resultMap>
   <sql id="Base_Column_List">
-    pk_id, WangWangNum, complaintDate, channel, remarks, frequency,
-   status, is_delete
+    pk_id, WangWangNum, complaintDate, channel, remarks, frequency, is_delete
   </sql>
   <sql id="Blob_Column_List">
     content
@@ -70,9 +68,6 @@
       <if test="frequency != null">
         frequency,
       </if>
-      <if test="status != null">
-        status,
-      </if>
       <if test="isDelete != null">
         is_delete,
       </if>
@@ -120,9 +115,6 @@
       </if>
       <if test="frequency != null">
         #{frequency,jdbcType=INTEGER},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=TINYINT},
       </if>
       <if test="isDelete != null">
         #{isDelete,jdbcType=TINYINT},
@@ -172,9 +164,6 @@
       <if test="frequency != null">
         frequency = #{frequency,jdbcType=INTEGER},
       </if>
-      <if test="status != null">
-        status = #{status,jdbcType=TINYINT},
-      </if>
       <if test="isDelete != null">
         is_delete = #{isDelete,jdbcType=TINYINT},
       </if>
@@ -204,7 +193,6 @@
       sceneRestoration = #{scenerestoration,jdbcType=VARCHAR},
       remarks = #{remarks,jdbcType=VARCHAR},
       frequency = #{frequency,jdbcType=INTEGER},
-      status=#{status,jdbcType = INTEGER},
       is_delete = #{isDelete,jdbcType=TINYINT},
     where pk_id = #{pkId,jdbcType=INTEGER}
   </update>
@@ -217,7 +205,6 @@
     <result column="sceneRestoration" jdbcType="VARCHAR" property="scenerestoration" />
     <result column="remarks" jdbcType="VARCHAR" property="remarks" />
     <result column="frequency" jdbcType="INTEGER" property="frequency" />
-    <result column="status" jdbcType="TINYINT" property="status" />
     <result column="is_delete" jdbcType="TINYINT" property="isDelete" />
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
     <result column="turnover" jdbcType="INTEGER" property="turnover" />
@@ -326,9 +313,6 @@
         OR cc.`complaintDate` LIKE CONCAT('%',#{keyword}, '%')))
         <!--客诉类别搜索-->
       </if>
-      <if test="status != -1">
-        AND cc.status=#{status,jdbcType=TINYINT}
-      </if>
       <if test="tscustomer !=-1">
       AND cu.`TScustomer`=#{tscustomer,jdbcType=VARCHAR}
     </if>
@@ -361,22 +345,19 @@
   </select>
   <!--查询分页加搜索改进版-->
   <select id="selectComplaintList" parameterType="java.util.HashMap" resultMap="BaseResultMapVo">
-    SELECT * FROM t_complaint cc
+    SELECT cc.*,rr.result FROM t_complaint cc left join t_responsibility rr ON rr.`complaint_id` = cc.`pk_id`
     <trim prefix="WHERE" prefixOverrides="AND|OR">
     cc.is_delete=0
     <if test="keyword != null and keyword != ''">
-      AND ((cc.WangWangNum LIKE CONCAT('%', #{keyword}, '%')
-        <!--团队名称搜索-->
-        <!--时间搜索-->
-      OR cc.`complaintDate` LIKE CONCAT('%',#{keyword}, '%')))
+      AND cc.WangWangNum LIKE CONCAT('%', #{keyword}, '%')
       </if>
       <!--按照状态搜索-->
-      <if test="status != -1">
-        AND cc.status=#{status,jdbcType=TINYINT}
-      </if>
       <!--按照投诉次数管理-->
       <if test="frequency !=-1">
         and cc.`frequency` > #{frequency,jdbcType=INTEGER}
+      </if>
+      <if test="result !=-1">
+        and rr.result = #{result}
       </if>
       <!--按照投诉渠道搜索-->
       <if test="channel !=-1">
@@ -403,10 +384,7 @@
     <trim prefix="WHERE" prefixOverrides="AND|OR">
       cc.is_delete=0
       <if test="keyword != null and keyword != ''">
-        AND ((cc.WangWangNum LIKE CONCAT('%', #{keyword}, '%')
-        <!--团队名称搜索-->
-        <!--时间搜索-->
-        OR cc.`complaintDate` LIKE CONCAT('%',#{keyword}, '%')))
+        AND cc.WangWangNum LIKE CONCAT('%', #{keyword}, '%')
       </if>
       <!--按照投诉次数管理-->
       <if test="frequency !=-1">
@@ -472,7 +450,7 @@
   <select id="selectHiddenByWangWangNum" resultType="com.mj.dao.vo.ResponsibilityVo">
     SELECT *  FROM t_hidden_trouble ht LEFT JOIN t_responsibility rr
       ON rr.`complaint_id` = ht.`pk_id`
-   LEFT JOIN t_complaint_level cl ON rr.`level` = cl.parent_id
+   LEFT JOIN t_complaint_level cl ON rr.`son_level` = cl.`pk_id`
     WHERE ht.WangWangNum =#{wangwangnum,jdbcType=VARCHAR}
       and  ht.is_delete=0
   </select>
@@ -480,7 +458,7 @@
   <select id="selectRefundByWangWangNum" resultType="com.mj.dao.vo.ResponsibilityVo">
     SELECT *  FROM t_refund rf LEFT JOIN t_responsibility rr
     ON rr.`complaint_id` = rf.`pk_id`
-    LEFT JOIN t_complaint_level cl ON rr.`level` = cl.parent_id
+    LEFT JOIN t_complaint_level cl ON rr.`son_level` = cl.`pk_id`
     WHERE rf.WangWangNum =#{wangwangnum,jdbcType=VARCHAR}
       and  rf.is_delete=0
   </select>

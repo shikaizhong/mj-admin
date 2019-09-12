@@ -84,9 +84,6 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
             params.put("startTime", null);
             params.put("endTime", null);
         }
-        if (PersonnelID == "null") {
-            params.put("PersonnelID", -1);
-        }
         String TeamName = String.valueOf(params.get("TeamName"));
         if (TeamName == "") {
             params.put("TeamName", null);
@@ -444,10 +441,14 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
     public RestResult selectAll(Map params) throws ParseException {
         Integer pageNum = Integer.valueOf(String.valueOf(params.get("pageNum")));
         Integer pageSize = Integer.valueOf(String.valueOf(params.get("pageSize")));
-        String PersonnelID = String.valueOf(params.get("PersonnelID"));
+        Integer PersonnelID = Integer.valueOf((Integer) params.get("PersonnelID"));
         String keyword = String.valueOf(params.get("keyword"));
         String channel = String.valueOf(params.get("channel"));
         String frequency = String.valueOf(params.get("frequency"));
+        String TScustomer = String.valueOf(params.get("TScustomer"));
+        params.put("TScustomer",TScustomer);
+        params.put("PersonnelID", PersonnelID);
+
         //格式化时间
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
@@ -492,9 +493,6 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
         if (frequency =="null"){
             params.put("frequency",-1);
         }
-        if (PersonnelID == "null") {
-            params.put("PersonnelID", -1);
-        }
         String TeamName = String.valueOf(params.get("TeamName"));
         if (TeamName == "") {
             params.put("TeamName", null);
@@ -535,10 +533,10 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
             //取出mysql数据库数据
             responsibilityVo.setBasic(vo.getBasic());
             responsibilityVo.setChannel(vo.getChannel());
-            responsibilityVo.setComplaintdate(vo.getComplaintdate());
             responsibilityVo.setComplaintId(vo.getComplaintId());
             responsibilityVo.setComplaintName(vo.getComplaintName());
-            responsibilityVo.setCreateTime(vo.getCreateTime());
+            responsibilityVo.setCreateTime(vo.getComplaintdate());
+            responsibilityVo.setReDate(vo.getCreateTime());
             responsibilityVo.setDeal(vo.getDeal());
             responsibilityVo.setGrade(vo.getGrade());
             if (vo.getLevel() != null) {
@@ -565,8 +563,8 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
                 responsibilityVo.setTeamname(responsibilityVos.getTeamname());
                 responsibilityVo.setShopptype(responsibilityVos.getShopptype());
                 responsibilityVo.setServerdeadline(responsibilityVos.getServerdeadline());
+                result.add(responsibilityVo);
             }
-            result.add(responsibilityVo);
         }
         if (!list1.isEmpty()) {
             for (ResponsibilityVo listHidden : list1) {
@@ -577,6 +575,7 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
                 responsibilityVo.setWangwangnum(listHidden.getWangwangnum());
                 responsibilityVo.setHiddenContent(listHidden.getHiddenContent());
                 responsibilityVo.setCreateTime(listHidden.getHiddenDate());
+                responsibilityVo.setReDate(listHidden.getCreateTime());
                 responsibilityVo.setResult(listHidden.getResult());
                 responsibilityVo.setRemark(listHidden.getRemark());
                 responsibilityVo.setFrequency(listHidden.getFrequency());
@@ -596,7 +595,7 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
                 responsibilityVo.setParentName(listHidden.getParentName());
                 responsibilityVo.setExternalCause(listHidden.getExternalCause());
                 responsibilityVo.setGrade(listHidden.getGrade());
-                if (sqlServerVos != null) {
+                if (sqlServerVos.size() != 0) {
                     for (SQLServerVo sqlServerVo : sqlServerVos) {
                         responsibilityVo.setCusttype(sqlServerVo.getCusttype());
                         responsibilityVo.setChildtype(sqlServerVo.getChildtype());
@@ -605,8 +604,9 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
                         responsibilityVo.setTeamname(sqlServerVo.getTeamname());
                         responsibilityVo.setShopptype(sqlServerVo.getShopptype());
                     }
+                    result.add(responsibilityVo);
                 }
-                result.add(responsibilityVo);
+
             }
         }
         if (!list2.isEmpty()){
@@ -620,6 +620,7 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
                     responsibilityVo.setRefundCause(listRefund.getRefundCause());
                     responsibilityVo.setRefundChannel(listRefund.getRefundChannel());
                     responsibilityVo.setCreateTime(listRefund.getRefundDate());
+                    responsibilityVo.setReDate(listRefund.getCreateTime());
                     responsibilityVo.setRemark(listRefund.getRemark());
                     responsibilityVo.setRefundAmount(listRefund.getRefundAmount());
                     responsibilityVo.setPkId(listRefund.getPkId());
@@ -641,7 +642,7 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
                 responsibilityVo.setParentName(listRefund.getParentName());
                 responsibilityVo.setExternalCause(listRefund.getExternalCause());
                 responsibilityVo.setGrade(listRefund.getGrade());
-                if (sqlServerVos != null) {
+                if (sqlServerVos.size() != 0) {
                     for(SQLServerVo sqlServerVo : sqlServerVos) {
                         responsibilityVo.setCusttype(sqlServerVo.getCusttype());
                         responsibilityVo.setChildtype(sqlServerVo.getChildtype());
@@ -651,8 +652,8 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
                         responsibilityVo.setShopptype(sqlServerVo.getShopptype());
                         responsibilityVo.setDeadline(sqlServerVo.getDeadline());
                     }
+                    result.add(responsibilityVo);
                 }
-                result.add(responsibilityVo);
             }
         }
         Integer total1 = complaintMapper.selectComplaintCount(params);

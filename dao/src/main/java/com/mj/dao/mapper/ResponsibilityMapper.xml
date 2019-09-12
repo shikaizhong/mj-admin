@@ -275,6 +275,8 @@
       <result column="CustType" jdbcType="VARCHAR" property="custtype"/>
       <result column="ChildType" jdbcType="VARCHAR" property="childtype"/>
       <result column="TurnoverMoney" jdbcType="FLOAT" property="turnovermaoey"/>
+
+      <result column="re_date" jdbcType="TIMESTAMP" property="reDate"/>
   </resultMap>
   <!--查重-->
   <select id="selectByComplaintId" parameterType="com.mj.dao.entity.ResponsibilityWithBLOBs" resultMap="ResultMapWithBLOBs">
@@ -423,10 +425,10 @@
 
     <!--type为0时,查询投诉信息-->
     <select id="selectResponsiblityList" parameterType="java.util.HashMap" resultMap="BaseResultMapVo">
-        SELECT *  FROM t_complaint cc LEFT JOIN t_responsibility rr ON rr.`complaint_id` = cc.`pk_id`
+        SELECT DISTINCT *  FROM t_complaint cc LEFT JOIN t_responsibility rr ON rr.`complaint_id` = cc.`pk_id`
            LEFT JOIN t_complaint_level cl ON rr.`level` = cl.parent_id
             <trim prefix="WHERE" prefixOverrides="AND|OR">
-                cc.is_delete=0
+                cc.is_delete=0 and cc.complaint_type = 0
                 <if test="keyword != null and keyword != ''">
                   AND (cc.WangWangNum LIKE CONCAT('%', #{keyword}, '%'))
                 </if>
@@ -447,10 +449,10 @@
     </select>
     <!--type为1时,查询隐患信息-->
     <select id="selectHiddenTrouble" parameterType="java.util.HashMap" resultMap="BaseResultMapVo">
-        SELECT *  FROM t_hidden_trouble ht LEFT JOIN t_responsibility rr ON rr.`complaint_id` = ht.`pk_id`
+        SELECT DISTINCT *  FROM t_hidden_trouble ht LEFT JOIN t_responsibility rr ON rr.`complaint_id` = ht.`pk_id`
            LEFT JOIN t_complaint_level cl ON rr.`level` = cl.parent_id
             <trim prefix="WHERE" prefixOverrides="AND|OR">
-                ht.is_delete = 0
+                ht.is_delete = 0 and ht.hidden_type = 1
                 <if test="keyword != null and keyword != ''">
                   AND (ht.WangWangNum LIKE CONCAT('%', #{keyword}, '%'))
                 </if>
@@ -461,7 +463,7 @@
                     AND rr.`result` =#{result,jdbcType=INTEGER}
                 </if>
                 <if test="grade !=null">
-                    AND cl.`grade` =#{grade}
+                    AND rr.`grade` =#{grade}
                 </if>
             </trim>
         ORDER BY ht.`hidden_date` DESC
@@ -471,10 +473,10 @@
     </select>
     <!--type为2时,查询退款管理-->
     <select id="selectRefund" parameterType="java.util.HashMap" resultMap="BaseResultMapVo">
-        SELECT *  FROM t_refund rf LEFT JOIN t_responsibility rr ON rr.`complaint_id` = rf.`pk_id`
+        SELECT DISTINCT *  FROM t_refund rf LEFT JOIN t_responsibility rr ON rr.`complaint_id` = rf.`pk_id`
           LEFT JOIN t_complaint_level cl ON rr.`level` = cl.parent_id
             <trim prefix="WHERE" prefixOverrides="AND|OR">
-                rf.is_delete = 0
+                rf.is_delete = 0 and refund_type = 2
                 <if test="keyword != null and keyword != ''">
                   AND (rf.WangWangNum LIKE CONCAT('%', #{keyword}, '%'))
                 </if>
@@ -488,7 +490,7 @@
                     AND rr.`result` =#{result,jdbcType=INTEGER}
                 </if>
                 <if test="grade !=null and grade != ''">
-                    AND cl.`grade` =#{grade,jdbcType=INTEGER}
+                    AND rr.`grade` =#{grade,jdbcType=INTEGER}
                 </if>
             </trim>
         order by rf.`refund_date` DESC

@@ -148,9 +148,6 @@ public class PersonnelServiceImpl implements PersonnelService {
     @DataSource(value = "slave1")
     @Override
     public ComplaintVo selectComplaintListOver(Map map) {
-        System.out.println("进来哦");
-        System.out.println(map.get("wangwangnum"));
-        /*ComplaintVo complaintVo = personnelMapper.selectComplaintListOver(map);*/
         return personnelMapper.selectComplaintListOver(map);
     }
     @DataSource(value = "slave1")
@@ -183,6 +180,16 @@ public class PersonnelServiceImpl implements PersonnelService {
     @DataSource(value = "slave1")
     @Override
     public ResponsibilityVo selectResponsibilityList(Map map) {
+        Integer PersonnelID = Integer.valueOf((Integer) map.get("PersonnelID"));
+        String TScustomer = String.valueOf(map.get("TScustomer"));
+        if (PersonnelID == -1){
+            map.put("PersonnelID",-1);
+        }else if (PersonnelID == null){
+            map.put("PersonnelID",-1);
+        }
+        if (TScustomer == "null"){
+            map.put("TScustomer",null);
+        }
         return personnelMapper.selectResponsibilityList(map);
     }
 
@@ -199,7 +206,12 @@ public class PersonnelServiceImpl implements PersonnelService {
         //根据招商顾问查询
         String username2 = String.valueOf(params.get("username2"));
         //根据团队名查询
-        String teamname = String.valueOf(params.get("teamname"));
+        String TeamName = String.valueOf(params.get("TeamName"));
+        System.out.println("组别为1:"+TeamName);
+        //店长ID
+        String TScustomer = String.valueOf(params.get("TScustomer"));
+        //招商顾问ID
+        Integer PersonnelID = Integer.valueOf((Integer) params.get("PersonnelID"));
 
         params.put("wangwangnum", wangwangnum);
         Map map = new HashMap();
@@ -215,8 +227,23 @@ public class PersonnelServiceImpl implements PersonnelService {
         if(!username2.isEmpty() && username2 !="null"){
             map.put("username2", username2);
         }
-        if(!teamname.isEmpty() && teamname !="null"){
-            map.put("teamname", teamname);
+        if(!TeamName.isEmpty() && TeamName !="null"){
+            System.out.println("组别为2:"+TeamName);
+            map.put("TeamName", TeamName);
+        }
+        if(TScustomer == "null"){
+            map.put("TScustomer", null);
+        }else if(TScustomer == ""){
+            map.put("TScustomer", null);
+        }else {
+            map.put("TScustomer",TScustomer);
+        }
+        if (PersonnelID == -1){
+            map.put("PersonnelID",-1);
+        }else if (PersonnelID == null) {
+            map.put("PersonnelID", -1);
+        }else {
+            map.put("PersonnelID",PersonnelID);
         }
         List<SQLServerVo> list = personnelMapper.selectBySQL(map);
         for(SQLServerVo sqlServerVo : list){

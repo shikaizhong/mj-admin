@@ -63,7 +63,7 @@ public class ComplaintServiceImpl implements ComplaintService {
         Integer pageNum = Integer.valueOf(String.valueOf(params.get("pageNum")));
         Integer pagesize = Integer.valueOf(String.valueOf(params.get("pagesize")));
         String keyword = String.valueOf(params.get("keyword"));
-        String status = String.valueOf(params.get("status"));
+        String results = String.valueOf(params.get("result"));
         String channel = String.valueOf(params.get("channel"));
         String frequency = String.valueOf(params.get("frequency"));
         String TScustomer = String.valueOf(params.get("TScustomer"));
@@ -77,8 +77,8 @@ public class ComplaintServiceImpl implements ComplaintService {
         if (PersonnelID =="null"){
             params.put("PersonnelID",-1);
         }
-        if (status =="null"){
-            params.put("status",-1);
+        if (results =="null"){
+            params.put("result",-1);
         }
         if (channel == "null"){
             params.put("channel",-1);

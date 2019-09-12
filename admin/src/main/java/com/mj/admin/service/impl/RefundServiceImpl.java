@@ -71,7 +71,11 @@ public class RefundServiceImpl implements RefundService {
         //根据招商顾问查询
         String username2 = String.valueOf(params.get("username2"));
         //根据团队名查询
-        String teamname = String.valueOf(params.get("teamname"));
+        String TeamName = String.valueOf(params.get("TeamName"));
+        //店长ID
+        String TScustomer = String.valueOf(params.get("TScustomer"));
+        //招商顾问ID
+        Integer PersonnelID = Integer.valueOf((Integer) params.get("PersonnelID"));
 
         //时间区间的判断，若前端没有值传输，则为：[, ]
         String a = "[, ]";
@@ -147,7 +151,10 @@ public class RefundServiceImpl implements RefundService {
             put1.put("shopptype", shopptype);
             put1.put("username1", username1);
             put1.put("username2", username2);
-            put1.put("teamname", teamname);
+            put1.put("TeamName", TeamName);
+            put1.put("TScustomer", TScustomer);
+            put1.put("PersonnelID", PersonnelID);
+
 //            System.out.println("put1集合的值："+put1);
             //根据旺旺名调用personnelServerImpl接口获取数据
             List<SQLServerVo> listVos = personnelServiceImpl.selectByDatebase(put1);
@@ -174,7 +181,6 @@ public class RefundServiceImpl implements RefundService {
                     refundVo.setTeamname(sqlServerVo.getTeamname());
                     refundVo.setUsername1(sqlServerVo.getUsername1());
                     refundVo.setUsername2(sqlServerVo.getUsername2());
-//                    System.out.println("获取refundVos里的值后："+refundVo);
                 }
                 result1.add(refundVo);
             }
@@ -184,7 +190,6 @@ public class RefundServiceImpl implements RefundService {
         Integer total = refundMapper.selectRefundCount(params);
         //结果集Map集合
         Map map = new HashMap();
-//            System.out.println("将refundVo里的值封装给result后：" + result);
         map.put("list", result1);
         map.put("total", total);
         return new RestResultBuilder().setCode(0).setMsg("请求成功").setData(map).build();
@@ -359,8 +364,11 @@ public class RefundServiceImpl implements RefundService {
         //根据招商顾问查询
         String username2 = String.valueOf(params.get("username2"));
         //根据团队名查询
-        String teamname = String.valueOf(params.get("teamname"));
-//        System.out.println("Refund_旺旺名为:" + wangwangnum);
+        String TeamName = String.valueOf(params.get("TeamName"));
+        //店长ID
+        String TScustomer = String.valueOf(params.get("TScustomer"));
+        //招商顾问ID
+        Integer PersonnelID = Integer.valueOf((Integer) params.get("PersonnelID"));
         List<Refund> refund = refundMapper.selectInfoByWangWangNum(wangwangnum);
 
         List<RefundVo> listVo = new ArrayList();
@@ -373,7 +381,9 @@ public class RefundServiceImpl implements RefundService {
             map.put("shopptype", shopptype);
             map.put("username1", username1);
             map.put("username2", username2);
-            map.put("teamname", teamname);
+            map.put("TeamName", TeamName);
+            map.put("TScustomer",TScustomer);
+            map.put("PersonnelID",PersonnelID);
             List<SQLServerVo> sqlServerVo = personnelServiceImpl.selectByDatebase(map);
             refundVo.setWangwangnum(list.getWangwangnum());
             refundVo.setRefundDate(list.getRefundDate());
