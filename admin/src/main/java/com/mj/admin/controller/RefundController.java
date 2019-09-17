@@ -5,6 +5,7 @@ import com.mj.common.result.RestResult;
 import com.mj.common.result.RestResultBuilder;
 import com.mj.dao.entity.Files;
 import com.mj.dao.entity.Refund;
+import com.mj.dao.vo.RefundVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -34,7 +35,7 @@ public class RefundController {
 
     //修改反馈
     @RequestMapping(value = "/updateRefund", method = RequestMethod.POST)
-    public RestResult updateRefund(@RequestBody Refund refund)throws ParseException{
+    public RestResult updateRefund(@RequestBody RefundVo refund)throws ParseException{
         return refundService.updateRefund(refund);
     }
 

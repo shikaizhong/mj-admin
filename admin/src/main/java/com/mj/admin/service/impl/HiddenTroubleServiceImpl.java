@@ -142,6 +142,8 @@ public class HiddenTroubleServiceImpl implements HiddenTroubleService {
                 hiddenTroubleVo.setPkId(listHidden.getPkId());
                 hiddenTroubleVo.setResult(listHidden.getResult());
                 hiddenTroubleVo.setRemark(listHidden.getRemark());
+                hiddenTroubleVo.setLevel(listHidden.getLevel());
+                hiddenTroubleVo.setSonLevel(listHidden.getSonLevel());
                 Map map = new HashMap();
                 if(!wangwangnums.isEmpty()){
                     map.put("wangwangnum", wangwangnums);
@@ -267,11 +269,16 @@ public class HiddenTroubleServiceImpl implements HiddenTroubleService {
     //修改
     @DataSource(value = "druid")
     @Override
-    public RestResult updateHidden(HiddenTrouble hiddenTrouble) throws ParseException {
+    public RestResult updateHidden(HiddenTroubleVo hiddenTrouble) throws ParseException {
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
         SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        HiddenTrouble hiddenTrouble1 = hiddenTroubleMapper.selectByPrimaryKey(hiddenTrouble.getPkId());
-        hiddenTrouble1.setHiddenContent(hiddenTrouble.getHiddenContent());
+        HiddenTroubleVo hiddenTrouble1 = hiddenTroubleMapper.selectBy(hiddenTrouble.getPkId());
+        System.out.println(hiddenTrouble.getHiddenContent()+"内容为:");
+        if(!hiddenTrouble.getHiddenContent().isEmpty()){
+            System.out.println("修改之后1:"+hiddenTrouble.getHiddenContent());
+            hiddenTrouble1.setHiddenContent(hiddenTrouble.getHiddenContent());
+            System.out.println("修改之后2:"+hiddenTrouble1.getHiddenContent());
+        }
         //初始化
         String str = hiddenTrouble.gethDate();
         //通过正则表达式判断前端获取的时间是否为格林威治时间
@@ -291,8 +298,10 @@ public class HiddenTroubleServiceImpl implements HiddenTroubleService {
             hiddenTrouble1.setHiddenDate(sdf2.parse(newtime));
         }
         hiddenTrouble1.setRemark(hiddenTrouble.getRemark());
+        hiddenTrouble1.setLevel(hiddenTrouble.getLevel());
+        hiddenTrouble1.setSonLevel(hiddenTrouble.getSonLevel());
         //调用修改的dao方法
-        hiddenTroubleMapper.updateByPrimaryKeySelective(hiddenTrouble1);
+        hiddenTroubleMapper.updateAll(hiddenTrouble1);
         return new RestResultBuilder<>().success("修改成功");
     }
 

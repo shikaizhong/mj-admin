@@ -51,7 +51,10 @@ public class HiddenTrouble {
     private String hiddenContent;
 
     private Integer result;
-
+    //客诉大类别
+    private Integer level;
+    //客诉小类别
+    private Integer sonLevel;
     /**
      * 主键，隐患表
      *
@@ -213,6 +216,22 @@ public class HiddenTrouble {
 
     public void setResult(Integer result) {
         this.result = result;
+    }
+
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
+    }
+
+    public Integer getSonLevel() {
+        return sonLevel;
+    }
+
+    public void setSonLevel(Integer sonLevel) {
+        this.sonLevel = sonLevel;
     }
 
     /**

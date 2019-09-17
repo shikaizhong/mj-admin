@@ -5,6 +5,7 @@ import com.mj.common.result.RestResult;
 import com.mj.common.result.RestResultBuilder;
 import com.mj.dao.entity.Complaint;
 import com.mj.dao.entity.Files;
+import com.mj.dao.vo.ComplaintVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -45,7 +46,7 @@ public class ComplaintController {
     }
     //修改反馈
     @RequestMapping(value = "/updateComplaint",method = RequestMethod.POST)
-    public RestResult updateComplaint(@RequestBody Complaint complaint){
+    public RestResult updateComplaint(@RequestBody ComplaintVo complaint){
         return complaintService.updateComplaint(complaint);
     }
     //删除反馈

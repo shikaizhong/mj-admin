@@ -267,14 +267,15 @@ public class RefundServiceImpl implements RefundService {
     //修改退款信息
     @DataSource(value = "druid")
     @Override
-    public RestResult updateRefund(Refund refund) throws ParseException {
+    public RestResult updateRefund(RefundVo refund) throws ParseException {
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
         SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 //        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //        Calendar calendar = new GregorianCalendar();
 
         //根据ID查询
-        Refund refund2 = refundMapper.selectByPrimaryKey(refund.getPkId());
+        RefundVo refund2 = refundMapper.selectBy(refund.getPkId());
+        System.out.println("主键为:"+refund.getPkId());
         //初始化
 //        System.out.println("获取退款时间："+refund.getRefunddate());
 
@@ -300,15 +301,21 @@ public class RefundServiceImpl implements RefundService {
             long rightTime = (long) (sdf1.parse(str).getTime() + 8 * 60 * 60 * 1000);
             //格式转化
             String newtime = sdf2.format(rightTime);
+            System.out.println("时间为1:"+newtime);
+            System.out.println("时间为2:"+sdf2.parse(newtime));
             refund2.setRefundDate(sdf2.parse(newtime));
         }
 
         refund2.setRefundChannel(refund.getRefundChannel());
         refund2.setRemark(refund.getRemark());
         refund2.setWangwangnum(refund.getWangwangnum());
+        System.out.println("退款原因为:"+refund.getRefundCause());
         refund2.setRefundCause(refund.getRefundCause());
+        System.out.println("修改后退款原因为:"+refund2.getRefundCause());
         refund2.setRefundAmount(refund.getRefundAmount());
-        refundMapper.updateByPrimaryKeyWithBLOBs(refund2);
+        refund2.setLevel(refund.getLevel());
+        refund2.setSonLevel(refund.getSonLevel());
+        refundMapper.updateAll(refund2);
         return new RestResultBuilder<>().success("修改成功");
     }
 

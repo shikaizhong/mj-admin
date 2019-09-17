@@ -32,9 +32,9 @@ public class Complaint {
     private String scenerestoration;
 
     /**
-     * 备注 remarks
+     * 备注 remark
      */
-    private String remarks;
+    private String remark;
 
     /**
      * 投诉次数,每投诉一次自动+1 frequency
@@ -129,12 +129,12 @@ public class Complaint {
         this.scenerestoration = scenerestoration;
     }
 
-    public String getRemarks() {
-        return remarks;
+    public String getRemark() {
+        return remark;
     }
 
-    public void setRemarks(String remarks) {
-        this.remarks = remarks;
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 
     public Integer getFrequency() {

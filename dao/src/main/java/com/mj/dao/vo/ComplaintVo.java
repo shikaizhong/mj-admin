@@ -20,7 +20,7 @@ public class ComplaintVo {
      * 投诉日期 complaintDate
      */
 //    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(locale = "zh", timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(locale = "zh", timezone = "GMT+8", pattern = "yyyy-MM-dd")
     private Date complaintdate;
 
     /**
@@ -34,9 +34,9 @@ public class ComplaintVo {
     private String scenerestoration;
 
     /**
-     * 备注 remarks
+     * 备注 remark
      */
-    private String remarks;
+    private String remark;
 
     /**
      * 投诉次数,每投诉一次自动+1 frequency
@@ -99,6 +99,41 @@ public class ComplaintVo {
     private Integer teamid;
     //判责状态
     private Integer result;
+    //客诉子类别
+    private Integer sonLevel;
+
+    /**
+     * 获取前端的时间而新增的，数据库中并无该字段，Vo层中也没有该字段
+     */
+    private String hDate;
+    /**
+     * 投诉类别，对应判责表客诉类型 level
+     */
+    private Integer level;
+
+    public Integer getSonLevel() {
+        return sonLevel;
+    }
+
+    public void setSonLevel(Integer sonLevel) {
+        this.sonLevel = sonLevel;
+    }
+
+    public String gethDate() {
+        return hDate;
+    }
+
+    public void sethDate(String hDate) {
+        this.hDate = hDate;
+    }
+
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
+    }
 
     public Integer getResult() {
         return result;
@@ -298,12 +333,12 @@ public class ComplaintVo {
         this.scenerestoration = scenerestoration;
     }
 
-    public String getRemarks() {
-        return remarks;
+    public String getRemark() {
+        return remark;
     }
 
-    public void setRemarks(String remarks) {
-        this.remarks = remarks;
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 
     public Integer getFrequency() {

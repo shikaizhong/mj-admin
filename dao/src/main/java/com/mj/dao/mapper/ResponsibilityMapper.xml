@@ -277,6 +277,8 @@
       <result column="TurnoverMoney" jdbcType="FLOAT" property="turnovermaoey"/>
 
       <result column="re_date" jdbcType="TIMESTAMP" property="reDate"/>
+
+    <result column="time" jdbcType="TIMESTAMP" property="time"/>
   </resultMap>
   <!--查重-->
   <select id="selectByComplaintId" parameterType="com.mj.dao.entity.ResponsibilityWithBLOBs" resultMap="ResultMapWithBLOBs">

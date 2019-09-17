@@ -207,8 +207,31 @@ public class ResponsibilityVo {
     //合同金额
     private Double turnovermoney;
 
+    //店铺近30天成交额
+    private Integer turnover;
+
+    //店铺近30天成交笔数
+    private  Integer number;
+
+    //店铺行业
+    private Integer industry;
+
+    //处理方案
+    private String processingScheme;
+
+    //跟进过程
+    private String followProcess;
+    //跟进人员
+    private String  followPersonel;
+
     //投诉日期
     private Date reDate;
+
+    //合日期
+    private Date time;
+
+    //原因
+    private  String content;
 
     //生产get.set方法
     public Integer getPkId() {
@@ -570,5 +593,70 @@ public class ResponsibilityVo {
 
     public void setReDate(Date reDate) {
         this.reDate = reDate;
+    }
+
+
+    public Date getTime() {
+        return time;
+    }
+
+    public void setTime(Date time) {
+        this.time = time;
+    }
+
+    public Integer getTurnover() {
+        return turnover;
+    }
+
+    public void setTurnover(Integer turnover) {
+        this.turnover = turnover;
+    }
+
+    public Integer getNumber() {
+        return number;
+    }
+
+    public void setNumber(Integer number) {
+        this.number = number;
+    }
+
+    public Integer getIndustry() {
+        return industry;
+    }
+
+    public void setIndustry(Integer industry) {
+        this.industry = industry;
+    }
+
+    public String getProcessingScheme() {
+        return processingScheme;
+    }
+
+    public void setProcessingScheme(String processingScheme) {
+        this.processingScheme = processingScheme;
+    }
+
+    public String getFollowProcess() {
+        return followProcess;
+    }
+
+    public void setFollowProcess(String followProcess) {
+        this.followProcess = followProcess;
+    }
+
+    public String getFollowPersonel() {
+        return followPersonel;
+    }
+
+    public void setFollowPersonel(String followPersonel) {
+        this.followPersonel = followPersonel;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 }

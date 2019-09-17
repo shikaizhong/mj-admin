@@ -1,6 +1,7 @@
 package com.mj.dao.repository;
 
 import com.mj.dao.entity.HiddenTrouble;
+import com.mj.dao.vo.HiddenTroubleVo;
 
 import java.util.List;
 import java.util.Map;
@@ -65,4 +66,8 @@ public interface HiddenTroubleMapper {
     //根据id查询隐患详情
     List<HiddenTrouble> selectById(Map params);
 
+    //修改客诉类别
+    int updateAll(HiddenTroubleVo hiddenTrouble);
+    //查看
+    HiddenTroubleVo selectBy(Integer pkId);
 }

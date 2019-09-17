@@ -5,6 +5,7 @@ import com.mj.common.result.RestResult;
 import com.mj.common.result.RestResultBuilder;
 import com.mj.dao.entity.Files;
 import com.mj.dao.entity.HiddenTrouble;
+import com.mj.dao.vo.HiddenTroubleVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -35,8 +36,8 @@ public class HiddenTroubleController {
     }
 
     //修改隐患
-    @RequestMapping(value = "updateHidden", method = {RequestMethod.POST,RequestMethod.GET})
-    public RestResult updateHiddenController(@RequestBody HiddenTrouble hiddenTrouble) throws ParseException {
+    @RequestMapping(value = "/updateHidden", method = {RequestMethod.POST,RequestMethod.GET})
+    public RestResult updateHiddenController(@RequestBody HiddenTroubleVo hiddenTrouble) throws ParseException {
         return hiddenTroubleService.updateHidden(hiddenTrouble);
     }
 

@@ -2,6 +2,7 @@ package com.mj.dao.repository;
 
 import com.mj.dao.entity.Files;
 import com.mj.dao.entity.Refund;
+import com.mj.dao.vo.RefundVo;
 
 import java.util.List;
 import java.util.Map;
@@ -65,4 +66,9 @@ public interface RefundMapper {
 
     //根据refundId查询历史记录
     List<Files> selectFiles(Map params);
+
+    //修改客诉类别
+    int updateAll(RefundVo refundVo);
+    //查看
+    RefundVo selectBy(Integer pkId);
 }

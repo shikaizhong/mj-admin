@@ -175,10 +175,7 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
         int pageSize = pageRequest.getPageSize();
         PageHelper.startPage(pageNum, pageSize);
         List<Responsibility> responsibilities = responsibilityMapper.page();
-        for (Responsibility p : responsibilities) {
-            System.out.println(p.getType());
-            System.out.println("进来哦弟弟");
-        }
+
         return new PageInfo<Responsibility>(responsibilities);
     }
 
@@ -334,7 +331,7 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
             complaintVo.setComplaintdate(vo.getComplaintdate());
             complaintVo.setDepartment(vo.getDepartment());
             complaintVo.setWorktype(vo.getWorktype());
-            complaintVo.setRemarks(vo.getRemarks());
+            complaintVo.setRemark(vo.getRemark());
             complaintVo.setPkId(vo.getPkId());
             complaintVo.setIsStop(vo.getIsStop());
             complaintVo.setIsDelete(vo.getIsDelete());
@@ -539,6 +536,7 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
             responsibilityVo.setReDate(vo.getCreateTime());
             responsibilityVo.setDeal(vo.getDeal());
             responsibilityVo.setGrade(vo.getGrade());
+            responsibilityVo.setTime(vo.getComplaintdate());
             if (vo.getLevel() != null) {
                 responsibilityVo.setLevel(vo.getLevel());
             }
@@ -576,6 +574,7 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
                 responsibilityVo.setHiddenContent(listHidden.getHiddenContent());
                 responsibilityVo.setCreateTime(listHidden.getHiddenDate());
                 responsibilityVo.setReDate(listHidden.getCreateTime());
+                responsibilityVo.setTime(listHidden.getHiddenDate());
                 responsibilityVo.setResult(listHidden.getResult());
                 responsibilityVo.setRemark(listHidden.getRemark());
                 responsibilityVo.setFrequency(listHidden.getFrequency());
@@ -624,6 +623,7 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
                     responsibilityVo.setRemark(listRefund.getRemark());
                     responsibilityVo.setRefundAmount(listRefund.getRefundAmount());
                     responsibilityVo.setPkId(listRefund.getPkId());
+                    responsibilityVo.setTime(listRefund.getRefundDate());
 
                 if (responsibilityVo.getLevel() != null) {
                     responsibilityVo.setLevel(responsibilityVo.getLevel());

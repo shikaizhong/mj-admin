@@ -3,6 +3,7 @@ package com.mj.admin.service;
 import com.mj.common.result.RestResult;
 import com.mj.dao.entity.Files;
 import com.mj.dao.entity.HiddenTrouble;
+import com.mj.dao.vo.HiddenTroubleVo;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -22,7 +23,7 @@ public interface HiddenTroubleService {
     RestResult deleteHidden(List<Integer> pkIds);
 
     //修改
-    RestResult updateHidden(HiddenTrouble hiddenTrouble)throws ParseException;
+    RestResult updateHidden(HiddenTroubleVo hiddenTrouble)throws ParseException;
 
     //根据旺旺名查看历史记录
     RestResult selectInfoByWangWangNum(Map params)throws ParseException;

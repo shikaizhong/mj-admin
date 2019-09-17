@@ -182,13 +182,26 @@ public class PersonnelServiceImpl implements PersonnelService {
     public ResponsibilityVo selectResponsibilityList(Map map) {
         Integer PersonnelID = Integer.valueOf((Integer) map.get("PersonnelID"));
         String TScustomer = String.valueOf(map.get("TScustomer"));
+        //根据团队名查询
+        String TeamName = String.valueOf(map.get("TeamName"));
+        if (TeamName ==""){
+            map.put("TeamName",null);
+        }else if (TeamName == "null"){
+            map.put("TeamName", null);
+        }else {
+            map.put("TeamName",TScustomer);
+        }
+        if(TScustomer == "null"){
+            map.put("TScustomer", null);
+        }else if(TScustomer == ""){
+            map.put("TScustomer", null);
+        }else {
+            map.put("TScustomer",TScustomer);
+        }
         if (PersonnelID == -1){
             map.put("PersonnelID",-1);
         }else if (PersonnelID == null){
             map.put("PersonnelID",-1);
-        }
-        if (TScustomer == "null"){
-            map.put("TScustomer",null);
         }
         return personnelMapper.selectResponsibilityList(map);
     }
@@ -207,7 +220,6 @@ public class PersonnelServiceImpl implements PersonnelService {
         String username2 = String.valueOf(params.get("username2"));
         //根据团队名查询
         String TeamName = String.valueOf(params.get("TeamName"));
-        System.out.println("组别为1:"+TeamName);
         //店长ID
         String TScustomer = String.valueOf(params.get("TScustomer"));
         //招商顾问ID
@@ -228,7 +240,6 @@ public class PersonnelServiceImpl implements PersonnelService {
             map.put("username2", username2);
         }
         if(!TeamName.isEmpty() && TeamName !="null"){
-            System.out.println("组别为2:"+TeamName);
             map.put("TeamName", TeamName);
         }
         if(TScustomer == "null"){

@@ -3,6 +3,7 @@ package com.mj.admin.service;
 import com.mj.common.result.RestResult;
 import com.mj.dao.entity.Files;
 import com.mj.dao.entity.Refund;
+import com.mj.dao.vo.RefundVo;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -18,7 +19,7 @@ public interface RefundService {
     RestResult addRefund(Refund refund) throws ParseException;
 
     //修改
-    RestResult updateRefund(Refund refund)throws ParseException;
+    RestResult updateRefund(RefundVo refund)throws ParseException;
 
     //批量删除退款
     RestResult deleteRefund(List<Integer> pkIds);

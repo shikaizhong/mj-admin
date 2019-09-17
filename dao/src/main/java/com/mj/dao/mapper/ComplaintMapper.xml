@@ -7,7 +7,7 @@
     <result column="complaintDate" jdbcType="TIMESTAMP" property="complaintdate" />
     <result column="channel" jdbcType="INTEGER" property="channel" />
     <result column="sceneRestoration" jdbcType="VARCHAR" property="scenerestoration" /><!--该字段弃用-->
-    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="frequency" jdbcType="INTEGER" property="frequency" />
     <result column="is_delete" jdbcType="TINYINT" property="isDelete" />
   </resultMap>
@@ -15,7 +15,7 @@
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
   </resultMap>
   <sql id="Base_Column_List">
-    pk_id, WangWangNum, complaintDate, channel, remarks, frequency, is_delete
+    pk_id, WangWangNum, complaintDate, channel, remark, frequency, is_delete
   </sql>
   <sql id="Blob_Column_List">
     content
@@ -34,12 +34,12 @@
   </delete>
   <insert id="insert" parameterType="com.mj.dao.entity.Complaint">
     insert into t_complaint (pk_id, WangWangNum, complaintDate, 
-      channel, sceneRestoration, remarks, 
+      channel, sceneRestoration, remark, 
       frequency,
       content
       )
     values (#{pkId,jdbcType=INTEGER}, #{wangwangnum,jdbcType=VARCHAR}, #{complaintdate,jdbcType=TIMESTAMP}, 
-      #{channel,jdbcType=INTEGER}, #{scenerestoration,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}, 
+      #{channel,jdbcType=INTEGER}, #{scenerestoration,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
       #{frequency,jdbcType=INTEGER},
      #{content,jdbcType=LONGVARCHAR}
       )
@@ -62,8 +62,8 @@
       <if test="scenerestoration != null">
         sceneRestoration,
       </if>
-      <if test="remarks != null">
-        remarks,
+      <if test="remark != null">
+        remark,
       </if>
       <if test="frequency != null">
         frequency,
@@ -110,8 +110,8 @@
       <if test="scenerestoration != null">
         #{scenerestoration,jdbcType=VARCHAR},
       </if>
-      <if test="remarks != null">
-        #{remarks,jdbcType=VARCHAR},
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
       </if>
       <if test="frequency != null">
         #{frequency,jdbcType=INTEGER},
@@ -158,8 +158,8 @@
       <if test="scenerestoration != null">
         sceneRestoration = #{scenerestoration,jdbcType=VARCHAR},
       </if>
-      <if test="remarks != null">
-        remarks = #{remarks,jdbcType=VARCHAR},
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
       </if>
       <if test="frequency != null">
         frequency = #{frequency,jdbcType=INTEGER},
@@ -179,7 +179,7 @@
       complaintDate = #{complaintdate,jdbcType=TIMESTAMP},
       channel = #{channel,jdbcType=INTEGER},
       sceneRestoration = #{scenerestoration,jdbcType=VARCHAR},
-      remarks = #{remarks,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
       frequency = #{frequency,jdbcType=INTEGER},
       content = #{content,jdbcType=LONGVARCHAR},
         is_delete = #{isDelete,jdbcType=TINYINT},
@@ -191,7 +191,7 @@
       complaintDate = #{complaintdate,jdbcType=TIMESTAMP},
       channel = #{channel,jdbcType=INTEGER},
       sceneRestoration = #{scenerestoration,jdbcType=VARCHAR},
-      remarks = #{remarks,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
       frequency = #{frequency,jdbcType=INTEGER},
       is_delete = #{isDelete,jdbcType=TINYINT},
     where pk_id = #{pkId,jdbcType=INTEGER}
@@ -203,7 +203,7 @@
     <result column="complaintDate" jdbcType="TIMESTAMP" property="complaintdate" />
     <result column="channel" jdbcType="INTEGER" property="channel" />
     <result column="sceneRestoration" jdbcType="VARCHAR" property="scenerestoration" />
-    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="frequency" jdbcType="INTEGER" property="frequency" />
     <result column="is_delete" jdbcType="TINYINT" property="isDelete" />
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
@@ -227,6 +227,9 @@
     <result column="complaint_name" jdbcType="VARCHAR" property="complaintName" />
     <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+
+    <result column="level" jdbcType="INTEGER" property="level" />
+    <result column="son_level" jdbcType="INTEGER" property="sonLevel" />
 
     <result column="UserName" jdbcType="VARCHAR" property="username" />
     <result column="ID" jdbcType="INTEGER" property="id" />
@@ -345,7 +348,7 @@
   </select>
   <!--查询分页加搜索改进版-->
   <select id="selectComplaintList" parameterType="java.util.HashMap" resultMap="BaseResultMapVo">
-    SELECT cc.*,rr.result FROM t_complaint cc left join t_responsibility rr ON rr.`complaint_id` = cc.`pk_id`
+    SELECT cc.*,rr.result,rr.`level`,rr.`son_level` FROM t_complaint cc left join t_responsibility rr ON rr.`complaint_id` = cc.`pk_id`
     <trim prefix="WHERE" prefixOverrides="AND|OR">
     cc.is_delete=0
     <if test="keyword != null and keyword != ''">
@@ -461,5 +464,49 @@
     LEFT JOIN t_complaint_level cl ON rr.`son_level` = cl.`pk_id`
     WHERE rf.WangWangNum =#{wangwangnum,jdbcType=VARCHAR}
       and  rf.is_delete=0
+  </select>
+
+  <!--修改客诉内容-->
+  <update id="updateAll" parameterType="com.mj.dao.vo.ComplaintVo">
+    update t_complaint cc left join t_responsibility re on cc.`pk_id` = re.`complaint_id`
+    <set>
+      <if test="wangwangnum != null">
+        cc.WangWangNum = #{wangwangnum,jdbcType=VARCHAR},
+      </if>
+      <if test="complaintdate != null">
+        cc.complaintDate = #{complaintdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="channel != null">
+        cc.channel = #{channel,jdbcType=INTEGER},
+      </if>
+      <if test="scenerestoration != null">
+        cc.sceneRestoration = #{scenerestoration,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        cc.remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="frequency != null">
+        cc.frequency = #{frequency,jdbcType=INTEGER},
+      </if>
+      <if test="isDelete != null">
+        cc.is_delete = #{isDelete,jdbcType=TINYINT},
+      </if>
+      <if test="content != null">
+        cc.content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="level !=null">
+        re.level = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="sonLevel !=null">
+        re.son_level = #{sonLevel,jdbcType = INTEGER},
+      </if>
+    </set>
+    where cc.pk_id = #{pkId,jdbcType=INTEGER}
+  </update>
+  <!--通过pkId查询-->
+  <select id="selectBy" parameterType="java.lang.Integer" resultType="com.mj.dao.vo.ComplaintVo">
+    select cc.*,re.`result`,re.`level`,re.`son_level` FROM t_complaint cc LEFT JOIN t_responsibility re
+                                                                                         ON cc.`pk_id` = re.`complaint_id`
+    where cc.pk_id = #{pkId,jdbcType=INTEGER}
   </select>
 </mapper>

@@ -3,6 +3,7 @@ package com.mj.admin.service;
 import com.mj.common.result.RestResult;
 import com.mj.dao.entity.Complaint;
 import com.mj.dao.entity.Files;
+import com.mj.dao.vo.ComplaintVo;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -16,7 +17,7 @@ public interface ComplaintService {
     //添加
     RestResult addComplaint(Complaint complaint);
     //修改
-    RestResult updateComplaint(Complaint complaint);
+    RestResult updateComplaint(ComplaintVo complaint);
     //批量删除反馈
     RestResult deleteComlaint(List<Integer> pkIds);
     //根据旺旺名查询历史记录

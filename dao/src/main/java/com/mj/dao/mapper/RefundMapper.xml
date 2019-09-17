@@ -307,4 +307,44 @@
             where ff.`complaint_id` = #{complaintId,jdbcType=INTEGER} AND ff.`file_type` = 2 ORDER BY ff.`pk_id` DESC
     </select>
 
+    <!--通过pkId查询-->
+    <select id="selectBy" parameterType="java.lang.Integer" resultType="com.mj.dao.vo.RefundVo">
+        select rr.*,re.`result`,re.`level`,re.`son_level` FROM t_refund rr LEFT JOIN t_responsibility re
+          ON rr.`pk_id` = re.`complaint_id`
+        where rr.pk_id = #{pkId,jdbcType=INTEGER}
+    </select>
+    <!--修改客诉内容-->
+    <update id="updateAll" parameterType="com.mj.dao.vo.RefundVo">
+        update t_refund rr left join t_responsibility re on rr.`pk_id` = re.`complaint_id`
+        <set>
+            <if test="wangwangnum != null">
+                rr.WangWangNum = #{wangwangnum,jdbcType=VARCHAR},
+            </if>
+            <if test="refundDate != null">
+                rr.refund_date = #{refundDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="refundChannel != null">
+                rr.refund_channel = #{refundChannel,jdbcType=TINYINT},
+            </if>
+            <if test="refundCause != null">
+                rr.refund_cause = #{refundCause,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="remark != null">
+                rr.remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="refundAmount != null">
+                rr.refund_amount = #{refundAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="isDelete != null">
+                rr.is_delete = #{isDelete,jdbcType=TINYINT},
+            </if>
+            <if test="level !=null">
+                re.level = #{level,jdbcType=INTEGER},
+            </if>
+            <if test="sonLevel !=null">
+                re.son_level = #{sonLevel,jdbcType = INTEGER},
+            </if>
+        </set>
+        where rr.pk_id = #{pkId,jdbcType=INTEGER}
+    </update>
 </mapper>

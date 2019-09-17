@@ -100,6 +100,26 @@ public class RefundVo {
      */
     public String externalCause;
 
+    /**
+     * 投诉大类别
+     */
+    private Integer level;
+    //客诉子类别
+    private Integer sonLevel;
+
+    /**
+     * 获取前端的时间而新增的，数据库中并无该字段，Vo层中也没有该字段
+     */
+    private String hDate;
+
+    public String gethDate() {
+        return hDate;
+    }
+
+    public void sethDate(String hDate) {
+        this.hDate = hDate;
+    }
+
     public String getExternalCause() {
         return externalCause;
     }
@@ -248,5 +268,21 @@ public class RefundVo {
 
     public void setResult(Integer result) {
         this.result = result;
+    }
+
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
+    }
+
+    public Integer getSonLevel() {
+        return sonLevel;
+    }
+
+    public void setSonLevel(Integer sonLevel) {
+        this.sonLevel = sonLevel;
     }
 }

@@ -79,4 +79,9 @@ public interface ComplaintMapper {
     List<ResponsibilityVo> selectHiddenByWangWangNum(Map params);
     //通过wangwangnum查询退款信息
     List<ResponsibilityVo> selectRefundByWangWangNum(Map params);
+
+    //修改客诉类别
+    int updateAll(ComplaintVo complaintVo);
+    //查看
+    ComplaintVo selectBy(Integer pkId);
 }

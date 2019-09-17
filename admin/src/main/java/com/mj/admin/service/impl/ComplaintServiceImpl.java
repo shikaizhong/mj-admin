@@ -3,6 +3,7 @@ package com.mj.admin.service.impl;
 import com.mj.admin.datasource.annotation.DataSource;
 import com.mj.admin.jdbc.DBHelp;
 import com.mj.admin.service.ComplaintService;
+import com.mj.admin.service.ResponsibilityService;
 import com.mj.common.enums.ResultCodeEnum;
 import com.mj.common.result.RestResult;
 import com.mj.common.result.RestResultBuilder;
@@ -52,6 +53,8 @@ public class ComplaintServiceImpl implements ComplaintService {
     private FilesMapper  filesMapper;
     @Autowired
     private PersonnelServiceImpl personnelService;
+    @Autowired
+    private ResponsibilityService responsibilityService;
     //分页搜索总记录数
     @DataSource(value = "druid")
     @Override
@@ -146,34 +149,10 @@ public class ComplaintServiceImpl implements ComplaintService {
 //        List<ComplaintVo> list = complaintMapper.selectComplaint(params);
         List<ComplaintVo> list = complaintMapper.selectComplaintList(params);
         System.out.println("最上面的循环长度是"+list.size());
-        //List<ComplaintVo> complaintVos = personnelService.selectComplaintListOver(list.get(0).getWangwangnum());
-        /*for(int i = 0 ; i < list.size() ; i++){
-            String wangwangnum =list.get(i).getWangwangnum();
-            System.out.println(wangwangnum+"旺旺名为");
-                System.out.println("下来了");
-                List<ComplaintVo> complaintVos = personnelService.selectComplaintListOver(wangwangnum);
-                System.out.println(complaintVos.size()+"集合长度为");
-                for (int z =0; z<complaintVos.size();z++){
-                    ComplaintVo complaintVo = new ComplaintVo();
-                    complaintVo.setWangwangnum(complaintVos.get(z).getWangwangnum());
-                    complaintVo.setTechnologyrecruitmentid(complaintVos.get(z).getTechnologyrecruitmentid());
-                    complaintVo.setShopptype(complaintVos.get(z).getShopptype());
-                    complaintVo.setPersonnelid(complaintVos.get(z).getPersonnelid());
-                    complaintVo.setTscustomer(complaintVos.get(z).getTscustomer());
-                    complaintVo.setTeamid(complaintVos.get(z).getTeamid());
-                    complaintVo.setTeamname(complaintVos.get(z).getTeamname());
-                    complaintVo.setUsername(complaintVos.get(z).getUsername());
-                    complaintVo.setPname(complaintVos.get(z).getPname());
-                    complaintVo.setTename(complaintVos.get(z).getTename());
-                    System.out.println(complaintVo.getTscustomer()+"店长id为");
-                    list.add(complaintVo);
-                }
-        }*/
         List<ComplaintVo> result = new ArrayList<>();
         for (ComplaintVo vo:list){
             String wangwangnum = vo.getWangwangnum();
             params.put("wangwangnum",wangwangnum);
-
             ComplaintVo complaintVos = personnelService.selectComplaintListOver(params);
             ComplaintVo complaintVo = new ComplaintVo();
             complaintVo.setScenerestoration(vo.getScenerestoration());
@@ -184,7 +163,7 @@ public class ComplaintServiceImpl implements ComplaintService {
             complaintVo.setComplaintdate(vo.getComplaintdate());
             complaintVo.setDepartment(vo.getDepartment());
             complaintVo.setWorktype(vo.getWorktype());
-            complaintVo.setRemarks(vo.getRemarks());
+            complaintVo.setRemark(vo.getRemark());
             complaintVo.setPkId(vo.getPkId());
             complaintVo.setIsStop(vo.getIsStop());
             complaintVo.setIsDelete(vo.getIsDelete());
@@ -197,6 +176,9 @@ public class ComplaintServiceImpl implements ComplaintService {
             complaintVo.setTurnover(vo.getTurnover());
             complaintVo.setProcessingScheme(vo.getProcessingScheme());
             complaintVo.setFollowProcess(vo.getFollowProcess());
+            complaintVo.setResult(vo.getResult());
+            complaintVo.setLevel(vo.getLevel());
+            complaintVo.setSonLevel(vo.getSonLevel());
             if (complaintVos !=null) {
             complaintVo.setTechnologyrecruitmentid(complaintVos.getTechnologyrecruitmentid());
             complaintVo.setShopptype(complaintVos.getShopptype());
@@ -209,6 +191,7 @@ public class ComplaintServiceImpl implements ComplaintService {
             complaintVo.setTename(complaintVos.getTename());
             result.add(complaintVo);
             }
+
         }
         //总数量
         Integer total = complaintMapper.selectComplaintCount(params);
@@ -231,7 +214,7 @@ public class ComplaintServiceImpl implements ComplaintService {
             complaint1.setContent(complaint.getContent());
             //反馈次数自动加1
             complaint1.setFrequency(frequency + 1);
-            complaint1.setRemarks(complaint.getRemarks());
+            complaint1.setRemark(complaint.getRemark());
             complaint1.setNumber(complaint.getNumber());
             complaint1.setTurnover(complaint.getTurnover());
             complaint1.setIndustry(complaint.getIndustry());
@@ -240,7 +223,11 @@ public class ComplaintServiceImpl implements ComplaintService {
             complaint1.setFollowProcess(complaint.getFollowProcess());
             Files files = new Files();
             files.setComplaintId(complaint1.getPkId());
+            if (complaint.getComplaintdate() ==null){
+                complaint1.setComplaintdate(new Date());
+            }else {
             complaint1.setComplaintdate(DateUtil.getAfter(complaint.getComplaintdate(), 1));
+            }
             System.out.println(complaint1.getComplaintdate() + "时间为");
 //            complaint1.setScenerestoration(complaint.getScenerestoration());
             complaint1.setWangwangnum(complaint.getWangwangnum());
@@ -257,9 +244,9 @@ public class ComplaintServiceImpl implements ComplaintService {
     @Transactional
     @DataSource(value = "druid")
     @Override
-    public RestResult updateComplaint(Complaint complaint) {
+    public RestResult updateComplaint(ComplaintVo complaint) {
         //根据id查询
-        Complaint complaint1 = complaintMapper.selectByPrimaryKey(complaint.getPkId());
+        ComplaintVo complaint1 = complaintMapper.selectBy(complaint.getPkId());
 //        System.out.println(complaint1+"地址为");
 //        //取出地址的所有内容
 //        String url = complaint1.getScenerestoration();
@@ -310,20 +297,21 @@ public class ComplaintServiceImpl implements ComplaintService {
 //        complaint1.setComplaintid(complaint.getComplaintid());
 //        complaint1.setComplaintId(complaint.getComplaintId());
 //        System.out.println("ComplaintId为"+complaint1.getComplaintId());
-        System.out.println("时间为"+complaint1.getComplaintdate());
         complaint1.setStatus(complaint.getStatus());
         complaint1.setWangwangnum(complaint.getWangwangnum());
         //文件上传时候修改
 //        complaint1.setScenerestoration(complaint.getScenerestoration());
 //        complaint1.setResult(complaint.getResult());
 //        complaint1.setResponsibility(complaint.getResponsibility());
-        complaint1.setRemarks(complaint.getRemarks());
+        complaint1.setRemark(complaint.getRemark());
 //        complaint1.setLevel(complaint.getLevel());
         complaint1.setContent(complaint.getContent());
         complaint1.setChannel(complaint.getChannel());
         complaint1.setComplaintdate(DateUtil.getAfter(complaint.getComplaintdate(),1));
+        complaint1.setSonLevel(complaint.getSonLevel());
+        complaint1.setLevel(complaint.getLevel());
         System.out.println("到了");
-        complaintMapper.updateByPrimaryKeySelective(complaint1);
+        complaintMapper.updateAll(complaint1);
         return new RestResultBuilder<>().success("修改成功");
     }
     //删除反馈信息
@@ -365,7 +353,7 @@ public class ComplaintServiceImpl implements ComplaintService {
             complaintVo.setComplaintdate(vo.getComplaintdate());
             complaintVo.setDepartment(vo.getDepartment());
             complaintVo.setWorktype(vo.getWorktype());
-            complaintVo.setRemarks(vo.getRemarks());
+            complaintVo.setRemark(vo.getRemark());
             complaintVo.setPkId(vo.getPkId());
             complaintVo.setIsStop(vo.getIsStop());
             complaintVo.setIsDelete(vo.getIsDelete());
@@ -540,6 +528,15 @@ public class ComplaintServiceImpl implements ComplaintService {
             responsibilityVo.setDeal(vo.getDeal());
             responsibilityVo.setGrade(vo.getGrade());
             responsibilityVo.setFrequency(vo.getFrequency());
+            responsibilityVo.setTurnover(vo.getTurnover());
+            responsibilityVo.setIndustry(vo.getIndustry());
+            responsibilityVo.setProcessingScheme(vo.getProcessingScheme());
+            responsibilityVo.setFollowProcess(vo.getFollowProcess());
+            responsibilityVo.setExternalCause(vo.getExternalCause());
+            responsibilityVo.setFollowPersonel(vo.getFollowPersonel());
+            responsibilityVo.setNumber(vo.getNumber());
+            responsibilityVo.setFollowProcess(vo.getFollowProcess());
+            responsibilityVo.setContent(vo.getContent());
             if (vo.getLevel() != null) {
                 responsibilityVo.setLevel(vo.getLevel());
             }
@@ -555,6 +552,7 @@ public class ComplaintServiceImpl implements ComplaintService {
             responsibilityVo.setSummary(vo.getSummary());
             responsibilityVo.setType(vo.getComplaintType());
             responsibilityVo.setWangwangnum(vo.getWangwangnum());
+            responsibilityVo.setRemark(vo.getRemark());
             if (responsibilityVos != null) {
                 responsibilityVo.setPersonnelid(responsibilityVos.getPersonnelid());
                 responsibilityVo.setPname(responsibilityVos.getPname());
@@ -574,7 +572,7 @@ public class ComplaintServiceImpl implements ComplaintService {
                 List<SQLServerVo> sqlServerVos = personnelService.selectByDatebase(params);
                 ResponsibilityVo responsibilityVo = new ResponsibilityVo();
                 responsibilityVo.setWangwangnum(listHidden.getWangwangnum());
-                responsibilityVo.setHiddenContent(listHidden.getHiddenContent());
+//                responsibilityVo.setHiddenContent(listHidden.getHiddenContent());
                 responsibilityVo.setCreateTime(listHidden.getHiddenDate());
                 responsibilityVo.setResult(listHidden.getResult());
                 responsibilityVo.setRemark(listHidden.getRemark());
@@ -591,6 +589,7 @@ public class ComplaintServiceImpl implements ComplaintService {
                 responsibilityVo.setDeal(listHidden.getDeal());
                 responsibilityVo.setComplaintId(listHidden.getComplaintId());
                 responsibilityVo.setType(listHidden.getHiddenType());
+                responsibilityVo.setContent(listHidden.getHiddenContent());
                 responsibilityVo.setComplaintName(listHidden.getComplaintName());
                 responsibilityVo.setParentName(listHidden.getParentName());
                 responsibilityVo.setExternalCause(listHidden.getExternalCause());
@@ -637,6 +636,7 @@ public class ComplaintServiceImpl implements ComplaintService {
                 responsibilityVo.setComplaintId(listRefund.getComplaintId());
                 responsibilityVo.setType(listRefund.getRefundType());
                 responsibilityVo.setComplaintName(listRefund.getComplaintName());
+                responsibilityVo.setContent(listRefund.getContent());
                 responsibilityVo.setParentName(listRefund.getParentName());
                 responsibilityVo.setExternalCause(listRefund.getExternalCause());
                 responsibilityVo.setGrade(listRefund.getGrade());

@@ -218,7 +218,7 @@
         </if>
     </select>-->
     <select id="selectHiddenList" parameterType="java.util.HashMap" resultMap="BaseResultMapVo">
-        SELECT ht.*,re.`result` FROM t_hidden_trouble ht LEFT JOIN t_responsibility re ON ht.`pk_id` = re.`complaint_id`
+        SELECT ht.*,re.`result`,re.`level`,re.`son_level` FROM t_hidden_trouble ht LEFT JOIN t_responsibility re ON ht.`pk_id` = re.`complaint_id`
         <trim prefix="WHERE" prefixOverrides="AND|OR">
             AND ht.`is_delete` = 0
             <if test="wangwangnum != null and wangwangnum != ''">
@@ -284,5 +284,43 @@
     <select id="selectById" parameterType="java.util.HashMap" resultMap="BaseResultMapVo">
         SELECT ht.* FROM t_hidden_trouble ht WHERE ht.`pk_id` = #{pkId,jdbcType=INTEGER}
         AND ht.`is_delete` = 0
+    </select>
+
+    <!--修改客诉内容-->
+    <update id="updateAll" parameterType="com.mj.dao.vo.HiddenTroubleVo">
+        update t_hidden_trouble ht left join t_responsibility re on ht.`pk_id` = re.`complaint_id`
+        <set>
+            <if test="wangwangnum != null">
+                ht.WangWangNum = #{wangwangnum,jdbcType=VARCHAR},
+            </if>
+            <if test="hiddenDate != null">
+                ht.hidden_date = #{hiddenDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                ht.remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="frequency != null">
+                ht.frequency = #{frequency,jdbcType=INTEGER},
+            </if>
+            <if test="isDelete != null">
+                ht.is_delete = #{isDelete,jdbcType=TINYINT},
+            </if>
+            <if test="hiddenContent != null">
+                ht.hidden_content = #{hiddenContent,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="level !=null">
+                re.level = #{level,jdbcType=INTEGER},
+            </if>
+            <if test="sonLevel !=null">
+                re.son_level = #{sonLevel,jdbcType = INTEGER},
+            </if>
+        </set>
+        where ht.pk_id = #{pkId,jdbcType=INTEGER}
+    </update>
+    <!--通过pkId查询-->
+    <select id="selectBy" parameterType="java.lang.Integer" resultType="com.mj.dao.vo.HiddenTroubleVo">
+      select ht.*,re.`result`,re.`level`,re.`son_level` FROM t_hidden_trouble ht LEFT JOIN t_responsibility re
+        ON ht.`pk_id` = re.`complaint_id`
+      where ht.pk_id = #{pkId,jdbcType=INTEGER}
     </select>
 </mapper>
