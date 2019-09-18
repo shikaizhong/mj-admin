@@ -28,7 +28,7 @@ public class ResponsibilityVo {
     /**
      * 客诉名称: 1:直通车不专业,2:作图,3:服务不专业,4:服务态度不好,5:店长进度慢,6:店长沟通不好,7:服务流量,8:服务转化,9:店铺排名,10直通车没人管 level_name
      */
-    private String sonLevel;
+    private Integer sonLevel;
 
     /**
      * 判责结果:0:微责  1:无责  2:待定 3:轻责 4:中责 5:重责 result
@@ -250,11 +250,11 @@ public class ResponsibilityVo {
         this.level = level;
     }
 
-    public String getSonLevel() {
+    public Integer getSonLevel() {
         return sonLevel;
     }
 
-    public void setSonLevel(String sonLevel) {
+    public void setSonLevel(Integer sonLevel) {
         this.sonLevel = sonLevel;
     }
 

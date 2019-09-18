@@ -63,8 +63,6 @@ public class ComplaintServiceImpl implements ComplaintService {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
         SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
-        Integer pageNum = Integer.valueOf(String.valueOf(params.get("pageNum")));
-        Integer pagesize = Integer.valueOf(String.valueOf(params.get("pagesize")));
         String keyword = String.valueOf(params.get("keyword"));
         String results = String.valueOf(params.get("result"));
         String channel = String.valueOf(params.get("channel"));
@@ -86,15 +84,6 @@ public class ComplaintServiceImpl implements ComplaintService {
         if (channel == "null"){
             params.put("channel",-1);
         }
-        if (pagesize>=10){
-            pagesize = 10;
-        }if (pageNum == 1){
-            pageNum = 0;
-        }else {
-            pageNum=(pageNum-1)*pagesize;
-        }
-        params.put("pageNum",pageNum);
-        params.put("pageSize",pagesize);
         params.put("keyword",keyword);
 
         //时间区间的判断，若前端没有值传输，则为：[, ]
@@ -399,10 +388,10 @@ public class ComplaintServiceImpl implements ComplaintService {
             Integer level = Integer.valueOf(String.valueOf(params.get("parentId")));
             params.put("level",level);
             List<ComplaintLevel> complaintLevels =complaintLevelMapper.getLevelName(params);
-            System.out.println(complaintLevels.size());
-            Map result = new HashMap();
-            result.put("list",complaintLevels);
-            return new RestResultBuilder().setCode(0).setMsg("请求成功").setData(result).build();
+//            System.out.println(complaintLevels.size());
+//            Map result = new HashMap();
+//            result.put("list",complaintLevels);
+            return new RestResultBuilder().setCode(0).setMsg("请求成功").setData(complaintLevels).build();
         }
         return new RestResultBuilder().setCode(-1).setMsg("大分类不存在").setData(null).build();
     }
@@ -578,8 +567,8 @@ public class ComplaintServiceImpl implements ComplaintService {
                 responsibilityVo.setRemark(listHidden.getRemark());
                 responsibilityVo.setFrequency(listHidden.getFrequency());
                 responsibilityVo.setPkId(listHidden.getPkId());
-                if (responsibilityVo.getLevel() != null) {
-                    responsibilityVo.setLevel(responsibilityVo.getLevel());
+                if (listHidden.getLevel() != null) {
+                    responsibilityVo.setLevel(listHidden.getLevel());
                 }
                 responsibilityVo.setSonLevel(listHidden.getSonLevel());
                 responsibilityVo.setResponsibilityer(listHidden.getResponsibilityer());
@@ -622,8 +611,8 @@ public class ComplaintServiceImpl implements ComplaintService {
                 responsibilityVo.setRefundAmount(listRefund.getRefundAmount());
                 responsibilityVo.setPkId(listRefund.getPkId());
 
-                if (responsibilityVo.getLevel() != null) {
-                    responsibilityVo.setLevel(responsibilityVo.getLevel());
+                if (listRefund.getLevel() != null) {
+                    responsibilityVo.setLevel(listRefund.getLevel());
                 }
                 responsibilityVo.setResult(listRefund.getResult());
                 responsibilityVo.setDeadline(listRefund.getDeadline());

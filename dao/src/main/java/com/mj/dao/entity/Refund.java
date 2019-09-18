@@ -62,6 +62,17 @@ public class Refund {
     private Integer result;
 
     /**
+     * 客诉大类别 对应complaint_level的parent_id level
+     */
+    private Integer level;
+
+    /**
+     * 客诉名称: 1:直通车不专业,2:作图,3:服务不专业,4:服务态度不好,5:店长进度慢,6:店长沟通不好,7:服务流量,8:服务转化,9:店铺排名,10直通车没人管 level_name
+     */
+    private Integer sonLevel;
+
+
+    /**
      * 主键
      * @author Administrator
      * @return pk_id 主键
@@ -217,6 +228,22 @@ public class Refund {
 
     public void setResult(Integer result) {
         this.result = result;
+    }
+
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
+    }
+
+    public Integer getSonLevel() {
+        return sonLevel;
+    }
+
+    public void setSonLevel(Integer sonLevel) {
+        this.sonLevel = sonLevel;
     }
 
     /**

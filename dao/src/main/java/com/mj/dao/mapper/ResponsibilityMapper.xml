@@ -333,9 +333,6 @@
         </trim>
       </if>
       order by cc.`complaintDate` DESC
-      <if test="pageNum !=null and pageSize !=null">
-        Limit #{pageNum},#{pageSize}
-      </if>
     </if>
     <!--隐患-->
     <if test="type ==1">
@@ -376,9 +373,6 @@
         </trim>
       </if>
       ORDER BY ht.`hidden_date` DESC
-      <if test="pageNum !=null and pageSize !=null">
-        Limit #{pageNum},#{pageSize}
-      </if>
     </if>
     <!--退款-->
     <if test="type ==2">
@@ -419,16 +413,13 @@
         </trim>
       </if>
       order by rf.`refund_date` DESC
-      <if test="pageNum !=null and pageSize !=null">
-        Limit #{pageNum},#{pageSize}
-      </if>
     </if>
   </select>
 
     <!--type为0时,查询投诉信息-->
     <select id="selectResponsiblityList" parameterType="java.util.HashMap" resultMap="BaseResultMapVo">
         SELECT DISTINCT *  FROM t_complaint cc LEFT JOIN t_responsibility rr ON rr.`complaint_id` = cc.`pk_id`
-           LEFT JOIN t_complaint_level cl ON rr.`level` = cl.parent_id
+           LEFT JOIN t_complaint_level cl ON rr.`son_level` = cl.pk_id
             <trim prefix="WHERE" prefixOverrides="AND|OR">
                 cc.is_delete=0 and cc.complaint_type = 0
                 <if test="keyword != null and keyword != ''">
@@ -445,14 +436,11 @@
                 </if>
             </trim>
         order by cc.`complaintDate` DESC
-        <if test="pageNum !=null and pageSize !=null">
-            Limit #{pageNum},#{pageSize}
-        </if>
     </select>
     <!--type为1时,查询隐患信息-->
     <select id="selectHiddenTrouble" parameterType="java.util.HashMap" resultMap="BaseResultMapVo">
         SELECT DISTINCT *  FROM t_hidden_trouble ht LEFT JOIN t_responsibility rr ON rr.`complaint_id` = ht.`pk_id`
-           LEFT JOIN t_complaint_level cl ON rr.`level` = cl.parent_id
+           LEFT JOIN t_complaint_level cl ON rr.`son_level` = cl.pk_id
             <trim prefix="WHERE" prefixOverrides="AND|OR">
                 ht.is_delete = 0 and ht.hidden_type = 1
                 <if test="keyword != null and keyword != ''">
@@ -469,14 +457,11 @@
                 </if>
             </trim>
         ORDER BY ht.`hidden_date` DESC
-        <if test="pageNum !=null and pageSize !=null">
-            Limit #{pageNum},#{pageSize}
-        </if>
     </select>
     <!--type为2时,查询退款管理-->
     <select id="selectRefund" parameterType="java.util.HashMap" resultMap="BaseResultMapVo">
         SELECT DISTINCT *  FROM t_refund rf LEFT JOIN t_responsibility rr ON rr.`complaint_id` = rf.`pk_id`
-          LEFT JOIN t_complaint_level cl ON rr.`level` = cl.parent_id
+          LEFT JOIN t_complaint_level cl ON rr.`son_level` = cl.pk_id
             <trim prefix="WHERE" prefixOverrides="AND|OR">
                 rf.is_delete = 0 and refund_type = 2
                 <if test="keyword != null and keyword != ''">
@@ -496,9 +481,6 @@
                 </if>
             </trim>
         order by rf.`refund_date` DESC
-        <if test="pageNum !=null and pageSize !=null">
-            Limit #{pageNum},#{pageSize}
-        </if>
     </select>
 
   <select id="selectComplaintCount" parameterType="java.util.HashMap" resultType="java.lang.Integer">

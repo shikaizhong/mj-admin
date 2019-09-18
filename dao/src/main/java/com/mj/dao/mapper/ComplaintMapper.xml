@@ -342,9 +342,6 @@
       </if>
     </trim>
     order by cc.`complaintDate` DESC
-    <if test="pageNum != null and pageSize != null">
-      Limit #{pageNum},#{pageSize}
-    </if>
   </select>
   <!--查询分页加搜索改进版-->
   <select id="selectComplaintList" parameterType="java.util.HashMap" resultMap="BaseResultMapVo">
@@ -371,9 +368,6 @@
       </if>
     </trim>
     order by cc.`complaintDate` DESC
-      <if test="pageNum !=null and pageSize !=null">
-        Limit #{pageNum},#{pageSize}
-      </if>
   </select>
 
   <!--根据pkId查询信息-->

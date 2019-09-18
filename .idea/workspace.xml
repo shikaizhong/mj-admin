@@ -1,29 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="GROUP_BY_SEVERITY" value="true" />
+  </component>
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/impl/ComplaintServiceImpl.java" line="439" />
+    <bookmark url="file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/impl/ComplaintServiceImpl.java" line="373" />
+    <bookmark url="file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/ResponsibilityService.java" line="18" />
+    <bookmark url="file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/impl/ResponsibilityServiceImpl.java" line="298" />
+    <bookmark url="file://$PROJECT_DIR$/dao/src/main/java/com/mj/dao/mapper/ResponsibilityMapper.xml" line="324" />
+    <bookmark url="file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/impl/ResponsibilityServiceImpl.java" line="620" />
+    <bookmark url="file://$PROJECT_DIR$/dao/src/main/java/com/mj/dao/vo/RefundVo.java" line="271" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0f4b6966-2ea5-4a09-9b69-6018d077f878" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../新建文件夹/mj-admin/admin/src/main/resources/templates/index/indexs.ftl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/admin/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/aop/DynamicDataSourceAnnotationAdvisor.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/aop/DynamicDataSourceAnnotationAdvisor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/aop/DynamicDataSourceAnnotationInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/aop/DynamicDataSourceAnnotationInterceptor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/aop/DynamicDataSourceAspect.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/aop/DynamicDataSourceAspect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/controller/ComplaintController.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/controller/ComplaintController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/controller/PersonnelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/controller/PersonnelController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/datasource/config/DynamicContextHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/datasource/config/DynamicContextHolder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/PersonnelService.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/PersonnelService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/controller/HiddenTroubleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/controller/HiddenTroubleController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/controller/RefundController.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/controller/RefundController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/impl/ComplaintServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/impl/ComplaintServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/impl/PersonnelServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/impl/PersonnelServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/resources/application-dev.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/src/test/java/com/mj/admin/service/JdbcTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/test/java/com/mj/admin/service/JdbcTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/impl/HiddenTroubleServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/impl/HiddenTroubleServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/impl/RefundServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/impl/RefundServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/impl/ResponsibilityServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/impl/ResponsibilityServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/mj/dao/entity/Refund.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/mj/dao/entity/Refund.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/mj/dao/mapper/ComplaintMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/mj/dao/mapper/ComplaintMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/mj/dao/mapper/HiddenTroubleMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/mj/dao/mapper/HiddenTroubleMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/mj/dao/mapper/PersonnelMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/mj/dao/mapper/PersonnelMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/mj/dao/repository/ComplaintMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/mj/dao/repository/ComplaintMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/mj/dao/repository/PersonnelMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/mj/dao/repository/PersonnelMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/mj/dao/vo/ComplaintVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/mj/dao/vo/ComplaintVo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/mj/dao/mapper/RefundMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/mj/dao/mapper/RefundMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/mj/dao/mapper/ResponsibilityMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/mj/dao/mapper/ResponsibilityMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dao/src/main/java/com/mj/dao/vo/ResponsibilityVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/dao/src/main/java/com/mj/dao/vo/ResponsibilityVo.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/dao/target/" />
     <ignored path="$PROJECT_DIR$/common/target/" />
@@ -61,37 +64,91 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/src/main/resources/application.yml">
+        <entry file="file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/controller/ComplaintController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-261">
-              <caret line="6" selection-start-line="6" selection-end-line="7" selection-end-column="21" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/AdminApplication.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="82">
-              <caret line="10" column="61" selection-start-line="10" selection-start-column="61" selection-end-line="10" selection-end-column="61" />
+            <state relative-caret-position="421">
+              <caret line="156" column="45" selection-start-line="156" selection-start-column="45" selection-end-line="156" selection-end-column="45" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#764#765#0" expanded="true" />
-                <element signature="e#831#832#0" expanded="true" />
+                <element signature="method#testUploadFile#0;class#ComplaintController#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/src/main/resources/application-dev.yml">
+        <entry file="file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/ComplaintService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
-              <caret line="74" column="119" lean-forward="true" selection-start-line="74" selection-start-column="119" selection-end-line="74" selection-end-column="119" />
+            <state relative-caret-position="474">
+              <caret line="41" column="15" selection-start-line="41" selection-start-column="15" selection-end-line="41" selection-end-column="15" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/impl/ComplaintServiceImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="363">
+              <caret line="569" column="30" selection-start-line="569" selection-start-column="30" selection-end-line="569" selection-end-column="30" />
               <folding>
-                <element signature="e#2204#2208#0" />
-                <element signature="e#2660#2792#0" />
-                <element signature="e#2990#3186#0" />
+                <element signature="e#1974#2002#0" />
+                <element signature="method#selectComplaint#0;class#ComplaintServiceImpl#0" />
+                <element signature="e#2978#3029#1" />
+                <element signature="e#3063#3116#1" />
+                <element signature="e#3146#3194#1" />
+                <element signature="e#3225#3274#1" />
+                <element signature="e#3438#4627#1" />
+                <element signature="e#4631#4726#1" />
+                <element signature="e#4768#4886#1" />
+                <element signature="e#4914#4966#1" />
+                <element signature="e#4991#5043#1" />
+                <element signature="e#5090#5155#1" />
+                <element signature="e#5164#5172#0" />
+                <element signature="e#5467#7783#1" />
+                <element signature="e#7107#7772#1" />
+                <element signature="e#8073#8087#0" />
+                <element signature="method#addComplaint#0;class#ComplaintServiceImpl#0" />
+                <element signature="e#9231#9303#1" />
+                <element signature="e#9308#9416#1" />
+                <element signature="e#9671#9735#0" />
+                <element signature="e#10022#10036#0" />
+                <element signature="method#updateComplaint#0;class#ComplaintServiceImpl#0" />
+                <element signature="e#10244#10291#0" />
+                <element signature="e#12293#12303#0" />
+                <element signature="e#13079#13093#0" />
+                <element signature="method#deleteComlaint#0;class#ComplaintServiceImpl#0" />
+                <element signature="e#13246#13512#1" />
+                <element signature="e#13291#13389#1" />
+                <element signature="method#selectInfoByWangWangNum#0;class#ComplaintServiceImpl#0" />
+                <element signature="e#14009#15845#1" />
+                <element signature="e#15130#15835#1" />
+                <element signature="method#selectFiles#0;class#ComplaintServiceImpl#0" />
+                <element signature="method#selectLevel#0;class#ComplaintServiceImpl#0" />
+                <element signature="method#getLevelName#0;class#ComplaintServiceImpl#0" />
+                <element signature="e#16709#17190#1" />
+                <element signature="e#16928#16985#0" />
+                <element signature="method#upload#0;class#ComplaintServiceImpl#0" />
+                <element signature="e#17859#17876#0" />
+                <element signature="e#18016#18027#0" />
+                <element signature="e#18686#18748#1" />
+                <element signature="method#addFile#0;class#ComplaintServiceImpl#0" />
+                <element signature="method#deleteFile#0;class#ComplaintServiceImpl#0" />
+                <element signature="method#exist#0;class#ComplaintServiceImpl#0" />
+                <element signature="e#19947#20357#0" />
+                <element signature="e#20134#20205#1" />
+                <element signature="e#20210#20347#1" />
+                <element signature="e#20379#20423#0" />
+                <element signature="e#20457#20501#0" />
+                <element signature="e#20510#20601#0" />
+                <element signature="e#21068#21121#1" />
+                <element signature="e#21589#24564#1" />
+                <element signature="e#23010#23083#1" />
+                <element signature="e#23849#24512#1" />
+                <element signature="e#26628#27223#1" />
+                <element signature="e#26695#27205#1" />
+                <element signature="e#27323#30408#1" />
+                <element signature="e#29572#30338#1" />
+                <element signature="e#29638#30320#1" />
+                <element signature="e#30409#30444#0" />
               </folding>
             </state>
           </provider>
@@ -111,37 +168,41 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>com.microsoft.jdbc.sqlserver.SQLServerDriver</find>
-      <find>@DataSource</find>
-      <find>slave1</find>
+      <find>t_lose</find>
+      <find>ll</find>
+      <find>ll.</find>
       <find>frequency</find>
-      <find>sql</find>
-      <find>req</find>
-      <find>complaintid</find>
-      <find>setComplaintdate</find>
-      <find>id</find>
-      <find>id为</find>
-      <find>id为9</find>
-      <find>192.168.1.112</find>
-      <find>ts</find>
+      <find>status</find>
+      <find>result结果为</find>
+      <find>BaseResultVo</find>
+      <find>selectResponsibilityList</find>
+      <find>结果集为</find>
+      <find>mysql查询的值为</find>
+      <find>sqlServerVos</find>
       <find>teamname</find>
-      <find>shopptype</find>
-      <find>list</find>
-      <find>preparedStatement</find>
-      <find>complaintVos</find>
-      <find>TScustomer</find>
-      <find>ShoppType</find>
-      <find>TechnologyRecruitmentID</find>
-      <find>PersonnelID</find>
-      <find>teamid</find>
-      <find>technologyRecruitmentid</find>
-      <find>complaintVo1</find>
-      <find>BaseResultMapVo</find>
-      <find>tscustomer</find>
-      <find>selectComplaintListOver</find>
-      <find>@JsonFormat(locale = &quot;zh&quot;, timezone = &quot;GMT+8&quot;, pattern = &quot;yyyy-MM-dd HH:mm:ss&quot;)</find>
-      <find>startTime</find>
+      <find>组别为2</find>
+      <find>account</find>
+      <find>level</find>
+      <find>remarks</find>
+      <find>remark</find>
+      <find>turnover</find>
+      <find>complaintType</find>
+      <find>修改之后1</find>
+      <find>时间为</find>
+      <find>退款原因为</find>
+      <find>updateAll</find>
+      <find>update</find>
+      <find>refundDate</find>
+      <find>主键为</find>
+      <find>complaintdate</find>
+      <find>总数为</find>
+      <find>selectComplaintList</find>
+      <find>page</find>
     </findStrings>
+    <replaceStrings>
+      <replace>remark</replace>
+      <replace>Remark</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="ROOT_SYNC" value="DONT_SYNC" />
@@ -150,57 +211,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/common/src/main/java/com/mj/common/tools/MapUtil.java" />
-        <option value="$PROJECT_DIR$/common/src/main/java/com/mj/common/tools/SpringContextUtils.java" />
-        <option value="$PROJECT_DIR$/common/src/main/java/com/mj/common/tools/HttpServletRequest.java" />
-        <option value="$PROJECT_DIR$/common/src/main/java/com/mj/common/tools/HttpContextUtil.java" />
-        <option value="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/aop/HttpAspect.java" />
-        <option value="$PROJECT_DIR$/common/src/main/java/com/mj/common/tools/ApiConstant.java" />
-        <option value="$PROJECT_DIR$/common/src/main/java/com/mj/common/tools/DateUtils.java" />
-        <option value="$PROJECT_DIR$/common/pom.xml" />
-        <option value="$PROJECT_DIR$/common/src/main/java/com/mj/common/tools/DateUtil.java" />
-        <option value="$PROJECT_DIR$/dao/src/main/java/com/mj/dao/entity/Complaint.java" />
-        <option value="$PROJECT_DIR$/admin/src/test/java/com/mj/admin/StringTest.java" />
-        <option value="$PROJECT_DIR$/dao/src/main/resources/mybatis/generatorConfig.xml" />
-        <option value="$PROJECT_DIR$/dao/src/main/java/com/mj/dao/mybatis/MybatisGenerateApp.java" />
-        <option value="$PROJECT_DIR$/dao/src/main/java/com/mj/dao/mapper/FilesMapper.xml" />
-        <option value="$PROJECT_DIR$/dao/src/main/java/com/mj/dao/datasource/config/DynamicContextHolder.java" />
-        <option value="$PROJECT_DIR$/dao/src/main/java/com/mj/dao/datasource/config/DynamicDataSourceConfig.java" />
-        <option value="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/datasource/config/DynamicDataSourceConfig.java" />
-        <option value="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/config/uploadConfig.java" />
-        <option value="$PROJECT_DIR$/common/src/main/java/com/mj/common/tools/JDBCTools.java" />
-        <option value="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/config/Properties.java" />
-        <option value="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/jdbc/Properties.java" />
-        <option value="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/jdbc/JDBCTools.java" />
-        <option value="$PROJECT_DIR$/common/src/main/java/com/mj/common/enums/ResultCodeEnum.java" />
-        <option value="$PROJECT_DIR$/admin/src/main/resources/banner.txt" />
-        <option value="$PROJECT_DIR$/admin/src/test/java/com/mj/admin/service/JdbcTest.java" />
-        <option value="$PROJECT_DIR$/common/src/main/java/com/mj/common/result/RestResult.java" />
-        <option value="$PROJECT_DIR$/dao/src/main/java/com/mj/dao/vo/ComplaintOver.java" />
-        <option value="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/datasource/config/DataSource1Config.java" />
-        <option value="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/jdbc/DBHelp.java" />
-        <option value="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/aop/GlobalExceptionHandler.java" />
-        <option value="$PROJECT_DIR$/admin/pom.xml" />
-        <option value="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/controller/ComplaintController.java" />
-        <option value="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/aop/DynamicDataSourceAnnotationAdvisor.java" />
-        <option value="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/aop/DynamicDataSourceAnnotationInterceptor.java" />
-        <option value="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/aop/DynamicDataSourceAspect.java" />
-        <option value="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/exceptions/GlobalExceptionHandler.java" />
-        <option value="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/aop/GlobalExceptionHandlers.java" />
-        <option value="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/datasource/config/DynamicContextHolder.java" />
-        <option value="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/controller/PersonnelController.java" />
+        <option value="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/impl/CustomerServiceImpl.java" />
+        <option value="$PROJECT_DIR$/dao/src/main/java/com/mj/dao/mapper/CustomerMapper.xml" />
+        <option value="$PROJECT_DIR$/dao/src/main/java/com/mj/dao/repository/CustomerMapper.java" />
         <option value="$PROJECT_DIR$/dao/src/main/java/com/mj/dao/repository/PersonnelMapper.java" />
         <option value="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/PersonnelService.java" />
-        <option value="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/impl/PersonnelServiceImpl.java" />
-        <option value="$PROJECT_DIR$/dao/src/main/java/com/mj/dao/mapper/PersonnelMapper.xml" />
+        <option value="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/controller/CustomerController.java" />
+        <option value="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/controller/LoseController.java" />
+        <option value="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/controller/PersonnelController.java" />
+        <option value="$PROJECT_DIR$/common/src/main/java/com/mj/common/tools/DateUtil.java" />
+        <option value="$PROJECT_DIR$/dao/src/main/java/com/mj/dao/repository/ResponsibilityMapper.java" />
+        <option value="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/config/uploadConfig.java" />
+        <option value="$PROJECT_DIR$/dao/src/main/java/com/mj/dao/entity/Responsibility.java" />
+        <option value="$PROJECT_DIR$/dao/src/main/java/com/mj/dao/entity/ComplaintLevel.java" />
+        <option value="$PROJECT_DIR$/dao/src/main/java/com/mj/dao/mapper/ComplaintLevelMapper.xml" />
+        <option value="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/impl/LoseServiceImpl.java" />
+        <option value="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/controller/AdminController.java" />
+        <option value="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/ResponsibilityService.java" />
+        <option value="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/controller/ResponsibilityController.java" />
+        <option value="$PROJECT_DIR$/dao/src/main/java/com/mj/dao/vo/SQLServerVo.java" />
+        <option value="$PROJECT_DIR$/dao/src/main/java/com/mj/dao/pojo/User.java" />
+        <option value="$PROJECT_DIR$/admin/src/test/java/com/mj/admin/service/CreateSalt.java" />
+        <option value="$PROJECT_DIR$/dao/src/main/java/com/mj/dao/entity/HiddenTrouble.java" />
+        <option value="$PROJECT_DIR$/dao/src/main/java/com/mj/dao/vo/HiddenTroubleVo.java" />
+        <option value="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/HiddenTroubleService.java" />
+        <option value="$PROJECT_DIR$/dao/src/main/java/com/mj/dao/repository/HiddenTroubleMapper.java" />
+        <option value="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/RefundService.java" />
+        <option value="$PROJECT_DIR$/dao/src/main/java/com/mj/dao/repository/RefundMapper.java" />
+        <option value="$PROJECT_DIR$/dao/src/main/java/com/mj/dao/vo/RefundVo.java" />
+        <option value="$PROJECT_DIR$/dao/src/main/java/com/mj/dao/vo/ComplaintOver.java" />
         <option value="$PROJECT_DIR$/dao/src/main/java/com/mj/dao/repository/ComplaintMapper.java" />
-        <option value="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/impl/ComplaintServiceImpl.java" />
+        <option value="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/impl/PersonnelServiceImpl.java" />
+        <option value="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/controller/ComplaintController.java" />
         <option value="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/ComplaintService.java" />
-        <option value="$PROJECT_DIR$/dao/src/main/java/com/mj/dao/mapper/ComplaintMapper.xml" />
+        <option value="$PROJECT_DIR$/dao/src/main/java/com/mj/dao/entity/Complaint.java" />
         <option value="$PROJECT_DIR$/dao/src/main/java/com/mj/dao/vo/ComplaintVo.java" />
+        <option value="$PROJECT_DIR$/dao/src/main/java/com/mj/dao/entity/Refund.java" />
+        <option value="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/controller/HiddenTroubleController.java" />
+        <option value="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/controller/RefundController.java" />
+        <option value="$PROJECT_DIR$/dao/src/main/java/com/mj/dao/mapper/PersonnelMapper.xml" />
+        <option value="$PROJECT_DIR$/dao/src/main/java/com/mj/dao/vo/ResponsibilityVo.java" />
+        <option value="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/AdminApplication.java" />
         <option value="$PROJECT_DIR$/admin/src/main/resources/application.yml" />
         <option value="$PROJECT_DIR$/admin/src/main/resources/application-dev.yml" />
-        <option value="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/AdminApplication.java" />
+        <option value="$PROJECT_DIR$/dao/src/main/java/com/mj/dao/mapper/HiddenTroubleMapper.xml" />
+        <option value="$PROJECT_DIR$/dao/src/main/java/com/mj/dao/mapper/RefundMapper.xml" />
+        <option value="$PROJECT_DIR$/dao/src/main/java/com/mj/dao/mapper/ResponsibilityMapper.xml" />
+        <option value="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/impl/RefundServiceImpl.java" />
+        <option value="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/impl/ResponsibilityServiceImpl.java" />
+        <option value="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/impl/HiddenTroubleServiceImpl.java" />
+        <option value="$PROJECT_DIR$/dao/src/main/java/com/mj/dao/mapper/ComplaintMapper.xml" />
+        <option value="$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/impl/ComplaintServiceImpl.java" />
       </list>
     </option>
   </component>
@@ -260,17 +321,199 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="1">
-    <option name="x" value="598" />
-    <option name="y" value="12" />
-    <option name="width" value="975" />
-    <option name="height" value="684" />
+    <option name="x" value="-5" />
+    <option name="y" value="6" />
+    <option name="width" value="1936" />
+    <option name="height" value="1062" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
+      <flattenPackages ProjectPane="false" />
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="mj-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mj-admin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mj-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mj-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mj-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mj-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mj-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mj-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mj-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mj-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mj-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mj-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mj-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mj-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="mj" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mj-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mj-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="mj" type="462c0819:PsiDirectoryNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mj-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mj-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="mj" type="462c0819:PsiDirectoryNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mj-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mj-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="mj" type="462c0819:PsiDirectoryNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mj-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mj-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="mj" type="462c0819:PsiDirectoryNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+              <item name="impl" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mj-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mj-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mj-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mj-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="dao" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mj-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mj-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="dao" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mj-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mj-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="dao" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mj-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mj-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="dao" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mj-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mj-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="dao" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mj-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mj-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="dao" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="mj" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mj-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mj-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="dao" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="mj" type="462c0819:PsiDirectoryNode" />
+              <item name="dao" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mj-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mj-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="dao" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="mj" type="462c0819:PsiDirectoryNode" />
+              <item name="dao" type="462c0819:PsiDirectoryNode" />
+              <item name="entity" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="Scope">
         <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
           <expand>
@@ -432,67 +675,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="mj-admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mj-admin" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mj-admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mj-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mj-admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mj-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mj-admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mj-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mj-admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mj-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mj-admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mj-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mj-admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mj-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mj-admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mj-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
-              <item name="target" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -503,7 +685,7 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1566465508274" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1568801981029" />
     <property name="js.buildTools.gulp.gulp_package_dir" value="" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -511,36 +693,40 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="editing.templates" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="ReadonlyStatusHandler">
     <option name="SHOW_DIALOG" value="false" />
   </component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.mj.admin" />
+      <recent name="com.mj.dao.repository" />
+      <recent name="com.mj.admin.config" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.wky.admin.service.impl" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\麦佳\mj-admin\dao\src\main\java\com\mj\dao\mapper" />
+      <recent name="D:\麦佳\mj-admin\dao\src\main\java\com\mj\dao" />
+      <recent name="D:\麦佳\mj-admin\admin\src\main\java\com\mj\admin" />
+      <recent name="D:\麦佳\mj-admin\dao\src\main\java\com\mj\dao\mappers" />
+      <recent name="D:\sdx项目\sdx-admin\dao\src\main\java\com\wky\dao\vo" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.mj.admin.controller" />
+      <recent name="com.mj.admin.service.impl" />
+      <recent name="com.mj.admin.service" />
+      <recent name="com.mj.dao.vo" />
+      <recent name="com.mj.dao.repository" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\麦佳\mj-admin\common\src\main\java\com\mj\common\tools" />
       <recent name="D:\麦佳\mj-admin\dao\src\main\java\com\mj\dao\mapper" />
       <recent name="D:\麦佳\mj-admin\dao\src\main\java\com\mj\dao\mapper\master" />
       <recent name="D:\麦佳\mj-admin\dao\src\main\java\com\mj\dao\mapper\other" />
       <recent name="D:\麦佳\mj-admin\dao\src\main\java\com\mj\dao\mappers" />
-    </key>
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="com.wky.admin.service.impl" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\麦佳\mj-admin\dao\src\main\java\com\mj\dao" />
-      <recent name="D:\麦佳\mj-admin\admin\src\main\java\com\mj\admin" />
-      <recent name="D:\麦佳\mj-admin\dao\src\main\java\com\mj\dao\mappers" />
-      <recent name="D:\sdx项目\sdx-admin\dao\src\main\java\com\wky\dao\vo" />
-      <recent name="D:\sdx项目\sdx-admin\common\src\main\java\com\wky\common\tools" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.mj.admin.controller" />
-    </key>
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="com.mj.admin" />
-      <recent name="com.mj.dao.repository" />
-      <recent name="com.mj.admin.config" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -556,6 +742,32 @@
     </option>
   </component>
   <component name="RunManager" selected="Spring Boot.AdminApplication">
+    <configuration name="CreateSalt" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.mj.admin.service.CreateSalt" />
+      <module name="admin" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.mj.admin.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DataSourceSwitch" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.mj.admin.datasource.config.DataSourceSwitch" />
+      <module name="admin" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.mj.admin.datasource.config.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="JdbcTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.mj.admin.service.JdbcTest" />
       <module name="admin" />
@@ -575,19 +787,6 @@
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.mj.dao.mybatis.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="StringTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.mj.admin.StringTest" />
-      <module name="admin" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.mj.admin.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -625,19 +824,6 @@
         </pattern>
       </extension>
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.mj.admin.AdminApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="DaoApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
-      <module name="dao" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.mj.dao.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.mj.dao.DaoApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -909,18 +1095,18 @@
     <list>
       <item itemvalue="Application.JdbcTest" />
       <item itemvalue="Application.MybatisGenerateApp" />
-      <item itemvalue="Application.StringTest" />
+      <item itemvalue="Application.DataSourceSwitch" />
+      <item itemvalue="Application.CreateSalt" />
       <item itemvalue="Spring Boot.AdminApplication" />
-      <item itemvalue="Spring Boot.DaoApplication" />
       <item itemvalue="Tomcat Server.Tomcat 8.0" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Spring Boot.AdminApplication" />
-        <item itemvalue="Application.JdbcTest" />
+        <item itemvalue="Application.CreateSalt" />
         <item itemvalue="Application.MybatisGenerateApp" />
-        <item itemvalue="Application.StringTest" />
-        <item itemvalue="Spring Boot.DaoApplication" />
+        <item itemvalue="Application.DataSourceSwitch" />
+        <item itemvalue="Application.JdbcTest" />
       </list>
     </recent_temporary>
   </component>
@@ -1193,12 +1379,53 @@
       <workItem from="1566364287062" duration="87000" />
       <workItem from="1566366863665" duration="21241000" />
       <workItem from="1566435814811" duration="16888000" />
-      <workItem from="1566456124171" duration="9742000" />
+      <workItem from="1566456124171" duration="9744000" />
+      <workItem from="1566521266195" duration="11657000" />
+      <workItem from="1566539262467" duration="13472000" />
+      <workItem from="1566782638828" duration="3008000" />
+      <workItem from="1566788309033" duration="1828000" />
+      <workItem from="1566790852745" duration="33000" />
+      <workItem from="1566809276527" duration="1903000" />
+      <workItem from="1566867260236" duration="1308000" />
+      <workItem from="1566953749151" duration="13989000" />
+      <workItem from="1567040419821" duration="22735000" />
+      <workItem from="1567126836936" duration="19201000" />
+      <workItem from="1567211918690" duration="22585000" />
+      <workItem from="1567385467472" duration="17844000" />
+      <workItem from="1567416441040" duration="1710000" />
+      <workItem from="1567471960000" duration="24580000" />
+      <workItem from="1567558767423" duration="23151000" />
+      <workItem from="1567645957183" duration="161000" />
+      <workItem from="1567648033856" duration="599000" />
+      <workItem from="1567648734990" duration="3007000" />
+      <workItem from="1567667779409" duration="2087000" />
+      <workItem from="1567670529209" duration="3904000" />
+      <workItem from="1567676591622" duration="2090000" />
+      <workItem from="1567730859427" duration="25438000" />
+      <workItem from="1567817534458" duration="1119000" />
+      <workItem from="1567820612249" duration="11431000" />
+      <workItem from="1567835925751" duration="68000" />
+      <workItem from="1567836254360" duration="12458000" />
+      <workItem from="1567990712699" duration="7478000" />
+      <workItem from="1568000932154" duration="5550000" />
+      <workItem from="1568022407276" duration="3004000" />
+      <workItem from="1568076179420" duration="28880000" />
+      <workItem from="1568109114571" duration="965000" />
+      <workItem from="1568162718236" duration="29357000" />
+      <workItem from="1568249225141" duration="16531000" />
+      <workItem from="1568267915435" duration="13721000" />
+      <workItem from="1568595398412" duration="20389000" />
+      <workItem from="1568681146992" duration="7536000" />
+      <workItem from="1568701452279" duration="14000" />
+      <workItem from="1568701632153" duration="12855000" />
+      <workItem from="1568768352814" duration="10062000" />
+      <workItem from="1568785962630" duration="837000" />
+      <workItem from="1568792884830" duration="5172000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1921156000" />
+    <option name="totallyTimeSpent" value="2324875000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1210,87 +1437,48 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="598" y="12" width="975" height="684" extended-state="1" />
+    <frame x="-5" y="6" width="1936" height="1062" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49610895" visible="true" weight="0.40655738" />
-      <window_info id="Structure" order="1" sideWeight="0.50389105" side_tool="true" weight="0.21108742" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49421966" visible="true" weight="0.23134328" />
+      <window_info id="Structure" order="1" sideWeight="0.50545454" side_tool="true" weight="0.31193218" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
       <window_info id="Capture Tool" order="4" />
       <window_info id="UI Designer" order="5" />
-      <window_info id="Favorites" order="6" sideWeight="0.5032787" side_tool="true" weight="0.21108742" />
+      <window_info id="Favorites" order="6" sideWeight="0.50578034" side_tool="true" weight="0.27703986" />
       <window_info id="Web" order="7" sideWeight="0.5032787" side_tool="true" weight="0.21108742" />
       <window_info id="Learn" order="8" />
-      <window_info anchor="bottom" id="Problems" order="0" />
-      <window_info anchor="bottom" id="Message" order="1" />
-      <window_info anchor="bottom" id="Find" order="2" weight="0.32719395" />
-      <window_info anchor="bottom" id="Application Servers" order="3" weight="0.32719547" />
-      <window_info anchor="bottom" id="Debug" order="4" sideWeight="0.49946696" weight="0.25027084" />
-      <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="7" weight="0.25568798" />
-      <window_info anchor="bottom" id="Run" order="8" visible="true" weight="0.42831215" />
+      <window_info active="true" anchor="bottom" id="Run" order="0" visible="true" weight="0.22794117" />
+      <window_info anchor="bottom" id="Problems" order="1" weight="0.32980973" />
+      <window_info anchor="bottom" id="Message" order="2" />
+      <window_info anchor="bottom" id="Find" order="3" weight="0.3266385" />
+      <window_info anchor="bottom" id="Application Servers" order="4" weight="0.3255814" />
+      <window_info anchor="bottom" id="Debug" order="5" sideWeight="0.49946696" weight="0.45063025" />
+      <window_info anchor="bottom" id="Cvs" order="6" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="7" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="8" weight="0.25568798" />
       <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50053304" side_tool="true" weight="0.3900325" />
-      <window_info anchor="bottom" id="Messages" order="11" weight="0.24377032" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.23834746" />
       <window_info anchor="bottom" id="Spring" order="12" weight="0.24929178" />
-      <window_info anchor="bottom" id="Java Enterprise" order="13" />
+      <window_info anchor="bottom" id="Java Enterprise" order="13" weight="0.32936078" />
       <window_info anchor="bottom" id="Database Changes" order="14" />
       <window_info anchor="bottom" id="Version Control" order="15" weight="0.32827735" />
       <window_info anchor="bottom" id="Terminal" order="16" weight="0.3286119" />
-      <window_info anchor="bottom" id="Duplicate detector" order="17" weight="0.32936078" />
+      <window_info anchor="bottom" id="Duplicate detector" order="17" weight="0.3290993" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Maven" order="3" weight="0.24093817" />
-      <window_info anchor="right" id="Palette" order="4" />
-      <window_info anchor="right" id="Capture Analysis" order="5" />
-      <window_info anchor="right" id="Database" order="6" weight="0.3286004" />
-      <window_info anchor="right" id="Bean Validation" order="7" weight="0.3272921" />
-      <window_info anchor="right" id="Palette&#9;" order="8" />
-      <window_info anchor="right" id="Theme Preview" order="9" />
-      <window_info anchor="right" id="Module Dependencies" order="10" weight="0.33042896" />
+      <window_info anchor="right" id="Database" order="1" weight="0.3283582" />
+      <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
+      <window_info anchor="right" id="Maven" order="4" weight="0.29530916" />
+      <window_info anchor="right" id="Palette" order="5" />
+      <window_info anchor="right" id="Capture Analysis" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+      <window_info anchor="right" id="Theme Preview" order="8" />
+      <window_info anchor="right" id="Module Dependencies" order="9" weight="0.33042896" />
+      <window_info anchor="right" id="Bean Validation" order="10" weight="0.32622603" />
     </layout>
-    <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49610895" visible="true" weight="0.19829424" />
-      <window_info id="Structure" order="1" sideWeight="0.50389105" side_tool="true" weight="0.21108742" />
-      <window_info id="Designer" order="2" />
-      <window_info id="Image Layers" order="3" />
-      <window_info id="Capture Tool" order="4" />
-      <window_info id="UI Designer" order="5" />
-      <window_info id="Favorites" order="6" sideWeight="0.5032787" side_tool="true" weight="0.21108742" />
-      <window_info id="Web" order="7" sideWeight="0.5032787" side_tool="true" weight="0.21108742" />
-      <window_info id="Learn" order="8" />
-      <window_info anchor="bottom" id="Problems" order="0" />
-      <window_info anchor="bottom" id="Message" order="1" />
-      <window_info anchor="bottom" id="Find" order="2" weight="0.32719395" />
-      <window_info anchor="bottom" id="Application Servers" order="3" weight="0.32719547" />
-      <window_info anchor="bottom" id="Debug" order="4" sideWeight="0.49946696" weight="0.25027084" />
-      <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="7" weight="0.25568798" />
-      <window_info anchor="bottom" id="Run" order="8" visible="true" weight="0.25568798" />
-      <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50053304" side_tool="true" weight="0.3900325" />
-      <window_info anchor="bottom" id="Messages" order="11" weight="0.24377032" />
-      <window_info anchor="bottom" id="Spring" order="12" weight="0.24929178" />
-      <window_info anchor="bottom" id="Java Enterprise" order="13" />
-      <window_info anchor="bottom" id="Database Changes" order="14" />
-      <window_info anchor="bottom" id="Version Control" order="15" weight="0.32827735" />
-      <window_info anchor="bottom" id="Terminal" order="16" weight="0.3286119" />
-      <window_info anchor="bottom" id="Duplicate detector" order="17" weight="0.32936078" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Maven" order="3" weight="0.24093817" />
-      <window_info anchor="right" id="Palette" order="4" />
-      <window_info anchor="right" id="Capture Analysis" order="5" />
-      <window_info anchor="right" id="Database" order="6" weight="0.3286004" />
-      <window_info anchor="right" id="Bean Validation" order="7" weight="0.3272921" />
-      <window_info anchor="right" id="Palette&#9;" order="8" />
-      <window_info anchor="right" id="Theme Preview" order="9" />
-      <window_info anchor="right" id="Module Dependencies" order="10" weight="0.33042896" />
-    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -1446,487 +1634,578 @@
           <properties />
           <option name="timeStamp" value="31" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/impl/ComplaintServiceImpl.java</url>
-          <line>111</line>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/common/src/main/java/com/mj/common/tools/DateUtil2.java</url>
+          <line>388</line>
           <properties />
-          <option name="timeStamp" value="100" />
+          <option name="timeStamp" value="104" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/common/src/main/java/com/mj/common/tools/MD5Utils.java</url>
+          <line>40</line>
+          <properties />
+          <option name="timeStamp" value="105" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/controller/PersonnelController.java</url>
+          <line>97</line>
+          <properties />
+          <option name="timeStamp" value="108" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/impl/ResponsibilityServiceImpl.java</url>
+          <line>175</line>
+          <properties />
+          <option name="timeStamp" value="124" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/controller/ResponsibilityController.java</url>
+          <line>47</line>
+          <properties />
+          <option name="timeStamp" value="129" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/impl/ResponsibilityServiceImpl.java</url>
+          <line>387</line>
+          <properties />
+          <option name="timeStamp" value="132" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/impl/HiddenTroubleServiceImpl.java</url>
+          <line>368</line>
+          <properties />
+          <option name="timeStamp" value="136" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/impl/HiddenTroubleServiceImpl.java</url>
+          <line>371</line>
+          <properties />
+          <option name="timeStamp" value="137" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/impl/HiddenTroubleServiceImpl.java</url>
+          <line>409</line>
+          <properties />
+          <option name="timeStamp" value="140" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/impl/ComplaintServiceImpl.java</url>
-          <line>140</line>
+          <line>325</line>
           <properties />
-          <option name="timeStamp" value="102" />
+          <option name="timeStamp" value="141" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/impl/ResponsibilityServiceImpl.java</url>
+          <line>54</line>
+          <properties />
+          <option name="timeStamp" value="190" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/impl/HiddenTroubleServiceImpl.java</url>
+          <line>194</line>
+          <properties />
+          <option name="timeStamp" value="198" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/impl/HiddenTroubleServiceImpl.java</url>
+          <line>292</line>
+          <properties />
+          <option name="timeStamp" value="230" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/impl/ResponsibilityServiceImpl.java</url>
+          <line>161</line>
+          <properties />
+          <option name="timeStamp" value="238" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/impl/ComplaintServiceImpl.java</url>
-          <line>141</line>
+          <line>237</line>
           <properties />
-          <option name="timeStamp" value="103" />
+          <option name="timeStamp" value="241" />
         </line-breakpoint>
         <line-breakpoint type="java-method">
           <url>file://$PROJECT_DIR$/dao/src/main/java/com/mj/dao/repository/PersonnelMapper.java</url>
-          <line>15</line>
+          <line>13</line>
           <properties class="com.mj.dao.repository.PersonnelMapper" method="insert" />
           <option name="timeStamp" value="35" />
         </line-breakpoint>
-        <line-breakpoint type="java-method">
-          <url>file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/impl/PersonnelServiceImpl.java</url>
-          <line>91</line>
-          <properties class="com.mj.admin.service.impl.PersonnelServiceImpl" method="selectComplaintId" />
-          <option name="timeStamp" value="92" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="SpringBootApplicationConfigurationType">
+        <watch expression="this" />
+        <watch expression="result" />
+        <watch expression="((HashMap)map).entrySet().toArray()[0]" custom="java.util.HashMap" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/jdbc/DBHelp.java">
+    <entry file="file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/impl/CustomerServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="369">
-          <caret line="13" column="7" lean-forward="true" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/datasource/config/DataSource1Config.java" />
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/lang/annotation/ElementType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="72" column="12" selection-start-line="72" selection-start-column="12" selection-end-line="72" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/lang/annotation/RetentionPolicy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="36" column="12" selection-start-line="36" selection-start-column="12" selection-end-line="36" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/lang/annotation/Inherited.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="51" column="18" selection-start-line="51" selection-start-column="18" selection-end-line="51" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/lang/annotation/Documented.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="41" column="18" selection-start-line="41" selection-start-column="18" selection-end-line="41" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="97" column="32" lean-forward="true" selection-start-line="97" selection-start-column="32" selection-end-line="97" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/aop/HttpAspect.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
-          <caret line="31" column="13" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/aop/DynamicDataSourceAspect.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="638">
-          <caret line="22" column="57" selection-start-line="22" selection-start-column="57" selection-end-line="22" selection-end-column="57" />
+        <state relative-caret-position="181">
+          <caret line="26" column="63" selection-start-line="26" selection-start-column="63" selection-end-line="26" selection-end-column="63" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/aop/DynamicDataSourceAnnotationInterceptor.java">
+    <entry file="file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/HiddenTroubleService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="638">
-          <caret line="41" column="61" selection-start-line="41" selection-start-column="61" selection-end-line="41" selection-end-column="61" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/aop/DynamicDataSourceAnnotationAdvisor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="667">
-          <caret line="40" column="68" selection-start-line="40" selection-start-column="68" selection-end-line="40" selection-end-column="68" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/datasource/annotation/DataSource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="484">
-          <caret line="23" column="30" lean-forward="true" selection-start-line="23" selection-start-column="30" selection-end-line="23" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/datasource/properties/DataSourceProperties.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
-          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/datasource/properties/DynamicDataSourceProperties.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="58">
-          <caret line="8" column="43" lean-forward="true" selection-start-line="8" selection-start-column="43" selection-end-line="8" selection-end-column="43" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#697#698#0" expanded="true" />
-            <element signature="e#741#742#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/exceptions/GlobalExceptionHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="261">
-          <caret line="14" column="24" lean-forward="true" selection-end-line="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/aop/GlobalExceptionHandlers.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="21" column="40" lean-forward="true" selection-end-line="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/datasource/config/DynamicDataSourceConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="402">
-          <caret line="30" column="13" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/datasource/config/DynamicDataSourceFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-584">
-          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/datasource/config/DynamicDataSource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
-          <folding>
-            <element signature="e#424#425#0" expanded="true" />
-            <element signature="e#474#475#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/datasource/config/DynamicContextHolder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="33" column="65" selection-start-line="33" selection-start-column="65" selection-end-line="33" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dao/src/main/java/com/mj/dao/mapper/RoleMapper.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dao/src/main/java/com/mj/dao/vo/ComplaintLevelVo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="263">
-          <caret line="10" column="29" lean-forward="true" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dao/src/main/java/com/mj/dao/vo/ComplaintOver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="58" column="31" selection-start-line="58" selection-start-column="21" selection-end-line="58" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dao/src/main/java/com/mj/dao/vo/PersonnelVo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="14" column="5" lean-forward="true" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/java/mavenhome/org/springframework/spring-aop/5.0.11.RELEASE/spring-aop-5.0.11.RELEASE.jar!/org/springframework/aop/framework/ReflectiveMethodInvocation.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="69" selection-start-line="69" selection-end-line="69" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/java/mavenhome/org/springframework/spring-tx/5.0.11.RELEASE/spring-tx-5.0.11.RELEASE.jar!/org/springframework/transaction/interceptor/TransactionAspectSupport.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="176" selection-start-line="176" selection-end-line="176" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/java/mavenhome/org/springframework/spring-web/5.0.11.RELEASE/spring-web-5.0.11.RELEASE.jar!/org/springframework/web/method/support/InvocableHandlerMethod.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="128" selection-start-line="128" selection-end-line="128" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/java/mavenhome/org/springframework/spring-aop/5.0.11.RELEASE/spring-aop-5.0.11.RELEASE.jar!/org/springframework/aop/aspectj/AbstractAspectJAdvice.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="429" selection-start-line="429" selection-end-line="429" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/java/mavenhome/org/springframework/spring-aop/5.0.11.RELEASE/spring-aop-5.0.11.RELEASE.jar!/org/springframework/aop/interceptor/ExposeInvocationInterceptor.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="40" selection-start-line="40" selection-end-line="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/datasource/aspect/DataSourceAspect.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="394">
-          <caret line="67" selection-start-line="67" selection-end-line="67" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/java/mavenhome/org/apache/logging/log4j/log4j-api/2.10.0/log4j-api-2.10.0.jar!/org/apache/logging/log4j/util/Strings.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="27" selection-start-line="27" selection-end-line="27" />
-          <folding>
-            <element signature="e#741#742#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/controller/PersonnelController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1624">
-          <caret line="81" column="7" selection-start-line="81" selection-start-column="7" selection-end-line="81" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/java/mavenhome/com/alibaba/druid/1.1.5/druid-1.1.5.jar!/com/alibaba/druid/filter/stat/StatFilter.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="29">
-          <caret line="187" selection-start-line="187" selection-end-line="187" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/PersonnelService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="479">
-          <caret line="32" column="49" selection-start-line="32" selection-start-column="49" selection-end-line="32" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/java/mavenhome/org/springframework/spring-aop/5.0.11.RELEASE/spring-aop-5.0.11.RELEASE.jar!/org/springframework/aop/framework/CglibAopProxy.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="473" selection-start-line="473" selection-end-line="473" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/java/mavenhome/org/springframework/spring-aop/5.0.11.RELEASE/spring-aop-5.0.11.RELEASE.jar!/org/springframework/aop/aspectj/MethodInvocationProceedingJoinPoint.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="91">
-          <caret line="41" selection-start-line="41" selection-end-line="41" />
+        <state relative-caret-position="207">
+          <caret line="27" column="17" lean-forward="true" selection-start-line="27" selection-start-column="17" selection-end-line="27" selection-end-column="17" />
         </state>
       </provider>
     </entry>
     <entry file="jar://D:/java/mavenhome/org/springframework/spring-core/5.0.11.RELEASE/spring-core-5.0.11.RELEASE.jar!/org/springframework/cglib/proxy/MethodProxy.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="103" selection-start-line="103" selection-end-line="103" />
+        <state relative-caret-position="163">
+          <caret line="105" selection-start-line="105" selection-end-line="105" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/RefundService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="15" column="45" selection-start-line="15" selection-start-column="45" selection-end-line="15" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dao/src/main/java/com/mj/dao/repository/HiddenTroubleMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="461">
+          <caret line="71" column="43" lean-forward="true" selection-start-line="68" selection-start-column="2" selection-end-line="71" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/controller/CustomerController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="348">
+          <caret line="22" column="42" selection-start-line="22" selection-start-column="42" selection-end-line="22" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dao/src/main/java/com/mj/dao/mapper/ComplaintLevelMapper.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dao/src/main/java/com/mj/dao/vo/ComplaintLevelVo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="63">
+          <caret line="4" column="10" lean-forward="true" selection-start-line="4" selection-start-column="10" selection-end-line="4" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dao/src/main/java/com/mj/dao/vo/ComplaintOver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="123">
+          <caret line="48" lean-forward="true" selection-start-line="48" selection-end-line="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dao/src/main/java/com/mj/dao/vo/Complaints.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="121">
+          <caret line="6" column="26" lean-forward="true" selection-start-line="6" selection-start-column="26" selection-end-line="6" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dao/src/main/java/com/mj/dao/vo/LoseVo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="7" column="7" lean-forward="true" selection-start-line="7" selection-start-column="7" selection-end-line="7" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dao/src/main/java/com/mj/dao/vo/PageRequest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="232">
+          <caret line="10" column="27" selection-start-line="10" selection-start-column="27" selection-end-line="10" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dao/src/main/java/com/mj/dao/vo/PageResult.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="196">
+          <caret line="9" column="13" lean-forward="true" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dao/src/main/java/com/mj/dao/vo/PersonnelVo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="9" column="7" lean-forward="true" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dao/src/main/java/com/mj/dao/vo/RefundVo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="179">
+          <caret line="109" column="7" lean-forward="true" selection-start-line="109" selection-start-column="7" selection-end-line="109" selection-end-column="7" />
+          <folding>
+            <element signature="e#1935#1936#0" expanded="true" />
+            <element signature="e#1963#1964#0" expanded="true" />
+            <element signature="e#2005#2006#0" expanded="true" />
+            <element signature="e#2039#2040#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dao/src/main/java/com/mj/dao/vo/SQLServerVo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="261">
+          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dao/src/main/java/com/mj/dao/mapper/CustomerMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="377">
+          <caret line="423" column="33" selection-start-line="423" selection-start-column="14" selection-end-line="423" selection-end-column="33" />
+          <folding>
+            <element signature="n#resultMap#0;n#mapper#0;n#!!top" />
+            <element signature="n#insert#0;n#mapper#0;n#!!top" />
+            <element signature="n#insert#1;n#mapper#0;n#!!top" />
+            <element signature="n#trim#0;n#insert#1;n#mapper#0;n#!!top" />
+            <element signature="e#7402#7448#0" />
+            <element signature="e#7455#7519#0" />
+            <element signature="e#7526#7588#0" />
+            <element signature="e#7595#7665#0" />
+            <element signature="e#7672#7730#0" />
+            <element signature="e#7737#7797#0" />
+            <element signature="e#7804#7864#0" />
+            <element signature="e#7871#7937#0" />
+            <element signature="e#7944#7994#0" />
+            <element signature="e#8001#8053#0" />
+            <element signature="e#8060#8130#0" />
+            <element signature="e#8137#8189#0" />
+            <element signature="e#8196#8258#0" />
+            <element signature="e#8265#8315#0" />
+            <element signature="e#8322#8372#0" />
+            <element signature="e#8379#8435#0" />
+            <element signature="e#8442#8518#0" />
+            <element signature="e#8525#8587#0" />
+            <element signature="e#8594#8646#0" />
+            <element signature="e#8653#8725#0" />
+            <element signature="e#8732#8798#0" />
+            <element signature="e#8805#8875#0" />
+            <element signature="e#8882#8954#0" />
+            <element signature="e#8961#9023#0" />
+            <element signature="e#9030#9102#0" />
+            <element signature="e#9109#9189#0" />
+            <element signature="e#9196#9270#0" />
+            <element signature="e#9277#9363#0" />
+            <element signature="e#9370#9444#0" />
+            <element signature="e#9451#9525#0" />
+            <element signature="e#9532#9604#0" />
+            <element signature="e#9611#9693#0" />
+            <element signature="e#9700#9774#0" />
+            <element signature="e#9781#9843#0" />
+            <element signature="e#9850#9928#0" />
+            <element signature="e#9935#9991#0" />
+            <element signature="e#9998#10054#0" />
+            <element signature="e#10061#10125#0" />
+            <element signature="e#10132#10200#0" />
+            <element signature="e#10207#10275#0" />
+            <element signature="e#10282#10358#0" />
+            <element signature="e#10365#10429#0" />
+            <element signature="e#10436#10494#0" />
+            <element signature="e#10501#10561#0" />
+            <element signature="e#10568#10620#0" />
+            <element signature="e#10627#10705#0" />
+            <element signature="e#10712#10782#0" />
+            <element signature="e#10789#10861#0" />
+            <element signature="e#10868#10956#0" />
+            <element signature="e#10963#11023#0" />
+            <element signature="e#11030#11134#0" />
+            <element signature="n#trim#1;n#insert#1;n#mapper#0;n#!!top" />
+            <element signature="e#11213#11279#0" />
+            <element signature="e#11286#11370#0" />
+            <element signature="e#11377#11459#0" />
+            <element signature="e#11466#11556#0" />
+            <element signature="e#11563#11641#0" />
+            <element signature="e#11648#11728#0" />
+            <element signature="e#11735#11815#0" />
+            <element signature="e#11822#11908#0" />
+            <element signature="e#11915#11985#0" />
+            <element signature="e#11992#12064#0" />
+            <element signature="e#12071#12161#0" />
+            <element signature="e#12168#12240#0" />
+            <element signature="e#12247#12329#0" />
+            <element signature="e#12336#12406#0" />
+            <element signature="e#12413#12483#0" />
+            <element signature="e#12490#12568#0" />
+            <element signature="e#12575#12671#0" />
+            <element signature="e#12678#12760#0" />
+            <element signature="e#12767#12839#0" />
+            <element signature="e#12846#12938#0" />
+            <element signature="e#12945#13031#0" />
+            <element signature="e#13038#13130#0" />
+            <element signature="e#13137#13231#0" />
+            <element signature="e#13238#13322#0" />
+            <element signature="e#13329#13421#0" />
+            <element signature="e#13428#13528#0" />
+            <element signature="e#13535#13629#0" />
+            <element signature="e#13636#13742#0" />
+            <element signature="e#13749#13843#0" />
+            <element signature="e#13850#13944#0" />
+            <element signature="e#13951#14043#0" />
+            <element signature="e#14050#14151#0" />
+            <element signature="e#14158#14252#0" />
+            <element signature="e#14259#14340#0" />
+            <element signature="e#14347#14445#0" />
+            <element signature="e#14452#14530#0" />
+            <element signature="e#14537#14613#0" />
+            <element signature="e#14620#14704#0" />
+            <element signature="e#14711#14799#0" />
+            <element signature="e#14806#14894#0" />
+            <element signature="e#14901#14997#0" />
+            <element signature="e#15004#15088#0" />
+            <element signature="e#15095#15173#0" />
+            <element signature="e#15180#15260#0" />
+            <element signature="e#15267#15339#0" />
+            <element signature="e#15346#15444#0" />
+            <element signature="e#15451#15541#0" />
+            <element signature="e#15548#15640#0" />
+            <element signature="e#15647#15755#0" />
+            <element signature="e#15762#15844#0" />
+            <element signature="e#15851#15977#0" />
+            <element signature="n#select#0;n#mapper#0;n#!!top" />
+            <element signature="n#resultMap#1;n#mapper#0;n#!!top" />
+            <element signature="n#select#1;n#mapper#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dao/src/main/java/com/mj/dao/mapper/CustomerRecordsMapper.xml">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/impl/PersonnelServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="149" column="5" lean-forward="true" selection-start-line="149" selection-start-column="5" selection-end-line="149" selection-end-column="5" />
+        <state relative-caret-position="156">
+          <caret line="185" column="62" selection-start-line="185" selection-start-column="62" selection-end-line="185" selection-end-column="62" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#1289#1318#0" />
             <element signature="method#login#0;class#PersonnelServiceImpl#0" />
+            <element signature="e#3044#3072#0" />
+            <element signature="method#selectInfoByID#0;class#PersonnelServiceImpl#0" />
             <element signature="method#selectTid#0;class#PersonnelServiceImpl#0" />
             <element signature="method#selectComplaintId#0;class#PersonnelServiceImpl#0" />
             <element signature="method#selectTeam#0;class#PersonnelServiceImpl#0" />
+            <element signature="e#4483#4492#0" />
             <element signature="method#selectTeams#0;class#PersonnelServiceImpl#0" />
-            <element signature="method#selectInfoByIDs#0;class#PersonnelServiceImpl#0" />
-            <element signature="method#selectComplaintIds#0;class#PersonnelServiceImpl#0" />
-            <element signature="method#selectTeamss#0;class#PersonnelServiceImpl#0" />
             <element signature="method#selectTeamsss#0;class#PersonnelServiceImpl#0" />
+            <element signature="e#6131#6132#0" expanded="true" />
+            <element signature="e#6198#6199#0" expanded="true" />
+            <element signature="method#testPageHelper#0;class#PersonnelServiceImpl#0" />
+            <element signature="method#getPageInfo#0;class#PersonnelServiceImpl#0" />
+            <element signature="method#selectByDatebase#0;class#PersonnelServiceImpl#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/controller/ComplaintController.java">
+    <entry file="file://$PROJECT_DIR$/dao/src/main/java/com/mj/dao/repository/ResponsibilityMapper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="36" column="67" selection-start-line="36" selection-start-column="67" selection-end-line="36" selection-end-column="67" />
-          <folding>
-            <element signature="e#2639#2722#0" />
-            <element signature="method#testUploadFile#0;class#ComplaintController#0" />
-            <element signature="e#4136#4219#0" />
-            <element signature="method#uploadFile#0;class#ComplaintController#0" />
-            <element signature="e#4452#4513#1" />
-            <element signature="method#deleteFile#0;class#ComplaintController#0" />
-          </folding>
+        <state relative-caret-position="299">
+          <caret line="63" column="29" selection-start-line="63" selection-start-column="25" selection-end-line="63" selection-end-column="29" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dao/src/main/java/com/mj/dao/repository/PersonnelMapper.java">
+    <entry file="jar://D:/java/mavenhome/com/github/pagehelper/pagehelper/3.4.2/pagehelper-3.4.2.jar!/com/github/pagehelper/PageHelper.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="53" column="39" selection-start-line="53" selection-start-column="16" selection-end-line="53" selection-end-column="39" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="164">
+          <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dao/src/main/java/com/mj/dao/repository/ComplaintMapper.java">
+    <entry file="file://$PROJECT_DIR$/dao/src/main/java/com/mj/dao/repository/RefundMapper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
-          <caret line="56" selection-start-line="56" selection-end-line="56" />
+        <state relative-caret-position="461">
+          <caret line="70" column="17" selection-start-line="70" selection-start-column="8" selection-end-line="70" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dao/src/main/java/com/mj/dao/entity/ComplaintLevel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1129">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dao/src/main/java/com/mj/dao/vo/ComplaintVo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2813">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#1993#1994#0" expanded="true" />
+            <element signature="e#2024#2025#0" expanded="true" />
+            <element signature="e#2073#2074#0" expanded="true" />
+            <element signature="e#2113#2114#0" expanded="true" />
+            <element signature="e#2145#2146#0" expanded="true" />
+            <element signature="e#2173#2174#0" expanded="true" />
+            <element signature="e#2215#2216#0" expanded="true" />
+            <element signature="e#2249#2250#0" expanded="true" />
+            <element signature="e#2282#2283#0" expanded="true" />
+            <element signature="e#2310#2311#0" expanded="true" />
+            <element signature="e#2353#2354#0" expanded="true" />
+            <element signature="e#2387#2388#0" expanded="true" />
+            <element signature="e#2421#2422#0" expanded="true" />
+            <element signature="e#2450#2451#0" expanded="true" />
+            <element signature="e#2495#2496#0" expanded="true" />
+            <element signature="e#2531#2532#0" expanded="true" />
+            <element signature="e#2582#2583#0" expanded="true" />
+            <element signature="e#2628#2629#0" expanded="true" />
+            <element signature="e#2810#2811#0" expanded="true" />
+            <element signature="e#2839#2840#0" expanded="true" />
+            <element signature="e#2883#2884#0" expanded="true" />
+            <element signature="e#2919#2920#0" expanded="true" />
+            <element signature="e#2951#2952#0" expanded="true" />
+            <element signature="e#2979#2980#0" expanded="true" />
+            <element signature="e#3021#3022#0" expanded="true" />
+            <element signature="e#3055#3056#0" expanded="true" />
+            <element signature="e#3089#3090#0" expanded="true" />
+            <element signature="e#3118#3119#0" expanded="true" />
+            <element signature="e#3163#3164#0" expanded="true" />
+            <element signature="e#3199#3200#0" expanded="true" />
+            <element signature="e#3229#3230#0" expanded="true" />
+            <element signature="e#3254#3255#0" expanded="true" />
+            <element signature="e#3291#3292#0" expanded="true" />
+            <element signature="e#3319#3320#0" expanded="true" />
+            <element signature="e#3354#3355#0" expanded="true" />
+            <element signature="e#3385#3386#0" expanded="true" />
+            <element signature="e#3433#3434#0" expanded="true" />
+            <element signature="e#3473#3474#0" expanded="true" />
+            <element signature="e#4227#4228#0" expanded="true" />
+            <element signature="e#4258#4259#0" expanded="true" />
+            <element signature="e#4307#4308#0" expanded="true" />
+            <element signature="e#4347#4348#0" expanded="true" />
+            <element signature="e#4382#4383#0" expanded="true" />
+            <element signature="e#4415#4416#0" expanded="true" />
+            <element signature="e#4465#4466#0" expanded="true" />
+            <element signature="e#4509#4510#0" expanded="true" />
+            <element signature="e#4543#4544#0" expanded="true" />
+            <element signature="e#4572#4573#0" expanded="true" />
+            <element signature="e#4617#4618#0" expanded="true" />
+            <element signature="e#4653#4654#0" expanded="true" />
+            <element signature="e#4689#4690#0" expanded="true" />
+            <element signature="e#4720#4721#0" expanded="true" />
+            <element signature="e#4769#4770#0" expanded="true" />
+            <element signature="e#4809#4810#0" expanded="true" />
+            <element signature="e#4845#4846#0" expanded="true" />
+            <element signature="e#4876#4877#0" expanded="true" />
+            <element signature="e#4925#4926#0" expanded="true" />
+            <element signature="e#4965#4966#0" expanded="true" />
+            <element signature="e#4999#5000#0" expanded="true" />
+            <element signature="e#5028#5029#0" expanded="true" />
+            <element signature="e#5073#5074#0" expanded="true" />
+            <element signature="e#5109#5110#0" expanded="true" />
+            <element signature="e#5141#5142#0" expanded="true" />
+            <element signature="e#5168#5169#0" expanded="true" />
+            <element signature="e#5209#5210#0" expanded="true" />
+            <element signature="e#5241#5242#0" expanded="true" />
+            <element signature="e#5279#5280#0" expanded="true" />
+            <element signature="e#5313#5314#0" expanded="true" />
+            <element signature="e#5367#5368#0" expanded="true" />
+            <element signature="e#5413#5414#0" expanded="true" />
+            <element signature="e#5451#5452#0" expanded="true" />
+            <element signature="e#5487#5488#0" expanded="true" />
+            <element signature="e#5543#5544#0" expanded="true" />
+            <element signature="e#5593#5594#0" expanded="true" />
+            <element signature="e#5628#5629#0" expanded="true" />
+            <element signature="e#5658#5659#0" expanded="true" />
+            <element signature="e#5705#5706#0" expanded="true" />
+            <element signature="e#5743#5744#0" expanded="true" />
+            <element signature="e#5786#5787#0" expanded="true" />
+            <element signature="e#5825#5826#0" expanded="true" />
+            <element signature="e#5889#5890#0" expanded="true" />
+            <element signature="e#5945#5946#0" expanded="true" />
+            <element signature="e#5978#5979#0" expanded="true" />
+            <element signature="e#6007#6008#0" expanded="true" />
+            <element signature="e#6051#6052#0" expanded="true" />
+            <element signature="e#6087#6088#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dao/src/main/java/com/mj/dao/entity/Complaint.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-58">
+        <state relative-caret-position="-753">
+          <caret line="20" column="66" selection-start-line="20" selection-start-column="56" selection-end-line="20" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dao/src/main/java/com/mj/dao/entity/Responsibility.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="348">
+          <caret line="20" column="29" lean-forward="true" selection-start-line="12" selection-start-column="3" selection-end-line="20" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dao/src/main/java/com/mj/dao/entity/Refund.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-298">
+          <caret line="232" column="31" selection-start-line="232" selection-start-column="31" selection-end-line="232" selection-end-column="31" />
+          <folding>
+            <element signature="e#4782#4783#0" expanded="true" />
+            <element signature="e#4825#4826#0" expanded="true" />
+            <element signature="e#4859#4860#0" expanded="true" />
+            <element signature="e#4895#4896#0" expanded="true" />
+            <element signature="e#4926#4927#0" expanded="true" />
+            <element signature="e#4975#4976#0" expanded="true" />
+            <element signature="e#5015#5016#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dao/src/main/java/com/mj/dao/vo/HiddenTroubleVo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2320">
           <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+          <folding>
+            <element signature="e#5899#5900#0" expanded="true" />
+            <element signature="e#5927#5928#0" expanded="true" />
+            <element signature="e#5969#5970#0" expanded="true" />
+            <element signature="e#6003#6004#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dao/src/main/java/com/mj/dao/mapper/CustomerMapper.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dao/src/main/java/com/mj/dao/vo/ComplaintVo.java">
+    <entry file="file://$PROJECT_DIR$/dao/src/main/java/com/mj/dao/entity/HiddenTrouble.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="424">
-          <caret line="25" column="7" lean-forward="true" selection-start-line="25" selection-start-column="7" selection-end-line="25" selection-end-column="7" />
+        <state relative-caret-position="-1218">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#4156#4157#0" expanded="true" />
+            <element signature="e#4184#4185#0" expanded="true" />
+            <element signature="e#4227#4228#0" expanded="true" />
+            <element signature="e#4261#4262#0" expanded="true" />
+            <element signature="e#4297#4298#0" expanded="true" />
+            <element signature="e#4328#4329#0" expanded="true" />
+            <element signature="e#4377#4378#0" expanded="true" />
+            <element signature="e#4417#4418#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dao/src/main/java/com/mj/dao/mapper/ComplaintMapper.xml">
+    <entry file="file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/controller/RefundController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="173" column="61" lean-forward="true" selection-start-line="173" selection-start-column="61" selection-end-line="173" selection-end-column="61" />
-          <folding>
-            <element signature="n#resultMap#0;n#mapper#0;n#!!top" />
-            <element signature="n#resultMap#1;n#mapper#0;n#!!top" />
-            <element signature="n#sql#0;n#mapper#0;n#!!top" />
-            <element signature="n#sql#1;n#mapper#0;n#!!top" />
-            <element signature="n#select#0;n#mapper#0;n#!!top" />
-            <element signature="n#delete#0;n#mapper#0;n#!!top" />
-            <element signature="n#insert#0;n#mapper#0;n#!!top" />
-            <element signature="n#insert#1;n#mapper#0;n#!!top" />
-            <element signature="n#trim#0;n#insert#1;n#mapper#0;n#!!top" />
-            <element signature="n#if#0;n#trim#0;n#insert#1;n#mapper#0;n#!!top" />
-            <element signature="n#if#1;n#trim#0;n#insert#1;n#mapper#0;n#!!top" />
-            <element signature="n#if#2;n#trim#0;n#insert#1;n#mapper#0;n#!!top" />
-            <element signature="n#if#3;n#trim#0;n#insert#1;n#mapper#0;n#!!top" />
-            <element signature="n#if#4;n#trim#0;n#insert#1;n#mapper#0;n#!!top" />
-            <element signature="n#if#5;n#trim#0;n#insert#1;n#mapper#0;n#!!top" />
-            <element signature="n#if#6;n#trim#0;n#insert#1;n#mapper#0;n#!!top" />
-            <element signature="n#if#7;n#trim#0;n#insert#1;n#mapper#0;n#!!top" />
-            <element signature="n#if#8;n#trim#0;n#insert#1;n#mapper#0;n#!!top" />
-            <element signature="n#if#9;n#trim#0;n#insert#1;n#mapper#0;n#!!top" />
-            <element signature="n#trim#1;n#insert#1;n#mapper#0;n#!!top" />
-            <element signature="n#if#0;n#trim#1;n#insert#1;n#mapper#0;n#!!top" />
-            <element signature="n#if#1;n#trim#1;n#insert#1;n#mapper#0;n#!!top" />
-            <element signature="n#if#2;n#trim#1;n#insert#1;n#mapper#0;n#!!top" />
-            <element signature="n#if#3;n#trim#1;n#insert#1;n#mapper#0;n#!!top" />
-            <element signature="n#if#4;n#trim#1;n#insert#1;n#mapper#0;n#!!top" />
-            <element signature="n#if#5;n#trim#1;n#insert#1;n#mapper#0;n#!!top" />
-            <element signature="n#if#6;n#trim#1;n#insert#1;n#mapper#0;n#!!top" />
-            <element signature="n#if#7;n#trim#1;n#insert#1;n#mapper#0;n#!!top" />
-            <element signature="n#if#8;n#trim#1;n#insert#1;n#mapper#0;n#!!top" />
-            <element signature="n#if#9;n#trim#1;n#insert#1;n#mapper#0;n#!!top" />
-            <element signature="n#update#0;n#mapper#0;n#!!top" />
-            <element signature="n#set#0;n#update#0;n#mapper#0;n#!!top" />
-            <element signature="n#if#0;n#set#0;n#update#0;n#mapper#0;n#!!top" />
-            <element signature="n#if#1;n#set#0;n#update#0;n#mapper#0;n#!!top" />
-            <element signature="n#if#2;n#set#0;n#update#0;n#mapper#0;n#!!top" />
-            <element signature="n#if#3;n#set#0;n#update#0;n#mapper#0;n#!!top" />
-            <element signature="n#if#4;n#set#0;n#update#0;n#mapper#0;n#!!top" />
-            <element signature="n#if#5;n#set#0;n#update#0;n#mapper#0;n#!!top" />
-            <element signature="n#if#6;n#set#0;n#update#0;n#mapper#0;n#!!top" />
-            <element signature="n#if#7;n#set#0;n#update#0;n#mapper#0;n#!!top" />
-            <element signature="n#if#8;n#set#0;n#update#0;n#mapper#0;n#!!top" />
-            <element signature="n#update#1;n#mapper#0;n#!!top" />
-            <element signature="n#update#2;n#mapper#0;n#!!top" />
-            <element signature="n#resultMap#2;n#mapper#0;n#!!top" />
-            <element signature="n#resultMap#3;n#mapper#0;n#!!top" />
-            <element signature="n#select#1;n#mapper#0;n#!!top" />
-            <element signature="n#if#1;n#trim#0;n#select#2;n#mapper#0;n#!!top" />
-            <element signature="n#if#2;n#trim#0;n#select#2;n#mapper#0;n#!!top" />
-            <element signature="n#select#4;n#mapper#0;n#!!top" />
-            <element signature="n#update#3;n#mapper#0;n#!!top" />
-            <element signature="n#foreach#0;n#update#3;n#mapper#0;n#!!top" />
-            <element signature="n#select#6;n#mapper#0;n#!!top" />
-            <element signature="n#select#7;n#mapper#0;n#!!top" />
-            <element signature="n#update#4;n#mapper#0;n#!!top" />
-          </folding>
+        <state relative-caret-position="203">
+          <caret line="39" column="62" lean-forward="true" selection-start-line="39" selection-start-column="62" selection-end-line="39" selection-end-column="62" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/ComplaintService.java">
+    <entry file="file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/controller/HiddenTroubleController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="13" column="60" selection-start-line="13" selection-start-column="60" selection-end-line="13" selection-end-column="60" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/impl/ComplaintServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="804">
-          <caret line="82" column="9" lean-forward="true" selection-start-line="82" selection-start-column="9" selection-end-line="82" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#addComplaint#0;class#ComplaintServiceImpl#0" />
-            <element signature="method#deleteComlaint#0;class#ComplaintServiceImpl#0" />
-            <element signature="method#selectInfoByWangWangNum#0;class#ComplaintServiceImpl#0" />
-            <element signature="method#selectFiles#0;class#ComplaintServiceImpl#0" />
-            <element signature="method#selectLevel#0;class#ComplaintServiceImpl#0" />
-            <element signature="method#getLevelName#0;class#ComplaintServiceImpl#0" />
-            <element signature="method#upload#0;class#ComplaintServiceImpl#0" />
-            <element signature="method#addFile#0;class#ComplaintServiceImpl#0" />
-            <element signature="method#deleteFile#0;class#ComplaintServiceImpl#0" />
-            <element signature="method#exist#0;class#ComplaintServiceImpl#0" />
-          </folding>
+        <state relative-caret-position="89">
+          <caret line="41" column="69" lean-forward="true" selection-start-line="40" selection-start-column="8" selection-end-line="41" selection-end-column="69" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dao/src/main/java/com/mj/dao/mapper/PersonnelMapper.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="415" column="95" selection-start-line="415" selection-start-column="80" selection-end-line="415" selection-end-column="95" />
+        <state relative-caret-position="152">
+          <caret line="466" column="96" selection-start-line="466" selection-start-column="96" selection-end-line="466" selection-end-column="96" />
           <folding>
             <element signature="n#resultMap#0;n#mapper#0;n#!!top" />
             <element signature="n#insert#0;n#mapper#0;n#!!top" />
@@ -2011,40 +2290,598 @@
             <element signature="n#if#36;n#trim#1;n#insert#1;n#mapper#0;n#!!top" />
             <element signature="n#if#37;n#trim#1;n#insert#1;n#mapper#0;n#!!top" />
             <element signature="n#if#38;n#trim#1;n#insert#1;n#mapper#0;n#!!top" />
+            <element signature="n#resultMap#1;n#mapper#0;n#!!top" />
+            <element signature="n#resultMap#2;n#mapper#0;n#!!top" />
             <element signature="n#resultMap#3;n#mapper#0;n#!!top" />
+            <element signature="n#resultMap#4;n#mapper#0;n#!!top" />
+            <element signature="n#resultMap#5;n#mapper#0;n#!!top" />
             <element signature="n#select#0;n#mapper#0;n#!!top" />
             <element signature="n#select#1;n#mapper#0;n#!!top" />
+            <element signature="n#select#2;n#mapper#0;n#!!top" />
+            <element signature="n#select#3;n#mapper#0;n#!!top" />
+            <element signature="n#select#4;n#mapper#0;n#!!top" />
+            <element signature="n#select#5;n#mapper#0;n#!!top" />
+            <element signature="n#select#6;n#mapper#0;n#!!top" />
+            <element signature="n#select#7;n#mapper#0;n#!!top" />
+            <element signature="n#select#8;n#mapper#0;n#!!top" />
+            <element signature="n#select#9;n#mapper#0;n#!!top" />
+            <element signature="n#select#10;n#mapper#0;n#!!top" />
+            <element signature="n#select#11;n#mapper#0;n#!!top" />
+            <element signature="n#select#12;n#mapper#0;n#!!top" />
+            <element signature="n#trim#0;n#select#12;n#mapper#0;n#!!top" />
+            <element signature="n#if#0;n#trim#0;n#select#12;n#mapper#0;n#!!top" />
+            <element signature="n#if#1;n#trim#0;n#select#12;n#mapper#0;n#!!top" />
+            <element signature="n#if#2;n#trim#0;n#select#12;n#mapper#0;n#!!top" />
+            <element signature="n#if#3;n#trim#0;n#select#12;n#mapper#0;n#!!top" />
+            <element signature="n#if#4;n#trim#0;n#select#12;n#mapper#0;n#!!top" />
+            <element signature="n#select#13;n#mapper#0;n#!!top" />
+            <element signature="n#trim#0;n#select#14;n#mapper#0;n#!!top" />
+            <element signature="n#if#0;n#trim#0;n#select#14;n#mapper#0;n#!!top" />
+            <element signature="n#if#1;n#trim#0;n#select#14;n#mapper#0;n#!!top" />
+            <element signature="n#if#2;n#trim#0;n#select#14;n#mapper#0;n#!!top" />
+            <element signature="n#select#15;n#mapper#0;n#!!top" />
+            <element signature="n#trim#0;n#select#16;n#mapper#0;n#!!top" />
+            <element signature="n#if#0;n#trim#0;n#select#16;n#mapper#0;n#!!top" />
+            <element signature="n#if#1;n#trim#0;n#select#16;n#mapper#0;n#!!top" />
+            <element signature="n#if#2;n#trim#0;n#select#16;n#mapper#0;n#!!top" />
+            <element signature="n#if#3;n#trim#0;n#select#16;n#mapper#0;n#!!top" />
+            <element signature="n#if#4;n#trim#0;n#select#16;n#mapper#0;n#!!top" />
+            <element signature="n#if#5;n#trim#0;n#select#16;n#mapper#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/ResponsibilityService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="36" column="15" selection-start-line="36" selection-start-column="15" selection-end-line="36" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/controller/ResponsibilityController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="261">
+          <caret line="61" column="42" selection-start-line="61" selection-start-column="42" selection-end-line="61" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/pom.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dao/src/main/java/com/mj/dao/vo/ResponsibilityVo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7018">
+          <caret line="252" column="34" selection-start-line="252" selection-start-column="34" selection-end-line="252" selection-end-column="34" />
+          <folding>
+            <element signature="e#4319#4320#0" expanded="true" />
+            <element signature="e#4368#4369#0" expanded="true" />
+            <element signature="e#4408#4409#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/src/main/resources/application.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-261">
-          <caret line="6" selection-start-line="6" selection-end-line="7" selection-end-column="21" />
+        <state relative-caret-position="174">
+          <caret line="6" selection-start-line="6" selection-start-column="1" selection-end-line="7" selection-end-column="21" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/src/main/resources/application-dev.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="74" column="119" lean-forward="true" selection-start-line="74" selection-start-column="119" selection-end-line="74" selection-end-column="119" />
-          <folding>
-            <element signature="e#2204#2208#0" />
-            <element signature="e#2660#2792#0" />
-            <element signature="e#2990#3186#0" />
-          </folding>
+        <state relative-caret-position="2146">
+          <caret line="74" column="34" selection-start-line="74" selection-start-column="34" selection-end-line="74" selection-end-column="34" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/AdminApplication.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="82">
-          <caret line="10" column="61" selection-start-line="10" selection-start-column="61" selection-end-line="10" selection-end-column="61" />
+        <state relative-caret-position="193">
+          <caret line="26" column="65" selection-start-line="26" selection-start-column="65" selection-end-line="26" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dao/src/main/java/com/mj/dao/mapper/FilesMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="379">
+          <caret line="14" column="11" lean-forward="true" selection-start-line="14" selection-start-column="11" selection-end-line="14" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dao/src/main/java/com/mj/dao/mapper/HiddenTroubleMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="168" column="8" selection-start-line="168" selection-start-column="8" selection-end-line="168" selection-end-column="8" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#764#765#0" expanded="true" />
-            <element signature="e#831#832#0" expanded="true" />
+            <element signature="n#resultMap#0;n#mapper#0;n#!!top" />
+            <element signature="n#resultMap#1;n#mapper#0;n#!!top" />
+            <element signature="n#sql#0;n#mapper#0;n#!!top" />
+            <element signature="n#sql#1;n#mapper#0;n#!!top" />
+            <element signature="n#select#0;n#mapper#0;n#!!top" />
+            <element signature="n#delete#0;n#mapper#0;n#!!top" />
+            <element signature="n#insert#0;n#mapper#0;n#!!top" />
+            <element signature="n#insert#1;n#mapper#0;n#!!top" />
+            <element signature="n#update#0;n#mapper#0;n#!!top" />
+            <element signature="n#update#1;n#mapper#0;n#!!top" />
+            <element signature="n#update#2;n#mapper#0;n#!!top" />
+            <element signature="e#5584#6808#0" />
+            <element signature="n#resultMap#2;n#mapper#0;n#!!top" />
+            <element signature="e#7544#10031#0" />
+            <element signature="n#select#2;n#mapper#0;n#!!top" />
+            <element signature="n#select#3;n#mapper#0;n#!!top" />
+            <element signature="n#update#3;n#mapper#0;n#!!top" />
+            <element signature="n#select#4;n#mapper#0;n#!!top" />
+            <element signature="n#select#5;n#mapper#0;n#!!top" />
+            <element signature="n#select#6;n#mapper#0;n#!!top" />
+            <element signature="n#select#7;n#mapper#0;n#!!top" />
+            <element signature="n#update#4;n#mapper#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dao/src/main/java/com/mj/dao/mapper/RefundMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="212">
+          <caret line="198" column="8" selection-start-line="198" selection-start-column="8" selection-end-line="198" selection-end-column="8" />
+          <folding>
+            <element signature="n#resultMap#0;n#mapper#0;n#!!top" />
+            <element signature="n#resultMap#1;n#mapper#0;n#!!top" />
+            <element signature="n#sql#0;n#mapper#0;n#!!top" />
+            <element signature="n#sql#1;n#mapper#0;n#!!top" />
+            <element signature="n#select#0;n#mapper#0;n#!!top" />
+            <element signature="n#delete#0;n#mapper#0;n#!!top" />
+            <element signature="n#insert#0;n#mapper#0;n#!!top" />
+            <element signature="n#insert#1;n#mapper#0;n#!!top" />
+            <element signature="n#trim#0;n#insert#1;n#mapper#0;n#!!top" />
+            <element signature="n#if#0;n#trim#0;n#insert#1;n#mapper#0;n#!!top" />
+            <element signature="n#if#1;n#trim#0;n#insert#1;n#mapper#0;n#!!top" />
+            <element signature="n#if#2;n#trim#0;n#insert#1;n#mapper#0;n#!!top" />
+            <element signature="n#if#3;n#trim#0;n#insert#1;n#mapper#0;n#!!top" />
+            <element signature="n#if#4;n#trim#0;n#insert#1;n#mapper#0;n#!!top" />
+            <element signature="n#if#5;n#trim#0;n#insert#1;n#mapper#0;n#!!top" />
+            <element signature="n#if#6;n#trim#0;n#insert#1;n#mapper#0;n#!!top" />
+            <element signature="n#if#7;n#trim#0;n#insert#1;n#mapper#0;n#!!top" />
+            <element signature="n#trim#1;n#insert#1;n#mapper#0;n#!!top" />
+            <element signature="n#if#0;n#trim#1;n#insert#1;n#mapper#0;n#!!top" />
+            <element signature="n#if#1;n#trim#1;n#insert#1;n#mapper#0;n#!!top" />
+            <element signature="n#if#2;n#trim#1;n#insert#1;n#mapper#0;n#!!top" />
+            <element signature="n#if#3;n#trim#1;n#insert#1;n#mapper#0;n#!!top" />
+            <element signature="n#if#4;n#trim#1;n#insert#1;n#mapper#0;n#!!top" />
+            <element signature="n#if#5;n#trim#1;n#insert#1;n#mapper#0;n#!!top" />
+            <element signature="n#if#6;n#trim#1;n#insert#1;n#mapper#0;n#!!top" />
+            <element signature="n#if#7;n#trim#1;n#insert#1;n#mapper#0;n#!!top" />
+            <element signature="n#update#0;n#mapper#0;n#!!top" />
+            <element signature="n#if#0;n#set#0;n#update#0;n#mapper#0;n#!!top" />
+            <element signature="n#if#1;n#set#0;n#update#0;n#mapper#0;n#!!top" />
+            <element signature="n#if#2;n#set#0;n#update#0;n#mapper#0;n#!!top" />
+            <element signature="n#if#3;n#set#0;n#update#0;n#mapper#0;n#!!top" />
+            <element signature="n#if#4;n#set#0;n#update#0;n#mapper#0;n#!!top" />
+            <element signature="n#if#5;n#set#0;n#update#0;n#mapper#0;n#!!top" />
+            <element signature="n#update#1;n#mapper#0;n#!!top" />
+            <element signature="n#update#2;n#mapper#0;n#!!top" />
+            <element signature="e#5989#7637#0" />
+            <element signature="n#result#1;n#resultMap#2;n#mapper#0;n#!!top" />
+            <element signature="n#result#2;n#resultMap#2;n#mapper#0;n#!!top" />
+            <element signature="n#result#4;n#resultMap#2;n#mapper#0;n#!!top" />
+            <element signature="n#result#5;n#resultMap#2;n#mapper#0;n#!!top" />
+            <element signature="n#result#6;n#resultMap#2;n#mapper#0;n#!!top" />
+            <element signature="e#8893#11297#0" />
+            <element signature="n#if#0;n#trim#0;n#select#1;n#mapper#0;n#!!top" />
+            <element signature="n#if#1;n#trim#0;n#select#1;n#mapper#0;n#!!top" />
+            <element signature="n#select#2;n#mapper#0;n#!!top" />
+            <element signature="n#update#3;n#mapper#0;n#!!top" />
+            <element signature="n#foreach#0;n#update#3;n#mapper#0;n#!!top" />
+            <element signature="n#select#3;n#mapper#0;n#!!top" />
+            <element signature="n#select#4;n#mapper#0;n#!!top" />
+            <element signature="n#select#5;n#mapper#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dao/src/main/java/com/mj/dao/mapper/ResponsibilityMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="443">
+          <caret line="498" column="18" selection-start-line="498" selection-start-column="14" selection-end-line="498" selection-end-column="18" />
+          <folding>
+            <element signature="n#resultMap#0;n#mapper#0;n#!!top" />
+            <element signature="n#resultMap#1;n#mapper#0;n#!!top" />
+            <element signature="n#sql#0;n#mapper#0;n#!!top" />
+            <element signature="n#sql#1;n#mapper#0;n#!!top" />
+            <element signature="n#select#0;n#mapper#0;n#!!top" />
+            <element signature="n#delete#0;n#mapper#0;n#!!top" />
+            <element signature="n#insert#0;n#mapper#0;n#!!top" />
+            <element signature="n#insert#1;n#mapper#0;n#!!top" />
+            <element signature="n#trim#0;n#insert#1;n#mapper#0;n#!!top" />
+            <element signature="n#if#0;n#trim#0;n#insert#1;n#mapper#0;n#!!top" />
+            <element signature="n#if#1;n#trim#0;n#insert#1;n#mapper#0;n#!!top" />
+            <element signature="n#if#2;n#trim#0;n#insert#1;n#mapper#0;n#!!top" />
+            <element signature="n#if#3;n#trim#0;n#insert#1;n#mapper#0;n#!!top" />
+            <element signature="n#if#4;n#trim#0;n#insert#1;n#mapper#0;n#!!top" />
+            <element signature="n#if#5;n#trim#0;n#insert#1;n#mapper#0;n#!!top" />
+            <element signature="n#if#6;n#trim#0;n#insert#1;n#mapper#0;n#!!top" />
+            <element signature="n#if#7;n#trim#0;n#insert#1;n#mapper#0;n#!!top" />
+            <element signature="n#if#8;n#trim#0;n#insert#1;n#mapper#0;n#!!top" />
+            <element signature="n#if#9;n#trim#0;n#insert#1;n#mapper#0;n#!!top" />
+            <element signature="n#if#10;n#trim#0;n#insert#1;n#mapper#0;n#!!top" />
+            <element signature="n#if#11;n#trim#0;n#insert#1;n#mapper#0;n#!!top" />
+            <element signature="n#if#12;n#trim#0;n#insert#1;n#mapper#0;n#!!top" />
+            <element signature="n#if#13;n#trim#0;n#insert#1;n#mapper#0;n#!!top" />
+            <element signature="n#trim#1;n#insert#1;n#mapper#0;n#!!top" />
+            <element signature="n#if#0;n#trim#1;n#insert#1;n#mapper#0;n#!!top" />
+            <element signature="n#if#1;n#trim#1;n#insert#1;n#mapper#0;n#!!top" />
+            <element signature="n#if#2;n#trim#1;n#insert#1;n#mapper#0;n#!!top" />
+            <element signature="n#if#3;n#trim#1;n#insert#1;n#mapper#0;n#!!top" />
+            <element signature="n#if#4;n#trim#1;n#insert#1;n#mapper#0;n#!!top" />
+            <element signature="n#if#5;n#trim#1;n#insert#1;n#mapper#0;n#!!top" />
+            <element signature="n#if#6;n#trim#1;n#insert#1;n#mapper#0;n#!!top" />
+            <element signature="n#if#7;n#trim#1;n#insert#1;n#mapper#0;n#!!top" />
+            <element signature="n#if#8;n#trim#1;n#insert#1;n#mapper#0;n#!!top" />
+            <element signature="n#if#9;n#trim#1;n#insert#1;n#mapper#0;n#!!top" />
+            <element signature="n#if#10;n#trim#1;n#insert#1;n#mapper#0;n#!!top" />
+            <element signature="n#if#11;n#trim#1;n#insert#1;n#mapper#0;n#!!top" />
+            <element signature="n#if#12;n#trim#1;n#insert#1;n#mapper#0;n#!!top" />
+            <element signature="n#if#13;n#trim#1;n#insert#1;n#mapper#0;n#!!top" />
+            <element signature="n#update#0;n#mapper#0;n#!!top" />
+            <element signature="n#set#0;n#update#0;n#mapper#0;n#!!top" />
+            <element signature="n#if#0;n#set#0;n#update#0;n#mapper#0;n#!!top" />
+            <element signature="n#if#1;n#set#0;n#update#0;n#mapper#0;n#!!top" />
+            <element signature="n#if#2;n#set#0;n#update#0;n#mapper#0;n#!!top" />
+            <element signature="n#if#3;n#set#0;n#update#0;n#mapper#0;n#!!top" />
+            <element signature="n#if#4;n#set#0;n#update#0;n#mapper#0;n#!!top" />
+            <element signature="n#if#5;n#set#0;n#update#0;n#mapper#0;n#!!top" />
+            <element signature="n#if#6;n#set#0;n#update#0;n#mapper#0;n#!!top" />
+            <element signature="n#if#7;n#set#0;n#update#0;n#mapper#0;n#!!top" />
+            <element signature="n#if#8;n#set#0;n#update#0;n#mapper#0;n#!!top" />
+            <element signature="n#if#9;n#set#0;n#update#0;n#mapper#0;n#!!top" />
+            <element signature="n#if#10;n#set#0;n#update#0;n#mapper#0;n#!!top" />
+            <element signature="n#if#11;n#set#0;n#update#0;n#mapper#0;n#!!top" />
+            <element signature="n#if#12;n#set#0;n#update#0;n#mapper#0;n#!!top" />
+            <element signature="n#update#1;n#mapper#0;n#!!top" />
+            <element signature="n#update#2;n#mapper#0;n#!!top" />
+            <element signature="n#resultMap#2;n#mapper#0;n#!!top" />
+            <element signature="n#result#31;n#resultMap#2;n#mapper#0;n#!!top" />
+            <element signature="n#result#32;n#resultMap#2;n#mapper#0;n#!!top" />
+            <element signature="n#result#33;n#resultMap#2;n#mapper#0;n#!!top" />
+            <element signature="n#result#34;n#resultMap#2;n#mapper#0;n#!!top" />
+            <element signature="n#result#35;n#resultMap#2;n#mapper#0;n#!!top" />
+            <element signature="n#result#36;n#resultMap#2;n#mapper#0;n#!!top" />
+            <element signature="n#result#37;n#resultMap#2;n#mapper#0;n#!!top" />
+            <element signature="n#select#1;n#mapper#0;n#!!top" />
+            <element signature="n#select#2;n#mapper#0;n#!!top" />
+            <element signature="n#if#0;n#select#2;n#mapper#0;n#!!top" />
+            <element signature="n#if#0;n#if#0;n#select#2;n#mapper#0;n#!!top" />
+            <element signature="n#trim#0;n#if#0;n#if#0;n#select#2;n#mapper#0;n#!!top" />
+            <element signature="n#if#0;n#trim#0;n#if#0;n#if#0;n#select#2;n#mapper#0;n#!!top" />
+            <element signature="n#if#1;n#trim#0;n#if#0;n#if#0;n#select#2;n#mapper#0;n#!!top" />
+            <element signature="n#if#2;n#trim#0;n#if#0;n#if#0;n#select#2;n#mapper#0;n#!!top" />
+            <element signature="n#if#3;n#trim#0;n#if#0;n#if#0;n#select#2;n#mapper#0;n#!!top" />
+            <element signature="n#if#4;n#trim#0;n#if#0;n#if#0;n#select#2;n#mapper#0;n#!!top" />
+            <element signature="n#if#1;n#if#0;n#select#2;n#mapper#0;n#!!top" />
+            <element signature="n#trim#0;n#if#1;n#if#0;n#select#2;n#mapper#0;n#!!top" />
+            <element signature="n#if#0;n#trim#0;n#if#1;n#if#0;n#select#2;n#mapper#0;n#!!top" />
+            <element signature="n#if#1;n#trim#0;n#if#1;n#if#0;n#select#2;n#mapper#0;n#!!top" />
+            <element signature="n#if#2;n#trim#0;n#if#1;n#if#0;n#select#2;n#mapper#0;n#!!top" />
+            <element signature="n#if#3;n#trim#0;n#if#1;n#if#0;n#select#2;n#mapper#0;n#!!top" />
+            <element signature="n#if#0;n#if#1;n#select#2;n#mapper#0;n#!!top" />
+            <element signature="n#trim#0;n#if#0;n#if#1;n#select#2;n#mapper#0;n#!!top" />
+            <element signature="n#if#0;n#trim#0;n#if#0;n#if#1;n#select#2;n#mapper#0;n#!!top" />
+            <element signature="n#if#1;n#trim#0;n#if#0;n#if#1;n#select#2;n#mapper#0;n#!!top" />
+            <element signature="n#if#2;n#trim#0;n#if#0;n#if#1;n#select#2;n#mapper#0;n#!!top" />
+            <element signature="n#if#3;n#trim#0;n#if#0;n#if#1;n#select#2;n#mapper#0;n#!!top" />
+            <element signature="n#if#1;n#if#1;n#select#2;n#mapper#0;n#!!top" />
+            <element signature="n#trim#0;n#if#1;n#if#1;n#select#2;n#mapper#0;n#!!top" />
+            <element signature="n#if#0;n#trim#0;n#if#1;n#if#1;n#select#2;n#mapper#0;n#!!top" />
+            <element signature="n#if#1;n#trim#0;n#if#1;n#if#1;n#select#2;n#mapper#0;n#!!top" />
+            <element signature="n#if#2;n#trim#0;n#if#1;n#if#1;n#select#2;n#mapper#0;n#!!top" />
+            <element signature="n#if#3;n#trim#0;n#if#1;n#if#1;n#select#2;n#mapper#0;n#!!top" />
+            <element signature="n#if#0;n#if#2;n#select#2;n#mapper#0;n#!!top" />
+            <element signature="n#trim#0;n#if#0;n#if#2;n#select#2;n#mapper#0;n#!!top" />
+            <element signature="n#if#0;n#trim#0;n#if#0;n#if#2;n#select#2;n#mapper#0;n#!!top" />
+            <element signature="n#if#1;n#trim#0;n#if#0;n#if#2;n#select#2;n#mapper#0;n#!!top" />
+            <element signature="n#if#2;n#trim#0;n#if#0;n#if#2;n#select#2;n#mapper#0;n#!!top" />
+            <element signature="n#if#3;n#trim#0;n#if#0;n#if#2;n#select#2;n#mapper#0;n#!!top" />
+            <element signature="n#if#1;n#if#2;n#select#2;n#mapper#0;n#!!top" />
+            <element signature="n#trim#0;n#if#1;n#if#2;n#select#2;n#mapper#0;n#!!top" />
+            <element signature="n#if#0;n#trim#0;n#if#1;n#if#2;n#select#2;n#mapper#0;n#!!top" />
+            <element signature="n#if#1;n#trim#0;n#if#1;n#if#2;n#select#2;n#mapper#0;n#!!top" />
+            <element signature="n#if#2;n#trim#0;n#if#1;n#if#2;n#select#2;n#mapper#0;n#!!top" />
+            <element signature="n#if#3;n#trim#0;n#if#1;n#if#2;n#select#2;n#mapper#0;n#!!top" />
+            <element signature="n#trim#0;n#select#3;n#mapper#0;n#!!top" />
+            <element signature="n#if#0;n#trim#0;n#select#3;n#mapper#0;n#!!top" />
+            <element signature="n#if#1;n#trim#0;n#select#3;n#mapper#0;n#!!top" />
+            <element signature="n#if#2;n#trim#0;n#select#3;n#mapper#0;n#!!top" />
+            <element signature="n#if#3;n#trim#0;n#select#3;n#mapper#0;n#!!top" />
+            <element signature="n#select#4;n#mapper#0;n#!!top" />
+            <element signature="n#if#0;n#trim#0;n#select#4;n#mapper#0;n#!!top" />
+            <element signature="n#if#1;n#trim#0;n#select#4;n#mapper#0;n#!!top" />
+            <element signature="n#if#2;n#trim#0;n#select#4;n#mapper#0;n#!!top" />
+            <element signature="n#if#3;n#trim#0;n#select#4;n#mapper#0;n#!!top" />
+            <element signature="n#select#5;n#mapper#0;n#!!top" />
+            <element signature="n#trim#0;n#select#5;n#mapper#0;n#!!top" />
+            <element signature="n#if#0;n#trim#0;n#select#5;n#mapper#0;n#!!top" />
+            <element signature="n#if#1;n#trim#0;n#select#5;n#mapper#0;n#!!top" />
+            <element signature="n#if#2;n#trim#0;n#select#5;n#mapper#0;n#!!top" />
+            <element signature="n#if#3;n#trim#0;n#select#5;n#mapper#0;n#!!top" />
+            <element signature="n#if#4;n#trim#0;n#select#5;n#mapper#0;n#!!top" />
+            <element signature="n#select#6;n#mapper#0;n#!!top" />
+            <element signature="n#trim#0;n#select#6;n#mapper#0;n#!!top" />
+            <element signature="n#if#0;n#trim#0;n#select#6;n#mapper#0;n#!!top" />
+            <element signature="n#if#1;n#trim#0;n#select#6;n#mapper#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/impl/RefundServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1129">
+          <caret line="115" column="22" selection-start-line="115" selection-start-column="22" selection-end-line="115" selection-end-column="22" />
+          <folding>
+            <element signature="method#addRefund#0;class#RefundServiceImpl#0" />
+            <element signature="method#updateRefund#0;class#RefundServiceImpl#0" />
+            <element signature="method#deleteRefund#0;class#RefundServiceImpl#0" />
+            <element signature="method#selectWang#0;class#RefundServiceImpl#0" />
+            <element signature="method#upload#0;class#RefundServiceImpl#0" />
+            <element signature="method#addFile#0;class#RefundServiceImpl#0" />
+            <element signature="method#deleteFile#0;class#RefundServiceImpl#0" />
+            <element signature="method#selectFiles#0;class#RefundServiceImpl#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/impl/ResponsibilityServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="58">
+          <caret line="2" column="33" selection-start-line="2" selection-start-column="29" selection-end-line="2" selection-end-column="33" />
+          <folding>
+            <element signature="method#selectResponsiblity#0;class#ResponsibilityServiceImpl#0" />
+            <element signature="e#2095#3284#1" />
+            <element signature="e#3288#3383#1" />
+            <element signature="e#3478#3531#1" />
+            <element signature="e#3626#3675#1" />
+            <element signature="e#3761#3811#1" />
+            <element signature="e#4385#6712#1" />
+            <element signature="e#5219#5292#1" />
+            <element signature="e#5993#6702#1" />
+            <element signature="e#6870#6952#1" />
+            <element signature="method#updataResponsiblity#0;class#ResponsibilityServiceImpl#0" />
+            <element signature="method#addFile#0;class#ResponsibilityServiceImpl#0" />
+            <element signature="method#selectById#0;class#ResponsibilityServiceImpl#0" />
+            <element signature="method#selectInfoByPkId#0;class#ResponsibilityServiceImpl#0" />
+            <element signature="method#selectByHId#0;class#ResponsibilityServiceImpl#0" />
+            <element signature="e#25149#27539#1" />
+            <element signature="method#updataLevel#0;class#ResponsibilityServiceImpl#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/impl/HiddenTroubleServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="118">
+          <caret line="169" column="31" selection-start-line="169" selection-start-column="28" selection-end-line="169" selection-end-column="31" />
+          <folding>
+            <element signature="e#1336#1364#0" />
+            <element signature="e#1938#1986#1" />
+            <element signature="e#2820#4009#1" />
+            <element signature="e#4013#4108#1" />
+            <element signature="e#4357#4420#1" />
+            <element signature="e#4450#4502#1" />
+            <element signature="method#deleteHidden#0;class#HiddenTroubleServiceImpl#0" />
+            <element signature="method#updateHidden#0;class#HiddenTroubleServiceImpl#0" />
+            <element signature="method#selectInfoByWangWangNum#0;class#HiddenTroubleServiceImpl#0" />
+            <element signature="method#selectInfoByPkId#0;class#HiddenTroubleServiceImpl#0" />
+            <element signature="method#selectByWangWangNum#0;class#HiddenTroubleServiceImpl#0" />
+            <element signature="method#upload#0;class#HiddenTroubleServiceImpl#0" />
+            <element signature="method#addFile#0;class#HiddenTroubleServiceImpl#0" />
+            <element signature="method#deleteFile#0;class#HiddenTroubleServiceImpl#0" />
+            <element signature="method#selectFile#0;class#HiddenTroubleServiceImpl#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dao/src/main/java/com/mj/dao/repository/ComplaintMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290">
+          <caret line="56" column="41" selection-start-line="56" selection-start-column="22" selection-end-line="56" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dao/src/main/java/com/mj/dao/mapper/ComplaintMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="282">
+          <caret line="369" column="36" lean-forward="true" selection-start-line="369" selection-start-column="36" selection-end-line="369" selection-end-column="36" />
+          <folding>
+            <element signature="e#208#896#0" />
+            <element signature="e#899#1082#0" />
+            <element signature="e#1085#1198#0" />
+            <element signature="e#1201#1249#0" />
+            <element signature="e#1252#1525#0" />
+            <element signature="e#1528#1677#0" />
+            <element signature="e#1680#2195#0" />
+            <element signature="e#2198#4823#0" />
+            <element signature="e#2304#3397#0" />
+            <element signature="e#2359#2410#0" />
+            <element signature="e#2417#2481#0" />
+            <element signature="e#2488#2556#0" />
+            <element signature="e#2563#2619#0" />
+            <element signature="e#2626#2700#0" />
+            <element signature="e#2707#2761#0" />
+            <element signature="e#2768#2828#0" />
+            <element signature="e#2835#2894#0" />
+            <element signature="e#2901#2957#0" />
+            <element signature="e#2965#3023#0" />
+            <element signature="e#3030#3084#0" />
+            <element signature="e#3091#3149#0" />
+            <element signature="e#3156#3227#0" />
+            <element signature="e#3234#3309#0" />
+            <element signature="e#3316#3385#0" />
+            <element signature="e#3402#4811#0" />
+            <element signature="e#3464#3534#0" />
+            <element signature="e#3541#3625#0" />
+            <element signature="e#3632#3722#0" />
+            <element signature="e#3729#3805#0" />
+            <element signature="e#3812#3906#0" />
+            <element signature="e#3913#3987#0" />
+            <element signature="e#3994#4074#0" />
+            <element signature="e#4081#4159#0" />
+            <element signature="e#4166#4246#0" />
+            <element signature="e#4254#4332#0" />
+            <element signature="e#4339#4413#0" />
+            <element signature="e#4420#4498#0" />
+            <element signature="e#4505#4595#0" />
+            <element signature="e#4602#4700#0" />
+            <element signature="e#4707#4799#0" />
+            <element signature="e#4826#5824#0" />
+            <element signature="e#4939#5769#0" />
+            <element signature="e#4951#5049#0" />
+            <element signature="e#5056#5162#0" />
+            <element signature="e#5169#5255#0" />
+            <element signature="e#5262#5375#0" />
+            <element signature="e#5382#5465#0" />
+            <element signature="e#5472#5564#0" />
+            <element signature="e#5571#5661#0" />
+            <element signature="e#5668#5758#0" />
+            <element signature="e#5827#6403#0" />
+            <element signature="e#6406#6922#0" />
+            <element signature="e#6938#9637#0" />
+            <element signature="e#9640#10011#0" />
+            <element signature="e#10015#13195#0" />
+            <element signature="e#12477#12566#0" />
+            <element signature="e#12571#12658#0" />
+            <element signature="e#12663#12748#0" />
+            <element signature="e#12753#12842#0" />
+            <element signature="e#12848#12931#0" />
+            <element signature="e#12936#13019#0" />
+            <element signature="e#13024#13113#0" />
+            <element signature="e#13219#15082#0" />
+            <element signature="e#13581#14935#0" />
+            <element signature="e#13655#13904#0" />
+            <element signature="e#13911#14005#0" />
+            <element signature="e#14012#14150#0" />
+            <element signature="e#14157#14260#0" />
+            <element signature="e#14267#14364#0" />
+            <element signature="e#14371#14462#0" />
+            <element signature="e#14469#14560#0" />
+            <element signature="e#14760#14923#0" />
+            <element signature="e#15411#15527#0" />
+            <element signature="e#15576#15673#0" />
+            <element signature="e#15680#15749#0" />
+            <element signature="e#15778#15869#0" />
+            <element signature="e#15876#16022#0" />
+            <element signature="e#16209#16379#0" />
+            <element signature="e#16399#17157#0" />
+            <element signature="e#16542#17145#0" />
+            <element signature="e#16616#16734#0" />
+            <element signature="e#16763#16860#0" />
+            <element signature="e#16889#16980#0" />
+            <element signature="e#16987#17133#0" />
+            <element signature="e#17179#17411#0" />
+            <element signature="e#17444#17698#0" />
+            <element signature="e#17570#17686#0" />
+            <element signature="e#17733#18173#0" />
+            <element signature="e#18208#18414#0" />
+            <element signature="e#18431#18752#0" />
+            <element signature="e#18775#18987#0" />
+            <element signature="e#19020#19371#0" />
+            <element signature="e#19403#19756#0" />
+            <element signature="e#19788#20132#0" />
+            <element signature="e#20152#21414#0" />
+            <element signature="e#20312#21356#0" />
+            <element signature="e#20324#20425#0" />
+            <element signature="e#20432#20541#0" />
+            <element signature="e#20548#20637#0" />
+            <element signature="e#20644#20760#0" />
+            <element signature="e#20767#20853#0" />
+            <element signature="e#20860#20955#0" />
+            <element signature="e#20962#21055#0" />
+            <element signature="e#21062#21155#0" />
+            <element signature="e#21162#21244#0" />
+            <element signature="e#21251#21345#0" />
+            <element signature="e#21435#21815#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/controller/ComplaintController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="421">
+          <caret line="156" column="45" selection-start-line="156" selection-start-column="45" selection-end-line="156" selection-end-column="45" />
+          <folding>
+            <element signature="method#testUploadFile#0;class#ComplaintController#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/ComplaintService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="474">
+          <caret line="41" column="15" selection-start-line="41" selection-start-column="15" selection-end-line="41" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/src/main/java/com/mj/admin/service/impl/ComplaintServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="363">
+          <caret line="569" column="30" selection-start-line="569" selection-start-column="30" selection-end-line="569" selection-end-column="30" />
+          <folding>
+            <element signature="e#1974#2002#0" />
+            <element signature="method#selectComplaint#0;class#ComplaintServiceImpl#0" />
+            <element signature="e#2978#3029#1" />
+            <element signature="e#3063#3116#1" />
+            <element signature="e#3146#3194#1" />
+            <element signature="e#3225#3274#1" />
+            <element signature="e#3438#4627#1" />
+            <element signature="e#4631#4726#1" />
+            <element signature="e#4768#4886#1" />
+            <element signature="e#4914#4966#1" />
+            <element signature="e#4991#5043#1" />
+            <element signature="e#5090#5155#1" />
+            <element signature="e#5164#5172#0" />
+            <element signature="e#5467#7783#1" />
+            <element signature="e#7107#7772#1" />
+            <element signature="e#8073#8087#0" />
+            <element signature="method#addComplaint#0;class#ComplaintServiceImpl#0" />
+            <element signature="e#9231#9303#1" />
+            <element signature="e#9308#9416#1" />
+            <element signature="e#9671#9735#0" />
+            <element signature="e#10022#10036#0" />
+            <element signature="method#updateComplaint#0;class#ComplaintServiceImpl#0" />
+            <element signature="e#10244#10291#0" />
+            <element signature="e#12293#12303#0" />
+            <element signature="e#13079#13093#0" />
+            <element signature="method#deleteComlaint#0;class#ComplaintServiceImpl#0" />
+            <element signature="e#13246#13512#1" />
+            <element signature="e#13291#13389#1" />
+            <element signature="method#selectInfoByWangWangNum#0;class#ComplaintServiceImpl#0" />
+            <element signature="e#14009#15845#1" />
+            <element signature="e#15130#15835#1" />
+            <element signature="method#selectFiles#0;class#ComplaintServiceImpl#0" />
+            <element signature="method#selectLevel#0;class#ComplaintServiceImpl#0" />
+            <element signature="method#getLevelName#0;class#ComplaintServiceImpl#0" />
+            <element signature="e#16709#17190#1" />
+            <element signature="e#16928#16985#0" />
+            <element signature="method#upload#0;class#ComplaintServiceImpl#0" />
+            <element signature="e#17859#17876#0" />
+            <element signature="e#18016#18027#0" />
+            <element signature="e#18686#18748#1" />
+            <element signature="method#addFile#0;class#ComplaintServiceImpl#0" />
+            <element signature="method#deleteFile#0;class#ComplaintServiceImpl#0" />
+            <element signature="method#exist#0;class#ComplaintServiceImpl#0" />
+            <element signature="e#19947#20357#0" />
+            <element signature="e#20134#20205#1" />
+            <element signature="e#20210#20347#1" />
+            <element signature="e#20379#20423#0" />
+            <element signature="e#20457#20501#0" />
+            <element signature="e#20510#20601#0" />
+            <element signature="e#21068#21121#1" />
+            <element signature="e#21589#24564#1" />
+            <element signature="e#23010#23083#1" />
+            <element signature="e#23849#24512#1" />
+            <element signature="e#26628#27223#1" />
+            <element signature="e#26695#27205#1" />
+            <element signature="e#27323#30408#1" />
+            <element signature="e#29572#30338#1" />
+            <element signature="e#29638#30320#1" />
+            <element signature="e#30409#30444#0" />
           </folding>
         </state>
       </provider>

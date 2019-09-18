@@ -236,9 +236,6 @@
             </if>
         </trim>
         ORDER BY ht.`hidden_date` DESC
-        <if test="pageSize != null and pageNum != null">
-            LIMIT #{pageNum},#{pageSize}
-        </if>
     </select>
 
 

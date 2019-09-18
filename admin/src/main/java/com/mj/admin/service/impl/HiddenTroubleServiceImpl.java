@@ -49,10 +49,6 @@ public class HiddenTroubleServiceImpl implements HiddenTroubleService {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
         SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
-        //分页
-        Integer pageSize = Integer.valueOf(String.valueOf(params.get("pageSize")));
-        Integer pageNum = Integer.valueOf(String.valueOf(params.get("pageNum")));
-
         String result = String.valueOf(params.get("result"));
         if (result == "null"){
             params.put("result",-1);
@@ -112,14 +108,6 @@ public class HiddenTroubleServiceImpl implements HiddenTroubleService {
             params.put("endTime", null);
         }
 
-        if (pageNum == 1) {
-            pageNum = 0;
-        } else {
-            pageNum = (pageNum - 1) * pageSize;
-        }
-
-        params.put("pageNum", pageNum);
-        params.put("pageSize", pageSize);
         if (!wangwangnum.isEmpty()) {
             params.put("wangwangnum", wangwangnum);
         }
@@ -179,6 +167,7 @@ public class HiddenTroubleServiceImpl implements HiddenTroubleService {
 
         //调用查询的dao层
         Integer total = hiddenTroubleMapper.total(params);
+        System.out.println("总数为:"+total);
         Map map = new HashMap();
         map.put("list", result1);
         map.put("total", total);

@@ -38,6 +38,8 @@ public class HiddenTroubleController {
     //修改隐患
     @RequestMapping(value = "/updateHidden", method = {RequestMethod.POST,RequestMethod.GET})
     public RestResult updateHiddenController(@RequestBody HiddenTroubleVo hiddenTrouble) throws ParseException {
+        System.out.println(hiddenTrouble.getPkId()+":111111");
+        System.out.println(hiddenTrouble.getSonLevel()+":222222222");
         return hiddenTroubleService.updateHidden(hiddenTrouble);
     }
 

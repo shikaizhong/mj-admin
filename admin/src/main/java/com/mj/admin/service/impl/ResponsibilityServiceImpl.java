@@ -45,8 +45,6 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
         SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
-        Integer pageNum = Integer.valueOf(String.valueOf(params.get("pageNum")));
-        Integer pageSize = Integer.valueOf(String.valueOf(params.get("pageSize")));
         Integer typess = Integer.valueOf(String.valueOf(params.get("type")));
         String PersonnelID = String.valueOf(params.get("PersonnelID"));
         String keyword = String.valueOf(params.get("keyword"));
@@ -96,16 +94,6 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
         if (grade == "") {
             params.put("grade", null);
         }
-        if (pageSize >= 10) {
-            pageSize = 10;
-        }
-        if (pageNum == 1) {
-            pageNum = 0;
-        } else {
-            pageNum = (pageNum - 1) * pageSize;
-        }
-        params.put("pageNum", pageNum);
-        params.put("pageSize", pageSize);
         params.put("type", typess);
         params.put("keyword", keyword);
         List<ResponsibilityVo> list = responsibilityMapper.selectResponsiblity(params);
@@ -436,8 +424,6 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
 
     @Override
     public RestResult selectAll(Map params) throws ParseException {
-        Integer pageNum = Integer.valueOf(String.valueOf(params.get("pageNum")));
-        Integer pageSize = Integer.valueOf(String.valueOf(params.get("pageSize")));
         Integer PersonnelID = Integer.valueOf((Integer) params.get("PersonnelID"));
         String keyword = String.valueOf(params.get("keyword"));
         String channel = String.valueOf(params.get("channel"));
@@ -502,16 +488,6 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
         if (grade == "") {
             params.put("grade", null);
         }
-        if (pageSize >= 10) {
-            pageSize = 10;
-        }
-        if (pageNum == 1) {
-            pageNum = 0;
-        } else {
-            pageNum = (pageNum - 1) * pageSize;
-        }
-        params.put("pageNum", pageNum);
-        params.put("pageSize", pageSize);
         params.put("keyword", keyword);
         //投诉数据
         List<ResponsibilityVo> list = responsibilityMapper.selectResponsiblityList(params);
@@ -579,8 +555,8 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
                 responsibilityVo.setRemark(listHidden.getRemark());
                 responsibilityVo.setFrequency(listHidden.getFrequency());
                 responsibilityVo.setPkId(listHidden.getPkId());
-                if (responsibilityVo.getLevel() != null) {
-                    responsibilityVo.setLevel(responsibilityVo.getLevel());
+                if (listHidden.getLevel() != null) {
+                    responsibilityVo.setLevel(listHidden.getLevel());
                 }
                 responsibilityVo.setSonLevel(listHidden.getSonLevel());
                 responsibilityVo.setResponsibilityer(listHidden.getResponsibilityer());
@@ -625,8 +601,8 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
                     responsibilityVo.setPkId(listRefund.getPkId());
                     responsibilityVo.setTime(listRefund.getRefundDate());
 
-                if (responsibilityVo.getLevel() != null) {
-                    responsibilityVo.setLevel(responsibilityVo.getLevel());
+                if (listRefund.getLevel() != null) {
+                    responsibilityVo.setLevel(listRefund.getLevel());
                 }
                 responsibilityVo.setResult(listRefund.getResult());
                 responsibilityVo.setDeadline(listRefund.getDeadline());

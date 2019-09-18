@@ -194,13 +194,6 @@
         <result column="result" jdbcType="INTEGER" property="result" />
     </resultMap>
 
-    <!--    <select id="selectRefundAll" parameterType="java.util.HashMap" resultType="BaseResultMapVo">-->
-    <!--        select * from t_refund-->
-    <!--        order by rr.`refund_date` DESC-->
-    <!--        <if test="pageNum != null and pageSize != null">-->
-    <!--            Limit #{pageNum},#{pageSize}-->
-    <!--        </if>-->
-    <!--    </select>-->
 
     <!--查询，分页,搜索-->
     <!--<select id="selectRefund" parameterType="java.util.HashMap" resultMap="BaseResultMapVo">
@@ -254,7 +247,7 @@
 
     <!--查询退款表所有数据-->
     <select id="selectRefundList" parameterType="java.util.HashMap" resultMap="BaseResultMapVo">
-        SELECT rr.*,re.`result` FROM t_refund rr LEFT JOIN t_responsibility re ON rr.`pk_id` = re.`complaint_id`
+        SELECT rr.*,re.`result`,re.`level`,re.`son_level` FROM t_refund rr LEFT JOIN t_responsibility re ON rr.`pk_id` = re.`complaint_id`
         <trim prefix="WHERE" prefixOverrides="AND|OR">
             AND rr.`is_delete` = 0
             <if test="wangwangnum != null and wangwangnum != ''">
@@ -269,9 +262,6 @@
             </if>
         </trim>
         ORDER BY rr.`refund_date` DESC
-        <if test="pageSize != null and pageNum != null">
-            LIMIT #{pageNum},#{pageSize}
-        </if>
     </select>
 
     <!--查询退款总数-->

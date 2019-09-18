@@ -510,7 +510,7 @@
   <!--拼接查询sqlserver拼接到responsibility-->
   <select id="selectResponsibilityList" parameterType="java.util.Map" resultMap="BaseResultMapRo">
     SELECT DISTINCT p1.UserName tename,tt.TeamName,cc.ServerDeadline,cr.PersonnelID,p2.UserName pname,t2.TeamName pteamname,cc.ShoppType,cc.TScustomer
-      from Customer cc
+      from (SELECT TOP 1 * FROM Customer WHERE WangWangNum = #{wangwangnum,jdbcType=VARCHAR} ORDER BY ID DESC) AS cc
       LEFT JOIN Personnel p1 ON cc.TScustomer =p1.ID
       LEFT JOIN Team tt ON p1.TeamID = tt.ID
       LEFT JOIN CustomerRecords cr ON cc.WangWangNum = cr.Trader

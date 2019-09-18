@@ -58,10 +58,6 @@ public class RefundServiceImpl implements RefundService {
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
         SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
 
-        //第几页
-        Integer pageNum = Integer.valueOf(String.valueOf(params.get("pageNum")));
-        //一页中有多少条数据
-        Integer pageSize = Integer.valueOf(String.valueOf(params.get("pageSize")));
         //根据旺旺名查询
         String wangwangnum = String.valueOf(params.get("wangwangnum"));
         //根据店铺类型查询
@@ -117,18 +113,7 @@ public class RefundServiceImpl implements RefundService {
         if (result == "null"){
             params.put("result",-1);
         }
-//        if (pageSize >= 10) {
-//            pageSize = pageSize;
-//        }
-
-        if (pageNum == 1) {
-            pageNum = 0;
-        } else {
-            pageNum = (pageNum - 1) * pageSize;
-        }
         //将条件封装到map集合里
-        params.put("pageNum", pageNum);
-        params.put("pageSize", pageSize);
         params.put("wangwangnum", wangwangnum);
 
 //        params.put("shopptype", shopptype);
@@ -169,6 +154,8 @@ public class RefundServiceImpl implements RefundService {
             refundVo.setPkId(refund.getPkId());
             refundVo.setResult(refund.getResult());
             refundVo.setRefundAmount(refund.getRefundAmount());
+            refundVo.setLevel(refund.getLevel());
+            refundVo.setSonLevel(refund.getSonLevel());
 //            System.out.println("获取refund里的值后："+refundVo.getRefundDate());
             if (!listVos.isEmpty()) {
                 //进sqlserver获取里面的数据

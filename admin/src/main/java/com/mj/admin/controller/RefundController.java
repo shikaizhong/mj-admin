@@ -36,6 +36,8 @@ public class RefundController {
     //修改反馈
     @RequestMapping(value = "/updateRefund", method = RequestMethod.POST)
     public RestResult updateRefund(@RequestBody RefundVo refund)throws ParseException{
+        System.out.println(refund.getPkId()+":111111");
+        System.out.println(refund.getSonLevel()+":222222222");
         return refundService.updateRefund(refund);
     }
 
