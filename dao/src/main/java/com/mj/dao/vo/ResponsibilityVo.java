@@ -224,7 +224,7 @@ public class ResponsibilityVo {
     //跟进人员
     private String  followPersonel;
 
-    //投诉日期
+    //判责日期
     private Date reDate;
 
     //合日期

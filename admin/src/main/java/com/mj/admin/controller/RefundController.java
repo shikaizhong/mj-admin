@@ -60,6 +60,12 @@ public class RefundController {
         return refundService.selectInfoByWangWangNum(params);
     }
 
+    //根据wangwangNum查询对应的历史记录
+    @RequestMapping(value = "/selectByRefundWangwangnum", method = RequestMethod.POST)
+    public RestResult selectByRefundWangwangnum(@RequestBody Refund refund) throws Exception {
+        return refundService.SelectByRefundWangwangnum(refund);
+    }
+
     //文件上传
 //    @RequestMapping(value = "/upload", method = {RequestMethod.POST, RequestMethod.GET})
 //    @CrossOrigin(origins = "*", allowCredentials = "true", allowedHeaders = "", methods = {})

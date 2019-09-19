@@ -337,4 +337,9 @@
         </set>
         where rr.pk_id = #{pkId,jdbcType=INTEGER}
     </update>
+
+    <!--退款旺旺名查询-->
+    <select id="selectByRefundWangwangnum" parameterType="java.util.HashMap" resultMap="BaseResultMapVo">
+        SELECT * FROM t_refund WHERE WangWangNum = #{wangwangnum}
+    </select>
 </mapper>

@@ -71,6 +71,16 @@ public class Refund {
      */
     private Integer sonLevel;
 
+    /**
+     * @Author Simon
+     * @Method
+     * @Version 1.0
+     * @Return
+     * @Exception
+     * @Date 2019-09-19 0019 10:11:36
+     */
+     private Integer frequency;
+
 
     /**
      * 主键
@@ -244,6 +254,14 @@ public class Refund {
 
     public void setSonLevel(Integer sonLevel) {
         this.sonLevel = sonLevel;
+    }
+
+    public Integer getFrequency() {
+        return frequency;
+    }
+
+    public void setFrequency(Integer frequency) {
+        this.frequency = frequency;
     }
 
     /**

@@ -262,24 +262,20 @@ public class RefundServiceImpl implements RefundService {
 
         //根据ID查询
         RefundVo refund2 = refundMapper.selectBy(refund.getPkId());
-        System.out.println("主键为:"+refund.getPkId());
-        //初始化
-//        System.out.println("获取退款时间："+refund.getRefunddate());
-
         String str = refund.gethDate();
+        System.out.println("时间为:"+str);
 //        System.out.println("从测试环境获取的时间为："+str);
         //正则表达式，判断字符串长度是否在3~20之间
         String pattern = "^.{3,20}$";
         Pattern p = Pattern.compile(pattern);
         Matcher m = p.matcher(str);
+        System.out.println("结果为:"+m.matches());
         //根据正则表达式判断
         if (m.matches()) {
             //如果为true，则执行这里的
             Date date1 = sdf2.parse(str);
-            //从前端iview获取的时间为格林威治时间，所以需要加上8个小时为本地时间
-            long rightTime = (long) (date1.getTime() + 8 * 60 * 60 * 1000);
             //格式转化
-            String newTime = sdf2.format(rightTime);
+            String newTime = sdf2.format(date1);
             //将String类型的转化成Date类型
             date1 = sdf2.parse(newTime);
             //将修改后的时间传给回访时间
@@ -288,17 +284,13 @@ public class RefundServiceImpl implements RefundService {
             long rightTime = (long) (sdf1.parse(str).getTime() + 8 * 60 * 60 * 1000);
             //格式转化
             String newtime = sdf2.format(rightTime);
-            System.out.println("时间为1:"+newtime);
-            System.out.println("时间为2:"+sdf2.parse(newtime));
             refund2.setRefundDate(sdf2.parse(newtime));
         }
 
         refund2.setRefundChannel(refund.getRefundChannel());
         refund2.setRemark(refund.getRemark());
         refund2.setWangwangnum(refund.getWangwangnum());
-        System.out.println("退款原因为:"+refund.getRefundCause());
         refund2.setRefundCause(refund.getRefundCause());
-        System.out.println("修改后退款原因为:"+refund2.getRefundCause());
         refund2.setRefundAmount(refund.getRefundAmount());
         refund2.setLevel(refund.getLevel());
         refund2.setSonLevel(refund.getSonLevel());
@@ -420,7 +412,23 @@ public class RefundServiceImpl implements RefundService {
             //返回信息
             return ResultUtils.error(ResultCodeEnum.USER_NOT_FOUND.getCode(), ResultCodeEnum.USER_NOT_FOUND.getMsg());
         } else {
-            return ResultUtils.error(ResultCodeEnum.ACCOUNT_EXIST.getCode(), ResultCodeEnum.ACCOUNT_EXIST.getMsg());
+            if(refundMapper.selectByRefundWangwangnum(map).size() == 0) {
+                return ResultUtils.success(0);
+            }else{
+                return ResultUtils.error(ResultCodeEnum.ACCOUNT_EXIST.getCode(), ResultCodeEnum.ACCOUNT_EXIST.getMsg());
+            }
+        }
+    }
+
+    @Override
+    public RestResult SelectByRefundWangwangnum(Refund refund) {
+        String wangwangnum = refund.getWangwangnum();
+        Map map = new HashMap();
+        map.put("wangwangnum", wangwangnum);
+        if(refundMapper.selectByRefundWangwangnum(map).size() == 0) {
+            return ResultUtils.success(0);
+        }else{
+            return null;
         }
     }
 

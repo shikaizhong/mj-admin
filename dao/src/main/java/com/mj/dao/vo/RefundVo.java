@@ -107,6 +107,8 @@ public class RefundVo {
     //客诉子类别
     private Integer sonLevel;
 
+    private Integer frequency;
+
     /**
      * 获取前端的时间而新增的，数据库中并无该字段，Vo层中也没有该字段
      */
@@ -284,5 +286,13 @@ public class RefundVo {
 
     public void setSonLevel(Integer sonLevel) {
         this.sonLevel = sonLevel;
+    }
+
+    public Integer getFrequency() {
+        return frequency;
+    }
+
+    public void setFrequency(Integer frequency) {
+        this.frequency = frequency;
     }
 }

@@ -71,4 +71,6 @@ public interface RefundMapper {
     int updateAll(RefundVo refundVo);
     //查看
     RefundVo selectBy(Integer pkId);
+    //根据旺旺名查
+    List<Refund> selectByRefundWangwangnum(Map params);
 }

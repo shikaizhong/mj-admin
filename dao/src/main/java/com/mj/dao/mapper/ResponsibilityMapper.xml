@@ -500,6 +500,4 @@
       select * from t_responsibility
   </select>
 
-
-
 </mapper>

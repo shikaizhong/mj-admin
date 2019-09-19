@@ -200,7 +200,7 @@ public class HiddenTroubleServiceImpl implements HiddenTroubleService {
             hiddenTrouble1.setHiddenContent(hiddenTrouble.getHiddenContent());
             hiddenTrouble1.setRemark(hiddenTrouble.getRemark());
             //时间格式处理
-            if (hiddenTrouble.getHiddenDate() == null) {
+            if (hiddenTrouble.gethDate().isEmpty()) {
                 Date date = new Date();
                 hiddenTrouble1.setHiddenDate(date);
             } else {
@@ -262,11 +262,8 @@ public class HiddenTroubleServiceImpl implements HiddenTroubleService {
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
         SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         HiddenTroubleVo hiddenTrouble1 = hiddenTroubleMapper.selectBy(hiddenTrouble.getPkId());
-        System.out.println(hiddenTrouble.getHiddenContent()+"内容为:");
         if(!hiddenTrouble.getHiddenContent().isEmpty()){
-            System.out.println("修改之后1:"+hiddenTrouble.getHiddenContent());
             hiddenTrouble1.setHiddenContent(hiddenTrouble.getHiddenContent());
-            System.out.println("修改之后2:"+hiddenTrouble1.getHiddenContent());
         }
         //初始化
         String str = hiddenTrouble.gethDate();
@@ -277,8 +274,7 @@ public class HiddenTroubleServiceImpl implements HiddenTroubleService {
         //若是格林威治时间，则执行else，若不是，则直接执行
         if (m.matches()) {
             Date date1 = sdf2.parse(str);
-            long rightTime = (long) (date1.getTime() + 8 * 60 * 60 * 1000);
-            String newtime = sdf2.format(rightTime);
+            String newtime = sdf2.format(date1);
             date1 = sdf2.parse(newtime);
             hiddenTrouble1.setHiddenDate(date1);
         } else {

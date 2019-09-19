@@ -232,7 +232,7 @@
                 AND re.`result` = #{result}
             </if>
             <if test="frequency !=-1">
-                and ht.frequency = #{frequency}
+                and ht.frequency >= #{frequency}
             </if>
         </trim>
         ORDER BY ht.`hidden_date` DESC

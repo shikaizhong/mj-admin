@@ -1,7 +1,5 @@
 package com.mj.dao.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import java.util.Date;
 
 public class Complaint {
@@ -18,8 +16,12 @@ public class Complaint {
     /**
      * 投诉日期 complaintDate
      */
-    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd")
     private Date complaintdate;
+
+    /**
+     * 获取前端的时间而新增的，数据库中并无该字段，Vo层中也没有该字段
+     */
+    private String hDate;
 
     /**
      * 投诉渠道:  1:招商京东 2:招商淘宝 3:综管部 4:企划部 5:京东官方投诉 6:京东差评投诉 7:淘宝官方投诉 8:其他 channel
@@ -40,11 +42,6 @@ public class Complaint {
      * 投诉次数,每投诉一次自动+1 frequency
      */
     private Integer frequency;
-
-    /**
-     * 审核状态 0：待审核 1:已审核 2:待审定 status
-     */
-    private Integer status;
 
     /**
      * 是否删除: 0:正常 1:删除 is_delete
@@ -145,14 +142,6 @@ public class Complaint {
         this.frequency = frequency;
     }
 
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
     public Integer getIsDelete() {
         return isDelete;
     }
@@ -215,5 +204,13 @@ public class Complaint {
 
     public void setFollowProcess(String followProcess) {
         this.followProcess = followProcess;
+    }
+
+    public String gethDate() {
+        return hDate;
+    }
+
+    public void sethDate(String hDate) {
+        this.hDate = hDate;
     }
 }

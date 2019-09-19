@@ -33,6 +33,8 @@ public interface RefundService {
     //根据退款用户判断该用户存在不存在
     RestResult selectWang(Refund refund);
 
+    RestResult SelectByRefundWangwangnum(Refund refund);
+
     //上传文件
     RestResult upload(MultipartFile file) throws IOException;
 
@@ -44,6 +46,8 @@ public interface RefundService {
 
     //根据refundId查询历史记录
     RestResult selectFiles(Map params);
+
+
 
     //查询文件列表
 //    RestResult selectFileList();

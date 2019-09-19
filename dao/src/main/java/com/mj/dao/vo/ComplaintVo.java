@@ -1,7 +1,5 @@
 package com.mj.dao.vo;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import java.util.Date;
 
 
@@ -20,7 +18,6 @@ public class ComplaintVo {
      * 投诉日期 complaintDate
      */
 //    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(locale = "zh", timezone = "GMT+8", pattern = "yyyy-MM-dd")
     private Date complaintdate;
 
     /**

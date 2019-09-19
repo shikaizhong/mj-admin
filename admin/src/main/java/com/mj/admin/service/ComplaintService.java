@@ -15,9 +15,9 @@ public interface ComplaintService {
     //查询分页加搜索
     RestResult selectComplaint(Map params) throws Exception;
     //添加
-    RestResult addComplaint(Complaint complaint);
+    RestResult addComplaint(Complaint complaint) throws ParseException;
     //修改
-    RestResult updateComplaint(ComplaintVo complaint);
+    RestResult updateComplaint(ComplaintVo complaint) throws ParseException;
     //批量删除反馈
     RestResult deleteComlaint(List<Integer> pkIds);
     //根据旺旺名查询历史记录

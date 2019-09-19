@@ -9,7 +9,6 @@ import com.mj.common.result.RestResult;
 import com.mj.common.result.RestResultBuilder;
 import com.mj.common.result.ResultUtils;
 import com.mj.common.tools.ApiConstant;
-import com.mj.common.tools.DateUtil;
 import com.mj.dao.entity.Complaint;
 import com.mj.dao.entity.ComplaintLevel;
 import com.mj.dao.entity.Files;
@@ -34,6 +33,8 @@ import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 //@Transactional
@@ -193,7 +194,10 @@ public class ComplaintServiceImpl implements ComplaintService {
     @Transactional
     @DataSource(value = "druid")
     @Override
-    public RestResult addComplaint(Complaint complaint) {
+    public RestResult addComplaint(Complaint complaint) throws ParseException {
+        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        Calendar calendar = new GregorianCalendar();
             //根据旺旺名来查询该客户反馈次数
             Integer frequency = complaintMapper.sumCustomerComplaint(complaint.getWangwangnum());
             //初始化
@@ -212,15 +216,44 @@ public class ComplaintServiceImpl implements ComplaintService {
             complaint1.setFollowProcess(complaint.getFollowProcess());
             Files files = new Files();
             files.setComplaintId(complaint1.getPkId());
-            if (complaint.getComplaintdate() ==null){
-                complaint1.setComplaintdate(new Date());
-            }else {
-            complaint1.setComplaintdate(DateUtil.getAfter(complaint.getComplaintdate(), 1));
+
+        if (complaint.gethDate().isEmpty()) {
+            Date date = new Date();
+//                date = sdf.parse(sdf.format(date));
+            complaint1.setComplaintdate(date);
+        } else {
+            String str = complaint.gethDate();
+//        System.out.println("从测试环境获取的时间为："+str);
+            //正则表达式，判断字符串长度是否在3~20之间
+            String pattern = "^.{3,20}$";
+            Pattern p = Pattern.compile(pattern);
+            Matcher m = p.matcher(str);
+            //根据正则表达式判断
+            if (m.matches()) {
+                //如果为true，则执行这里的
+                Date date1 = sdf2.parse(str);
+                //从前端iview获取的时间为格林威治时间，所以需要加上8个小时为本地时间
+                long rightTime = (long) (date1.getTime() + 8 * 60 * 60 * 1000);
+                //格式转化
+                String newTime = sdf2.format(rightTime);
+                //将String类型的转化成Date类型
+                date1 = sdf2.parse(newTime);
+//            System.out.println("时间为（正常）："+date1);
+                //将修改后的时间传给回访时间
+                complaint1.setComplaintdate(date1);
+            } else {
+                //如果为false，则执行这里的
+                //从前端iview获取的时间为格林威治时间，所以需要加上8个小时为本地时间
+                long rightTime = (long) (sdf1.parse(str).getTime() + 8 * 60 * 60 * 1000);
+                //格式转化
+                String newtime = sdf2.format(rightTime);
+//            System.out.println("时间为（格林威治时间）："+sdf2.parse(newtime));
+                //将修改后的时间传给回访时间
+                complaint1.setComplaintdate(sdf2.parse(newtime));
             }
-            System.out.println(complaint1.getComplaintdate() + "时间为");
-//            complaint1.setScenerestoration(complaint.getScenerestoration());
+        }
             complaint1.setWangwangnum(complaint.getWangwangnum());
-            complaint1.setStatus(0);
+
 //        complaint1.setComplaintid(complaint.getComplaintid());
 //        complaint1.setComplaintId(complaint.getComplaintId());
             //调用添加方法
@@ -233,7 +266,9 @@ public class ComplaintServiceImpl implements ComplaintService {
     @Transactional
     @DataSource(value = "druid")
     @Override
-    public RestResult updateComplaint(ComplaintVo complaint) {
+    public RestResult updateComplaint(ComplaintVo complaint) throws ParseException {
+        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         //根据id查询
         ComplaintVo complaint1 = complaintMapper.selectBy(complaint.getPkId());
 //        System.out.println(complaint1+"地址为");
@@ -286,7 +321,7 @@ public class ComplaintServiceImpl implements ComplaintService {
 //        complaint1.setComplaintid(complaint.getComplaintid());
 //        complaint1.setComplaintId(complaint.getComplaintId());
 //        System.out.println("ComplaintId为"+complaint1.getComplaintId());
-        complaint1.setStatus(complaint.getStatus());
+
         complaint1.setWangwangnum(complaint.getWangwangnum());
         //文件上传时候修改
 //        complaint1.setScenerestoration(complaint.getScenerestoration());
@@ -295,11 +330,39 @@ public class ComplaintServiceImpl implements ComplaintService {
         complaint1.setRemark(complaint.getRemark());
 //        complaint1.setLevel(complaint.getLevel());
         complaint1.setContent(complaint.getContent());
+        complaint1.setProcessingScheme(complaint.getProcessingScheme());
+        complaint1.setFollowProcess(complaint.getFollowProcess());
+        complaint1.setTurnover(complaint.getTurnover());
+        complaint1.setFollowPersonel(complaint.getFollowPersonel());
+        complaint1.setIndustry(complaint.getIndustry());
+        complaint1.setNumber(complaint.getNumber());
         complaint1.setChannel(complaint.getChannel());
-        complaint1.setComplaintdate(DateUtil.getAfter(complaint.getComplaintdate(),1));
         complaint1.setSonLevel(complaint.getSonLevel());
         complaint1.setLevel(complaint.getLevel());
-        System.out.println("到了");
+
+        String str = complaint.gethDate();
+//        System.out.println("从测试环境获取的时间为："+str);
+        //正则表达式，判断字符串长度是否在3~20之间
+        String pattern = "^.{3,20}$";
+        Pattern p = Pattern.compile(pattern);
+        Matcher m = p.matcher(str);
+        //根据正则表达式判断
+        if (m.matches()) {
+            //如果为true，则执行这里的
+            Date date1 = sdf2.parse(str);
+            //格式转化
+            String newTime = sdf2.format(date1);
+            //将String类型的转化成Date类型
+            date1 = sdf2.parse(newTime);
+            //将修改后的时间传给回访时间
+            complaint1.setComplaintdate(date1);
+        } else {
+            long rightTime = (long) (sdf1.parse(str).getTime() + 8 * 60 * 60 * 1000);
+            //格式转化
+            String newtime = sdf2.format(rightTime);
+            complaint1.setComplaintdate(sdf2.parse(newtime));
+        }
+
         complaintMapper.updateAll(complaint1);
         return new RestResultBuilder<>().success("修改成功");
     }
@@ -629,6 +692,7 @@ public class ComplaintServiceImpl implements ComplaintService {
                 responsibilityVo.setParentName(listRefund.getParentName());
                 responsibilityVo.setExternalCause(listRefund.getExternalCause());
                 responsibilityVo.setGrade(listRefund.getGrade());
+                responsibilityVo.setFrequency(1);
                 if (sqlServerVos != null) {
                     for(SQLServerVo sqlServerVo : sqlServerVos) {
                         responsibilityVo.setCusttype(sqlServerVo.getCusttype());

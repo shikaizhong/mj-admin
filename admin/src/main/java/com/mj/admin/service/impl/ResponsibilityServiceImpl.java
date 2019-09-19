@@ -199,10 +199,8 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
                 if (m.matches()) {
                     //如果为true，则执行这里的
                     Date date1 = sdf2.parse(str);
-                    //从前端iview获取的时间为格林威治时间，所以需要加上8个小时为本地时间
-                    long rightTime = (long) (date1.getTime() + 8 * 60 * 60 * 1000);
                     //格式转化
-                    String newTime = sdf2.format(rightTime);
+                    String newTime = sdf2.format(date1);
                     //将String类型的转化成Date类型
                     date1 = sdf2.parse(newTime);
 //            System.out.println("时间为（正常）："+date1);
@@ -243,10 +241,8 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
                 if (m.matches()) {
                     //如果为true，则执行这里的
                     Date date1 = sdf2.parse(str);
-                    //从前端iview获取的时间为格林威治时间，所以需要加上8个小时为本地时间
-                    long rightTime = (long) (date1.getTime() + 8 * 60 * 60 * 1000);
                     //格式转化
-                    String newTime = sdf2.format(rightTime);
+                    String newTime = sdf2.format(date1);
                     //将String类型的转化成Date类型
                     date1 = sdf2.parse(newTime);
 //            System.out.println("时间为（正常）："+date1);
@@ -282,7 +278,42 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
             responsibilityWithBLOBs2.setGrade(responsibilityWithBLOBs.getGrade());
             responsibilityWithBLOBs2.setComplaintId(responsibilityWithBLOBs.getComplaintId());
             responsibilityWithBLOBs2.setType(responsibilityWithBLOBs.getType());
-            responsibilityWithBLOBs2.setCreateTime(new Date());
+            if (responsibilityWithBLOBs.gethDate() ==null) {
+                Date date = new Date();
+//                date = sdf.parse(sdf.format(date));
+                responsibilityWithBLOBs2.setCreateTime(date);
+            } else {
+                String str = responsibilityWithBLOBs.gethDate();
+//        System.out.println("从测试环境获取的时间为："+str);
+                //正则表达式，判断字符串长度是否在3~20之间
+                String pattern = "^.{3,20}$";
+                Pattern p = Pattern.compile(pattern);
+                Matcher m = p.matcher(str);
+                //根据正则表达式判断
+                if (m.matches()) {
+                    //如果为true，则执行这里的
+                    Date date1 = sdf2.parse(str);
+                    //从前端iview获取的时间为格林威治时间，所以需要加上8个小时为本地时间
+                    long rightTime = (long) (date1.getTime() + 8 * 60 * 60 * 1000);
+                    //格式转化
+                    String newTime = sdf2.format(rightTime);
+                    //将String类型的转化成Date类型
+                    date1 = sdf2.parse(newTime);
+//            System.out.println("时间为（正常）："+date1);
+                    //将修改后的时间传给回访时间
+                    responsibilityWithBLOBs2.setCreateTime(date1);
+                } else {
+                    //如果为false，则执行这里的
+                    //从前端iview获取的时间为格林威治时间，所以需要加上8个小时为本地时间
+                    long rightTime = (long) (sdf1.parse(str).getTime() + 8 * 60 * 60 * 1000);
+                    //格式转化
+                    String newtime = sdf2.format(rightTime);
+//            System.out.println("时间为（格林威治时间）："+sdf2.parse(newtime));
+                    //将修改后的时间传给回访时间
+                    responsibilityWithBLOBs2.setCreateTime(sdf2.parse(newtime));
+                }
+
+            }
             responsibilityMapper.insertSelective(responsibilityWithBLOBs2);
         }
         return new RestResultBuilder<>().success("操作成功");
@@ -578,6 +609,7 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
                         responsibilityVo.setTename(sqlServerVo.getUsername1());
                         responsibilityVo.setTeamname(sqlServerVo.getTeamname());
                         responsibilityVo.setShopptype(sqlServerVo.getShopptype());
+                        responsibilityVo.setServerdeadline(sqlServerVo.getServerdeadline());
                     }
                     result.add(responsibilityVo);
                 }
@@ -627,6 +659,7 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
                         responsibilityVo.setTeamname(sqlServerVo.getTeamname());
                         responsibilityVo.setShopptype(sqlServerVo.getShopptype());
                         responsibilityVo.setDeadline(sqlServerVo.getDeadline());
+                        responsibilityVo.setServerdeadline(sqlServerVo.getServerdeadline());
                     }
                     result.add(responsibilityVo);
                 }

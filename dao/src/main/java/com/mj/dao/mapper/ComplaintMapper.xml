@@ -354,7 +354,7 @@
       <!--按照状态搜索-->
       <!--按照投诉次数管理-->
       <if test="frequency !=-1">
-        and cc.`frequency` > #{frequency,jdbcType=INTEGER}
+        and cc.`frequency` >= #{frequency,jdbcType=INTEGER}
       </if>
       <if test="result !=-1">
         and rr.result = #{result}
@@ -385,7 +385,7 @@
       </if>
       <!--按照投诉次数管理-->
       <if test="frequency !=-1">
-        and cc.`frequency` > #{frequency,jdbcType=INTEGER}
+        and cc.`frequency` >= #{frequency,jdbcType=INTEGER}
       </if>
       <!--按照投诉渠道搜索-->
       <if test="channel !=-1">
@@ -425,7 +425,6 @@
   </select>
   <!--反馈大类-->
   <select id="selectLevel" resultMap="BaseResultMapS">
-    <!--SELECT DISTINCT cl.`parent_name`,rr.`level`,cl.`parent_id`,cl.complaint_name FROM t_complaint_level cl LEFT JOIN t_responsibility rr ON rr.`level` = cl.`parent_id`-->
     SELECT DISTINCT cl.`parent_name`,cl.`parent_id`
     FROM t_complaint_level cl
   </select>
@@ -473,9 +472,6 @@
       <if test="channel != null">
         cc.channel = #{channel,jdbcType=INTEGER},
       </if>
-      <if test="scenerestoration != null">
-        cc.sceneRestoration = #{scenerestoration,jdbcType=VARCHAR},
-      </if>
       <if test="remark != null">
         cc.remark = #{remark,jdbcType=VARCHAR},
       </if>
@@ -493,6 +489,24 @@
       </if>
       <if test="sonLevel !=null">
         re.son_level = #{sonLevel,jdbcType = INTEGER},
+      </if>
+      <if test="turnover != null">
+        cc.turnover = #{turnover},
+      </if>
+      <if test="number != null">
+        cc.number = #{number},
+      </if>
+      <if test="industry != null">
+        cc.industry = #{industry},
+      </if>
+      <if test="followPersonel != null">
+        cc.follow_personel = #{followPersonel},
+      </if>
+      <if test="processingScheme != null">
+        cc.processing_scheme = #{processingScheme},
+      </if>
+      <if test="followProcess != null">
+        cc.follow_process = #{followProcess}
       </if>
     </set>
     where cc.pk_id = #{pkId,jdbcType=INTEGER}

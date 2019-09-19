@@ -41,12 +41,12 @@ public class ComplaintController {
     }
     //添加反馈
     @RequestMapping(value = "/addComplaint",method = RequestMethod.POST)
-    public RestResult addComplaint(@RequestBody Complaint complaint){
+    public RestResult addComplaint(@RequestBody Complaint complaint) throws ParseException{
         return complaintService.addComplaint(complaint);
     }
     //修改反馈
     @RequestMapping(value = "/updateComplaint",method = RequestMethod.POST)
-    public RestResult updateComplaint(@RequestBody ComplaintVo complaint){
+    public RestResult updateComplaint(@RequestBody ComplaintVo complaint) throws ParseException{
         return complaintService.updateComplaint(complaint);
     }
     //删除反馈
