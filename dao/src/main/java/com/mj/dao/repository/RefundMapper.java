@@ -73,4 +73,7 @@ public interface RefundMapper {
     RefundVo selectBy(Integer pkId);
     //根据旺旺名查
     List<Refund> selectByRefundWangwangnum(Map params);
+
+    //查询最新的一条主键
+    Refund selectPkId();
 }

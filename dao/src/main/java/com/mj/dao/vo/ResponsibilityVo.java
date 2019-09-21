@@ -1,7 +1,5 @@
 package com.mj.dao.vo;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import java.util.Date;
 
 /**
@@ -19,6 +17,16 @@ public class ResponsibilityVo {
      * 主键id pk_id
      */
     private Integer pkId;
+
+    /**
+     * @Author Simon
+     * @Method  判责表主键
+     * @Version 1.0
+     * @Return
+     * @Exception
+     * @Date 2019-09-20 0020 18:51:38
+     */
+    private Integer aspId;
 
     /**
      * 客诉大类别 对应complaint_level的parent_id level
@@ -83,7 +91,7 @@ public class ResponsibilityVo {
     /**
      * 投诉日期 complaintDate
      */
-    @JsonFormat(locale = "zh", timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+//    @JsonFormat(locale = "zh", timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date complaintdate;
     /**
      * 投诉渠道:  1:招商京东 2:招商淘宝 3:综管部 4:企划部 5:京东官方投诉 6:京东差评投诉 7:淘宝官方投诉 8:其他 channel
@@ -232,6 +240,14 @@ public class ResponsibilityVo {
 
     //原因
     private  String content;
+
+    //车手名字
+    private String carname;
+
+    /**
+     *  TechnologyRecruitmentID车手id
+     */
+    private Integer technologyrecruitmentid;
 
     //生产get.set方法
     public Integer getPkId() {
@@ -658,5 +674,29 @@ public class ResponsibilityVo {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public Integer getTechnologyrecruitmentid() {
+        return technologyrecruitmentid;
+    }
+
+    public void setTechnologyrecruitmentid(Integer technologyrecruitmentid) {
+        this.technologyrecruitmentid = technologyrecruitmentid;
+    }
+
+    public String getCarname() {
+        return carname;
+    }
+
+    public void setCarname(String carname) {
+        this.carname = carname;
+    }
+
+    public Integer getAspId() {
+        return aspId;
+    }
+
+    public void setAspId(Integer aspId) {
+        this.aspId = aspId;
     }
 }

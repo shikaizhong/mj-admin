@@ -1,7 +1,5 @@
 package com.mj.dao.vo;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import java.util.Date;
 
 public class HiddenTroubleVo {
@@ -18,7 +16,7 @@ public class HiddenTroubleVo {
     /**
      * 隐患日期 hidden_date
      */
-    @JsonFormat(locale = "zh", pattern = "yyyy-MM-dd HH:mm")
+//    @JsonFormat(locale = "zh", pattern = "yyyy-MM-dd HH:mm")
     private Date hiddenDate;
 
     /**

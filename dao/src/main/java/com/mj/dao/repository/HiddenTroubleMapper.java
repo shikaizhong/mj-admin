@@ -70,4 +70,7 @@ public interface HiddenTroubleMapper {
     int updateAll(HiddenTroubleVo hiddenTrouble);
     //查看
     HiddenTroubleVo selectBy(Integer pkId);
+
+    //查询最新的一条主键
+    HiddenTrouble selectPkId();
 }

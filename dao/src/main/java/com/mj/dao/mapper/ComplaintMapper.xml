@@ -347,7 +347,7 @@
   <select id="selectComplaintList" parameterType="java.util.HashMap" resultMap="BaseResultMapVo">
     SELECT cc.*,rr.result,rr.`level`,rr.`son_level` FROM t_complaint cc left join t_responsibility rr ON rr.`complaint_id` = cc.`pk_id`
     <trim prefix="WHERE" prefixOverrides="AND|OR">
-    cc.is_delete=0
+    cc.is_delete=0 AND rr.`type` = 0
     <if test="keyword != null and keyword != ''">
       AND cc.WangWangNum LIKE CONCAT('%', #{keyword}, '%')
       </if>
@@ -356,7 +356,7 @@
       <if test="frequency !=-1">
         and cc.`frequency` >= #{frequency,jdbcType=INTEGER}
       </if>
-      <if test="result !=-1">
+      <if test="result !=-1 and result !=null">
         and rr.result = #{result}
       </if>
       <!--按照投诉渠道搜索-->
@@ -368,6 +368,11 @@
       </if>
     </trim>
     order by cc.`complaintDate` DESC
+  </select>
+
+  <!--查询最新的主键-->
+  <select id="selectPkId" resultMap="BaseResultMap">
+    SELECT pk_id FROM t_complaint ORDER BY pk_id DESC LIMIT 1
   </select>
 
   <!--根据pkId查询信息-->
@@ -440,7 +445,7 @@
     ON cc.`pk_id` = rr.`complaint_id`
     LEFT JOIN t_complaint_level cl ON rr.`son_level` = cl.`pk_id`
     WHERE cc.`WangWangNum` = #{wangwangnum,jdbcType=VARCHAR}
-    and  cc.is_delete=0
+    and  cc.is_delete=0 AND rr.`type` = 0
   </select>
   <!--通过wangwangnum查询隐患信息-->
   <select id="selectHiddenByWangWangNum" resultType="com.mj.dao.vo.ResponsibilityVo">
@@ -448,7 +453,7 @@
       ON rr.`complaint_id` = ht.`pk_id`
    LEFT JOIN t_complaint_level cl ON rr.`son_level` = cl.`pk_id`
     WHERE ht.WangWangNum =#{wangwangnum,jdbcType=VARCHAR}
-      and  ht.is_delete=0
+      and  ht.is_delete=0 AND rr.`type` = 1
   </select>
   <!--通过wangwangnum查询退款信息-->
   <select id="selectRefundByWangWangNum" resultType="com.mj.dao.vo.ResponsibilityVo">
@@ -456,7 +461,7 @@
     ON rr.`complaint_id` = rf.`pk_id`
     LEFT JOIN t_complaint_level cl ON rr.`son_level` = cl.`pk_id`
     WHERE rf.WangWangNum =#{wangwangnum,jdbcType=VARCHAR}
-      and  rf.is_delete=0
+      and  rf.is_delete=0 AND rr.`type` = 2
   </select>
 
   <!--修改客诉内容-->
@@ -510,11 +515,12 @@
       </if>
     </set>
     where cc.pk_id = #{pkId,jdbcType=INTEGER}
+    AND re.`type` = 0
   </update>
   <!--通过pkId查询-->
   <select id="selectBy" parameterType="java.lang.Integer" resultType="com.mj.dao.vo.ComplaintVo">
     select cc.*,re.`result`,re.`level`,re.`son_level` FROM t_complaint cc LEFT JOIN t_responsibility re
-                                                                                         ON cc.`pk_id` = re.`complaint_id`
-    where cc.pk_id = #{pkId,jdbcType=INTEGER}
+      ON cc.`pk_id` = re.`complaint_id`
+    where cc.pk_id = #{pkId,jdbcType=INTEGER} AND re.`type` = 0
   </select>
 </mapper>

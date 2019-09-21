@@ -9,9 +9,7 @@ import com.mj.common.result.RestResult;
 import com.mj.common.result.RestResultBuilder;
 import com.mj.common.result.ResultUtils;
 import com.mj.common.tools.ApiConstant;
-import com.mj.dao.entity.Complaint;
-import com.mj.dao.entity.ComplaintLevel;
-import com.mj.dao.entity.Files;
+import com.mj.dao.entity.*;
 import com.mj.dao.repository.*;
 import com.mj.dao.vo.ComplaintVo;
 import com.mj.dao.vo.Complaints;
@@ -56,6 +54,9 @@ public class ComplaintServiceImpl implements ComplaintService {
     private PersonnelServiceImpl personnelService;
     @Autowired
     private ResponsibilityService responsibilityService;
+
+    @Autowired
+    private ResponsibilityMapper responsibilityMapper;
     //分页搜索总记录数
     @DataSource(value = "druid")
     @Override
@@ -81,6 +82,8 @@ public class ComplaintServiceImpl implements ComplaintService {
         }
         if (results =="null"){
             params.put("result",-1);
+        }else{
+            params.put("result", results);
         }
         if (channel == "null"){
             params.put("channel",-1);
@@ -258,6 +261,11 @@ public class ComplaintServiceImpl implements ComplaintService {
 //        complaint1.setComplaintId(complaint.getComplaintId());
             //调用添加方法
             complaintMapper.insertSelective(complaint1);
+            Complaint complaint2 = complaintMapper.selectPkId();
+            ResponsibilityWithBLOBs responsibility = new ResponsibilityWithBLOBs();
+            responsibility.setType(0);
+            responsibility.setComplaintId(complaint2.getPkId());
+            responsibilityMapper.insertSelective(responsibility);
 
             //统一返回信息
             return new RestResultBuilder().setCode(0).setMsg("请求成功").setData(complaint1).build();
@@ -614,6 +622,8 @@ public class ComplaintServiceImpl implements ComplaintService {
                 responsibilityVo.setTeamname(responsibilityVos.getTeamname());
                 responsibilityVo.setShopptype(responsibilityVos.getShopptype());
                 responsibilityVo.setServerdeadline(responsibilityVos.getServerdeadline());
+                responsibilityVo.setTechnologyrecruitmentid(responsibilityVos.getTechnologyrecruitmentid());
+                responsibilityVos.setCarname(responsibilityVos.getCarname());
             }
             result.add(responsibilityVo);
         }

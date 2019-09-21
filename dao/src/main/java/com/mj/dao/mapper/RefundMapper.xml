@@ -250,6 +250,7 @@
         SELECT rr.*,re.`result`,re.`level`,re.`son_level` FROM t_refund rr LEFT JOIN t_responsibility re ON rr.`pk_id` = re.`complaint_id`
         <trim prefix="WHERE" prefixOverrides="AND|OR">
             AND rr.`is_delete` = 0
+            AND re.`type` = 2
             <if test="wangwangnum != null and wangwangnum != ''">
                 AND rr.`WangWangNum` = #{wangwangnum,jdbcType=VARCHAR}
             </if>
@@ -257,17 +258,22 @@
                 AND rr.`refund_date` &gt;= #{startTime}
                 AND rr.`refund_date` &lt; #{endTime}
             </if>
-            <if test="result != -1">
+            <if test="result != -1 and result != null">
                 AND re.`result` = #{result}
             </if>
         </trim>
         ORDER BY rr.`refund_date` DESC
     </select>
 
+    <!--查询最新的主键-->
+    <select id="selectPkId" resultMap="BaseResultMap">
+        SELECT pk_id FROM t_refund ORDER BY pk_id DESC LIMIT 1
+    </select>
+
     <!--查询退款总数-->
     <select id="selectRefundCount" parameterType="java.util.HashMap" resultType="java.lang.Integer">
         SELECT COUNT(*) FROM t_refund rr LEFT JOIN t_responsibility re ON rr.`pk_id` = re.`complaint_id`
-          WHERE rr.`is_delete` = 0
+          WHERE rr.`is_delete` = 0 AND re.`type` = 2
     </select>
 
     <!--删除-->
@@ -300,7 +306,7 @@
     <!--通过pkId查询-->
     <select id="selectBy" parameterType="java.lang.Integer" resultType="com.mj.dao.vo.RefundVo">
         select rr.*,re.`result`,re.`level`,re.`son_level` FROM t_refund rr LEFT JOIN t_responsibility re
-          ON rr.`pk_id` = re.`complaint_id`
+          ON rr.`pk_id` = re.`complaint_id` AND re.`type` = 2
         where rr.pk_id = #{pkId,jdbcType=INTEGER}
     </select>
     <!--修改客诉内容-->
@@ -336,6 +342,7 @@
             </if>
         </set>
         where rr.pk_id = #{pkId,jdbcType=INTEGER}
+        AND re.`type` = 2
     </update>
 
     <!--退款旺旺名查询-->

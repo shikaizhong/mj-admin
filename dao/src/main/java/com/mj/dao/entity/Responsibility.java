@@ -1,7 +1,5 @@
 package com.mj.dao.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import java.util.Date;
 
 public class Responsibility {
@@ -44,13 +42,23 @@ public class Responsibility {
      * 判责日期 create_time
      */
 //    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss.SSS")
-    @JsonFormat(locale = "zh",timezone="GMT+8", pattern="yyyy-MM-dd HH:mm")
+//    @JsonFormat(locale = "zh",timezone="GMT+8", pattern="yyyy-MM-dd HH:mm")
     private Date createTime;
 
     /**
      * 获取前端的时间而新增的，数据库中并无该字段，Vo层中也没有该字段
      */
     private String hDate;
+
+    /**
+     * @Author Simon
+     * @Method 判责日期
+     * @Version 1.0
+     * @Return
+     * @Exception
+     * @Date 2019-09-20 0020 14:42:15
+     */
+    private Date reDate;
 
     /**
      * 判责人员id:对应personnel的id responsibilityor
@@ -261,6 +269,14 @@ public class Responsibility {
 
     public void sethDate(String hDate) {
         this.hDate = hDate;
+    }
+
+    public Date getReDate() {
+        return reDate;
+    }
+
+    public void setReDate(Date reDate) {
+        this.reDate = reDate;
     }
 
     /**

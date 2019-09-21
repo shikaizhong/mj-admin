@@ -221,6 +221,7 @@
         SELECT ht.*,re.`result`,re.`level`,re.`son_level` FROM t_hidden_trouble ht LEFT JOIN t_responsibility re ON ht.`pk_id` = re.`complaint_id`
         <trim prefix="WHERE" prefixOverrides="AND|OR">
             AND ht.`is_delete` = 0
+            AND re.`type` = 1
             <if test="wangwangnum != null and wangwangnum != ''">
                 AND ht.`WangWangNum` = #{wangwangnum,jdbcType=VARCHAR}
             </if>
@@ -228,7 +229,7 @@
                 AND ht.`hidden_date` &gt;= #{startTime}
                 AND ht.`hidden_date` &lt; #{endTime}
             </if>
-            <if test="result != -1">
+            <if test="result != -1 and result !=null">
                 AND re.`result` = #{result}
             </if>
             <if test="frequency !=-1">
@@ -238,17 +239,21 @@
         ORDER BY ht.`hidden_date` DESC
     </select>
 
+    <!--查询最新的主键-->
+    <select id="selectPkId" resultMap="BaseResultMapVo">
+        SELECT pk_id FROM t_hidden_trouble ORDER BY pk_id DESC LIMIT 1
+    </select>
 
     <!--查询数据总数-->
     <select id="total" parameterType="java.util.HashMap" resultType="java.lang.Integer">
       SELECT COUNT(*) FROM t_hidden_trouble ht LEFT JOIN t_responsibility re ON ht.`pk_id` = re.`complaint_id`
-          WHERE ht.`is_delete` = 0
+          WHERE ht.`is_delete` = 0 AND re.`type` = 1
     </select>
 
     <!--根据旺旺名查该店铺的隐患次数，到第几次-->
     <select id="totalWangWangNum" parameterType="java.lang.String" resultType="java.lang.Integer">
         SELECT ht.`frequency` FROM t_hidden_trouble ht where ht.`WangWangNum` = #{wangwangnum,jdbcType=VARCHAR}
-            ORDER BY pk_id desc limit 1
+            ORDER BY pk_id DESC LIMIT 1
     </select>
 
     <!--删除隐患-->
@@ -313,11 +318,12 @@
             </if>
         </set>
         where ht.pk_id = #{pkId,jdbcType=INTEGER}
+        AND re.`type` = 1
     </update>
     <!--通过pkId查询-->
     <select id="selectBy" parameterType="java.lang.Integer" resultType="com.mj.dao.vo.HiddenTroubleVo">
       select ht.*,re.`result`,re.`level`,re.`son_level` FROM t_hidden_trouble ht LEFT JOIN t_responsibility re
-        ON ht.`pk_id` = re.`complaint_id`
+        ON ht.`pk_id` = re.`complaint_id` AND re.`type` = 1
       where ht.pk_id = #{pkId,jdbcType=INTEGER}
     </select>
 </mapper>

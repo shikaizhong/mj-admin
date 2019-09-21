@@ -9,8 +9,10 @@ import com.mj.common.result.ResultUtils;
 import com.mj.common.tools.ApiConstant;
 import com.mj.dao.entity.Files;
 import com.mj.dao.entity.HiddenTrouble;
+import com.mj.dao.entity.ResponsibilityWithBLOBs;
 import com.mj.dao.repository.FilesMapper;
 import com.mj.dao.repository.HiddenTroubleMapper;
+import com.mj.dao.repository.ResponsibilityMapper;
 import com.mj.dao.vo.HiddenTroubleVo;
 import com.mj.dao.vo.SQLServerVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +43,10 @@ public class HiddenTroubleServiceImpl implements HiddenTroubleService {
     @Autowired
     private CustomerServiceImpl customerServiceImpl;
 
+    @Autowired
+    private ResponsibilityMapper responsibilityMapper;
+
+
     //查询，搜索，分页
     @DataSource(value = "druid")
     @Override
@@ -52,6 +58,8 @@ public class HiddenTroubleServiceImpl implements HiddenTroubleService {
         String result = String.valueOf(params.get("result"));
         if (result == "null"){
             params.put("result",-1);
+        }else{
+            params.put("result", result);
         }
 
         //根据店铺类型查询
@@ -233,6 +241,12 @@ public class HiddenTroubleServiceImpl implements HiddenTroubleService {
             }
             //调用添加的dao层
             hiddenTroubleMapper.insertSelective(hiddenTrouble1);
+
+            HiddenTrouble hiddenTrouble2 = hiddenTroubleMapper.selectPkId();
+            ResponsibilityWithBLOBs responsibility = new ResponsibilityWithBLOBs();
+            responsibility.setType(1);
+            responsibility.setComplaintId(hiddenTrouble2.getPkId());
+            responsibilityMapper.insertSelective(responsibility);
             return new RestResultBuilder().setCode(0).setMsg("请求成功").setData(hiddenTrouble1).build();
         }
     }
@@ -262,9 +276,9 @@ public class HiddenTroubleServiceImpl implements HiddenTroubleService {
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
         SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         HiddenTroubleVo hiddenTrouble1 = hiddenTroubleMapper.selectBy(hiddenTrouble.getPkId());
-        if(!hiddenTrouble.getHiddenContent().isEmpty()){
+//        if(!hiddenTrouble.getHiddenContent().isEmpty()){
             hiddenTrouble1.setHiddenContent(hiddenTrouble.getHiddenContent());
-        }
+//        }
         //初始化
         String str = hiddenTrouble.gethDate();
         //通过正则表达式判断前端获取的时间是否为格林威治时间

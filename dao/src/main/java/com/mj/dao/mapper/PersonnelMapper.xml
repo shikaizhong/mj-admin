@@ -380,6 +380,9 @@
     <result column="channel" jdbcType="INTEGER" property="channel" />
     <result column="WangWangNum" jdbcType="VARCHAR" property="wangwangnum" />
 
+    <result column="TechnologyRecruitmentID" jdbcType="INTEGER" property="technologyrecruitmentid"/>
+    <result column="carname" jdbcType="VARCHAR" property="carname" />
+
     <result column="parent_id" jdbcType="INTEGER" property="parentId" />
     <result column="complaint_name" jdbcType="VARCHAR" property="complaintName" />
     <result column="parent_name" jdbcType="VARCHAR" property="parentName"/>
@@ -512,13 +515,14 @@
 
   <!--拼接查询sqlserver拼接到responsibility-->
   <select id="selectResponsibilityList" parameterType="java.util.Map" resultMap="BaseResultMapRo">
-    SELECT DISTINCT p1.UserName tename,tt.TeamName,cc.ServerDeadline,cr.PersonnelID,p2.UserName pname,t2.TeamName pteamname,cc.ShoppType,cc.TScustomer
+    SELECT DISTINCT p1.UserName tename,cc.TechnologyRecruitmentID,p3.UserName carname,tt.TeamName,cc.ServerDeadline,cr.PersonnelID,p2.UserName pname,t2.TeamName pteamname,cc.ShoppType,cc.TScustomer
       from (SELECT TOP 1 * FROM Customer WHERE WangWangNum = #{wangwangnum,jdbcType=VARCHAR} ORDER BY ID DESC) AS cc
     LEFT JOIN (SELECT TOP 1 * FROM CustomerRecords WHERE Trader = #{wangwangnum,jdbcType=VARCHAR} ORDER BY ID DESC) AS cr
     ON cc.WangWangNum = cr.Trader
       LEFT JOIN Personnel p1 ON cc.TScustomer =p1.ID
       LEFT JOIN Team tt ON p1.TeamID = tt.ID
       LEFT JOIN Personnel p2 ON p2.ID = cr.PersonnelID
+      LEFT JOIN Personnel p3 on cc.TechnologyRecruitmentID =p3.ID
       LEFT JOIN Team t2 ON p2.TeamID = t2.ID
     <trim prefix="WHERE"  prefixOverrides="AND|OR">
       cc.WangWangNum =#{wangwangnum,jdbcType=VARCHAR}

@@ -1,7 +1,5 @@
 package com.mj.dao.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import java.util.Date;
 
 public class HiddenTrouble {
@@ -17,7 +15,7 @@ public class HiddenTrouble {
     /**
      * 隐患日期 hidden_date
      */
-    @JsonFormat(locale = "zh", timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm")
+//    @JsonFormat(locale = "zh", timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm")
     private Date hiddenDate;
 
     /**

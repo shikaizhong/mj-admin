@@ -6,6 +6,8 @@ public class ResponsibilityWithBLOBs extends Responsibility {
      */
     private String summary;
 
+    private Integer aspId;
+
     /**
      * 判责依据文本 basic
      */
@@ -68,6 +70,14 @@ public class ResponsibilityWithBLOBs extends Responsibility {
      */
     public void setDeal(String deal) {
         this.deal = deal == null ? null : deal.trim();
+    }
+
+    public Integer getAspId() {
+        return aspId;
+    }
+
+    public void setAspId(Integer aspId) {
+        this.aspId = aspId;
     }
 
     /**

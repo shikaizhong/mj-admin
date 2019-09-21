@@ -84,4 +84,7 @@ public interface ComplaintMapper {
     int updateAll(ComplaintVo complaintVo);
     //查看
     ComplaintVo selectBy(Integer pkId);
+
+    //查询最新的一条主键
+    Complaint selectPkId();
 }

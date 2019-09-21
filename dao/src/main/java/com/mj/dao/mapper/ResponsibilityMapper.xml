@@ -279,13 +279,14 @@
       <result column="re_date" jdbcType="TIMESTAMP" property="reDate"/>
 
     <result column="time" jdbcType="TIMESTAMP" property="time"/>
+    <result column="asp_id" jdbcType="INTEGER" property="aspId"/>
   </resultMap>
   <!--查重-->
   <select id="selectByComplaintId" parameterType="com.mj.dao.entity.ResponsibilityWithBLOBs" resultMap="ResultMapWithBLOBs">
     select
     *
     from t_responsibility
-    where complaint_id = #{complaintId,jdbcType=INTEGER}
+    where pk_id = #{complaintId,jdbcType=INTEGER}
   </select>
 
   <!--查询加搜索-->
@@ -418,38 +419,38 @@
 
     <!--type为0时,查询投诉信息-->
     <select id="selectResponsiblityList" parameterType="java.util.HashMap" resultMap="BaseResultMapVo">
-        SELECT DISTINCT *  FROM t_complaint cc LEFT JOIN t_responsibility rr ON rr.`complaint_id` = cc.`pk_id`
-           LEFT JOIN t_complaint_level cl ON rr.`son_level` = cl.pk_id
+        SELECT DISTINCT * ,rr.pk_id as asp_id FROM  t_complaint cc LEFT JOIN t_responsibility rr ON rr.complaint_id = cc.pk_id
+           LEFT JOIN t_complaint_level cl ON rr.son_level = cl.pk_id
             <trim prefix="WHERE" prefixOverrides="AND|OR">
-                cc.is_delete=0 and cc.complaint_type = 0
+                cc.is_delete=0 AND rr.`type` = 0
                 <if test="keyword != null and keyword != ''">
                   AND (cc.WangWangNum LIKE CONCAT('%', #{keyword}, '%'))
                 </if>
                 <if test="startTime != null and endTime !=null ">
-                  and rr.create_time &gt;= #{startTime} and rr.create_time &lt; #{endTime}
+                  AND rr.create_time &gt;= #{startTime} and rr.create_time &lt; #{endTime}
                 </if>
-                <if test="result !=-1">
-                    AND rr.`result` =#{result,jdbcType=INTEGER}
+                <if test="result != -1">
+                    AND rr.result =#{result}
                 </if>
                 <if test="grade !=null">
-                    AND rr.`grade` =#{grade}
+                    AND rr.grade =#{grade}
                 </if>
             </trim>
-        order by cc.`complaintDate` DESC
+      order by cc.complaintDate DESC
     </select>
     <!--type为1时,查询隐患信息-->
     <select id="selectHiddenTrouble" parameterType="java.util.HashMap" resultMap="BaseResultMapVo">
-        SELECT DISTINCT *  FROM t_hidden_trouble ht LEFT JOIN t_responsibility rr ON rr.`complaint_id` = ht.`pk_id`
-           LEFT JOIN t_complaint_level cl ON rr.`son_level` = cl.pk_id
+        SELECT DISTINCT * ,rr.pk_id as asp_id  FROM t_hidden_trouble ht LEFT JOIN t_responsibility rr ON rr.complaint_id = ht.pk_id
+           LEFT JOIN t_complaint_level cl ON rr.son_level = cl.pk_id
             <trim prefix="WHERE" prefixOverrides="AND|OR">
-                ht.is_delete = 0 and ht.hidden_type = 1
+                ht.is_delete = 0 AND rr.`type` = 1
                 <if test="keyword != null and keyword != ''">
                   AND (ht.WangWangNum LIKE CONCAT('%', #{keyword}, '%'))
                 </if>
                 <if test="startTime != null and endTime !=null ">
                   and rr.create_time &gt;= #{startTime} and rr.create_time &lt; #{endTime}
                 </if>
-                <if test="result !=-1">
+                <if test="result !=-1 and result != null">
                     AND rr.`result` =#{result,jdbcType=INTEGER}
                 </if>
                 <if test="grade !=null">
@@ -460,10 +461,10 @@
     </select>
     <!--type为2时,查询退款管理-->
     <select id="selectRefund" parameterType="java.util.HashMap" resultMap="BaseResultMapVo">
-        SELECT DISTINCT *  FROM t_refund rf LEFT JOIN t_responsibility rr ON rr.`complaint_id` = rf.`pk_id`
+        SELECT DISTINCT * ,rr.pk_id as asp_id FROM t_refund rf LEFT JOIN t_responsibility rr ON rr.`complaint_id` = rf.`pk_id`
           LEFT JOIN t_complaint_level cl ON rr.`son_level` = cl.pk_id
             <trim prefix="WHERE" prefixOverrides="AND|OR">
-                rf.is_delete = 0 and refund_type = 2
+              rf.is_delete = 0 AND rr.`type` = 2
                 <if test="keyword != null and keyword != ''">
                   AND (rf.WangWangNum LIKE CONCAT('%', #{keyword}, '%'))
                 </if>
@@ -473,7 +474,7 @@
                 <if test="startTime != null and endTime !=null ">
                   and rr.create_time &gt;= #{startTime} and rr.create_time &lt; #{endTime}
                 </if>
-                <if test="result !=-1">
+                <if test="result !=-1 and result != null">
                     AND rr.`result` =#{result,jdbcType=INTEGER}
                 </if>
                 <if test="grade !=null and grade != ''">

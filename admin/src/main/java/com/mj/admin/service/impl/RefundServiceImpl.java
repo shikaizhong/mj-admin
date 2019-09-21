@@ -9,9 +9,11 @@ import com.mj.common.tools.ApiConstant;
 import com.mj.dao.annotate.DataSource;
 import com.mj.dao.entity.Files;
 import com.mj.dao.entity.Refund;
+import com.mj.dao.entity.ResponsibilityWithBLOBs;
 import com.mj.dao.repository.CustomerMapper;
 import com.mj.dao.repository.FilesMapper;
 import com.mj.dao.repository.RefundMapper;
+import com.mj.dao.repository.ResponsibilityMapper;
 import com.mj.dao.vo.RefundVo;
 import com.mj.dao.vo.SQLServerVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +50,9 @@ public class RefundServiceImpl implements RefundService {
 
     @Autowired
     private CustomerServiceImpl customerServiceImpl;
+
+    @Autowired
+    private ResponsibilityMapper responsibilityMapper;
 
     //分页搜索总记录数
     @DataSource(value = "druid")
@@ -112,6 +117,8 @@ public class RefundServiceImpl implements RefundService {
         String result = String.valueOf(params.get("result"));
         if (result == "null"){
             params.put("result",-1);
+        }else{
+            params.put("result", result);
         }
         //将条件封装到map集合里
         params.put("wangwangnum", wangwangnum);
@@ -246,6 +253,11 @@ public class RefundServiceImpl implements RefundService {
             refund1.setRefundAmount(refund.getRefundAmount());
             //调用添加的方法
             refundMapper.insertSelective(refund1);
+            Refund refund2 = refundMapper.selectPkId();
+            ResponsibilityWithBLOBs responsibility = new ResponsibilityWithBLOBs();
+            responsibility.setType(2);
+            responsibility.setComplaintId(refund2.getPkId());
+            responsibilityMapper.insertSelective(responsibility);
             //返回信息
             return new RestResultBuilder().setCode(0).setMsg("请求成功").setData(refund1).build();
         }
@@ -263,13 +275,11 @@ public class RefundServiceImpl implements RefundService {
         //根据ID查询
         RefundVo refund2 = refundMapper.selectBy(refund.getPkId());
         String str = refund.gethDate();
-        System.out.println("时间为:"+str);
 //        System.out.println("从测试环境获取的时间为："+str);
         //正则表达式，判断字符串长度是否在3~20之间
         String pattern = "^.{3,20}$";
         Pattern p = Pattern.compile(pattern);
         Matcher m = p.matcher(str);
-        System.out.println("结果为:"+m.matches());
         //根据正则表达式判断
         if (m.matches()) {
             //如果为true，则执行这里的
