@@ -76,8 +76,8 @@ public class RefundServiceImpl implements RefundService {
         //店长ID
         String TScustomer = String.valueOf(params.get("TScustomer"));
         //招商顾问ID
-        Integer PersonnelID = Integer.valueOf((Integer) params.get("PersonnelID"));
-
+//        Integer PersonnelID = Integer.valueOf((Integer) params.get("PersonnelID"));
+        String PersonnelID = String.valueOf(params.get("PersonnelID"));
         //时间区间的判断，若前端没有值传输，则为：[, ]
         String a = "[, ]";
         if(!String.valueOf(params.get("dateTime")).equals(a)){

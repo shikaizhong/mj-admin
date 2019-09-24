@@ -72,7 +72,8 @@ public class ComplaintServiceImpl implements ComplaintService {
         String TScustomer = String.valueOf(params.get("TScustomer"));
         String TechnologyRecruitmentID =String.valueOf(params.get("TechnologyRecruitmentID"));
         String PersonnelID = String.valueOf(params.get("PersonnelID"));
-        Integer TeamID = Integer.valueOf(String.valueOf(params.get("TeamID")));
+        String TeamID  = String.valueOf(params.get("TeamID"));
+//        Integer TeamID = Integer.valueOf(String.valueOf(params.get("TeamID")));
         String TeamName = String.valueOf(params.get("TeamName"));
         if (frequency == ""){
             params.put("frequency",-1);
@@ -87,6 +88,13 @@ public class ComplaintServiceImpl implements ComplaintService {
         }
         if (channel == "null"){
             params.put("channel",-1);
+        }
+        if (TeamID == "null"){
+            params.put("TeamID",-1);
+        }else if (TeamID ==null){
+            params.put("TeamID",-1);
+        }else {
+            params.put("TeamID",TeamID);
         }
         params.put("keyword",keyword);
 
@@ -131,9 +139,6 @@ public class ComplaintServiceImpl implements ComplaintService {
         }
         if (TeamName == ""){
             params.put("TeamName",null);
-        }
-        if (TeamID !=-1){
-            params.put("TeamID",TeamID);
         }
         if (TechnologyRecruitmentID == "null"){
             params.put("TechnologyRecruitmentID",-1);

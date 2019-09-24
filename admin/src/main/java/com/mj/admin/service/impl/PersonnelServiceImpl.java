@@ -223,7 +223,8 @@ public class PersonnelServiceImpl implements PersonnelService {
         //店长ID
         String TScustomer = String.valueOf(params.get("TScustomer"));
         //招商顾问ID
-        Integer PersonnelID = Integer.valueOf((Integer) params.get("PersonnelID"));
+//        Integer PersonnelID = Integer.valueOf((Integer) params.get("PersonnelID"));
+        String PersonnelID = String.valueOf(params.get("PersonnelID"));
 
         params.put("wangwangnum", wangwangnum);
         Map map = new HashMap();
@@ -249,7 +250,7 @@ public class PersonnelServiceImpl implements PersonnelService {
         }else {
             map.put("TScustomer",TScustomer);
         }
-        if (PersonnelID == -1){
+        if (PersonnelID == "null"){
             map.put("PersonnelID",-1);
         }else if (PersonnelID == null) {
             map.put("PersonnelID", -1);
@@ -288,5 +289,19 @@ public class PersonnelServiceImpl implements PersonnelService {
             }
         }
         return list;
+    }
+//查询店铺类型
+    @DataSource(value = "slave1")
+    @Override
+    public RestResult selectShopType() {
+        List<SQLServerVo> sqlServerVos = personnelMapper.selectShopType();
+        return  new RestResultBuilder().setCode(0).setMsg("请求成功").setData(sqlServerVos).build();
+    }
+    //仅仅查询团队名
+    @DataSource(value = "slave1")
+    @Override
+    public RestResult selectOnleTeam() {
+        List<Teams> teamVos = personnelMapper.selectOnleTeam();
+        return new RestResultBuilder<>().setCode(0).setMsg("请求成功").setData(teamVos).build();
     }
 }

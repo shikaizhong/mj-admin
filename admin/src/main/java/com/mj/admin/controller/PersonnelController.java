@@ -108,4 +108,14 @@ public class PersonnelController {
     public List selectRefund(@RequestBody Map params) throws Exception {
         return personnelService.selectByDatebase(params);
     }
+    //查询店铺类型
+    @RequestMapping(value = "/selectShopType",method = RequestMethod.POST)
+    public RestResult selectShopType(){
+        return personnelService.selectShopType();
+    }
+    //查询团队名称
+    @RequestMapping(value = "/selectOnleTeam",method = RequestMethod.POST)
+    public RestResult selectOnleTeam(){
+        return personnelService.selectOnleTeam();
+    }
 }

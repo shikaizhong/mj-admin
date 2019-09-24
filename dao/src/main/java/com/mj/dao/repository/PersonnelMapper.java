@@ -66,4 +66,9 @@ public interface PersonnelMapper {
 
     //查询退款，隐患，流失
     List<SQLServerVo> selectBySQL(Map map);
+
+    //店铺类型列表
+    List<SQLServerVo> selectShopType();
+    //查询团队
+    List<Teams> selectOnleTeam();
 }

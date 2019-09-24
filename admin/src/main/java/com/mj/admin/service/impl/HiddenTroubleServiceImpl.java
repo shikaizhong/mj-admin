@@ -26,7 +26,15 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
+/**
+ * @Author Simon
+ * @Method 
+ * @Version 1.0
+ * @Return
+ * @Exception 
+ * @Date 2019-09-23 0023 12:18:47
+ */
+ 
 @Service
 //@Transactional
 public class HiddenTroubleServiceImpl implements HiddenTroubleService {
@@ -47,7 +55,7 @@ public class HiddenTroubleServiceImpl implements HiddenTroubleService {
     private ResponsibilityMapper responsibilityMapper;
 
 
-    //查询，搜索，分页
+//    查询，搜索，分页
     @DataSource(value = "druid")
     @Override
     public RestResult selectHidden(Map params) throws Exception {
@@ -78,7 +86,8 @@ public class HiddenTroubleServiceImpl implements HiddenTroubleService {
         //店长ID
         String TScustomer = String.valueOf(params.get("TScustomer"));
         //招商顾问ID
-        Integer PersonnelID = Integer.valueOf((Integer) params.get("PersonnelID"));
+//        Integer PersonnelID = Integer.valueOf((Integer) params.get("PersonnelID"));
+        String PersonnelID = String.valueOf(params.get("PersonnelID"));
 
 
         //时间区间的判断，若前端没有值传输，则为：[, ]
@@ -182,7 +191,7 @@ public class HiddenTroubleServiceImpl implements HiddenTroubleService {
         return new RestResultBuilder().setCode(0).setMsg("请求成功").setData(map).build();
     }
 
-    //添加隐患
+//    添加隐患
     @DataSource(value = "druid")
     @Override
     public RestResult addHidden(HiddenTrouble hiddenTrouble) throws ParseException {
@@ -251,18 +260,16 @@ public class HiddenTroubleServiceImpl implements HiddenTroubleService {
         }
     }
 
-    //删除隐患
+//    删除隐患
     @DataSource(value = "druid")
     @Override
     public RestResult deleteHidden(List<Integer> pkIds) {
         Integer[] pkId = new Integer[pkIds.size()];
-//        System.out.println("数组长度：" + pkId);
         if (pkIds.size() > 0) {
             for (int i = 0; i < pkIds.size(); i++) {
                 pkId[i] = pkIds.get(i);
 //                System.out.println("数组值：" + pkId[i]);
             }
-            //软删除
             hiddenTroubleMapper.deleteHidden(pkId);
             return ResultUtils.success("删除成功");
         }
@@ -318,23 +325,19 @@ public class HiddenTroubleServiceImpl implements HiddenTroubleService {
         String username2 = String.valueOf(params.get("username2"));
         //根据团队名查询
         String TeamName = String.valueOf(params.get("TeamName"));
-//        System.out.println("Refund_旺旺名为:" + wangwangnum);
         List<HiddenTrouble> hiddenTrouble = hiddenTroubleMapper.selectByWangWangNum(wangwangnum);
 
         List<HiddenTroubleVo> listVo = new ArrayList();
 
         for (HiddenTrouble list : hiddenTrouble) {
             HiddenTroubleVo hiddenTroubleVo = new HiddenTroubleVo();
-//            System.out.println("退款时间为："+list.getRefundDate());
             Map map = new HashMap();
             map.put("wangwangnum", wangwangnum);
             map.put("shopptype", shopptype);
             map.put("username1", username1);
             map.put("username2", username2);
             map.put("TeamName", TeamName);
-//            System.out.println("Refund_map集合里的数据：" + map);
             List<SQLServerVo> sqlServerVo = personnelServiceImpl.selectByDatebase(map);
-//            System.out.println("干啥呢？不想好了？");
             hiddenTroubleVo.setWangwangnum(list.getWangwangnum());
             hiddenTroubleVo.setHiddenDate(list.getHiddenDate());
             hiddenTroubleVo.setFrequency(list.getFrequency());
@@ -344,7 +347,6 @@ public class HiddenTroubleServiceImpl implements HiddenTroubleService {
             hiddenTroubleVo.setPkId(list.getPkId());
             hiddenTroubleVo.setResult(list.getResult());
             hiddenTroubleVo.setHiddenDate(list.getHiddenDate());
-//            System.out.println("Refund_获取refund里的值后：" + refundVo);
             if (!sqlServerVo.isEmpty()) {
                 for (SQLServerVo sqlList : sqlServerVo) {
                     hiddenTroubleVo.setCusttype(sqlList.getCusttype());
@@ -356,7 +358,6 @@ public class HiddenTroubleServiceImpl implements HiddenTroubleService {
 //                    System.out.println("Refund_获取sqlserver里的值后：" + refundVo.getRefundDate());
 
                 }
-//                System.out.println("Refund_获取sqlserver里的值后11111：" + refundVo.getRefundDate());
                 listVo.add(hiddenTroubleVo);
             }
         }

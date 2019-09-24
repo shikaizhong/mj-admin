@@ -48,4 +48,8 @@ public interface PersonnelService {
     //根据旺旺名查询退款数据
     List<SQLServerVo> selectByDatebase(Map params) throws ParseException;
 
+    //查询店铺类型
+    RestResult selectShopType();
+    //仅查询团队名称
+    RestResult selectOnleTeam();
 }
